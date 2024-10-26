@@ -2,7 +2,12 @@
 
 import React, { useState } from "react";
 import { useServerInsertedHTML } from "next/navigation";
-import { ServerStyleSheet, StyleSheetManager } from "styled-components";
+import { createGlobalStyle, ServerStyleSheet, StyleSheetManager } from "styled-components";
+import { normalize } from "styled-normalize";
+
+const GlobalStyle = createGlobalStyle`
+  ${normalize}
+`;
 
 export default function StyledComponentsRegistry({
   children,
@@ -23,6 +28,7 @@ export default function StyledComponentsRegistry({
 
   return (
     <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
+      <GlobalStyle />
       {children}
     </StyleSheetManager>
   );
