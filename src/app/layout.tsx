@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import StyledComponentsRegistry from '@/lib/registry';
+import ScreenWrapper from '@components/ScreenWrapper';
 
 // [todo] description 등 meta data 변경
 export const metadata: Metadata = {
@@ -16,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <StyledComponentsRegistry>
+          <ScreenWrapper>{children}</ScreenWrapper>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
