@@ -3,6 +3,9 @@ import { useLayoutEffect, useRef, useState, ReactNode, useMemo } from 'react';
 import { useNaverMapsContext } from '@/contexts/naverMapsContext';
 import { NaverMapContext } from '@/contexts/naverMapContext';
 import { Position } from '@/constants/map';
+import MapContainer from './style';
+
+const ZOOM_LEVEL = 17;
 
 export default function NaverMap({
   children,
@@ -23,7 +26,7 @@ export default function NaverMap({
 
     const newMap = new naverMaps.Map(ref.current as HTMLDivElement, {
       center: new naverMaps.LatLng(position.lat, position.lng),
-      zoom: 17,
+      zoom: ZOOM_LEVEL,
     });
 
     setMap(newMap);
@@ -33,7 +36,7 @@ export default function NaverMap({
 
   return (
     <NaverMapContext.Provider value={providerValue}>
-      <div ref={ref} style={{ width: '100%', height: '100%' }} />
+      <MapContainer ref={ref} />
       {children}
     </NaverMapContext.Provider>
   );

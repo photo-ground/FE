@@ -1,11 +1,9 @@
 import { useLayoutEffect, useRef } from 'react';
 
-import { useNaverMapContext } from '@/contexts/naverMapContext';
 import { Position } from '@/constants/map';
+import { useNaverMapContext } from '@/contexts/naverMapContext';
 import { useNaverMapsContext } from '@/contexts/naverMapsContext';
-
-const MARKER_WIDTH = 48;
-const MARKER_HEIGHT = 48;
+import { MARKER_HEIGHT, MARKER_WIDTH, MarkerItem } from './style';
 
 export default function Marker({ position }: { position: Position }) {
   const naverMaps = useNaverMapsContext();
@@ -31,15 +29,5 @@ export default function Marker({ position }: { position: Position }) {
     });
   }, [mapContext, naverMaps, position]);
 
-  return (
-    <div
-      ref={markerRef}
-      style={{
-        width: `${MARKER_WIDTH}px`,
-        height: `${MARKER_HEIGHT}px`,
-        border: '2px solid red',
-        borderRadius: '100%',
-      }}
-    />
-  );
+  return <MarkerItem ref={markerRef} />;
 }
