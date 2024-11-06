@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode } from 'react';
-import BottomNavigationBar from '@components/BottomNavigationBar';
+import BottomNavigationBar from '@/components/BNB';
 import TopNavigationBar from '@components/TopNavigationBar';
 import { Container, Content, FullPage } from './styles';
 
