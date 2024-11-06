@@ -7,6 +7,7 @@ export const Container = styled.nav`
   justify-content: space-between;
 
   height: 3rem; // [todo] remove this
+  background: #ccc; // [todo] remove this
 `;
 
 export const Tab = styled(Link)<{ $isSelected: boolean }>`
