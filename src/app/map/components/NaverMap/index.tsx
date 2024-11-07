@@ -7,6 +7,14 @@ import MapContainer from './style';
 
 const ZOOM_LEVEL = 17;
 
+/**
+ * 네이버 지도 컴포넌트입니다.
+ *
+ * - 상위에 NaverMapsProvider가 존재해야 합니다.
+ * @param children - Marker 및 MapEvent 컴포넌트들
+ * @param position - 지도의 초기 중심 좌표
+ * @returns 지도를 담고 있는 div element
+ */
 export default function NaverMap({
   children,
   position,
@@ -18,7 +26,6 @@ export default function NaverMap({
   const ref = useRef<HTMLDivElement | null>(null);
   const [map, setMap] = useState<typeof naverMaps.Map | undefined>();
 
-  // make map object
   useLayoutEffect(() => {
     if (!naverMaps) {
       return;
