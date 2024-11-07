@@ -10,7 +10,7 @@ export default function useNaverMap() {
     }
 
     const script = document.createElement('script');
-    script.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NCP_CLIENT_ID}&submodules=panorama,geocoder,drawing`;
+    script.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NCP_CLIENT_ID}`;
     script.async = true;
 
     script.onload = () => {
