@@ -10,8 +10,9 @@
    - ~~이 문제를 피하기 위해서 `npm i --legacy-peer-deps` 명령어를 사용해주세요.~~
    - 24.10.27. 추가: `.npmrc` 파일 설정을 추가해 `npm i` 명령어로도 설치 가능합니다.
    - 이후 호환성 문제가 해결된다면 이 내용을 삭제해주세요.
-3. `npm run dev` 명령어로 서버를 실행합니다.
-4. 브라우저에서 [http://localhost:3000](http://localhost:3000/)로 이동해 페이지를 확인합니다.
+3. team notion의 `문서 - Environment Variables` 의 설명에 따라서 `.env` 파일을 생성합니다.
+4. `npm run dev` 명령어로 서버를 실행합니다.
+5. 브라우저에서 [http://localhost:3000](http://localhost:3000/)로 이동해 페이지를 확인합니다.
 
 ### 코드 수정하기 (로컬에서 Dev Server 실행에 이어서)
 
