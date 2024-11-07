@@ -1,5 +1,9 @@
+// window.naver를 script에서 추가해줘서 존재합니다.
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { NaverMapType } from '@/contexts/naverMapsContext';
 import { useEffect, useState } from 'react';
+
 /**
  * 네이버 지도를 로드하고 naverMaps 객체를 반환하는 커스텀 훅입니다.
  *
@@ -16,8 +20,8 @@ export default function useNaverMap() {
       return undefined;
     }
 
-    if (typeof window !== 'undefined' && window.naver?.maps) {
-      setNaverMaps(window.naver.maps);
+    if (typeof window !== 'undefined' && (window as any)?.naver?.maps) {
+      setNaverMaps((window as any).naver.maps);
       return undefined;
     }
 
@@ -26,7 +30,7 @@ export default function useNaverMap() {
     script.async = true;
 
     script.onload = () => {
-      setNaverMaps(window.naver.maps);
+      setNaverMaps((window as any).naver.maps);
     };
 
     document.body.appendChild(script);

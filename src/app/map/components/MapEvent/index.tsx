@@ -13,6 +13,8 @@ export default function MapEvent({
   callback,
 }: {
   eventType: string;
+  // [error] [todo] 희원님이 다른 브랜츠에서 해결했다고 하셔서 merge 전까지 잠시 disable합니다
+  // eslint-disable-next-line
   callback: (event: Event) => void;
 }) {
   const naverMaps = useNaverMapsContext();
