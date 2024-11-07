@@ -5,7 +5,12 @@ export default function useNaverMap() {
   const [naverMaps, setNaverMaps] = useState<NaverMapType | null>(null);
 
   useEffect(() => {
+    if (naverMaps) {
+      return undefined;
+    }
+
     if (typeof window !== 'undefined' && window.naver?.maps) {
+      setNaverMaps(window.naver.maps);
       return undefined;
     }
 
