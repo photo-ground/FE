@@ -1,9 +1,7 @@
-import Calendar from './_components/Calendar';
+import ReserveScreen from './screen';
 
 export default function ReservePage() {
-  return (
-    <div>
-      <Calendar />
-    </div>
-  );
+  // data fetch logic
+
+  return <ReserveScreen />;
 }
