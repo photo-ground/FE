@@ -1,3 +1,9 @@
+import Calendar from './_components/Calendar';
+
 export default function ReservePage() {
-  return <div>reservation</div>;
+  return (
+    <div>
+      <Calendar />
+    </div>
+  );
 }
