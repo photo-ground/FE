@@ -7,6 +7,7 @@ export const FullPage = styled.div`
 
   width: 100%;
   height: 100dvh;
+  background: ${({ theme }) => theme.colors.background.primary};
 `;
 
 export const Container = styled.div`
