@@ -1,6 +1,8 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+
+import Text from '@/components/atoms/Text';
 import { Container, Tab } from './styles';
 
 // 고객 뷰일 경우
@@ -32,7 +34,7 @@ export default function BottomNavigationBar() {
           href={menu.route}
           $isSelected={pathname === menu.route}
         >
-          {menu.title}
+          <Text variant="caption3">{menu.title}</Text>
         </Tab>
       ))}
     </Container>

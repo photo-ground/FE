@@ -36,6 +36,79 @@ const theme = {
       primary: '#000000',
     },
   },
+
+  typography: {
+    header1: {
+      fontSize: '1.5rem',
+      fontWeight: 600,
+      lineHeight: '2rem',
+    },
+    header2: {
+      fontSize: '1.125rem',
+      fontWeight: 500,
+      lineHeight: '2rem',
+    },
+    title1: {
+      fontSize: '1.25rem',
+      fontWeight: 600,
+      lineHeight: '1.75rem',
+    },
+    title2: {
+      fontSize: '1.125rem',
+      fontWeight: 600,
+      lineHeight: '1.5rem',
+    },
+    title3: {
+      fontSize: '1rem',
+      fontWeight: 600,
+      lineHeight: '1.375rem',
+    },
+    body1_md: {
+      fontSize: '1rem',
+      fontWeight: 500,
+      lineHeight: '1.375rem',
+    },
+    body1_rg: {
+      fontSize: '1rem',
+      fontWeight: 400,
+      lineHeight: '1.375rem',
+    },
+    body2_md: {
+      fontSize: '0.938rem',
+      fontWeight: 500,
+      lineHeight: '1.375rem',
+    },
+    body2_rg: {
+      fontSize: '0.938rem',
+      fontWeight: 400,
+      lineHeight: '1.375rem',
+    },
+    body3: {
+      fontSize: '0.875rem',
+      fontWeight: 400,
+      lineHeight: '1.25rem',
+    },
+    caption1_md: {
+      fontSize: '0.875rem',
+      fontWeight: 500,
+      lineHeight: '1.25rem',
+    },
+    caption1_rg: {
+      fontSize: '0.875rem',
+      fontWeight: 400,
+      lineHeight: '1.25rem',
+    },
+    caption2: {
+      fontSize: '0.813rem',
+      fontWeight: 400,
+      lineHeight: '1.25rem',
+    },
+    caption3: {
+      fontSize: '0.625rem',
+      fontWeight: 400,
+      lineHeight: '0.75rem',
+    },
+  },
 };
 
 export default theme;
