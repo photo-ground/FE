@@ -62,6 +62,7 @@ const GlobalStyle = createGlobalStyle`
 
   * {
    box-size: border-box;
+   color: ${theme.colors.white}
   }
 `;
 
