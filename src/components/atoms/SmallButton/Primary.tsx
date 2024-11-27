@@ -5,6 +5,7 @@ import Button from './styles';
 const PrimaryButton = styled(Button)<{ disabled: boolean }>`
   background: ${({ theme, disabled }) =>
     disabled ? theme.colors.gray[600] : theme.colors.primary[100]};
+  cursor: ${({ disabled }) => (disabled ? 'auto' : 'cursor')};
 `;
 
 const DisabledText = styled(Text)`
@@ -14,12 +15,14 @@ const DisabledText = styled(Text)`
 export default function Primary({
   text,
   disabled = false,
+  onClick = () => {},
 }: {
   text: string;
   disabled?: boolean;
+  onClick?: () => void;
 }) {
   return (
-    <PrimaryButton disabled={disabled}>
+    <PrimaryButton disabled={disabled} onClick={onClick}>
       {disabled ? (
         <DisabledText variant="body1_rg">{text}</DisabledText>
       ) : (
@@ -31,4 +34,5 @@ export default function Primary({
 
 Primary.defaultProps = {
   disabled: false,
+  onClick: () => {},
 };

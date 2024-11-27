@@ -11,10 +11,20 @@ const ButtonText = styled(Text)`
   color: ${({ theme }) => theme.colors.primary[100]};
 `;
 
-export default function Tertiary({ text }: { text: string }) {
+export default function Tertiary({
+  text,
+  onClick = () => {},
+}: {
+  text: string;
+  onClick?: () => void;
+}) {
   return (
-    <TertiaryButton>
+    <TertiaryButton onClick={onClick}>
       <ButtonText variant="body3">{text}</ButtonText>
     </TertiaryButton>
   );
 }
+
+Tertiary.defaultProps = {
+  onClick: () => {},
+};

@@ -6,10 +6,20 @@ const SecondaryButton = styled(Button)`
   background: ${({ theme }) => theme.colors.gray[900]};
 `;
 
-export default function Secondary({ text }: { text: string }) {
+export default function Secondary({
+  text,
+  onClick = () => {},
+}: {
+  text: string;
+  onClick?: () => void;
+}) {
   return (
-    <SecondaryButton>
+    <SecondaryButton onClick={onClick}>
       <Text variant="body1_rg">{text}</Text>
     </SecondaryButton>
   );
 }
+
+Secondary.defaultProps = {
+  onClick: () => {},
+};
