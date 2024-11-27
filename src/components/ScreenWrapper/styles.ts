@@ -15,10 +15,8 @@ export const Container = styled.div`
   flex-direction: column;
 
   width: 100%;
-  max-width: 26rem;
+  max-width: 768px;
   height: 100dvh;
-
-  box-shadow: 0 1rem 2rem -1rem gray;
 `;
 
 export const Content = styled.div`
