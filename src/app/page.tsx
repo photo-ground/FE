@@ -1,5 +1,6 @@
 'use client';
 
+import CTAButton from '@/components/atoms/CTAButton';
 import MediumButton from '@/components/atoms/MediumButton';
 import SmallButton from '@/components/atoms/SmallButton';
 import Tag from '@/components/atoms/Tag';
@@ -18,6 +19,11 @@ export default function Home() {
 
       <MediumButton text="스냅 전체보기" variant="primary" />
       <MediumButton text="스냅 전체보기" variant="secondary" />
+
+      <CTAButton text="예약하기" variant="primary" />
+      <CTAButton text="예약하기" variant="secondary" />
+      <CTAButton text="예약하기" variant="primary" disabled />
+      <CTAButton text="예약하기" variant="primary" disabled />
     </div>
   );
 }
