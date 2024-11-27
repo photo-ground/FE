@@ -7,20 +7,20 @@ import Text from '@/components/atoms/Text';
 
 const Container = styled.main`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 
-  margin-top: 40%;
+  height: 100dvh;
+  padding: 40% 1.25rem 10% 1.25rem;
 `;
 
 const ButtonArea = styled.div`
-  position: fixed;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 
-  width: 100vw;
-  margin: 0 1rem;
-  bottom: 10%;
+  width: 100%;
 `;
 
 export default function OnboardingPage() {
