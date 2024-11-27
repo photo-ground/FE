@@ -61,7 +61,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   * {
-   box-size: border-box;
+   box-sizing: border-box;
    color: ${theme.colors.white}
   }
 `;
