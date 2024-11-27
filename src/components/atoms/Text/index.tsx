@@ -3,6 +3,7 @@ import styled from 'styled-components';
 type Variant =
   | 'header1'
   | 'header2'
+  | 'header3'
   | 'title1'
   | 'title2'
   | 'title3'

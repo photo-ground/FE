@@ -44,6 +44,11 @@ const theme = {
       lineHeight: '2rem',
     },
     header2: {
+      fontSize: '1.5rem',
+      fontWeight: 500,
+      lineHeight: '2rem',
+    },
+    header3: {
       fontSize: '1.125rem',
       fontWeight: 500,
       lineHeight: '2rem',
