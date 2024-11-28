@@ -33,7 +33,7 @@ const theme = {
 
     background: {
       // [todo] 디자인 시스템에 없는데 사용되고 있어서 문의해봐야함
-      primary: '#000000',
+      primary: '#0e0e0e',
     },
   },
 
