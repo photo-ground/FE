@@ -1,14 +1,10 @@
-'use server';
-
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 export default async function goSignIn() {
-  const cookieStore = await cookies();
+  const expiryDate = new Date();
+  expiryDate.setDate(expiryDate.getDate() + 1); // 쿠키를 1일 뒤 만료로 설정
 
-  const oneDayInSeconds = 24 * 60 * 60;
-  cookieStore.set('isVisited', 'true', {
-    maxAge: Math.floor(Date.now() / 1000) + oneDayInSeconds,
-  });
+  document.cookie = `isVisited=true; path=/; expires=${expiryDate.toUTCString()}`;
+
   redirect('/signin');
 }
