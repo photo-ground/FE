@@ -2,9 +2,9 @@
 
 import CTAButton from '@/components/atoms/CTAButton';
 import Text from '@/components/atoms/Text';
-import { ButtonArea, Container } from './styles';
 import goOnboarding from './_actions/goOnboarding';
 import goSignIn from './_actions/goSignIn';
+import { ButtonArea, Container } from './styles';
 
 export default function SplashPage() {
   return (
