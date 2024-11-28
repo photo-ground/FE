@@ -31,7 +31,7 @@ const MENU_LIST = [
 export default function BottomNavigationBar() {
   const pathname = usePathname();
 
-  if (pathname === '/onboarding') {
+  if (pathname === '/splash') {
     return null;
   }
 

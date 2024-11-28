@@ -23,7 +23,7 @@ const ButtonArea = styled.div`
   width: 100%;
 `;
 
-export default function OnboardingPage() {
+export default function SplashPage() {
   return (
     <Container>
       <Text variant="header1">Photo Ground</Text>
