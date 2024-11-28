@@ -81,13 +81,15 @@ export default function StyledComponentsRegistry({
     return styles;
   });
 
-  return (
-    <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
+  if (typeof window !== 'undefined')
+    return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 
+  return (
+    <ThemeProvider theme={theme}>
+      <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
+        <GlobalStyle />
         {children}
-      </ThemeProvider>
-    </StyleSheetManager>
+      </StyleSheetManager>
+    </ThemeProvider>
   );
 }

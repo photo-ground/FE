@@ -16,7 +16,8 @@
     "next": "15.0.1",
     "react": "19.0.0-rc-69d4b800-20241021",
     "react-dom": "19.0.0-rc-69d4b800-20241021",
-    "styled-components": "^6.1.13"
+    "styled-components": "^6.1.13",
+    "vercel": "^32.3.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.2",
