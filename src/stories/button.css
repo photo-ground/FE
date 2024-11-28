@@ -1,0 +1,36 @@
+/* 기본 버튼 스타일 */
+button {
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* 버튼 색상 (기본) */
+button.primary {
+  color: rgb(5, 5, 5);
+  background-color: #1ea7fd;
+}
+
+button.secondary {
+  color: #333;
+  background-color: #e2e2e2;
+}
+
+/* 버튼 크기 */
+button.small {
+  font-size: 12px;
+  padding: 8px 12px;
+}
+
+button.medium {
+  font-size: 14px;
+  padding: 10px 15px;
+}
+
+button.large {
+  font-size: 16px;
+  padding: 12px 20px;
+}
