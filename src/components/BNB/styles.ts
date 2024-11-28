@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import Text from '../atoms/Text';
 import BREAK_POINT from '@/styles/constants';
+import Text from '../atoms/Text';
 
 export const Container = styled.nav`
   position: fixed;
