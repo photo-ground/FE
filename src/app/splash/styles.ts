@@ -7,7 +7,8 @@ export const Container = styled.main`
   justify-content: space-between;
 
   height: 100dvh;
-  padding: 40% 1.25rem 10% 1.25rem;
+  padding: 40vh 1.25rem ${({ theme }) => theme.spacing.fixedButtonBottom}
+    1.25rem;
 `;
 
 export const ButtonArea = styled.div`
