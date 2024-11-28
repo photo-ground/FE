@@ -1,7 +1,4 @@
-import {
-  convertToViewportHeight,
-  convertToViewportWidth,
-} from '@/styles/convertSize';
+import { convertToViewportHeight } from '@/styles/convertSize';
 import styled from 'styled-components';
 
 export const ScreenWithBottomButton = styled.div`
@@ -9,15 +6,10 @@ export const ScreenWithBottomButton = styled.div`
   flex-direction: column;
 
   height: 100%;
-  padding: ${convertToViewportHeight(24)} ${convertToViewportWidth(24)}
-    ${convertToViewportHeight(80)} ${convertToViewportWidth(24)};
+  padding: ${convertToViewportHeight(24)} 1.25rem ${convertToViewportHeight(80)}
+    1.25rem;
 
   overflow: auto;
-
-  @media (min-width: 769px) {
-    padding: ${convertToViewportHeight(24)} 1.25rem
-      ${convertToViewportHeight(80)} 1.25rem;
-  }
 `;
 
 export const Container = styled(ScreenWithBottomButton)`
