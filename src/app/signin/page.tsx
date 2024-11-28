@@ -7,11 +7,11 @@ import { convertToViewportHeight } from '@/styles/convertSize';
 import { ScreenWithBottomButton } from '../splash/styles';
 import Tabs from './Tabs';
 
-export const Container = styled(ScreenWithBottomButton)`
+const Container = styled(ScreenWithBottomButton)`
   gap: ${convertToViewportHeight(160)};
 `;
 
-export const SloganArea = styled.header`
+const SloganArea = styled.header`
   padding: 0 1.25rem;
 `;
 
