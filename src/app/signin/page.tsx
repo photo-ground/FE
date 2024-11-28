@@ -4,16 +4,10 @@ import styled from 'styled-components';
 
 import Text from '@/components/atoms/Text';
 import CTAButton from '@/components/atoms/CTAButton';
+import { ScreenWithBottomButton } from '../splash/styles';
 
-export const Container = styled.main`
-  display: flex;
-  flex-direction: column;
+export const Container = styled(ScreenWithBottomButton)`
   justify-content: space-between;
-
-  height: 100%;
-  padding: 1.5rem ${({ theme }) => theme.spacing.padding.horizontal}
-    ${({ theme }) => theme.spacing.fixedButtonBottom}
-    ${({ theme }) => theme.spacing.padding.horizontal};
 `;
 
 export default function SignInPage() {

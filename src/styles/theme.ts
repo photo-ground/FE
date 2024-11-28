@@ -1,14 +1,3 @@
-const BASE_SCREEN_WIDTH = 390;
-const BASE_SCREEN_HEIGHT = 844;
-
-function convertToViewportWidth(px: number) {
-  return `${(px / BASE_SCREEN_WIDTH) * 100}dvw`;
-}
-
-function convertToViewportHeight(px: number) {
-  return `${(px / BASE_SCREEN_HEIGHT) * 100}dvh`;
-}
-
 const theme = {
   colors: {
     primary: {
@@ -124,11 +113,6 @@ const theme = {
       fontWeight: 400,
       lineHeight: '0.75rem',
     },
-  },
-
-  spacing: {
-    padding: { horizontal: convertToViewportWidth(24) },
-    fixedButtonBottom: convertToViewportHeight(80),
   },
 };
 

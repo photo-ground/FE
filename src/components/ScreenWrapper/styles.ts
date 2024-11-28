@@ -1,3 +1,4 @@
+import BREAK_POINT from '@/styles/constants';
 import styled from 'styled-components';
 
 export const FullPage = styled.div`
@@ -15,7 +16,7 @@ export const Container = styled.div`
   flex-direction: column;
 
   width: 100%;
-  max-width: 768px;
+  max-width: ${BREAK_POINT}px;
   height: 100dvh;
 `;
 
