@@ -11,13 +11,17 @@ export const Container = styled(ScreenWithBottomButton)`
   gap: ${convertToViewportHeight(160)};
 `;
 
+export const SloganArea = styled.header`
+  padding: 0 1.25rem;
+`;
+
 export default function SignInPage() {
   return (
     <Container>
-      <header>
+      <SloganArea>
         <Text variant="title1">여기 위치에</Text>
         <Text variant="title1">슬로건을 적어볼까요</Text>
-      </header>
+      </SloganArea>
 
       <Tabs />
     </Container>

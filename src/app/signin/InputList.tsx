@@ -20,6 +20,8 @@ const InputContainer = styled.div`
 `;
 
 const Input = styled.input`
+  flex: 1;
+
   background: transparent;
   border: none;
   outline: none;
