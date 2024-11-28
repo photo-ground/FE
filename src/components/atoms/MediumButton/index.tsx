@@ -32,8 +32,3 @@ export default function MediumButton({
     </Button>
   );
 }
-
-MediumButton.defaultProps = {
-  variant: 'primary',
-  onClick: () => {},
-};
