@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const isVisited = request.cookies.get('isVisited')?.value;
+  const isVisited = request.cookies.get('isVisited')?.value === 'true';
 
   // 방문 기록이 없고, /splash 페이지가 아니라면 리디렉션
   if (!isVisited && !(request.nextUrl.pathname === '/splash')) {

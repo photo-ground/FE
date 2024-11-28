@@ -1,27 +1,9 @@
 'use client';
 
-import Link from 'next/link';
-import styled from 'styled-components';
 import CTAButton from '@/components/atoms/CTAButton';
 import Text from '@/components/atoms/Text';
-
-const Container = styled.main`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-
-  height: 100dvh;
-  padding: 40% 1.25rem 10% 1.25rem;
-`;
-
-const ButtonArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  width: 100%;
-`;
+import { ButtonArea, Container } from './styles';
+import goOnboarding from './_actions/goOnboarding';
 
 export default function SplashPage() {
   return (
@@ -29,12 +11,9 @@ export default function SplashPage() {
       <Text variant="header1">Photo Ground</Text>
 
       <ButtonArea>
-        <Link href="/">
-          <CTAButton text="둘러보기" variant="secondary" />
-        </Link>
-        <Link href="/login">
-          <CTAButton text="로그인" />
-        </Link>
+        {/* cookie 설정으로 인해 Link 대신 이벤트 핸들러를 사용합니다 */}
+        <CTAButton text="둘러보기" variant="secondary" onClick={goOnboarding} />
+        <CTAButton text="로그인" />
       </ButtonArea>
     </Container>
   );
