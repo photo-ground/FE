@@ -58,9 +58,3 @@ export default function CTAButton({
     </Button>
   );
 }
-
-CTAButton.defaultProps = {
-  variant: 'primary',
-  disabled: false,
-  onClick: () => {},
-};

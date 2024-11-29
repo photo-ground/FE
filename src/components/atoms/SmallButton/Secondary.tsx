@@ -19,7 +19,3 @@ export default function Secondary({
     </SecondaryButton>
   );
 }
-
-Secondary.defaultProps = {
-  onClick: () => {},
-};

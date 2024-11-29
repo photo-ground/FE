@@ -31,8 +31,3 @@ export default function Primary({
     </PrimaryButton>
   );
 }
-
-Primary.defaultProps = {
-  disabled: false,
-  onClick: () => {},
-};
