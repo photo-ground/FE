@@ -3,13 +3,13 @@
 import { ReactNode } from 'react';
 
 import BottomNavigationBar from '@/components/BNB';
-import { Container, Content, FullPage } from './styles';
+import { Container, FullPage } from './styles';
 
 export default function ScreenWrapper({ children }: { children: ReactNode }) {
   return (
     <FullPage>
       <Container>
-        <Content>{children}</Content>
+        {children}
         <BottomNavigationBar />
       </Container>
     </FullPage>

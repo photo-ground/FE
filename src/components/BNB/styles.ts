@@ -1,12 +1,18 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import BREAK_POINT from '@/styles/constants';
 import Text from '../atoms/Text';
 
 export const Container = styled.nav`
+  position: fixed;
+  bottom: 0;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
 
+  width: 100%;
+  max-width: ${BREAK_POINT}px;
   padding: 1rem 1.25rem;
   background: #0e0e0ecc;
   border-top: 1px solid ${({ theme }) => theme.colors.gray[800]};
