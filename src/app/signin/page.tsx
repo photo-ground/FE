@@ -19,8 +19,8 @@ export default function SignInPage() {
   return (
     <Container>
       <SloganArea>
-        <Text variant="title1">여기 위치에</Text>
-        <Text variant="title1">슬로건을 적어볼까요</Text>
+        <Text variant="title1_rg">여기 위치에</Text>
+        <Text variant="title1_rg">슬로건을 적어볼까요</Text>
       </SloganArea>
 
       <Tabs />
