@@ -41,7 +41,7 @@ export default function InputList() {
       </InputContainer>
       <InputContainer>
         <PasswordIcon size="1.25rem" />
-        <Input placeholder="비밀번호" />
+        <Input type="password" placeholder="비밀번호" />
       </InputContainer>
     </Container>
   );
