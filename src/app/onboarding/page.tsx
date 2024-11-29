@@ -10,7 +10,7 @@ import SchoolButtonItem from './SchoolButtonItem';
 import { SchoolButtonProps } from './interface';
 
 const Container = styled(ScreenWithBottomButton)`
-  gap: ${convertToViewportHeight(160)};
+  gap: ${convertToViewportHeight(48)};
 `;
 
 const SloganArea = styled.header`
@@ -48,6 +48,8 @@ export default function OnboardingPage() {
           {/* [todo] : 현재 사용자 이름으로 업데이트  */}
           <Text variant="title1_rg">김사진님,</Text>
           <Text variant="title1_rg">어떤 장소를 기록할까요?</Text>
+        </SloganArea>
+        <div>
           {schoolList.map((item) => (
             <SchoolButtonItem
               title={item.title}
@@ -55,7 +57,7 @@ export default function OnboardingPage() {
               link={item.link}
             />
           ))}
-        </SloganArea>
+        </div>
       </Container>
     </main>
   );
