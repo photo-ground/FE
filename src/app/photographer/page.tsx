@@ -3,6 +3,7 @@
 import TNB from '@/components/TNB';
 import styled from 'styled-components';
 import SearchArea from './_components/SearchArea';
+import PhotographerList from './_components/PhotographerList';
 
 const Container = styled.div`
   position: relative;
@@ -23,6 +24,8 @@ export default function PhotographerPage() {
       <TNB.Title text="사진작가" />
 
       <SearchArea />
+
+      <PhotographerList />
     </Container>
   );
 }
