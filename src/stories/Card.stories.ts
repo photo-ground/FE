@@ -26,7 +26,7 @@ export const Small: Story = {
 export const Medium: Story = {
   args: {
     size: 'medium',
-    src: 'https://via.placeholder.com/150',
+    src: 'https://via.placeholder.com/170',
     title: 'Medium Card',
     content: 'This is a medium card.',
   },
