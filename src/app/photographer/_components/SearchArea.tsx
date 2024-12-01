@@ -1,5 +1,26 @@
-import SearchIcon from '@/assets/SearchIcon';
+'use client';
+
+import { useState } from 'react';
 import styled from 'styled-components';
+import SearchIcon from '@/assets/SearchIcon';
+import Filter, { Option } from './Filter';
+
+const UNIV_LIST: Option[] = [
+  { value: 'sogang', label: '서강대학교' },
+  { value: 'yonsei', label: '연세대학교' },
+  { value: 'ewha', label: '이화여자대학교' },
+  { value: 'hongik', label: '홍익대학교' },
+];
+
+const GENDER_LIST: Option[] = [
+  { value: 'male', label: '남성' },
+  { value: 'female', label: '여성' },
+];
+
+type UnivValue = (typeof UNIV_LIST)[number]['value'];
+type GenderValue = (typeof GENDER_LIST)[number]['value'];
+
+// --------------------------------------------------
 
 const Container = styled.div`
   display: flex;
@@ -43,6 +64,16 @@ const FilterWrapper = styled.div`
 `;
 
 export default function SearchArea() {
+  const [univ, setUniv] = useState<UnivValue | null>(null);
+  const [gender, setGender] = useState<GenderValue | null>(null);
+
+  const onChangeUniv = (newValue: string) => {
+    setUniv(newValue);
+  };
+  const onChangeGender = (newValue: string) => {
+    setGender(newValue);
+  };
+
   return (
     <Container>
       <InputContainer>
@@ -51,8 +82,18 @@ export default function SearchArea() {
       </InputContainer>
 
       <FilterWrapper>
-        <div>dropdown here</div>
-        <div>dropdown here</div>
+        <Filter
+          value={univ}
+          onChange={onChangeUniv}
+          optionList={UNIV_LIST}
+          placeholder="학교"
+        />
+        <Filter
+          value={gender}
+          onChange={onChangeGender}
+          optionList={GENDER_LIST}
+          placeholder="성별"
+        />
       </FilterWrapper>
     </Container>
   );
