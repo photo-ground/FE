@@ -1,5 +1,5 @@
 import Card from '@/components/Card';
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -8,15 +8,18 @@ const Container = styled.div`
   column-gap: 0.625rem;
   row-gap: 1rem;
 
+  padding: 1.25rem;
   padding-bottom: calc(3rem + 4.875rem);
 `;
 
 export default function PhotographerList() {
   function masonryLayout() {
     document.querySelectorAll('#masonry-card').forEach((element) => {
-      element.style.gridRowEnd = `span ${Math.ceil(
-        element.querySelector('#masonry-card div').scrollHeight / 16 + 10 / 16,
-      )}`;
+      const card = element as HTMLElement;
+      const content = card.querySelector('#masonry-card div') as HTMLElement;
+      if (content) {
+        card.style.gridRowEnd = `span ${Math.ceil(content.scrollHeight / 16 + 10 / 16)}`;
+      }
     });
   }
 
@@ -26,24 +29,24 @@ export default function PhotographerList() {
   }, []);
 
   const data = [
-    { src: '/images/yonsei.jpg', title: '조은호 작가' },
-    { src: '/images/hongik.jpg', title: '조은호 작가' },
-    { src: '/images/ewha.jpg', title: '조은호 작가' },
-    { src: '/images/sogang.jpg', title: '조은호 작가' },
-    { src: '/images/yonsei.jpg', title: '조은호 작가' },
-    { src: '/images/hongik.jpg', title: '조은호 작가' },
-    { src: '/images/ewha.jpg', title: '조은호 작가' },
-    { src: '/images/sogang.jpg', title: '조은호 작가' },
-    { src: '/images/yonsei.jpg', title: '조은호 작가' },
-    { src: '/images/hongik.jpg', title: '조은호 작가' },
-    { src: '/images/ewha.jpg', title: '조은호 작가' },
-    { src: '/images/sogang.jpg', title: '조은호 작가' },
+    { id: '1', src: '/images/yonsei.jpg', title: '조은호 작가' },
+    { id: '2', src: '/images/hongik.jpg', title: '조은호 작가' },
+    { id: '3', src: '/images/ewha.jpg', title: '조은호 작가' },
+    { id: '4', src: '/images/sogang.jpg', title: '조은호 작가' },
+    { id: '5', src: '/images/yonsei.jpg', title: '조은호 작가' },
+    { id: '6', src: '/images/hongik.jpg', title: '조은호 작가' },
+    { id: '7', src: '/images/ewha.jpg', title: '조은호 작가' },
+    { id: '8', src: '/images/sogang.jpg', title: '조은호 작가' },
+    { id: '9', src: '/images/yonsei.jpg', title: '조은호 작가' },
+    { id: '10', src: '/images/hongik.jpg', title: '조은호 작가' },
+    { id: '11', src: '/images/ewha.jpg', title: '조은호 작가' },
+    { id: '12', src: '/images/sogang.jpg', title: '조은호 작가' },
   ];
 
   return (
     <Container className="masonry-container">
-      {data.map((datum, index) => (
-        <div id="masonry-card" key={datum.title + index}>
+      {data.map((datum) => (
+        <div id="masonry-card" key={datum.id}>
           <Card
             size="dynamic"
             src={datum.src}
