@@ -33,7 +33,7 @@ const theme = {
 
     background: {
       // [todo] 디자인 시스템에 없는데 사용되고 있어서 문의해봐야함
-      primary: '#000000',
+      primary: '#0e0e0e',
     },
   },
 
@@ -44,13 +44,23 @@ const theme = {
       lineHeight: '2rem',
     },
     header2: {
+      fontSize: '1.5rem',
+      fontWeight: 500,
+      lineHeight: '2rem',
+    },
+    header3: {
       fontSize: '1.125rem',
       fontWeight: 500,
       lineHeight: '2rem',
     },
-    title1: {
+    title1_sb: {
       fontSize: '1.25rem',
       fontWeight: 600,
+      lineHeight: '1.75rem',
+    },
+    title1_rg: {
+      fontSize: '1.25rem',
+      fontWeight: 400,
       lineHeight: '1.75rem',
     },
     title2: {

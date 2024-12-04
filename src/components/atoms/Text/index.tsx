@@ -3,7 +3,9 @@ import styled from 'styled-components';
 type Variant =
   | 'header1'
   | 'header2'
-  | 'title1'
+  | 'header3'
+  | 'title1_sb'
+  | 'title1_rg'
   | 'title2'
   | 'title3'
   | 'body1_md'

@@ -1,26 +1,15 @@
+import BREAK_POINT from '@/styles/constants';
 import styled from 'styled-components';
 
 export const FullPage = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
   height: 100dvh;
-  background: ${({ theme }) => theme.colors.background.primary};
 `;
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-
+  position: relative;
   width: 100%;
-  max-width: 26rem;
+  max-width: ${BREAK_POINT}px;
   height: 100dvh;
-
-  box-shadow: 0 1rem 2rem -1rem gray;
-`;
-
-export const Content = styled.div`
-  flex: 1;
+  margin: auto;
+  overflow: auto;
 `;
