@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 export const FullPage = styled.div`
   height: 100dvh;
-  background: ${({ theme }) => theme.colors.background.primary};
 `;
 
 export const Container = styled.div`
