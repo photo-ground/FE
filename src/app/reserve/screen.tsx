@@ -1,7 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
-import Calendar from './_components/Calendar';
+import CalendarLarge from '@/components/CalendarLarge';
 
 const Container = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ const Container = styled.div`
 export default function ReserveScreen() {
   return (
     <Container>
-      <Calendar />
+      <CalendarLarge />
     </Container>
   );
 }

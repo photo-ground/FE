@@ -18,7 +18,7 @@ const calendar = getDateList(new Date());
 
 const DAY_LIST = ['일', '월', '화', '수', '목', '금', '토'];
 
-export default function Calendar() {
+export default function CalendarLarge() {
   return (
     <Container>
       <Header>
