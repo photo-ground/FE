@@ -1,8 +1,9 @@
 'use client';
 
-import SmallButton from '@/components/atoms/SmallButton';
 import TNB from '@/components/TNB';
 import styled from 'styled-components';
+import SearchArea from './_components/SearchArea';
+import PhotographerList from './_components/PhotographerList';
 
 const Container = styled.div`
   position: relative;
@@ -20,10 +21,11 @@ export default function PhotographerPage() {
     <Container>
       <Background src="/images/background1.webp" alt="background" />
 
-      <div>
-        <TNB.Title text="사진작가" />
-        <SmallButton.Primary text="sample text" />
-      </div>
+      <TNB.Title text="사진작가" />
+
+      <SearchArea />
+
+      <PhotographerList />
     </Container>
   );
 }

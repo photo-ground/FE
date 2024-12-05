@@ -6,7 +6,7 @@ import './card.css';
 
 export interface CardProps {
   /** How large should the card be? */
-  size?: 'small' | 'medium' | 'large';
+  size?: 'small' | 'medium' | 'large' | 'dynamic';
   /** What card image to use */
   src: string;
   /** Card Title */
@@ -26,6 +26,7 @@ const CardWrapper = styled.div`
 const CardImage = styled.img`
   object-fit: cover;
   margin-bottom: 0.5rem;
+  border-radius: 0.125rem;
 `;
 
 const CardContent = styled(Text)`

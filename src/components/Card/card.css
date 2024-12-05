@@ -8,8 +8,8 @@
 
 .card.medium {
   img {
-    width: 10.625 rem;
-    height: 10.625 rem;
+    width: 10.625rem;
+    height: 10.625rem;
   }
 }
 
@@ -20,3 +20,9 @@
 }
 
 /* todo : masonry에 들어갈 동적 크기 card */
+.card.dynamic {
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
