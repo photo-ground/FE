@@ -1,4 +1,3 @@
-import { convertToViewportHeight } from '@/styles/convertSize';
 import styled from 'styled-components';
 import SearchIcon from '@/assets/SearchIcon';
 
@@ -9,8 +8,7 @@ const Form = styled.form`
   align-items: center;
   justify-content: space-between;
 
-  margin: 1rem 1.25rem;
-  //   margin-top: ${convertToViewportHeight(48)};
+  margin: 0 1.25rem;
 `;
 
 const InputContainer = styled.div`
