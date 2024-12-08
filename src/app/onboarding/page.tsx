@@ -20,14 +20,14 @@ const SloganArea = styled.header`
 export default function OnboardingPage() {
   const schoolList: SchoolButtonProps[] = [
     {
-      title: '연세대학교',
-      src: '/images/yonsei.jpg',
-      link: '/home?school=yonsei',
-    },
-    {
       title: '서강대학교',
       src: '/images/sogang.jpg',
       link: '/home?school=sogang',
+    },
+    {
+      title: '연세대학교',
+      src: '/images/yonsei.jpg',
+      link: '/home?school=yonsei',
     },
     {
       title: '이화여자대학교',
