@@ -76,7 +76,7 @@ export default function HomePage() {
       <Spacer size="1.5rem" />
       <TitleContainer>
         <Text variant="title1_sb">활발히 활동 중인 작가</Text>
-        <Text variant="caption1_rg"> 학교변경</Text>
+        <Text variant="caption1_rg"> 더보기</Text>
       </TitleContainer>
       <CardContainerX>
         {cards.map((card) => (
@@ -97,7 +97,7 @@ export default function HomePage() {
         <Text variant="title1_sb">최근 {univTitle} 스냅 사진</Text>
         <Filter
           optionList={UNIV_LIST}
-          placeholder="더보기"
+          placeholder="학교 변경"
           value={univ}
           onChange={onChangeUniv}
         />
