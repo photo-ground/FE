@@ -11,6 +11,7 @@ import {
 } from './styles';
 import EmailInput from './EmailInput';
 import PasswordInput from './PasswordInput';
+import PhoneInput from './PhoneInput';
 
 export default function SignUpPage() {
   return (
@@ -28,6 +29,7 @@ export default function SignUpPage() {
 
         <UserSection>
           <Text variant="title3">회원 정보</Text>
+          <PhoneInput />
         </UserSection>
 
         <ButtonWrapper>
