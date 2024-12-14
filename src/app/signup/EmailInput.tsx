@@ -66,7 +66,7 @@ export default function EmailInput() {
     <Container>
       <InputWrapper>
         <InputContainer>
-          <EmailIcon size="1.25rem" />
+          <EmailIcon size="1.5rem" />
           <Input placeholder="이메일" />
         </InputContainer>
         <Button type="button" onClick={sendMail} $disabled={isSent}>

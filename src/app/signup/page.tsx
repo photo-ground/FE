@@ -10,6 +10,7 @@ import {
   UserSection,
 } from './styles';
 import EmailInput from './EmailInput';
+import PasswordInput from './PasswordInput';
 
 export default function SignUpPage() {
   return (
@@ -20,6 +21,7 @@ export default function SignUpPage() {
         <AccountSection>
           <Text variant="title3">계정 정보</Text>
           <EmailInput />
+          <PasswordInput />
         </AccountSection>
 
         <DivideLine />
