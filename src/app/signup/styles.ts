@@ -16,7 +16,7 @@ export const UserSection = styled(Section)`
 `;
 
 export const ButtonWrapper = styled.div`
-  padding: 0 1.25rem;
+  padding: 0 1.25rem 1rem 1.25rem;
 `;
 
 export const DivideLine = styled.div`
