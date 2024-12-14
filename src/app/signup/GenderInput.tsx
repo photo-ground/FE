@@ -49,6 +49,7 @@ export default function GenderInput() {
         const isSelected = value === option.value;
         return (
           <Button
+            key={option.value}
             type="button"
             $isSelected={isSelected}
             onClick={() => {
