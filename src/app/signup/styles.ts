@@ -19,6 +19,6 @@ export const ButtonWrapper = styled.div`
   padding: 0 1.25rem;
 `;
 
-export const DivideLine = styled.hr`
-  border-color: ${({ theme }) => theme.colors.gray[800]};
+export const DivideLine = styled.div`
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray[800]};
 `;
