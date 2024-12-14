@@ -91,7 +91,7 @@ export default function UnivInput() {
   return (
     <div style={{ position: 'relative' }}>
       <Container ref={selectorRef} onClick={onOpen} $isOpen={isOpen}>
-        <FilterText variant="body2_rg">
+        <FilterText variant="body1_rg">
           {currentLabel || '학교 선택'}
         </FilterText>
         <DownChevronIcon />
@@ -109,7 +109,7 @@ export default function UnivInput() {
                   onClose();
                 }}
               >
-                <FilterText variant="body2_rg">{option.label}</FilterText>
+                <FilterText variant="body1_rg">{option.label}</FilterText>
               </OptionItem>
             ))}
           </OptionWrapper>

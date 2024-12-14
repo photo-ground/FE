@@ -24,7 +24,7 @@ const Button = styled.button<{ $isSelected: boolean }>`
   justify-content: center;
 
   width: 100%;
-  padding: 1rem;
+  padding: 0.5rem;
   background: transparent;
 
   border: 1px solid
