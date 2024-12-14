@@ -24,7 +24,3 @@ export default function Tertiary({
     </TertiaryButton>
   );
 }
-
-Tertiary.defaultProps = {
-  onClick: () => {},
-};

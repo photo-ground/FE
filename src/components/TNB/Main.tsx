@@ -5,7 +5,7 @@ import { Header } from './styles';
 export default function Main() {
   return (
     <Header>
-      <Text variant="title1">PHOTO GROUND</Text>
+      <Text variant="title1_sb">PHOTO GROUND</Text>
     </Header>
   );
 }

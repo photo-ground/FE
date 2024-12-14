@@ -1,16 +1,9 @@
-'use client';
+import { withThemeFromJSXProvider } from '@storybook/addon-themes';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
-import React, { useState } from 'react';
-import { useServerInsertedHTML } from 'next/navigation';
-import {
-  createGlobalStyle,
-  ServerStyleSheet,
-  StyleSheetManager,
-  ThemeProvider,
-} from 'styled-components';
-import theme from '@/styles/theme';
+import theme from '../src/styles/theme';
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/ 
     v2.0 | 20110126
     License: none (public domain)
@@ -43,7 +36,6 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     line-height: 1;
-    background: ${theme.colors.background.primary};
   }
   ol, ul {
     list-style: none;
@@ -67,30 +59,10 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export default function StyledComponentsRegistry({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  // Only create stylesheet once with lazy initial state
-  // x-ref: https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
-  const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
-
-  useServerInsertedHTML(() => {
-    const styles = styledComponentsStyleSheet.getStyleElement();
-    styledComponentsStyleSheet.instance.clearTag();
-    return styles;
-  });
-
-  if (typeof window !== 'undefined')
-    return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
-
-  return (
-    <ThemeProvider theme={theme}>
-      <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
-        <GlobalStyle />
-        {children}
-      </StyleSheetManager>
-    </ThemeProvider>
-  );
-}
+export const decorators = [
+  withThemeFromJSXProvider({
+    themes: { default: theme }, // 배열로 제공해야 함
+    Provider: ThemeProvider,
+    GlobalStyles, // registry.ts에 있는 내용이 적용이 안돼서,, 이렇게 만듦
+  }),
+];
