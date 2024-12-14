@@ -34,7 +34,8 @@ export default function BottomNavigationBar() {
   if (
     pathname === '/splash' ||
     pathname === '/onboarding' ||
-    pathname === '/signin'
+    pathname === '/signin' ||
+    pathname === '/signup'
   ) {
     return null;
   }

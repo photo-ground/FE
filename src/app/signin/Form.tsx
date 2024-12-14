@@ -40,7 +40,7 @@ export default function SignInForm() {
         <InputList />
 
         {/* [todo] 링크 변경 */}
-        <StyledLink href="/splash">
+        <StyledLink href="/signup">
           <SignUpText variant="caption1_rg">회원가입 </SignUpText>
         </StyledLink>
       </Wrapper>
