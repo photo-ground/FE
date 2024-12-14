@@ -21,12 +21,12 @@ export default function PasswordInput() {
     <Container>
       <InputContainer>
         <PasswordIcon size="1.5rem" />
-        <Input placeholder="비밀번호" />
+        <Input placeholder="비밀번호" type="password" />
       </InputContainer>
 
       <InputContainer>
         <PasswordConfirmIcon size="1.5rem" />
-        <Input placeholder="비밀번호 확인" />
+        <Input placeholder="비밀번호 확인" type="password" />
       </InputContainer>
     </Container>
   );
