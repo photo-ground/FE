@@ -4,8 +4,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-
-  width: fit-content;
+  width: 100%;
 `;
 
 export const Header = styled.div`
@@ -13,17 +12,19 @@ export const Header = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  padding: 0.75rem 1.25rem;
+  padding: 0.75rem 0;
 `;
 
 export const DayList = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 0.25rem 0;
 `;
 
 export const DayText = styled(Text)`
+  width: 2.5rem;
   color: ${({ theme }) => theme.colors.gray[200]};
+  text-align: center;
 `;
 
 export const WeekList = styled.div`
@@ -35,7 +36,7 @@ export const WeekList = styled.div`
 export const WeekRow = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 0.25rem;
+  justify-content: space-between;
 `;
 
 export const DateCell = styled.div`
