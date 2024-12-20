@@ -14,6 +14,7 @@ import PasswordInput from './PasswordInput';
 import PhoneInput from './PhoneInput';
 import GenderInput from './GenderInput';
 import UnivInput from './UnivInput';
+import NameInput from './NameInput';
 
 export default function SignUpPage() {
   return (
@@ -31,6 +32,7 @@ export default function SignUpPage() {
 
         <UserSection>
           <Text variant="title3">회원 정보</Text>
+          <NameInput />
           <PhoneInput />
           <UnivInput />
           <GenderInput />
