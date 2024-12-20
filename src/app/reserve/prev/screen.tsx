@@ -7,6 +7,7 @@ import Chip from '@/components/atoms/Chip';
 import LargeButton from '@/components/atoms/LargeButton';
 import Text from '@/components/atoms/Text';
 import TNB from '@/components/TNB';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 const Container = styled.ol``;
@@ -90,7 +91,9 @@ function Card() {
         </TextArea>
       </CardContainer>
 
-      <LargeButton text="후기 작성" variant="secondary" />
+      <Link href="/reserve/review/1">
+        <LargeButton text="후기 작성" variant="secondary" />
+      </Link>
     </CardWrapper>
   );
 }
