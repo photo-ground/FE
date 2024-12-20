@@ -1,8 +1,9 @@
+import styled from 'styled-components';
 import PhotographerIcon from '@/assets/PhotographerIcon';
 import LocationIcon from '@/assets/LocationIcon';
-import Text from '@/components/atoms/Text';
-import styled from 'styled-components';
 import PeopleIcon from '@/assets/PeopleIcon';
+import Text from '@/components/atoms/Text';
+import Chip from '@/components/atoms/Chip';
 
 const Container = styled.div`
   display: flex;
@@ -47,19 +48,6 @@ const InfoText = styled(Text)`
   color: ${({ theme }) => theme.colors.gray[200]};
 `;
 
-const Button = styled.button`
-  display: flex;
-  padding: 0.375rem 1rem;
-  background: ${({ theme }) => theme.colors.gray[900]};
-  border: none;
-  outline: none;
-  border-radius: 1.5rem;
-`;
-
-const ButtonText = styled(Text)`
-  color: ${({ theme }) => theme.colors.primary[100]};
-`;
-
 export default function Info() {
   return (
     <Container>
@@ -79,10 +67,7 @@ export default function Info() {
             </InfoLine>
           </InfoArea>
 
-          <Button>
-            <PeopleIcon />
-            <ButtonText variant="body2_rg">2인</ButtonText>
-          </Button>
+          <Chip type="brand" icon={PeopleIcon} text="2인" />
         </Content>
       </Card>
     </Container>
