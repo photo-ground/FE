@@ -6,6 +6,7 @@ import SmallButton from '@/components/atoms/SmallButton';
 import PhotographerIcon from '@/assets/PhotographerIcon';
 import LocationIcon from '@/assets/LocationIcon';
 import TimeIcon from '@/assets/TimeIcon';
+import Link from 'next/link';
 
 const Container = styled.div`
   display: flex;
@@ -100,7 +101,9 @@ export default function Upcoming() {
           </InfoLine>
         </InfoArea>
         <ButtonArea>
-          <RightChevronIcon size="20px" />
+          <Link href="/reserve/1">
+            <RightChevronIcon size="20px" />
+          </Link>
           <SmallButton.Tertiary text="채팅방" />
         </ButtonArea>
       </Content>
