@@ -63,9 +63,14 @@ const theme = {
       fontWeight: 400,
       lineHeight: '1.75rem',
     },
-    title2: {
+    title2_md: {
       fontSize: '1.125rem',
       fontWeight: 600,
+      lineHeight: '1.5rem',
+    },
+    title2_sb: {
+      fontSize: '1.125rem',
+      fontWeight: 500,
       lineHeight: '1.5rem',
     },
     title3: {
