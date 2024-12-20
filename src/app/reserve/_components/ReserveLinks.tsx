@@ -1,7 +1,8 @@
+import Link from 'next/link';
+import styled from 'styled-components';
 import CurrentReservationIcon from '@/assets/CurrentReservationIcon';
 import PrevReservationIcon from '@/assets/PrevReservationIcon';
 import Text from '@/components/atoms/Text';
-import styled from 'styled-components';
 
 const Container = styled.div`
   display: grid;
@@ -13,7 +14,7 @@ const Container = styled.div`
   margin-bottom: 3rem;
 `;
 
-const Button = styled.button`
+const Button = styled(Link)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,6 +25,8 @@ const Button = styled.button`
   border: none;
   border-radius: 0.625rem;
   outline: none;
+
+  text-decoration: none;
 `;
 
 const PrevButton = styled(Button)`
@@ -42,11 +45,11 @@ const CurrentButton = styled(Button)`
 export default function ReserveLinks() {
   return (
     <Container>
-      <PrevButton>
+      <PrevButton href="/reserve/prev">
         <PrevReservationIcon />
         <Text variant="body1_md">이전 스냅</Text>
       </PrevButton>
-      <CurrentButton>
+      <CurrentButton href="/reserve/current">
         <CurrentReservationIcon />
         <Text variant="body1_md">예약한 스냅</Text>
       </CurrentButton>
