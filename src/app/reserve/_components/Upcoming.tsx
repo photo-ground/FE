@@ -92,11 +92,11 @@ export default function Upcoming() {
           </InfoLine>
           <InfoLine>
             <LocationIcon />
-            <InfoText variant="body1_rg">이채린 작가</InfoText>
+            <InfoText variant="body1_rg">홍익대학교</InfoText>
           </InfoLine>
           <InfoLine>
             <TimeIcon />
-            <InfoText variant="body1_rg">이채린 작가</InfoText>
+            <InfoText variant="body1_rg">오후 12:00 - 1:00</InfoText>
           </InfoLine>
         </InfoArea>
         <ButtonArea>
