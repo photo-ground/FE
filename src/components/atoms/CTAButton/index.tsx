@@ -18,6 +18,7 @@ const getBackgroundColor = ({
   if (variant === 'primary') {
     return theme.colors.primary[100];
   }
+
   return theme.colors.gray[900];
 };
 
@@ -51,7 +52,7 @@ export default function CTAButton({
   return (
     <Button variant={variant} disabled={disabled} onClick={onClick}>
       {disabled ? (
-        <ButtonText variant="title2">{text}</ButtonText>
+        <ButtonText variant="title2_sb">{text}</ButtonText>
       ) : (
         <Text variant="title3">{text}</Text>
       )}
