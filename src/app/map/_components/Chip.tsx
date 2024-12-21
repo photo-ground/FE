@@ -6,13 +6,13 @@ type Variant = 'primary' | 'secondary';
 const getBackgroundColor = ({
   theme,
   variant,
-  disabled,
+  active,
 }: {
   theme: DefaultTheme;
   variant: Variant;
   active: boolean;
 }) => {
-  if (disabled) {
+  if (active) {
     return theme.colors.gray[600];
   }
   if (variant === 'primary') {
@@ -21,11 +21,16 @@ const getBackgroundColor = ({
   return theme.colors.gray[900];
 };
 
-const Button = styled.button<{ variant: Variant }>`
+// non-boolean문제 때문에 props늘려씀
+const Button = styled.button<{ variant: Variant; $active: boolean }>`
   width: 100%;
   padding: 0.75rem 0;
-  background: ${(props) => getBackgroundColor(props)};
-
+  background: ${(props) =>
+    getBackgroundColor({
+      theme: props.theme,
+      variant: props.variant,
+      active: props.$active,
+    })};
   outline: none;
   border: none;
   border-radius: 1.5rem;
@@ -49,7 +54,7 @@ export default function Chip({
   onClick?: () => void;
 }) {
   return (
-    <Button variant={variant} onClick={onClick}>
+    <Button $active={active} variant={variant} onClick={onClick}>
       {active ? (
         <ButtonText variant="body1_md">{text}</ButtonText>
       ) : (
