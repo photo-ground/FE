@@ -14,7 +14,6 @@ export default function makeMarker(
   position: naver.maps.LatLng,
   title: string,
   index: number,
-  viewportWidth: number,
   src: string,
 ): naver.maps.Marker {
   const marker = new naver.maps.Marker({
@@ -24,7 +23,6 @@ export default function makeMarker(
       content: generateCustomMarkerHTML({
         src,
         title,
-        windowWidth: viewportWidth,
       }), // React 컴포넌트가 렌더링된 DOM 요소
       size: new naver.maps.Size(72, 64),
       anchor: new naver.maps.Point(36, 64), // 마커의 중앙 하단으로 위치 조정

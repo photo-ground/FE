@@ -96,7 +96,6 @@ export default function NaverMap() {
         center: new naver.maps.LatLng(37.5511, 126.9407),
         zoom: 18,
       });
-      const viewportWidth = window.innerWidth;
 
       // 포토스팟 로드
       photoSpot.forEach((spot, idx) => {
@@ -105,7 +104,6 @@ export default function NaverMap() {
           new naver.maps.LatLng(spot.lat, spot.lng),
           spot.title,
           idx,
-          viewportWidth,
           spot.src,
         );
       });

@@ -1,11 +1,9 @@
 export default function generateCustomMarkerHTML({
   src,
   title,
-  windowWidth,
 }: {
   src: string;
   title: string;
-  windowWidth: number;
 }) {
   const combinedContent = `
     <div style="display: inline-block; position: relative; width: 5rem;">
