@@ -14,7 +14,7 @@ import { Container, Tab, TabText } from './styles';
 const MENU_LIST = [
   { title: '사진작가', route: '/photographer', icon: BNBPhotographerIcon },
   { title: '포토스팟', route: '/map', icon: BNBMapIcon },
-  { title: '홈', route: '/', icon: BNBHomeIcon },
+  { title: '홈', route: '/home', icon: BNBHomeIcon },
   { title: '예약', route: '/reserve', icon: BNBCalendarIcon },
   { title: '마이페이지', route: '/my', icon: BNBProfileIcon },
 ];

@@ -1,37 +1,35 @@
+'use client';
+
 import styled from 'styled-components';
 import SearchIcon from '@/assets/SearchIcon';
 
-const Form = styled.form`
-  position: relative;
+// --------------------------------------------------
+
+const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  gap: 0.75rem;
 
-  margin: 0 1.25rem;
+  padding: 1rem 1.25rem 1.5rem;
 `;
 
 const InputContainer = styled.div`
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-  padding: 0.5rem 1rem;
-  background: var(
-    --alpha-surface_35,
-    linear-gradient(
-      90deg,
-      rgba(140, 140, 140, 0.2) 0%,
-      rgba(89, 89, 89, 0.2) 100%
-    )
+  gap: 0.5rem; // 아이콘과 입력창 사이 간격을 임의로 설정
+
+  padding: 0.688rem 1.25rem;
+
+  background: linear-gradient(
+    90deg,
+    rgba(140, 140, 140, 0.2) 0%,
+    rgba(89, 89, 89, 0.2) 100%
   );
-  //   background: ${({ theme }) => theme.colors.gray[900]};
-  border-radius: 1.25rem;
-  border: 1px solid var(--alpha-border_315, #8c8c8c);
+  border: 1px solid rgba(191, 191, 191, 0.2);
+  border-radius: 1.5rem;
 `;
+
 const Input = styled.input`
   flex: 1;
-
   background: transparent;
   border: none;
   outline: none;
@@ -41,13 +39,14 @@ const Input = styled.input`
   line-height: ${({ theme }) => theme.typography.body2_rg.lineHeight};
   color: ${({ theme }) => theme.colors.white};
 `;
-export default function SearchEngine() {
+
+export default function SearchArea() {
   return (
-    <Form>
+    <Container>
       <InputContainer>
         <Input placeholder="작가 검색하기" />
-        <SearchIcon size="1.25rem" />
+        <SearchIcon size="1.5rem" />
       </InputContainer>
-    </Form>
+    </Container>
   );
 }

@@ -104,7 +104,6 @@ export default function HomePage() {
       </TitleContainer>
 
       <CardContainerY>
-        {' '}
         {cards.map((card) => (
           <Card
             key={card.id}
