@@ -78,7 +78,7 @@ export default function SearchArea() {
     <Container>
       <InputContainer>
         <Input placeholder="작가 검색하기" />
-        <SearchIcon />
+        <SearchIcon size="1.5rem" />
       </InputContainer>
 
       <FilterWrapper>
