@@ -10,7 +10,7 @@ import generateCustomMarkerHTML from '../_components/generateCustomMapMarker';
  * @returns 생성된 Marker 객체
  */
 export default function makeMarker(
-  map: naver.maps.Map,
+  map: naver.maps.Map | undefined,
   position: naver.maps.LatLng,
   title: string,
   index: number,

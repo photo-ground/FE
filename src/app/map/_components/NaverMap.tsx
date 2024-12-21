@@ -9,7 +9,8 @@ import Chip from './Chip';
 
 type School = {
   name: string;
-  position: naver.maps.LatLng;
+  lat: number;
+  lng: number;
 };
 
 // 칩 버튼들을 담을 컨테이너 스타일
@@ -20,14 +21,64 @@ const ChipContainer = styled.div`
   left: 10px;
   display: flex;
   gap: 10px;
-  z-index: 1000;
 `;
 const AbsContainer = styled.div`
   position: absolute;
   bottom: 76px;
-  left: calc(50% - 30px);
+  left: calc(50% - 6rem);
   width: 12rem;
 `;
+// 포토스팟 데이터 배열
+const photoSpot = [
+  {
+    lat: 37.5511,
+    lng: 126.9407,
+    title: '포토스팟 1',
+    src: '/images/ewha.jpg',
+  },
+  {
+    lat: 37.5647,
+    lng: 126.9386,
+    title: '포토스팟 2',
+    src: '/images/ewha.jpg',
+  },
+  {
+    lat: 37.5617,
+    lng: 126.9468,
+    title: '포토스팟 3',
+    src: '/images/ewha.jpg',
+  },
+  {
+    lat: 37.5519,
+    lng: 126.9246,
+    title: '포토스팟 4',
+    src: '/images/ewha.jpg',
+  },
+];
+const schoolList = [
+  {
+    name: '서강대학교',
+    lat: 37.5511,
+    lng: 126.9407,
+  },
+  {
+    name: '연세대학교',
+    lat: 37.5647,
+    lng: 126.9386,
+  },
+  {
+    name: '이화여자대학교',
+    lat: 37.5617,
+    lng: 126.9468,
+  },
+  {
+    name: '홍익대학교',
+    lat: 37.5519,
+    lng: 126.9246,
+  },
+];
+
+// naver.maps.*은 네이버 지도 API 스크립트가 로드된 후에만 사용할 수 있다.
 export default function NaverMap() {
   const mapElement = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<naver.maps.Map>();
@@ -35,11 +86,6 @@ export default function NaverMap() {
   const [selectedSchool, setSelectedSchool] = useState<string | null>(null);
 
   const clientId = process.env.NEXT_PUBLIC_NAVER_CLIENT_ID || '';
-
-  // const photoSpot = [ {
-  //   title: '서강대학교',
-  //   position: new naver.maps.LatLng(37.5511, 126.9407),
-  // },]
 
   useEffect(() => {
     loadNaverMap(clientId, () => {
@@ -52,59 +98,29 @@ export default function NaverMap() {
       });
       const viewportWidth = window.innerWidth;
 
-      // TODO 마커 추가 w/ for loop
-      makeMarker(
-        mapInstance.current,
-        new naver.maps.LatLng(37.563625, 126.942826),
-        '마커1',
-        0,
-        viewportWidth,
-        '/images/ewha.jpg',
-      );
-      makeMarker(
-        mapInstance.current,
-        new naver.maps.LatLng(37.564685, 126.943826),
-        '마커2',
-        1,
-        viewportWidth,
-        '/images/ewha.jpg',
-      );
-      makeMarker(
-        mapInstance.current,
-        new naver.maps.LatLng(37.56285, 126.944826),
-        '마커3',
-        2,
-        viewportWidth,
-        '/images/ewha.jpg',
-      );
-      // 학교 데이터 로드
-      const loadedSchools: School[] = [
-        {
-          name: '서강대학교',
-          position: new naver.maps.LatLng(37.5511, 126.9407),
-        },
-        {
-          name: '연세대학교',
-          position: new naver.maps.LatLng(37.5647, 126.9386),
-        },
-        {
-          name: '이화여자대학교',
-          position: new naver.maps.LatLng(37.5617, 126.9468),
-        },
-        {
-          name: '홍익대학교',
-          position: new naver.maps.LatLng(37.5519, 126.9246),
-        },
-      ];
+      // 포토스팟 로드
+      photoSpot.forEach((spot, idx) => {
+        makeMarker(
+          mapInstance.current!,
+          new naver.maps.LatLng(spot.lat, spot.lng),
+          spot.title,
+          idx,
+          viewportWidth,
+          spot.src,
+        );
+      });
 
-      setSchools(loadedSchools);
+      // 학교 로드
+      setSchools(schoolList);
     });
   }, [clientId]);
 
   // 학교 위치로 이동하는 함수
   const moveToSchool = (school: School) => {
     if (mapInstance.current) {
-      mapInstance.current.setCenter(school.position);
+      mapInstance.current.setCenter(
+        new naver.maps.LatLng(school.lat, school.lng),
+      );
       setSelectedSchool(school.name);
     }
   };
