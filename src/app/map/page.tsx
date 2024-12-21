@@ -1,3 +1,11 @@
+'use client';
+
+import NaverMap from './_components/NaverMap';
+
 export default function MapPage() {
-  return <div>map</div>;
+  return (
+    <div>
+      <NaverMap />
+    </div>
+  );
 }
