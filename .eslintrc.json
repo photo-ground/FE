@@ -13,8 +13,6 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "no-unused-vars": "off", // ts 함수선언을 못알아들어서 껐습니다
-    "react/require-default-props": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [
       "error",
