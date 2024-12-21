@@ -6,30 +6,34 @@ type Variant = 'primary' | 'secondary';
 const getBackgroundColor = ({
   theme,
   variant,
-  disabled,
+  active,
 }: {
   theme: DefaultTheme;
   variant: Variant;
-  disabled: boolean;
+  active: boolean;
 }) => {
-  if (disabled) {
+  if (active) {
     return theme.colors.gray[600];
   }
   if (variant === 'primary') {
     return theme.colors.primary[100];
   }
-
   return theme.colors.gray[900];
 };
 
-const Button = styled.button<{ variant: Variant; disabled: boolean }>`
+// non-boolean문제 때문에 props늘려씀
+const Button = styled.button<{ variant: Variant; $active: boolean }>`
   width: 100%;
-  padding: 1rem 0;
-  background: ${(props) => getBackgroundColor(props)};
-
+  padding: 0.75rem 0;
+  background: ${(props) =>
+    getBackgroundColor({
+      theme: props.theme,
+      variant: props.variant,
+      active: props.$active,
+    })};
   outline: none;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 1.5rem;
 
   cursor: pointer;
 `;
@@ -38,23 +42,23 @@ const ButtonText = styled(Text)`
   color: ${({ theme }) => theme.colors.gray[200]};
 `;
 
-export default function CTAButton({
+export default function Chip({
   text,
   variant = 'primary',
-  disabled = false,
+  active = false,
   onClick = () => {},
 }: {
   text: string;
   variant?: Variant;
-  disabled?: boolean;
+  active?: boolean;
   onClick?: () => void;
 }) {
   return (
-    <Button variant={variant} disabled={disabled} onClick={onClick}>
-      {disabled ? (
-        <ButtonText variant="title2_sb">{text}</ButtonText>
+    <Button $active={active} variant={variant} onClick={onClick}>
+      {active ? (
+        <ButtonText variant="body1_md">{text}</ButtonText>
       ) : (
-        <Text variant="title3">{text}</Text>
+        <Text variant="body1_md">{text}</Text>
       )}
     </Button>
   );

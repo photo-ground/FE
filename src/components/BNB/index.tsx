@@ -15,7 +15,7 @@ const MENU_LIST = [
   { title: '사진작가', route: '/photographer', icon: BNBPhotographerIcon },
   { title: '포토스팟', route: '/map', icon: BNBMapIcon },
   { title: '홈', route: '/', icon: BNBHomeIcon },
-  { title: '예약', route: '/book', icon: BNBCalendarIcon },
+  { title: '예약', route: '/reserve', icon: BNBCalendarIcon },
   { title: '마이페이지', route: '/my', icon: BNBProfileIcon },
 ];
 
@@ -24,7 +24,7 @@ const MENU_LIST = [
 //   { title: '사진작가', route: '/photographer' },
 //   { title: '포토스팟', route: '/map' },
 //   { title: '홈', route: '/' },
-//   { title: '예약', route: '/book' },
+//   { title: '예약', route: '/reserve' },
 //   { title: '마이페이지', route: '/profile' },
 // ];
 
@@ -34,7 +34,8 @@ export default function BottomNavigationBar() {
   if (
     pathname === '/splash' ||
     pathname === '/onboarding' ||
-    pathname === '/signin'
+    pathname === '/signin' ||
+    pathname === '/signup'
   ) {
     return null;
   }
