@@ -21,7 +21,7 @@ export const Primary: Story = {
   args: {
     text: 'Primary Button',
     variant: 'primary',
-    disabled: false,
+    active: false,
   },
 };
 
@@ -29,7 +29,7 @@ export const Secondary: Story = {
   args: {
     text: 'Secondary Button',
     variant: 'secondary',
-    disabled: false,
+    active: false,
   },
 };
 
@@ -37,6 +37,6 @@ export const Disabled: Story = {
   args: {
     text: 'Disabled Button',
     variant: 'primary',
-    disabled: true,
+    active: true,
   },
 };
