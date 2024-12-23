@@ -49,7 +49,7 @@ export default function ReserveLinks() {
         <PrevReservationIcon />
         <Text variant="body1_md">이전 스냅</Text>
       </PrevButton>
-      <CurrentButton href="/reserve/current">
+      <CurrentButton href="/reserve/list">
         <CurrentReservationIcon />
         <Text variant="body1_md">예약한 스냅</Text>
       </CurrentButton>
