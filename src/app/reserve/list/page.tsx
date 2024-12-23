@@ -1,6 +1,8 @@
 import { ReserveTab } from './_components/Tabs';
 import ReservationListScreen from './screen';
 
+export const runtime = 'edge';
+
 export default async function ReservationListPage({
   searchParams,
 }: {
