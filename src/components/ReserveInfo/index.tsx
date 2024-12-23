@@ -4,6 +4,7 @@ import PeopleIcon from '@/assets/PeopleIcon';
 import PhotographerIcon from '@/assets/PhotographerIcon';
 import Chip from '@/components/atoms/Chip';
 import Text from '@/components/atoms/Text';
+import SmallButton from '../atoms/SmallButton';
 
 const CardContainer = styled.div`
   display: flex;
@@ -49,7 +50,7 @@ const InfoText = styled(Text)`
 export default function ReserveInfo({
   chipType = 'tertiary',
 }: {
-  chipType?: 'tertiary' | 'brand';
+  chipType?: 'tertiary' | 'brand' | 'link';
 }) {
   return (
     <CardContainer>
@@ -69,7 +70,11 @@ export default function ReserveInfo({
             </InfoLine>
           </InfoArea>
 
-          <Chip icon={PeopleIcon} text="2인" type={chipType} />
+          {chipType === 'link' ? (
+            <SmallButton.Primary text="채팅방" />
+          ) : (
+            <Chip icon={PeopleIcon} text="2인" type={chipType} />
+          )}
         </Content>
       </TextArea>
     </CardContainer>

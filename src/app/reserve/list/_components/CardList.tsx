@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import ReserveCard from './ReserveCard';
 import PaymentCard from './PaymentCard';
 import { ReserveTab } from './Tabs';
+import ConfirmCard from './ConfirmCard';
 
 const Container = styled.div`
   padding: 1.5rem 0;
@@ -44,7 +45,7 @@ function mapCard(type: ReserveTab) {
       return <PaymentCard />;
 
     case 'confirm':
-      return <ReserveCard />;
+      return <ConfirmCard />;
 
     case 'cancel':
       return <ReserveCard />;
