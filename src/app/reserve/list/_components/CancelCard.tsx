@@ -3,13 +3,10 @@ import Tag from './Tag';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import Text from '@/components/atoms/Text';
 import ReserveInfo from '@/components/ReserveInfo';
-import LargeButton from '@/components/atoms/LargeButton';
 import InfoIcon from '@/assets/InfoIcon';
-
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
 
   margin: 0 1.25rem;
 `;
@@ -47,20 +44,20 @@ const DivideLine = styled.hr`
   margin: 1rem 0;
 `;
 
-export default function ReserveCard() {
+export default function CancelCard() {
   return (
     <Wrapper>
       <Container>
         <Header>
           <TitleArea>
-            <Tag text="예약 확인 중" />
+            <Tag text="예약 취소" type="error" />
             <RightChevronIcon size="20" />
           </TitleArea>
 
           <MessageArea>
             <InfoIcon />
             <Message variant="caption1_rg">
-              예약 확인까지 평균 2시간 정도 소요됩니다.
+              작가님의 사정으로 예약이 취소되었습니다.
             </Message>
           </MessageArea>
         </Header>
@@ -69,8 +66,6 @@ export default function ReserveCard() {
 
         <ReserveInfo chipType="tertiary" />
       </Container>
-
-      <LargeButton variant="tertiary" text="예약 취소하기" />
     </Wrapper>
   );
 }
