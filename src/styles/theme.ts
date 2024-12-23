@@ -55,6 +55,12 @@ const theme = {
     black: COLORS.BLACK,
     white: COLORS.WHITE,
 
+    orange: {
+      500: COLORS.ORANGE[500],
+      400: COLORS.ORANGE[400],
+      300: COLORS.ORANGE[300],
+    },
+
     gray: {
       900: COLORS.GRAY[900],
       800: COLORS.GRAY[800],
