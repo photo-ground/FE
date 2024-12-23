@@ -7,5 +7,5 @@ export default async function ReservationListPage({
 }) {
   const { tab } = await searchParams;
 
-  return <ReservationListScreen currentTab={tab || '1'} />;
+  return <ReservationListScreen currentTab={tab || 'reserve'} />;
 }

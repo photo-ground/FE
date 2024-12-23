@@ -1,13 +1,13 @@
 'use client';
 
 import TNB from '@/components/TNB';
-import Tabs from './_components/Tabs';
+import Tabs, { ReserveTab } from './_components/Tabs';
 import CardList from './_components/CardList';
 
 export default function ReservationListScreen({
   currentTab,
 }: {
-  currentTab: string;
+  currentTab: ReserveTab;
 }) {
   return (
     <>
@@ -15,7 +15,7 @@ export default function ReservationListScreen({
 
       <Tabs currentTab={currentTab} />
 
-      <CardList />
+      <CardList type={currentTab} />
     </>
   );
 }

@@ -3,6 +3,8 @@ import Text from '@/components/atoms/Text';
 import Link from 'next/link';
 import styled from 'styled-components';
 import ReserveCard from './ReserveCard';
+import PaymentCard from './PaymentCard';
+import { ReserveTab } from './Tabs';
 
 const Container = styled.div`
   padding: 1.5rem 0;
@@ -36,15 +38,28 @@ const DivideLine = styled.hr`
   margin-bottom: 1.5rem;
 `;
 
-export default function CardList() {
+function mapCard(type: ReserveTab) {
+  switch (type) {
+    case 'payment':
+      return <PaymentCard />;
+
+    case 'confirm':
+      return <ReserveCard />;
+
+    case 'cancel':
+      return <ReserveCard />;
+
+    default:
+      return <ReserveCard />;
+  }
+}
+
+export default function CardList({ type }: { type: ReserveTab }) {
   return (
     <Container>
-      <ReserveCard />
-
+      {mapCard(type)}
       <DivideLine />
-
-      <ReserveCard />
-
+      {mapCard(type)}
       <DivideLine />
 
       <InfoArea>

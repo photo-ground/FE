@@ -2,11 +2,13 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
 
+export type ReserveTab = 'reserve' | 'payment' | 'confirm' | 'cancel';
+
 const TAB_LIST = [
-  { label: '예약 신청', route: '1' },
-  { label: '결제 대기', route: '2' },
-  { label: '예약 확정', route: '3' },
-  { label: '예약 취소', route: '4' },
+  { label: '예약 신청', route: 'reserve' },
+  { label: '결제 대기', route: 'payment' },
+  { label: '예약 확정', route: 'confirm' },
+  { label: '예약 취소', route: 'cancel' },
 ];
 
 const Container = styled.div`
