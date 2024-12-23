@@ -5,13 +5,16 @@ import styled from 'styled-components';
 import ReserveCard from './ReserveCard';
 
 const Container = styled.div`
-  padding: 1.5rem 1.25rem;
+  padding: 1.5rem 0;
+  margin-bottom: 5rem;
 `;
 
 const InfoArea = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  padding: 0 1.25rem;
 `;
 
 const CaptionText = styled(Text)`
@@ -26,10 +29,23 @@ const ChatLink = styled(Link)`
   text-decoration: none;
 `;
 
+const DivideLine = styled.hr`
+  border: none;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray[700]};
+  margin-top: 5rem;
+  margin-bottom: 1.5rem;
+`;
+
 export default function CardList() {
   return (
     <Container>
       <ReserveCard />
+
+      <DivideLine />
+
+      <ReserveCard />
+
+      <DivideLine />
 
       <InfoArea>
         <div>

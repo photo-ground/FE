@@ -3,11 +3,14 @@ import Tag from './Tag';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import Text from '@/components/atoms/Text';
 import ReserveInfo from '@/components/ReserveInfo';
+import LargeButton from '@/components/atoms/LargeButton';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
+  margin: 0 1.25rem;
 `;
 
 const Container = styled.div`
@@ -64,6 +67,8 @@ export default function ReserveCard() {
 
         <ReserveInfo chipType="tertiary" />
       </Container>
+
+      <LargeButton variant="tertiary" text="예약 취소하기" />
     </Wrapper>
   );
 }
