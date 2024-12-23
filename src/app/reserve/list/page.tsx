@@ -1,11 +1,12 @@
+import { ReserveTab } from './_components/Tabs';
 import ReservationListScreen from './screen';
 
-export default function ReservationListPage({
+export default async function ReservationListPage({
   searchParams,
 }: {
-  searchParams: { tab?: string };
+  searchParams: Promise<{ tab?: ReserveTab }>;
 }) {
-  const { tab } = searchParams;
+  const { tab } = await searchParams;
 
   return <ReservationListScreen currentTab={tab || 'reserve'} />;
 }

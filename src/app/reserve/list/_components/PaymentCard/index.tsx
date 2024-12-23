@@ -96,7 +96,7 @@ export default function PaymentCard({
               <AccountWrapper>
                 <CopyIcon />
                 <AccountText variant="body3">
-                  계좌 000-0000000-000 ‘포토그라운드'
+                  {`계좌 000-0000000-000 ‘포토그라운드'`}
                 </AccountText>
               </AccountWrapper>
               <AccountText variant="body3">
