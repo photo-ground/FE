@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import Tag from '../Tag';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import Text from '@/components/atoms/Text';
 import ReserveInfo from '@/components/ReserveInfo';
 import CopyIcon from '@/assets/CopyIcon';
 import Request from './Request';
+import Tag from '../Tag';
 
 type PaymentStatus = 'wait' | 'check' | 'error';
 

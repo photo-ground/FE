@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import Tag from './Tag';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import Text from '@/components/atoms/Text';
 import ReserveInfo from '@/components/ReserveInfo';
 import LargeButton from '@/components/atoms/LargeButton';
+import Tag from './Tag';
 
 const Wrapper = styled.div`
   display: flex;
