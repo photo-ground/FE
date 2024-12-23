@@ -2,6 +2,9 @@ import CheckIcon from '@/assets/CheckIcon';
 import Text from '@/components/atoms/Text';
 import styled from 'styled-components';
 
+const LINE_WIDTH = '1.5px';
+const LINE_MARGIN = '1rem';
+const LINE_HEIGHT = '3.5rem';
 const LINE_TEXT_GAP = '1rem';
 const DOT_SIZE = '0.5rem';
 const LARGE_DOT_SIZE = '2rem';
@@ -22,12 +25,12 @@ const Wrapper = styled.div`
 const LineColumn = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 1rem;
+  margin: 0.5rem ${LINE_MARGIN};
 `;
 
 const Line = styled.div<{ $inProgress: boolean }>`
-  height: 3.5rem;
-  border-left: 1px solid
+  height: ${LINE_HEIGHT};
+  border-left: ${LINE_WIDTH} solid
     ${({ theme, $inProgress }) =>
       $inProgress ? theme.colors.primary[100] : theme.colors.gray[500]};
 `;
@@ -36,7 +39,6 @@ const TextColumn = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 5px 0;
 `;
 
 const Item = styled.div`
@@ -45,8 +47,11 @@ const Item = styled.div`
 
 const Dot = styled.div<{ $inProgress?: boolean }>`
   position: absolute;
-  top: 8px;
-  left: calc(-2rem - 0.25rem - 0.5px);
+  top: 50%;
+  transform: translate(0, -50%);
+  left: calc(
+    -${LINE_TEXT_GAP} - ${LINE_MARGIN} - ${DOT_SIZE} / 2 - ${LINE_WIDTH} / 2
+  );
 
   width: ${DOT_SIZE};
   height: ${DOT_SIZE};
@@ -61,8 +66,12 @@ const FinishedDot = styled.div`
   justify-content: center;
 
   position: absolute;
-  top: -4px;
-  left: calc(-2rem - 1rem - 0.5px);
+  top: 50%;
+  transform: translate(0, -50%);
+  left: calc(
+    -${LINE_TEXT_GAP} - ${LINE_MARGIN} - ${LARGE_DOT_SIZE} / 2 - ${LINE_WIDTH} /
+      2
+  );
 
   width: ${LARGE_DOT_SIZE};
   height: ${LARGE_DOT_SIZE};
@@ -71,14 +80,7 @@ const FinishedDot = styled.div`
 `;
 
 const PrevDot = styled(Dot)`
-  position: absolute;
-  top: 8px;
-  left: calc(-2rem - 0.25rem - 0.5px);
-
-  width: 0.5rem;
-  height: 0.5rem;
   background: ${({ theme }) => theme.colors.primary[100]};
-  border-radius: 100%;
 `;
 
 const StateText = styled(Text)<{ $inProgress?: boolean }>`
@@ -93,25 +95,25 @@ export default function ProgressBar() {
     <Wrapper>
       <LineColumn>
         {STEP_LIST.slice(0, -1).map((step, index) => (
-          <Line key={step} $inProgress={index <= currentStep} />
+          <Line key={step} $inProgress={index < currentStep} />
         ))}
       </LineColumn>
 
       <TextColumn>
         {STEP_LIST.map((step, index) => (
           <Item key={step}>
-            <StateText variant="body1_md" $inProgress>
+            <StateText variant="body1_md" $inProgress={index <= currentStep}>
               {step}
             </StateText>
 
-            {index < currentStep && <PrevDot />}
-            {index === currentStep && (
+            {index < currentStep - 1 && <PrevDot />}
+            {index === currentStep - 1 && (
               <FinishedDot>
                 <CheckIcon />
               </FinishedDot>
             )}
-            {index === currentStep + 1 && <Dot $inProgress />}
-            {index > currentStep + 1 && <Dot />}
+            {index === currentStep && <Dot $inProgress />}
+            {index > currentStep && <Dot />}
           </Item>
         ))}
       </TextColumn>
