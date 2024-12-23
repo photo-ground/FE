@@ -6,6 +6,7 @@ import PhotographerIcon from '@/assets/PhotographerIcon';
 import Chip from '@/components/atoms/Chip';
 import LargeButton from '@/components/atoms/LargeButton';
 import Text from '@/components/atoms/Text';
+import ReserveInfo from '@/components/ReserveInfo';
 import TNB from '@/components/TNB';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -69,27 +70,7 @@ const DivideLine = styled.hr`
 function Card() {
   return (
     <CardWrapper>
-      <CardContainer>
-        <Profile src="/images/yonsei.jpg" />
-        <TextArea>
-          <Text variant="body1_md">11.03(일) 오후 3:00</Text>
-
-          <Content>
-            <InfoArea>
-              <InfoLine>
-                <PhotographerIcon />
-                <InfoText variant="body1_md">이채린 작가</InfoText>
-              </InfoLine>
-              <InfoLine>
-                <LocationIcon />
-                <InfoText variant="body1_md">홍익대학교</InfoText>
-              </InfoLine>
-            </InfoArea>
-
-            <Chip icon={PeopleIcon} text="2인" />
-          </Content>
-        </TextArea>
-      </CardContainer>
+      <ReserveInfo />
 
       <Link href="/reserve/review/1">
         <LargeButton text="후기 작성" variant="secondary" />

@@ -21,7 +21,7 @@ const SecondaryContainer = styled(Container)`
 `;
 
 const TertiaryContainer = styled(Container)`
-  background: ${({ theme }) => theme.colors.background};
+  background: ${({ theme }) => theme.colors.background.primary};
 `;
 
 const PrimaryText = styled(Text)`

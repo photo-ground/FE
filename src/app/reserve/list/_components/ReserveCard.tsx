@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Tag from './Tag';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import Text from '@/components/atoms/Text';
+import ReserveInfo from '@/components/ReserveInfo';
 
 const Wrapper = styled.div`
   display: flex;
@@ -60,6 +61,8 @@ export default function ReserveCard() {
         </Header>
 
         <DivideLine />
+
+        <ReserveInfo chipType="tertiary" />
       </Container>
     </Wrapper>
   );
