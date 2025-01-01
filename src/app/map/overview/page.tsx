@@ -54,7 +54,7 @@ export default function Overview({ school }: { school: string }) {
       {/* 칩 버튼 */}
       <CardContainerY>
         {data.map((spot) => (
-          <Card size="small" src={spot.src} onClick={onClick} />
+          <Card size="small" src={spot.src} onClick={() => onClick()} />
         ))}
       </CardContainerY>
     </Container>
