@@ -2,8 +2,8 @@
 // components/NaverMap.js
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { loadNaverMap } from '../public/naver-maps';
-import makeMarker from '../public/makeMarker';
+import { loadNaverMap } from '../_public/naver-maps';
+import makeMarker from '../_public/makeMarker';
 import Chip from './Chip';
 // import CTAButton from '@/components/atoms/CTAButton';
 
