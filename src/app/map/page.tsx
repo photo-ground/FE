@@ -7,6 +7,7 @@
 
 // components/NaverMap.js
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { Drawer } from '@mui/material';
 import { loadNaverMap } from './_util/naverMaps';
@@ -149,7 +150,9 @@ export default function MapPage() {
         ))}
       </ChipContainer>
       <AbsContainer>
-        <Chip text="스냅 전체보기" variant="primary" />
+        <Link href={`/overview?school=${selectedSchool}`}>
+          <Chip text="스냅 전체보기" variant="primary" />
+        </Link>
       </AbsContainer>
       <div
         ref={drawerContainerRef}

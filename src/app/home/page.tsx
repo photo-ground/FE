@@ -98,7 +98,9 @@ export default function HomePage() {
       </CardContainerX>
 
       <Spacer size="3rem" />
-      <Banner children={<BannerContent>졸업 파격 할인</BannerContent>} />
+      <Banner>
+        <BannerContent>졸업 파격 할인</BannerContent>
+      </Banner>
       <Spacer size="3rem" />
 
       <TitleContainer>

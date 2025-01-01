@@ -2,6 +2,7 @@
 
 import Card from '@/components/Card';
 import Back from '@/components/TNB/Back';
+import { useSearchParams } from 'next/navigation';
 // import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
@@ -43,14 +44,17 @@ const data = [
   { src: '/images/yonsei.jpg', id: 'aaa' },
 ];
 
-// TODO : card 활용
-export default function Overview({ school }: { school: string }) {
+// school을 URL 매개변수로 전달
+export default function Overview() {
+  const searchParams = useSearchParams();
+  const school = searchParams.get('school'); // 쿼리 파라미터에서 'school' 값 가져옴
+
   function onClick() {
-    alert('heelo');
+    console.log('clicked');
   }
   return (
     <Container>
-      <Back text={school} />
+      <Back text={`${school}`} />
       {/* 칩 버튼 */}
       <CardContainerY>
         {data.map((spot) => (

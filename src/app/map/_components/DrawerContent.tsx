@@ -1,7 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { Box, Divider, IconButton, useTheme } from '@mui/material';
-import DragHandleIcon from '@mui/icons-material/DragHandle';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import { Box, Divider, IconButton } from '@mui/material';
 import styled from 'styled-components';
 import Card from '@/components/Card';
 import CloseIcon from '@/assets/CloseIcon';
@@ -71,19 +69,17 @@ const data = [
   { src: '/images/sogang.jpg', id: 'aaa' },
   { src: '/images/yonsei.jpg', id: 'aaa' },
 ];
-export default function DrawerContent({ toggleDrawer }: DrawerProps) {
-  const theme = useTheme();
-  // const [, setOpen] = useState(false);
+const photoSpotTitle = '독수리상';
+const photoSpotDetail =
+  '연세의 표상인 독수리 동상\n높이 2.6m, 폭 5.2m의 청동 독수리가 세워져 있음';
 
-  const photoSpotTitle = '독수리상';
-  const photoSpotDetail =
-    '연세의 표상인 독수리 동상\n높이 2.6m, 폭 5.2m의 청동 독수리가 세워져 있음';
+export default function DrawerContent({ toggleDrawer }: DrawerProps) {
   const handleDrawerClose = () => {
     toggleDrawer(false);
   };
 
   function onClick() {
-    alert('clicked');
+    console.log('clicked');
   }
 
   return (
