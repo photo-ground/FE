@@ -35,7 +35,7 @@ export default function makeMarker(
   });
 
   marker.addListener('click', () => {
-    console.log('Marker clicked');
+    // console.log('Marker clicked');
     toggleDrawer(true, { title, src });
   });
 

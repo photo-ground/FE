@@ -79,7 +79,7 @@ export default function DrawerContent({ toggleDrawer }: DrawerProps) {
   };
 
   function onClick() {
-    console.log('clicked');
+    // console.log('clicked');
   }
 
   return (

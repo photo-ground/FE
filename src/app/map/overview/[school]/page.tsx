@@ -50,7 +50,7 @@ export default function Overview() {
   const school = searchParams.get('school'); // 쿼리 파라미터에서 'school' 값 가져옴
 
   function onClick() {
-    console.log('clicked');
+    // console.log('clicked');
   }
   return (
     <Container>
