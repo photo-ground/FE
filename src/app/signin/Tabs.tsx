@@ -17,7 +17,6 @@ const TabHeaderWrapper = styled.div`
   display: flex;
   width: 100%;
   padding: 0 1.25rem;
-  border: 1px solid black;
 `;
 const TabHeader = styled.button`
   flex: 1;
@@ -56,14 +55,14 @@ export default function Tabs() {
         {tabList.map((tab) =>
           tab.id === currentTab ? (
             <SelectedTabHeader key={tab.id} onClick={() => onChangeTab(tab.id)}>
-              <Text variant="title2">{tab.title}</Text>
+              <Text variant="title2_sb">{tab.title}</Text>
             </SelectedTabHeader>
           ) : (
             <UnSelectedTabHeader
               key={tab.id}
               onClick={() => onChangeTab(tab.id)}
             >
-              <UnSelectedText variant="title2">{tab.title}</UnSelectedText>
+              <UnSelectedText variant="title2_sb">{tab.title}</UnSelectedText>
             </UnSelectedTabHeader>
           ),
         )}
