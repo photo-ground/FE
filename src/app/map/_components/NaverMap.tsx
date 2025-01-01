@@ -1,9 +1,10 @@
 /* eslint-disable no-undef */
 // components/NaverMap.js
+// TODO : 이 파일이 필요한 파일인지 판단
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { loadNaverMap } from '../_public/naver-maps';
-import makeMarker from '../_public/makeMarker';
+import { loadNaverMap } from '../_util/naverMaps';
+import makeMarker from '../_util/makeMarker';
 import Chip from './Chip';
 // import CTAButton from '@/components/atoms/CTAButton';
 
