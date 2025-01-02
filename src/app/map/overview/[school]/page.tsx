@@ -64,3 +64,5 @@ export default function Overview() {
     </Container>
   );
 }
+
+export const runtime = 'edge';
