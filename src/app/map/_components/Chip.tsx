@@ -24,7 +24,9 @@ const getBackgroundColor = ({
 // non-boolean문제 때문에 props늘려씀
 const Button = styled.button<{ variant: Variant; $active: boolean }>`
   width: 100%;
-  padding: 0.75rem 0;
+  min-width: 70px;
+  max-width: 12rem;
+  padding: 0.75rem 1.25rem;
   background: ${(props) =>
     getBackgroundColor({
       theme: props.theme,
@@ -34,7 +36,7 @@ const Button = styled.button<{ variant: Variant; $active: boolean }>`
   outline: none;
   border: none;
   border-radius: 1.5rem;
-
+  flex: 0 0 auto;
   cursor: pointer;
 `;
 

@@ -1,8 +1,16 @@
 /* 버튼 크기 */
+.card.round {
+  text-align: center;
+  img {
+    width: 80px;
+    height: 80px;
+    border-radius: 80px;
+  }
+}
 .card.small {
   img {
-    width: 7.5rem;
-    height: 7.5rem;
+    width: 110px;
+    height: 110px;
   }
 }
 

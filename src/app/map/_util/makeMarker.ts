@@ -1,5 +1,5 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-// import Marker from '../_components/Marker';
 import generateCustomMarkerHTML from '../_components/generateCustomMapMarker';
 
 /**
@@ -9,12 +9,17 @@ import generateCustomMarkerHTML from '../_components/generateCustomMapMarker';
  * @param index - 마커의 인덱스
  * @returns 생성된 Marker 객체
  */
+
 export default function makeMarker(
   map: naver.maps.Map | undefined,
   position: naver.maps.LatLng,
   title: string,
   index: number,
   src: string,
+  toggleDrawer: (
+    open: boolean,
+    markerInfo: { title: string; src: string },
+  ) => void,
 ): naver.maps.Marker {
   const marker = new naver.maps.Marker({
     map,
@@ -27,6 +32,11 @@ export default function makeMarker(
       size: new naver.maps.Size(72, 64),
       anchor: new naver.maps.Point(36, 64), // 마커의 중앙 하단으로 위치 조정
     },
+  });
+
+  marker.addListener('click', () => {
+    // console.log('Marker clicked');
+    toggleDrawer(true, { title, src });
   });
 
   return marker;
