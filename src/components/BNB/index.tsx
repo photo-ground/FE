@@ -19,15 +19,6 @@ const MENU_LIST = [
   { title: '마이페이지', route: '/my', icon: BNBProfileIcon },
 ];
 
-// [todo] 이후 고객/작가 구분하게 될 때 활성화하기
-// const MENU_LIST = [
-//   { title: '사진작가', route: '/photographer' },
-//   { title: '포토스팟', route: '/map' },
-//   { title: '홈', route: '/' },
-//   { title: '예약', route: '/reserve' },
-//   { title: '마이페이지', route: '/profile' },
-// ];
-
 export default function BottomNavigationBar() {
   const pathname = usePathname();
 
