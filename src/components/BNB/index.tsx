@@ -26,7 +26,8 @@ export default function BottomNavigationBar() {
     pathname === '/splash' ||
     pathname === '/onboarding' ||
     pathname === '/signin' ||
-    pathname === '/signup'
+    pathname === '/signup' ||
+    pathname === '/photographer/1'
   ) {
     return null;
   }
