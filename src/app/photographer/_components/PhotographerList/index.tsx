@@ -13,6 +13,10 @@ const Container = styled.div`
   padding-bottom: calc(3rem + 4.875rem);
 `;
 
+const CardWrapper = styled(Link)`
+  text-decoration: none;
+`;
+
 export default function PhotographerList() {
   function masonryLayout() {
     document.querySelectorAll('#masonry-card').forEach((element) => {
@@ -48,14 +52,14 @@ export default function PhotographerList() {
     <Container className="masonry-container">
       {data.map((datum) => (
         <div id="masonry-card" key={datum.id}>
-          <Link href="/photographer/1">
+          <CardWrapper href="/photographer/1">
             <Card
               size="dynamic"
               src={datum.src}
               title={datum.title}
               content="24세, 여성"
             />
-          </Link>
+          </CardWrapper>
         </div>
       ))}
     </Container>
