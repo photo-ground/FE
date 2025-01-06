@@ -24,9 +24,12 @@ const CardWrapper = styled.div`
   cursor: pointer;
 `;
 
+const CardTitle = styled(Text)`
+  margin-top: 0.75rem;
+`;
+
 const CardImage = styled.img`
   object-fit: cover;
-  margin-bottom: 0.75rem;
   border-radius: 0.125rem;
 `;
 
@@ -39,13 +42,13 @@ export default function Card({
   src,
   title,
   content,
-  etc,
+  etc, // 제 3의 디자인..이 나오는 경우 활용
   onClick,
 }: CardProps) {
   return (
     <CardWrapper onClick={onClick} className={`card ${size}`}>
       <CardImage src={src} alt={title} />
-      <Text variant="body1_md">{title}</Text>
+      {title && <CardTitle variant="body1_md">{title}</CardTitle>}
       <CardContent variant="body3">{content}</CardContent>
       {etc}
     </CardWrapper>
