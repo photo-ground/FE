@@ -11,5 +11,4 @@ export const Container = styled.div`
   max-width: ${BREAK_POINT}px;
   height: 100dvh;
   margin: auto;
-  overflow: auto;
 `;
