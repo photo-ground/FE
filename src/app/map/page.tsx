@@ -8,32 +8,20 @@
 // components/NaverMap.js
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
+import useUnivStore from '@/store';
 import { Drawer } from '@mui/material';
 import { loadNaverMap } from './_util/naverMaps';
 import makeMarker from './_util/makeMarker';
 import Chip from './_components/Chip';
 
 import photoSpots from './_data/photoSpots';
-import schoolList from './_data/schoolList';
 import DrawerContent from './_components/DrawerContent';
+import { Container } from './style';
+import { School } from './types';
 
-type School = {
-  name: string;
-  lat: number;
-  lng: number;
-};
+import schoolList from './_data/schoolList'; // 더미 데이터
 
-const Container = styled.div`
-  position: relative;
-  width: 100%;
-  height: calc(100vh - 76px);
-  overflow: hidden;
-  -ms-overflow-style: none;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-`;
 const MapContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -69,10 +57,14 @@ const AbsContainer = styled.div`
 
 // naver.maps.*은 네이버 지도 API 스크립트가 로드된 후에만 사용할 수 있다.
 export default function MapPage() {
+  const theme = useTheme();
+
   const mapElement = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<naver.maps.Map>();
-  const [schools, setSchools] = useState<School[]>([]);
-  const [selectedSchool, setSelectedSchool] = useState<string | null>(null);
+  const [schoolArr, setSchoolArr] = useState<School[]>([]);
+  // zustand상태관리
+
+  const { univ, setUniv } = useUnivStore();
   const drawerContainerRef = useRef<HTMLDivElement>(null);
 
   const clientId = process.env.NEXT_PUBLIC_NAVER_CLIENT_ID || '';
@@ -92,7 +84,6 @@ export default function MapPage() {
     setOpen(newOpen);
     if (markerInfo) {
       setSelectedMarker(markerInfo); // 클릭한 마커 정보 저장
-      // console.log(markerInfo?.title);
     }
   };
 
@@ -111,16 +102,16 @@ export default function MapPage() {
       photoSpots.forEach((spot, idx) => {
         makeMarker(
           mapInstance.current!,
-          new naver.maps.LatLng(spot.lat, spot.lng),
-          spot.title,
+          new naver.maps.LatLng(spot.latitude, spot.longitude),
+          spot.spotName,
           idx,
-          spot.src,
+          spot.spotImageUrl,
           toggleDrawer,
         );
       });
 
       // 학교 로드
-      setSchools(schoolList);
+      setSchoolArr(schoolList);
     });
   }, [clientId]);
 
@@ -130,7 +121,7 @@ export default function MapPage() {
       mapInstance.current.setCenter(
         new naver.maps.LatLng(school.lat, school.lng),
       );
-      setSelectedSchool(school.name);
+      setUniv(school.name); // TODO : zustand적용
     }
   };
 
@@ -139,18 +130,23 @@ export default function MapPage() {
       <MapContainer ref={mapElement} />
       {/* 칩 버튼 */}
       <ChipContainer>
-        {schools.map((school) => (
+        {schoolArr.map((element) => (
           <Chip
-            active={selectedSchool !== null && selectedSchool !== school.name}
-            key={school.name}
-            text={school.name}
+            active={univ !== null && univ !== element.name}
+            key={element.name}
+            text={element.name}
             variant="secondary"
-            onClick={() => moveToSchool(school)}
+            onClick={() => moveToSchool(element)}
           />
         ))}
       </ChipContainer>
       <AbsContainer>
-        <Link href={`/overview?school=${selectedSchool}`}>
+        <Link
+          href={{
+            pathname: '/map/overview/school',
+            query: { univ },
+          }}
+        >
           <Chip text="스냅 전체보기" variant="primary" />
         </Link>
       </AbsContainer>
@@ -169,10 +165,10 @@ export default function MapPage() {
           PaperProps={{
             style: {
               borderRadius: '1rem 1rem 0 0',
-              backgroundColor: '#000',
-              top: '50%',
+              backgroundColor: theme.colors.black,
+              top: '32%',
               position: 'absolute',
-              bottom: '76px', // 네비게이션 메뉴 높이를 고려하여 위치 조정              borderRadius: '16px 16px 0 0',
+              bottom: '76px', // 네비게이션 메뉴 높이를 고려하여 위치 조정
               width: 'calc(100%-2rem)',
               margin: '0 auto',
               maxWidth: '786px',
