@@ -1,19 +1,18 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import { redirect } from 'next/navigation';
 import { Box, Divider, IconButton } from '@mui/material';
 import styled from 'styled-components';
 import Card from '@/components/Card';
 import CloseIcon from '@/assets/CloseIcon';
 import Text from '@/components/atoms/Text';
-
-interface DrawerProps {
-  // title: string;
-  // src: string;
-  toggleDrawer: (isOpen: boolean) => void; // 매개변수를 받도록 타입 변경
-}
+import Link from 'next/link';
+import Chip from './Chip';
+import { photoSpotData } from '../_data/photoSpotData';
+import { DrawerProps } from '../types';
+import { TextContainer } from '../style';
 
 const CardContainer = styled.div`
   display: flex;
-  // padding: 0 1.25rem;
   flex-wrap: wrap;
   gap: 10px;
   margin: 0 auto;
@@ -21,11 +20,11 @@ const CardContainer = styled.div`
 `;
 const StickyHeader = styled.div`
   position: sticky;
-  top: 0; /* 상단 고정 */
+  top: 0;
   z-index: 10;
   display: flex;
   justify-content: space-between; /* 양쪽 정렬 */
-  background-color: #000;
+  background-color: ${({ theme }) => theme.colors.black};
 `;
 
 const DrawerHandle = styled.div`
@@ -38,48 +37,21 @@ const DrawerHandle = styled.div`
   background: ${({ theme }) => theme.colors.white};
 `;
 
-const TextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+const ChipContainer = styled.div`
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  width: inherit;
   text-align: center;
-  gap: 0.625rem;
-  margin-bottom: 3rem;
-  .text-pre {
-    white-space: pre-line;
-    color: ${({ theme }) => theme.colors.gray[200]};
-  }
 `;
-const data = [
-  { src: '/images/ewha.jpg', id: 'aaa' },
-  { src: '/images/sogang.jpg', id: 'aaa' },
-  { src: '/images/yonsei.jpg', id: 'aaa' },
-  { src: '/images/ewha.jpg', id: 'aaa' },
-  { src: '/images/sogang.jpg', id: 'aaa' },
-  { src: '/images/yonsei.jpg', id: 'aaa' },
-  { src: '/images/ewha.jpg', id: 'aaa' },
-  { src: '/images/sogang.jpg', id: 'aaa' },
-  { src: '/images/yonsei.jpg', id: 'aaa' },
-  { src: '/images/ewha.jpg', id: 'aaa' },
-  { src: '/images/sogang.jpg', id: 'aaa' },
-  { src: '/images/yonsei.jpg', id: 'aaa' },
-  { src: '/images/ewha.jpg', id: 'aaa' },
-  { src: '/images/sogang.jpg', id: 'aaa' },
-  { src: '/images/yonsei.jpg', id: 'aaa' },
-  { src: '/images/ewha.jpg', id: 'aaa' },
-  { src: '/images/sogang.jpg', id: 'aaa' },
-  { src: '/images/yonsei.jpg', id: 'aaa' },
-];
-const photoSpotTitle = '독수리상';
-const photoSpotDetail =
-  '연세의 표상인 독수리 동상\n높이 2.6m, 폭 5.2m의 청동 독수리가 세워져 있음';
 
 export default function DrawerContent({ toggleDrawer }: DrawerProps) {
+  const currSpot = photoSpotData.spotId;
   const handleDrawerClose = () => {
     toggleDrawer(false);
   };
 
   function onClick() {
-    // console.log('clicked');
+    redirect(`spot/@modal?spotId=${currSpot}`);
   }
 
   return (
@@ -101,17 +73,33 @@ export default function DrawerContent({ toggleDrawer }: DrawerProps) {
       </StickyHeader>
 
       <Divider />
+
       <TextContainer>
-        <Text variant="title2_sb">{photoSpotTitle}</Text>
+        <Text variant="title2_sb">{photoSpotData.spotName}</Text>
         <Text variant="body2_rg" className="text-pre">
-          {photoSpotDetail}
+          {photoSpotData.content}
         </Text>
       </TextContainer>
       <CardContainer>
-        {data.slice(0, 3).map((spot) => (
-          <Card size="small" src={spot.src} onClick={() => onClick()} />
+        {photoSpotData.imageInfo.spotPostImageList.slice(0, 6).map((spot) => (
+          <Card
+            key={spot.postId}
+            size="small"
+            src={spot.imageUrl}
+            onClick={() => onClick()}
+          />
         ))}
       </CardContainer>
+      <Link
+        href={{
+          pathname: '/map/overview/spot',
+          query: { spotId: photoSpotData.spotId },
+        }}
+      >
+        <ChipContainer>
+          <Chip text="더보기" variant="secondary" />
+        </ChipContainer>
+      </Link>
     </Box>
   );
 }
