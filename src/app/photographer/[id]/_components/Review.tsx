@@ -47,7 +47,7 @@ export default function Review() {
         <ScoreText variant="body1_md">5.0</ScoreText>
       </ScoreArea>
 
-      <DetailLink href="/">
+      <DetailLink href="/photographer/1/review">
         <LinkText variant="caption1_rg">리뷰 보기</LinkText>
         <RightChevronIcon size="20px" color={COLORS.GRAY[400]} />
       </DetailLink>
