@@ -18,8 +18,8 @@ export interface spotPostImageProps {
 }
 
 export interface photoSpotProps {
-  imageInfo: {
-    spotPostImageList: spotPostImageProps[];
-    hasNext: boolean;
-  };
+  // imageInfo: {
+  spotPostImageList: spotPostImageProps[];
+  hasNext: boolean;
+  // };
 }

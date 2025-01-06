@@ -6,7 +6,7 @@ const photoSpotData = {
     spotPostImageList: [
       {
         imageId: 4,
-        imageUrl: '/images/ewha.jpg',
+        imageUrl: '/images/yonsei.jpg',
         postId: 11234,
         photographerName: '조은아',
       },
@@ -18,13 +18,13 @@ const photoSpotData = {
       },
       {
         imageId: 423536,
-        imageUrl: '/images/ewha.jpg',
+        imageUrl: '/images/sogang.jpg',
         postId: 113524234,
         photographerName: '조은아',
       },
       {
         imageId: 53454754,
-        imageUrl: '/images/ewha.jpg',
+        imageUrl: '/images/yonsei.jpg',
         postId: 36461,
         photographerName: '조은아',
       },

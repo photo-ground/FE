@@ -1,6 +1,7 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import useSchoolStore from '@/store';
 import Card from '@/components/Card';
 import Back from '@/components/TNB/Back';
@@ -10,20 +11,21 @@ import Text from '@/components/atoms/Text';
 import { Container, CardContainerY, TextContainer } from '../../style';
 
 import photoSpotData from '../../_data/photoSpotData';
+import Modal from '../../_components/Modal';
 // school을 URL 매개변수로 전달
 export default function Overview() {
   // const searchParams = useSearchParams();
   const { univ } = useSchoolStore();
+  const [modalState, setModalState] = useState<boolean>(false);
   // const currSpot = photoSpotData.spotId;
 
   const spotTitle = photoSpotData.spotName;
   const spotDetail = photoSpotData.content;
 
-  const router = useRouter();
+  // const router = useRouter();
 
   function onClick() {
-    router.replace('/map/overview/i/flow/spot');
-    // redirect(`/map/overview/spot?spotId=${currSpot}`);
+    setModalState(!modalState);
   }
   return (
     <Container>
@@ -45,6 +47,13 @@ export default function Overview() {
           />
         ))}
       </CardContainerY>
+
+      {modalState && (
+        <Modal
+          setModalState={setModalState}
+          photoSpot={photoSpotData.imageInfo}
+        />
+      )}
     </Container>
   );
 }

@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { redirect } from 'next/navigation';
+import { useState } from 'react';
+// import { redirect } from 'next/navigation';
 import { Box, Divider, IconButton } from '@mui/material';
 import styled from 'styled-components';
 import Card from '@/components/Card';
@@ -7,6 +8,8 @@ import CloseIcon from '@/assets/CloseIcon';
 import Text from '@/components/atoms/Text';
 import Link from 'next/link';
 import Chip from './Chip';
+import Modal from './Modal';
+
 import photoSpotData from '../_data/photoSpotData';
 
 // import { photoSpotData } from '../_data/photoSpotData';
@@ -47,13 +50,16 @@ const ChipContainer = styled.div`
 `;
 
 export default function DrawerContent({ toggleDrawer }: DrawerProps) {
-  const currSpot = photoSpotData.spotId;
+  const [modalState, setModalState] = useState<boolean>(false);
+
+  // const currSpot = photoSpotData.spotId;
   const handleDrawerClose = () => {
     toggleDrawer(false);
   };
 
   function onClick() {
-    redirect(`spot/@modal?spotId=${currSpot}`);
+    // redirect(`spot/@modal?spotId=${currSpot}`);
+    setModalState(!modalState);
   }
 
   return (
@@ -98,6 +104,12 @@ export default function DrawerContent({ toggleDrawer }: DrawerProps) {
           query: { spotId: photoSpotData.spotId },
         }}
       >
+        {modalState && (
+          <Modal
+            setModalState={setModalState}
+            photoSpot={photoSpotData.imageInfo}
+          />
+        )}
         <ChipContainer>
           <Chip text="더보기" variant="secondary" />
         </ChipContainer>

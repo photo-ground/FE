@@ -1,51 +1,56 @@
 'use client';
 
+import React from 'react';
 import styled from 'styled-components';
 // import { redirect } from 'next/navigation';
 
 import Text from '@/components/atoms/Text';
-import Card from '@/components/Card';
+// import Card from '@/components/Card';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@/assets/CloseIcon';
 import photoSpotData from '../_data/photoSpotData';
+import Slider from './Slider';
+import { photoSpotProps } from '../types';
 
 const ModalContainer = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  // max-width: 500px;
-  background-color: #000;
-  border-radius: 10px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9); /* 모달 배경 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   padding: 1rem;
-  overflow: scroll;
+  overflow: auto; /* 콘텐츠가 넘칠 경우 스크롤 */
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
 `;
 
 const Overlay = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(17, 17, 225, 0.5); /* 투명도 있는 배경 */
   z-index: 999;
 `;
 
-const CloseButton = styled.button`
-  background: none;
-  border: none;
-  font-size: 1.25rem;
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  cursor: pointer;
+const CloseHeader = styled.div`
+  margin-right: auto;
 `;
 
-export default function Modal() {
-  const spotArr = photoSpotData.imageInfo.spotPostImageList;
+interface ModalProps {
+  photoSpot: photoSpotProps;
+  // spotPostImageList: spotPostImageProps[];
+  // hasNext: boolean;
+  setModalState: React.Dispatch<React.SetStateAction<boolean>>;
+}
+export default function Modal({ photoSpot, setModalState }: ModalProps) {
+  const spotArr = photoSpot.spotPostImageList;
   const spotTitle = photoSpotData.spotName;
   const spotContent = photoSpotData.content;
 
@@ -53,23 +58,19 @@ export default function Modal() {
     return <div>No data found for this spot.</div>;
   }
 
-  const handleDrawerClose = () => {
-    // toggleDrawer(false);
-  };
-
   return (
     <>
       <Overlay onClick={() => window.history.back()} />
       <ModalContainer>
-        <IconButton onClick={handleDrawerClose}>
-          <CloseIcon />
-        </IconButton>
-        <CloseButton onClick={() => window.history.back()}>×</CloseButton>
-        <Text variant="title2_sb">{spotTitle}sdfsd</Text>
-        {/* {spotArr.map((spot) => ( */}
-        <Card key={spotArr[0].imageId} size="large" src={spotArr[0].imageUrl} />
-        {/* ))} */}
-        <Text variant="body2_rg">Description for Spot {spotContent}</Text>
+        <CloseHeader>
+          <IconButton onClick={() => setModalState(false)}>
+            <CloseIcon />
+          </IconButton>
+        </CloseHeader>
+        <Text variant="title2_sb">{spotTitle}</Text>
+        <Slider spotPostImageList={spotArr} hasNext={false} />
+
+        {/* <Text variant="body2_rg">Description for Spot {spotContent}</Text> */}
       </ModalContainer>
     </>
   );
