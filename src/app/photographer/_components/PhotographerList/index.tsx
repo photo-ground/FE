@@ -1,6 +1,7 @@
-import Card from '@/components/Card';
 import { useEffect } from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
+import Card from '@/components/Card';
 
 const Container = styled.div`
   display: grid;
@@ -47,12 +48,14 @@ export default function PhotographerList() {
     <Container className="masonry-container">
       {data.map((datum) => (
         <div id="masonry-card" key={datum.id}>
-          <Card
-            size="dynamic"
-            src={datum.src}
-            title={datum.title}
-            content="24세, 여성"
-          />
+          <Link href="/photographer/1">
+            <Card
+              size="dynamic"
+              src={datum.src}
+              title={datum.title}
+              content="24세, 여성"
+            />
+          </Link>
         </div>
       ))}
     </Container>
