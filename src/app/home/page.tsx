@@ -34,6 +34,8 @@ const CardContainerX = styled.div`
   margin: 0 auto 0 20px;
 `;
 const CardTitle = styled.div`
+  margin-top: 0.75rem;
+
   color: ${({ theme }) => theme.colors.gray[200]};
   text-align: center;
   text: ${({ theme }) => theme.typography.body3};
@@ -92,6 +94,7 @@ export default function HomePage() {
             key={card.id}
             size="round"
             src={card.src}
+            contnet={card.title}
             etc={<CardTitle>{card.title}</CardTitle>}
           />
         ))}

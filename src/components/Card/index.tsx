@@ -49,7 +49,7 @@ export default function Card({
     <CardWrapper onClick={onClick} className={`card ${size}`}>
       <CardImage src={src} alt={title} />
       {title && <CardTitle variant="body1_md">{title}</CardTitle>}
-      <CardContent variant="body3">{content}</CardContent>
+      {content && <CardContent variant="body3">{content}</CardContent>}
       {etc}
     </CardWrapper>
   );
