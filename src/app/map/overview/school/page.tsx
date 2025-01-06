@@ -1,25 +1,32 @@
 'use client';
 
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import Card from '@/components/Card';
 import Back from '@/components/TNB/Back';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { photoSpotData } from '../../_data/photoSpotData';
 import { Container, CardContainerY } from '../../style';
+import photoSpotData from '../../_data/photoSpotData';
 
-// school을 URL 매개변수로 전달
-export default function Overview() {
+// Suspense로 감싼 SearchParams를 가져오는 컴포넌트
+function SearchParamsHandler() {
   const searchParams = useSearchParams();
-  const univ = searchParams.get('univ'); // 쿼리 파라미터에서 'school' 값 가져옴
+  const univ = searchParams.get('univ') || 'Unknown University';
 
+  return <Back text={`${univ}`} />;
+}
+
+export default function Overview() {
   const router = useRouter();
+
   function onClick() {
     router.replace('/map/overview/i/flow/school');
-    // console.log('clicked');
   }
+
   return (
     <Container>
-      <Back text={`${univ}`} />
-      {/* 칩 버튼 */}
+      <Suspense fallback={<div>Loading...</div>}>
+        <SearchParamsHandler />
+      </Suspense>
       <CardContainerY>
         {photoSpotData.imageInfo.spotPostImageList.map((spot) => (
           <Card

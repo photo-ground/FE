@@ -94,7 +94,6 @@ export default function HomePage() {
             key={card.id}
             size="round"
             src={card.src}
-            contnet={card.title}
             etc={<CardTitle>{card.title}</CardTitle>}
           />
         ))}

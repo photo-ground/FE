@@ -7,7 +7,9 @@ import CloseIcon from '@/assets/CloseIcon';
 import Text from '@/components/atoms/Text';
 import Link from 'next/link';
 import Chip from './Chip';
-import { photoSpotData } from '../_data/photoSpotData';
+import photoSpotData from '../_data/photoSpotData';
+
+// import { photoSpotData } from '../_data/photoSpotData';
 import { DrawerProps } from '../types';
 import { TextContainer } from '../style';
 

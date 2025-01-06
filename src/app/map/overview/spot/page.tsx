@@ -9,7 +9,7 @@ import Text from '@/components/atoms/Text';
 // import { useSearchParams } from 'next/navigation';
 import { Container, CardContainerY, TextContainer } from '../../style';
 
-import { photoSpotData } from '../../_data/photoSpotData';
+import photoSpotData from '../../_data/photoSpotData';
 // school을 URL 매개변수로 전달
 export default function Overview() {
   // const searchParams = useSearchParams();

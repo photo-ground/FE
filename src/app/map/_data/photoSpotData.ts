@@ -1,4 +1,4 @@
-export const photoSpotData = {
+const photoSpotData = {
   spotId: 2,
   spotName: '정문',
   content: '정문 최고',
@@ -56,3 +56,5 @@ export const photoSpotData = {
     hasNext: true,
   },
 };
+
+export default photoSpotData;

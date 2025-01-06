@@ -7,7 +7,7 @@ import Text from '@/components/atoms/Text';
 import Card from '@/components/Card';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@/assets/CloseIcon';
-import { photoSpotData } from '../_data/photoSpotData';
+import photoSpotData from '../_data/photoSpotData';
 
 const ModalContainer = styled.div`
   position: fixed;
