@@ -1,4 +1,4 @@
-const schools = [
+const univ = [
   {
     name: '서강대학교',
     lat: 37.5511,
@@ -21,4 +21,4 @@ const schools = [
   },
 ];
 
-export default schools;
+export default univ;
