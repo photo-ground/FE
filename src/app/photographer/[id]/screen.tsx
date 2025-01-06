@@ -2,6 +2,7 @@
 
 import styled from 'styled-components';
 import CTAButton from '@/components/atoms/CTAButton';
+import BREAK_POINT from '@/styles/constants';
 import PhotographerProfile from './_components/PhotographerProfile';
 import Price from './_components/Price';
 import Message from './_components/Message';
@@ -22,6 +23,7 @@ const ButtonWrapper = styled.div`
   bottom: 2rem;
 
   width: 100%;
+  max-width: ${BREAK_POINT}px;
   padding: 0 1.25rem;
 `;
 
