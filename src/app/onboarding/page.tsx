@@ -52,6 +52,7 @@ export default function OnboardingPage() {
         <div>
           {schoolList.map((item) => (
             <SchoolButtonItem
+              key={item.title}
               title={item.title}
               src={item.src}
               link={item.link}
