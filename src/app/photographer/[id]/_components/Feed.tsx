@@ -24,7 +24,7 @@ const Tag = styled(Text)`
 const Images = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.438rem;
+  gap: 0.5rem;
 `;
 
 const Image = styled.img`
