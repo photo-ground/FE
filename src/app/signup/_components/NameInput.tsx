@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { Input, InputContainer } from '@/styles/input';
 import PersonIcon from '@/assets/PersonIcon';
+import { SignUpData } from '../type';
 
 const Container = styled.div`
   display: flex;
@@ -14,12 +15,26 @@ const Container = styled.div`
   margin-bottom: 1rem;
 `;
 
-export default function NameInput() {
+export default function NameInput({
+  value,
+  onChange,
+}: {
+  value: SignUpData['name'];
+  onChange: (newValue: SignUpData['name']) => void;
+}) {
   return (
     <Container>
       <InputContainer>
         <PersonIcon />
-        <Input placeholder="이름" type="text" />
+        <Input
+          placeholder="이름"
+          type="text"
+          name="name"
+          value={value}
+          onChange={(event) => {
+            onChange(event.target.value);
+          }}
+        />
       </InputContainer>
     </Container>
   );
