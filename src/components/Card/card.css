@@ -9,15 +9,15 @@
 }
 .card.small {
   img {
-    width: 110px;
-    height: 110px;
+    min-width: 110px;
+    min-height: 110px;
   }
 }
 
 .card.medium {
   img {
-    width: 10.625rem;
-    height: 10.625rem;
+    min-width: 10.625rem;
+    min-height: 10.625rem;
   }
 }
 
@@ -27,7 +27,7 @@
   padding: 12px 20px;
   img {
     width: 286px;
-    height: 382px;
+    min-height: 382px;
   }
 }
 
@@ -35,6 +35,6 @@
 .card.dynamic {
   img {
     width: 100%;
-    height: auto;
+    min-height: auto;
   }
 }

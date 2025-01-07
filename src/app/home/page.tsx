@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 import Banner from '@/components/Banner';
 import Spacer from '@/components/Spacer';
@@ -8,6 +9,7 @@ import Card from '@/components/Card';
 import TNB from '@/components/TNB';
 import Text from '@/components/atoms/Text';
 import styled from 'styled-components';
+import RightChevronIcon from '@/assets/RightChevronIcon';
 import SearchEngine from './_components/SearchEngine';
 import Filter from './_components/Filter';
 import { Option, UNIV_LIST, UnivLabel, UnivValue } from './type/Option';
@@ -32,6 +34,7 @@ const CardContainerX = styled.div`
   overflow-x: scroll;
   gap: 1rem;
   margin: 0 auto 0 20px;
+  height: 114px;
 `;
 const CardTitle = styled.div`
   margin-top: 0.75rem;
@@ -41,12 +44,15 @@ const CardTitle = styled.div`
 `;
 
 const CardContainerY = styled.div`
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  // justify-content: center;
+
   flex-wrap: wrap;
   overflow-y: scroll;
   gap: 10px;
-  margin: 0 auto;
+  margin: 0 20px;
 `;
 
 const TitleContainer = styled.div`
@@ -56,6 +62,11 @@ const TitleContainer = styled.div`
   margin-top: 0;
 `;
 
+const IconTextLink = styled(Link)`
+  display: flex;
+  text-decoration: none;
+  color: red;
+`;
 const BannerContent = styled.div`
   background: linear-gradient(95deg, #a5b4a6 4.32%, #ffa67d 170.81%);
   padding: 1rem;
@@ -83,8 +94,13 @@ export default function HomePage() {
       <TNB.Main />
       <SearchEngine />
       <TitleContainer>
-        <Text variant="title1_sb">활발히 활동 중인 작가</Text>
-        <Text variant="caption1_rg">더보기</Text>
+        <Text variant="title1_sb">이 달의 작가</Text>
+        <IconTextLink href="/photographer">
+          <Text variant="caption1_rg" color="#8C8C8C">
+            더보기
+          </Text>
+          <RightChevronIcon size="20px" color="#8C8C8C" />
+        </IconTextLink>
       </TitleContainer>
       <CardContainerX>
         {cards.map((card) => (
@@ -104,7 +120,7 @@ export default function HomePage() {
       <Spacer size="3rem" />
 
       <TitleContainer>
-        <Text variant="title1_sb">최근 {univTitle} 스냅 사진</Text>
+        <Text variant="title1_sb">{univTitle} 스냅 사진</Text>
         <Filter
           optionList={UNIV_LIST}
           placeholder="학교 변경"
@@ -124,6 +140,7 @@ export default function HomePage() {
           />
         ))}
       </CardContainerY>
+      <Spacer size="32px" />
     </Container>
   );
 }

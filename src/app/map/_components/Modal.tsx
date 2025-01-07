@@ -67,8 +67,6 @@ export default function Modal({ photoSpot, setModalState }: ModalProps) {
         </CloseHeader>
         <Text variant="title2_sb">{spotTitle}</Text>
         <Slider spotPostImageList={spotArr} hasNext={false} />
-
-        {/* <Text variant="body2_rg">Description for Spot {spotContent}</Text> */}
       </ModalContainer>
     </>
   );
