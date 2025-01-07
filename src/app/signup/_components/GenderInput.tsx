@@ -1,8 +1,8 @@
 'use client';
 
-import Text from '@/components/atoms/Text';
 import { useState } from 'react';
 import styled from 'styled-components';
+import Text from '@/components/atoms/Text';
 
 type Value = 'male' | 'female';
 

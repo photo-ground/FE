@@ -1,5 +1,3 @@
-'use server';
-
 export default async function sendEmail({ email }: { email: string }) {
   try {
     const response = await fetch(

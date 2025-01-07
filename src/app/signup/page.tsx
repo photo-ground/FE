@@ -4,17 +4,19 @@ import CTAButton from '@/components/atoms/CTAButton';
 import Text from '@/components/atoms/Text';
 import TNB from '@/components/TNB';
 import {
+  EmailInput,
+  GenderInput,
+  NameInput,
+  PasswordInput,
+  PhoneInput,
+  UnivInput,
+} from './_components';
+import {
   AccountSection,
   ButtonWrapper,
   DivideLine,
   UserSection,
 } from './styles';
-import EmailInput from './EmailInput';
-import PasswordInput from './PasswordInput';
-import PhoneInput from './PhoneInput';
-import GenderInput from './GenderInput';
-import UnivInput from './UnivInput';
-import NameInput from './NameInput';
 
 export default function SignUpPage() {
   return (
