@@ -50,7 +50,7 @@ interface ModalProps {
 export default function Modal({ photoSpot, setModalState }: ModalProps) {
   const spotArr = photoSpot.spotPostImageList;
   const spotTitle = photoSpotData.spotName;
-  const spotContent = photoSpotData.content;
+  // const spotContent = photoSpotData.content;
 
   if (!spotArr.length) {
     return <div>No data found for this spot.</div>;
