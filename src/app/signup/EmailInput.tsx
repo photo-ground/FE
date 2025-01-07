@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import EmailIcon from '@/assets/EmailIcon';
 import Text from '@/components/atoms/Text';
 import { Input, InputContainer } from '@/styles/input';
+import sendEmail from './sendEmail';
 
 const Container = styled.div`
   display: flex;
@@ -56,9 +57,11 @@ const ButtonText = styled(Text)<{ $disabled?: boolean }>`
 `;
 
 export default function EmailInput() {
+  const [email, setEmail] = useState('');
   const [isSent, setIsSent] = useState(false);
 
-  const sendMail = () => {
+  const sendMail = async () => {
+    sendEmail({ email });
     setIsSent(true);
   };
 
@@ -67,9 +70,21 @@ export default function EmailInput() {
       <InputWrapper>
         <InputContainer>
           <EmailIcon size="1.5rem" />
-          <Input placeholder="이메일" />
+          <Input
+            placeholder="이메일"
+            name="email"
+            value={email}
+            onChange={(event) => {
+              setEmail(event.target.value);
+            }}
+          />
         </InputContainer>
-        <Button type="button" onClick={sendMail} $disabled={isSent}>
+        <Button
+          type="button"
+          disabled={isSent}
+          onClick={sendMail}
+          $disabled={isSent}
+        >
           <ButtonText variant="body2_rg" $disabled={isSent}>
             인증번호 전송
           </ButtonText>
@@ -79,7 +94,7 @@ export default function EmailInput() {
       {isSent && (
         <InputWrapper>
           <PasskeyInputContainer>
-            <Input placeholder="인증번호" />
+            <Input placeholder="인증번호" name="email-key" />
 
             <ConfirmButton type="button">확인</ConfirmButton>
           </PasskeyInputContainer>
