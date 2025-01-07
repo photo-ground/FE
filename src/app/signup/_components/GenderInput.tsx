@@ -1,14 +1,12 @@
 'use client';
 
-import { useState } from 'react';
 import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
+import { SignUpData } from '../type';
 
-type Value = 'male' | 'female';
-
-const OPTION_LIST: { title: string; value: Value }[] = [
-  { title: '남성', value: 'male' },
-  { title: '여성', value: 'female' },
+const OPTION_LIST: { title: string; value: SignUpData['gender'] }[] = [
+  { title: '남성', value: 'MALE' },
+  { title: '여성', value: 'FEMALE' },
 ];
 
 const Container = styled.div`
@@ -40,9 +38,13 @@ const ButtonText = styled(Text)<{ $isSelected: boolean }>`
     $isSelected ? theme.colors.white : theme.colors.gray[400]};
 `;
 
-export default function GenderInput() {
-  const [value, setValue] = useState<Value | null>(null);
-
+export default function GenderInput({
+  value,
+  onChange,
+}: {
+  value: SignUpData['gender'];
+  onChange: (newValue: SignUpData['gender']) => void;
+}) {
   return (
     <Container>
       {OPTION_LIST.map((option) => {
@@ -53,7 +55,7 @@ export default function GenderInput() {
             type="button"
             $isSelected={isSelected}
             onClick={() => {
-              setValue(option.value);
+              onChange(option.value);
             }}
           >
             <ButtonText variant="body2_rg" $isSelected={isSelected}>

@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import DownChevronIcon from '@/assets/DownChevronIcon';
 import Text from '@/components/atoms/Text';
+import { SignUpData } from '../type';
 
 export interface Option {
   value: string;
@@ -62,17 +63,20 @@ const OptionItem = styled.button`
   cursor: pointer;
 `;
 
-type Value = 'sogang' | 'yonsei' | 'ewha' | 'hongik';
-
-const OPTION_LIST: { label: string; value: Value }[] = [
-  { label: '서강대학교', value: 'sogang' },
-  { label: '연세대학교', value: 'yonsei' },
-  { label: '이화여자대학교', value: 'ewha' },
-  { label: '홍익대학교', value: 'hongik' },
+const OPTION_LIST: { label: string; value: SignUpData['myUniv'] }[] = [
+  { label: '서강대학교', value: '서강' },
+  { label: '연세대학교', value: '연세' },
+  { label: '이화여자대학교', value: '이화' },
+  { label: '홍익대학교', value: '홍익' },
 ];
 
-export default function UnivInput() {
-  const [value, setValue] = useState<Value | null>(null);
+export default function UnivInput({
+  value,
+  onChange,
+}: {
+  value: SignUpData['myUniv'];
+  onChange: (newValue: SignUpData['myUniv']) => void;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const selectorRef = useRef<HTMLDivElement | null>(null);
   const optionRef = useRef<HTMLDivElement | null>(null);
@@ -105,7 +109,7 @@ export default function UnivInput() {
               <OptionItem
                 key={option.value}
                 onClick={() => {
-                  setValue(option.value);
+                  onChange(option.value);
                   onClose();
                 }}
               >
