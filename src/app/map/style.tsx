@@ -13,9 +13,11 @@ export const Container = styled.div`
 `;
 
 export const CardContainerY = styled.div`
-  display: flex;
+  display: grid;
+  // grid로 수정
+  grid: auto-flow / 1fr 1fr 1fr;
+  // grid: repeat(3, 110px) / auto-flow 110px;
   padding: 1rem 1.25rem;
-  flex-wrap: wrap;
   overflow-y: scroll;
   gap: 10px;
   margin: 0 auto;

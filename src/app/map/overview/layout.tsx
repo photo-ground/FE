@@ -4,14 +4,14 @@ import { ReactNode } from 'react';
 
 export default function ModalLayout({
   children,
-  modal,
+  // modal,
 }: {
   children: ReactNode;
-  modal: ReactNode;
+  // modal: ReactNode;
 }) {
   return (
     <>
-      {modal}
+      {/* {modal} */}
       {children}
     </>
   );
