@@ -1,69 +1,46 @@
 'use client';
 
 import { useState } from 'react';
-import styled from 'styled-components';
 
 import EmailIcon from '@/assets/EmailIcon';
-import Text from '@/components/atoms/Text';
 import { Input, InputContainer } from '@/styles/input';
 import sendEmail from './sendEmail';
+import confirmEmail from './confirmEmail';
+import { SignUpData } from '../../type';
+import {
+  Button,
+  ButtonText,
+  ConfirmButton,
+  Container,
+  InputWrapper,
+  PasskeyInputContainer,
+} from './styles';
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-  width: 100%;
-`;
-
-const InputWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 7.125rem;
-  gap: 0.75rem;
-  width: 100%;
-`;
-
-const PasskeyInputContainer = styled(InputContainer)`
-  padding: 0;
-  padding-left: 0.5rem;
-`;
-
-const ConfirmButton = styled.button`
-  height: 100%;
-  padding: 0 1rem;
-  background: transparent;
-  white-space: nowrap;
-
-  border: none;
-  border-left: 1px solid ${({ theme }) => theme.colors.gray[600]};
-  outline: none;
-`;
-
-const Button = styled.button<{ $disabled?: boolean }>`
-  background: transparent;
-  padding: 0.5rem 0;
-  white-space: nowrap;
-
-  border: 1px solid
-    ${({ theme, $disabled }) => theme.colors.gray[$disabled ? 600 : 200]};
-  border-radius: 0.5rem;
-  outline: none;
-`;
-
-const ButtonText = styled(Text)<{ $disabled?: boolean }>`
-  color: ${({ theme, $disabled }) => theme.colors.gray[$disabled ? 600 : 200]};
-`;
-
-export default function EmailInput() {
-  const [email, setEmail] = useState('');
+export default function EmailInput({
+  value,
+  onChange,
+  onConfirm,
+}: {
+  value: SignUpData['email'];
+  onChange: (newValue: SignUpData['email']) => void;
+  onConfirm: () => void;
+}) {
   const [isSent, setIsSent] = useState(false);
+  const [verificationCode, setVerificationCode] = useState('');
 
-  const sendMail = async () => {
-    sendEmail({ email });
+  const sendMail = () => {
+    sendEmail({ email: value });
     setIsSent(true);
   };
+
+  const onClickConfirm = async () => {
+    const response = await confirmEmail({ email: value, verificationCode });
+    if (response) {
+      onConfirm();
+    }
+  };
+
+  const disableSendEmail = !(value && !isSent);
 
   return (
     <Container>
@@ -73,19 +50,21 @@ export default function EmailInput() {
           <Input
             placeholder="이메일"
             name="email"
-            value={email}
+            value={value}
             onChange={(event) => {
-              setEmail(event.target.value);
+              onChange(event.target.value);
             }}
+            readOnly
+            onFocus={(e) => e.target.removeAttribute('readOnly')}
           />
         </InputContainer>
         <Button
           type="button"
           disabled={isSent}
           onClick={sendMail}
-          $disabled={isSent}
+          $disabled={disableSendEmail}
         >
-          <ButtonText variant="body2_rg" $disabled={isSent}>
+          <ButtonText variant="body2_rg" $disabled={disableSendEmail}>
             인증번호 전송
           </ButtonText>
         </Button>
@@ -94,9 +73,17 @@ export default function EmailInput() {
       {isSent && (
         <InputWrapper>
           <PasskeyInputContainer>
-            <Input placeholder="인증번호" name="email-key" />
-
-            <ConfirmButton type="button">확인</ConfirmButton>
+            <Input
+              placeholder="인증번호"
+              name="verificationCode"
+              value={verificationCode}
+              onChange={(event) => {
+                setVerificationCode(event.target.value);
+              }}
+            />
+            <ConfirmButton type="button" onClick={onClickConfirm}>
+              확인
+            </ConfirmButton>
           </PasskeyInputContainer>
           <Button type="button" onClick={sendMail}>
             <ButtonText variant="body2_rg">재전송</ButtonText>
