@@ -3,6 +3,7 @@ import PeopleIcon from '@/assets/PeopleIcon';
 import Chip from '@/components/atoms/Chip';
 import SmallButton from '@/components/atoms/SmallButton';
 import Text from '@/components/atoms/Text';
+import BackButton from './BackButton';
 
 const ThumbnailWrapper = styled.div`
   position: relative;
@@ -84,7 +85,11 @@ export default function PhotographerProfile() {
   return (
     <ThumbnailWrapper>
       <Thumbnail src="/images/ewha.jpg" alt="thumbnail" />
+
+      <BackButton />
+
       <Overlay />
+
       <InfoArea>
         <Header>
           <Text variant="header1">조은호</Text>
