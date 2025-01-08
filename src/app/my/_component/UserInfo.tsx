@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const UserInfoWrapper = styled.div`
   padding: 1.5rem;
-  background-color: rgba(0, 0, 0, 0.5);
+  // background-color: rgba(0, 0, 0, 0.5);
   color: white;
   display: flex;
   justify-content: space-between;
@@ -55,10 +55,9 @@ export default function UserInfo({
       <Greeting>
         <TitleContainer>
           <Text variant="title1_sb">
-            <strong>{userName}님,</strong>
-            <span>좋은 하루예요!</span>
+            <p>{userName}님,</p>
+            <p>좋은 하루예요!</p>
           </Text>
-          <Text variant="caption1_rg">더보기</Text>
         </TitleContainer>
       </Greeting>
       <EditButton onClick={onEdit}>내 정보 수정 ›</EditButton>

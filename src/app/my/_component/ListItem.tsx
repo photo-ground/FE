@@ -28,7 +28,7 @@ export default function ListItem({
   onClick,
 }: {
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
 }) {
   return (
     <ListItemWrapper onClick={onClick}>
