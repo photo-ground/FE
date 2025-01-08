@@ -17,7 +17,9 @@ import { DrawerProps } from '../types';
 import { TextContainer } from '../style';
 
 const CardContainer = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
   flex-wrap: wrap;
   gap: 10px;
   margin: 0 auto;
