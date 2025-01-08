@@ -1,3 +1,4 @@
+import { MouseEventHandler } from 'react';
 import styled, { DefaultTheme } from 'styled-components';
 import Text from '@/components/atoms/Text';
 
@@ -41,16 +42,18 @@ const ButtonText = styled(Text)`
 export default function CTAButton({
   text,
   variant = 'primary',
+  type = 'button',
   disabled = false,
   onClick = () => {},
 }: {
   text: string;
   variant?: Variant;
+  type?: 'button' | 'submit'; // 나중에 더 추가해주세요...
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }) {
   return (
-    <Button variant={variant} disabled={disabled} onClick={onClick}>
+    <Button variant={variant} type={type} disabled={disabled} onClick={onClick}>
       {disabled ? (
         <ButtonText variant="title2_sb">{text}</ButtonText>
       ) : (
