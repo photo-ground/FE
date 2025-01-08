@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.div<{ $isError?: boolean }>`
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -8,6 +8,10 @@ export const InputContainer = styled.div`
   width: 100%;
   padding: 0.5rem 1rem;
   background: ${({ theme }) => theme.colors.gray[900]};
+  border: ${({ theme, $isError }) =>
+    $isError
+      ? `1px solid ${theme.colors.negative[500]}`
+      : '1px solid transparent'};
   border-radius: 0.5rem;
 `;
 

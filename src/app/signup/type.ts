@@ -7,4 +7,6 @@ export interface SignUpData {
   gender?: 'FEMALE' | 'MALE';
 
   isEmailConfirmed: boolean;
+  isPasswordValid: boolean;
+  isPasswordConfirmed: boolean;
 }

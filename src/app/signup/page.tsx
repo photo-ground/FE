@@ -22,6 +22,20 @@ import {
 } from './styles';
 import signup from './signup';
 
+function checkDataValid(data: SignUpData) {
+  return (
+    !!data.email &&
+    !!data.password &&
+    !!data.name &&
+    !!data.phone &&
+    !!data.myUniv &&
+    !!data.gender &&
+    data.isEmailConfirmed &&
+    data.isPasswordValid &&
+    data.isPasswordConfirmed
+  );
+}
+
 export default function SignUpPage() {
   const [signUpData, setSignUpData] = useState<SignUpData>({
     email: '',
@@ -29,6 +43,8 @@ export default function SignUpPage() {
     name: '',
     phone: '',
     isEmailConfirmed: false,
+    isPasswordValid: false,
+    isPasswordConfirmed: false,
   });
   const router = useRouter();
 
@@ -41,7 +57,15 @@ export default function SignUpPage() {
   };
 
   const onChangePassword = (newValue: SignUpData['password']) => {
-    setSignUpData({ ...signUpData, password: newValue });
+    setSignUpData((prevData) => ({ ...prevData, password: newValue }));
+  };
+
+  const onCheckPassword = (ok: boolean) => {
+    setSignUpData((prevData) => ({ ...prevData, isPasswordValid: ok }));
+  };
+
+  const onCheckConfirmPassword = (ok: boolean) => {
+    setSignUpData({ ...signUpData, isPasswordConfirmed: ok });
   };
 
   const onChangeName = (newValue: SignUpData['name']) => {
@@ -82,6 +106,8 @@ export default function SignUpPage() {
           <PasswordInput
             value={signUpData.password}
             onChange={onChangePassword}
+            onCheckPassword={onCheckPassword}
+            onCheckConfirmPassword={onCheckConfirmPassword}
           />
         </AccountSection>
 
@@ -97,7 +123,11 @@ export default function SignUpPage() {
         </UserSection>
 
         <ButtonWrapper>
-          <CTAButton text="가입하기" onClick={onSignUp} />
+          <CTAButton
+            text="가입하기"
+            onClick={onSignUp}
+            disabled={!checkDataValid(signUpData)}
+          />
         </ButtonWrapper>
       </div>
     </div>
