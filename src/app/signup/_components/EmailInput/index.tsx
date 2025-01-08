@@ -54,8 +54,6 @@ export default function EmailInput({
             onChange={(event) => {
               onChange(event.target.value);
             }}
-            readOnly
-            onFocus={(e) => e.target.removeAttribute('readOnly')}
           />
         </InputContainer>
         <Button
