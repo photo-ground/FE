@@ -17,17 +17,19 @@ export default async function signin(formData: FormData) {
       },
     );
 
-    if (rawResponse.ok) {
-      const accessToken = rawResponse.headers.get('Authorization')!;
-      const cookieStore = await cookies();
-      cookieStore.set('accessToken', accessToken);
-      redirect('/home');
+    if (!rawResponse.ok) {
+      const response = await rawResponse.json();
+      throw new Error(response.message);
     }
 
-    const response = await rawResponse.json();
-    throw new Error(response.message);
+    const accessToken = rawResponse.headers.get('Authorization')!;
+    const cookieStore = await cookies();
+    cookieStore.set('accessToken', accessToken);
   } catch (error: unknown) {
     console.error(error);
     console.error((error as Error).message || '문제가 발생했습니다.');
+    return;
   }
+
+  redirect('/home');
 }
