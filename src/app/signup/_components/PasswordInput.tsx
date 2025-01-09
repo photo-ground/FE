@@ -47,8 +47,8 @@ export default function PasswordInput({
 }: {
   value: SignUpData['password'];
   onChange: (newValue: SignUpData['password']) => void;
-  onCheckPassword: (ok: boolean) => void;
-  onCheckConfirmPassword: (ok: boolean) => void;
+  onCheckPassword?: (ok: boolean) => void;
+  onCheckConfirmPassword?: (ok: boolean) => void;
 }) {
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -64,7 +64,9 @@ export default function PasswordInput({
             value={value}
             onChange={(event) => {
               onChange(event.target.value);
-              onCheckPassword(checkPasswordValid(event.target.value));
+              if (onCheckPassword) {
+                onCheckPassword(checkPasswordValid(event.target.value));
+              }
             }}
             autoComplete="new-password"
           />
@@ -87,9 +89,11 @@ export default function PasswordInput({
             value={confirmPassword}
             onChange={(event) => {
               setConfirmPassword(event.target.value);
-              onCheckConfirmPassword(
-                checkConfirmPassword(value, event.target.value),
-              );
+              if (onCheckConfirmPassword) {
+                onCheckConfirmPassword(
+                  checkConfirmPassword(value, event.target.value),
+                );
+              }
             }}
             autoComplete="new-password"
           />
