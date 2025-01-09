@@ -21,6 +21,7 @@ import {
   UserSection,
 } from './styles';
 import signup from './signup';
+import Modal from './_components/Modal';
 
 function checkDataValid(data: SignUpData) {
   return (
@@ -46,6 +47,7 @@ export default function SignUpPage() {
     isPasswordValid: false,
     isPasswordConfirmed: false,
   });
+  const [isCompleted, setIsCompleted] = useState(false);
   const router = useRouter();
 
   const onChangeEmail = (newValue: SignUpData['email']) => {
@@ -87,7 +89,7 @@ export default function SignUpPage() {
   const onSignUp = async () => {
     const response = await signup({ data: signUpData });
     if (response) {
-      router.push('signin');
+      setIsCompleted(true);
     }
   };
 
@@ -130,6 +132,14 @@ export default function SignUpPage() {
           />
         </ButtonWrapper>
       </div>
+
+      {isCompleted && (
+        <Modal
+          onClose={() => {
+            router.replace('/signin');
+          }}
+        />
+      )}
     </div>
   );
 }

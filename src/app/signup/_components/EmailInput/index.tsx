@@ -79,7 +79,11 @@ export default function EmailInput({
     if (response.code === 'EMAIL_ALREADY_EXISTS') {
       setEmailErrorCode(response.code);
       setIsSent(false);
+      return;
     }
+
+    setEmailErrorCode('SERVER_ERROR');
+    setIsSent(false);
   };
 
   const onClickConfirm = async () => {
@@ -124,7 +128,6 @@ export default function EmailInput({
             </ButtonText>
           </Button>
         </InputWrapper>
-
         {emailErrorCode === 'INVALID_EMAIL' && (
           <ErrorMessage variant="caption1_rg">
             부적절한 이메일 형식입니다
@@ -133,6 +136,11 @@ export default function EmailInput({
         {emailErrorCode === 'EMAIL_ALREADY_EXISTS' && (
           <ErrorMessage variant="caption1_rg">
             동일한 이메일 계정이 존재합니다
+          </ErrorMessage>
+        )}
+        {emailErrorCode === 'SERVER_ERROR' && (
+          <ErrorMessage variant="caption1_rg">
+            서버 에러가 발생했습니다
           </ErrorMessage>
         )}
       </InputAreaWrapper>
