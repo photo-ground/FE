@@ -12,6 +12,12 @@ export const Container = styled.div`
   width: 100%;
 `;
 
+export const InputAreaWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+`;
+
 export const InputWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 7.125rem;
@@ -19,19 +25,27 @@ export const InputWrapper = styled.div`
   width: 100%;
 `;
 
+export const ErrorMessage = styled(Text)`
+  color: ${({ theme }) => theme.colors.negative[500]};
+  margin-left: 1rem;
+`;
+
 export const PasskeyInputContainer = styled(InputContainer)`
   padding: 0;
   padding-left: 0.5rem;
 `;
 
-export const ConfirmButton = styled.button`
+export const ConfirmButton = styled.button<{ $isError?: boolean }>`
   height: 100%;
   padding: 0 1rem;
   background: transparent;
   white-space: nowrap;
 
   border: none;
-  border-left: 1px solid ${({ theme }) => theme.colors.gray[600]};
+
+  border-left: 1px solid
+    ${({ theme, $isError }) =>
+      $isError ? theme.colors.negative[500] : theme.colors.gray[600]};
   outline: none;
 
   cursor: pointer;
@@ -46,8 +60,14 @@ export const Button = styled.button<{ $disabled?: boolean }>`
     ${({ theme, $disabled }) => theme.colors.gray[$disabled ? 600 : 200]};
   border-radius: 0.5rem;
   outline: none;
+
+  cursor: ${({ $disabled }) => ($disabled ? 'auto' : 'pointer')};
 `;
 
 export const ButtonText = styled(Text)<{ $disabled?: boolean }>`
   color: ${({ theme, $disabled }) => theme.colors.gray[$disabled ? 600 : 200]};
+`;
+
+export const SuccessText = styled(Text)<{ $disabled?: boolean }>`
+  color: ${({ theme }) => theme.colors.positive[500]};
 `;

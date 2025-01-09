@@ -68,6 +68,7 @@ const OPTION_LIST: { label: string; value: SignUpData['myUniv'] }[] = [
   { label: '연세대학교', value: '연세' },
   { label: '이화여자대학교', value: '이화' },
   { label: '홍익대학교', value: '홍익' },
+  { label: '선택 안 함', value: '선택안함' },
 ];
 
 export default function UnivInput({
