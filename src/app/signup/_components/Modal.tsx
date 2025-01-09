@@ -1,7 +1,6 @@
 import CheckIcon from '@/assets/modal/CheckIcon';
 import LargeButton from '@/components/atoms/LargeButton';
 import Text from '@/components/atoms/Text';
-import { useState } from 'react';
 import styled from 'styled-components';
 
 const Backdrop = styled.div`
