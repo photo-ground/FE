@@ -21,6 +21,21 @@ import {
   UserSection,
 } from './styles';
 import signup from './signup';
+import Modal from './_components/Modal';
+
+function checkDataValid(data: SignUpData) {
+  return (
+    !!data.email &&
+    !!data.password &&
+    !!data.name &&
+    !!data.phone &&
+    !!data.myUniv &&
+    !!data.gender &&
+    data.isEmailConfirmed &&
+    data.isPasswordValid &&
+    data.isPasswordConfirmed
+  );
+}
 
 export default function SignUpPage() {
   const [signUpData, setSignUpData] = useState<SignUpData>({
@@ -29,7 +44,10 @@ export default function SignUpPage() {
     name: '',
     phone: '',
     isEmailConfirmed: false,
+    isPasswordValid: false,
+    isPasswordConfirmed: false,
   });
+  const [isCompleted, setIsCompleted] = useState(false);
   const router = useRouter();
 
   const onChangeEmail = (newValue: SignUpData['email']) => {
@@ -41,7 +59,15 @@ export default function SignUpPage() {
   };
 
   const onChangePassword = (newValue: SignUpData['password']) => {
-    setSignUpData({ ...signUpData, password: newValue });
+    setSignUpData((prevData) => ({ ...prevData, password: newValue }));
+  };
+
+  const onCheckPassword = (ok: boolean) => {
+    setSignUpData((prevData) => ({ ...prevData, isPasswordValid: ok }));
+  };
+
+  const onCheckConfirmPassword = (ok: boolean) => {
+    setSignUpData({ ...signUpData, isPasswordConfirmed: ok });
   };
 
   const onChangeName = (newValue: SignUpData['name']) => {
@@ -63,7 +89,7 @@ export default function SignUpPage() {
   const onSignUp = async () => {
     const response = await signup({ data: signUpData });
     if (response) {
-      router.push('signin');
+      setIsCompleted(true);
     }
   };
 
@@ -82,6 +108,8 @@ export default function SignUpPage() {
           <PasswordInput
             value={signUpData.password}
             onChange={onChangePassword}
+            onCheckPassword={onCheckPassword}
+            onCheckConfirmPassword={onCheckConfirmPassword}
           />
         </AccountSection>
 
@@ -97,9 +125,21 @@ export default function SignUpPage() {
         </UserSection>
 
         <ButtonWrapper>
-          <CTAButton text="가입하기" onClick={onSignUp} />
+          <CTAButton
+            text="가입하기"
+            onClick={onSignUp}
+            disabled={!checkDataValid(signUpData)}
+          />
         </ButtonWrapper>
       </div>
+
+      {isCompleted && (
+        <Modal
+          onClose={() => {
+            router.replace('/signin');
+          }}
+        />
+      )}
     </div>
   );
 }

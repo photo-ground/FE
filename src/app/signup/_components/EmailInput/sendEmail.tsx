@@ -6,7 +6,7 @@ export default async function sendEmail({
   email: SignUpData['email'];
 }) {
   try {
-    const response = await fetch(
+    const rawResponse = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/customer/emails/request`,
       {
         method: 'POST',
@@ -15,10 +15,13 @@ export default async function sendEmail({
       },
     );
 
-    if (!response.ok) throw Error();
-  } catch {
-    return false;
-  }
+    if (rawResponse.ok) {
+      return { ok: true };
+    }
 
-  return true;
+    const response = await rawResponse.json();
+    return { ok: false, code: response.code };
+  } catch {
+    return { ok: false, code: '' };
+  }
 }

@@ -38,7 +38,6 @@ const CardContainerX = styled.div`
 `;
 const CardTitle = styled.div`
   margin-top: 0.75rem;
-
   color: ${({ theme }) => theme.colors.gray[200]};
   text-align: center;
   text: ${({ theme }) => theme.typography.body3};
@@ -77,7 +76,7 @@ const BannerContent = styled.div`
 export default function HomePage() {
   const [univ, setUniv] = useState<UnivValue | null>('yonsei');
   const [univTitle, setUnivTitle] = useState<UnivLabel | null>('연세대학교');
-  // 10개의 카드 데이터를 생성
+  // TODO : 10개의 카드 데이터를 생성 (임시데이터) -> api 명세서보고 수정
   const cards = Array.from({ length: 10 }, (_, index) => ({
     id: index,
     content: 'This is a card.',
@@ -100,10 +99,8 @@ export default function HomePage() {
           <Text variant="caption1_rg" color="#8C8C8C">
             더보기
           </Text>
-
           <RightChevronIcon size="20px" color="#8C8C8C" />
         </IconTextLink>
-        {/* </Link> */}
       </TitleContainer>
       <CardContainerX>
         {cards.map((card) => (

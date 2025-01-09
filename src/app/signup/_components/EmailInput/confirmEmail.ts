@@ -8,7 +8,7 @@ export default async function confirmEmail({
   verificationCode: string;
 }) {
   try {
-    const response = await fetch(
+    const rawResponse = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/customer/emails/verify`,
       {
         method: 'POST',
@@ -17,10 +17,11 @@ export default async function confirmEmail({
       },
     );
 
-    if (!response.ok) throw Error();
+    if (rawResponse.ok) {
+      return { ok: true };
+    }
+    return { ok: false };
   } catch {
-    return false;
+    return { ok: false };
   }
-
-  return true;
 }
