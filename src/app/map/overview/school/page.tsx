@@ -8,6 +8,7 @@ import Back from '@/components/TNB/Back';
 import { Container, CardContainerY } from '../../style';
 import photoSpotData from '../../_data/photoSpotData';
 import Modal from '../../_components/Modal';
+import useSpotStore from '../../_store';
 
 // Suspense로 감싼 SearchParams를 가져오는 컴포넌트
 function SearchParamsHandler() {
@@ -19,11 +20,17 @@ function SearchParamsHandler() {
 
 export default function Overview() {
   const [modalState, setModalState] = useState<boolean>(false);
-  // const router = useRouter();
+  const spotId = useSpotStore((state) => state.spotId);
+  const setSpotId = useSpotStore((state) => state.setSpotId);
 
-  function onClick() {
-    console.log('눌럿어');
-    setModalState(!modalState);
+  function handleCardModal(postId: number) {
+    console.log(postId);
+    const index = photoSpotData.imageInfo.spotPostImageList.findIndex(
+      (item) => item.postId === postId,
+    );
+    console.log(index);
+    setSpotId(index); // index를 저장
+    setModalState(true); // 모달 열기
   }
 
   return (
@@ -32,22 +39,20 @@ export default function Overview() {
         <SearchParamsHandler />
       </Suspense>
       <CardContainerY>
-        {/* <Link href="/school">Open modal</Link> */}
         {photoSpotData.imageInfo.spotPostImageList.map((spot) => (
-          // <Link href="/map/overview?modal=school">
           <Card
             key={spot.postId}
             size="small"
             src={spot.imageUrl}
-            onClick={() => onClick()}
+            onClick={() => handleCardModal(spot.postId)}
           />
-          // </Link>
         ))}
       </CardContainerY>
-      {modalState && (
+      {modalState && spotId !== null && (
         <Modal
+          currIndex={spotId}
           setModalState={setModalState}
-          photoSpot={photoSpotData.imageInfo}
+          photoSpot={photoSpotData}
         />
       )}
     </Container>

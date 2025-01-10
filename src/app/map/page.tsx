@@ -15,12 +15,15 @@ import { loadNaverMap } from './_util/naverMaps';
 import makeMarker from './_util/makeMarker';
 import Chip from './_components/Chip';
 
-import photoSpots from './_data/photoSpots';
+import photoSpots from './_data/photoSpots'; // dummy data
 import DrawerContent from './_components/DrawerContent';
 import { Container } from './style';
 import { School } from './types';
 
 import schoolList from './_data/schoolList'; // 더미 데이터
+import Modal from './_components/Modal';
+import photoSpotData from './_data/photoSpotData';
+import useSpotStore from './_store';
 
 const MapContainer = styled.div`
   width: 100%;
@@ -50,8 +53,8 @@ const ChipContainer = styled.div`
 const AbsContainer = styled.div`
   position: absolute;
   bottom: 1.25rem;
-  left: calc(50% - 6rem);
-  width: 12rem;
+  left: calc(50% - 75px);
+  width: 150px;
   z-index: 2;
 `;
 
@@ -75,6 +78,15 @@ export default function MapPage() {
   } | null>(null);
 
   const [open, setOpen] = useState(false);
+  const [modalState, setModalState] = useState<boolean>(false);
+  const setSpotId = useSpotStore((state) => state.setSpotId);
+
+  const spotId = useSpotStore((state) => state.spotId);
+
+  function toggleModal(index: number) {
+    setSpotId(index); // 배열의 인덱스를 저장
+    setModalState(true); // 모달 열기
+  }
 
   // 드로어 열기/닫기 및 마커 정보 설정
   const toggleDrawer = (
@@ -147,7 +159,7 @@ export default function MapPage() {
             query: { univ },
           }}
         >
-          <Chip text="스냅 전체보기" variant="primary" />
+          <Chip size="dynamic" text="스냅 전체보기" variant="primary" />
         </Link>
       </AbsContainer>
       <div
@@ -175,9 +187,26 @@ export default function MapPage() {
             },
           }}
         >
-          <DrawerContent toggleDrawer={() => toggleDrawer(false)} />
+          <DrawerContent
+            toggleModal={(imageId) => {
+              const index = photoSpotData.imageInfo.spotPostImageList.findIndex(
+                (item) => item.imageId === imageId,
+              );
+              toggleModal(index); // index를 전달
+            }}
+            toggleDrawer={() => toggleDrawer(false)}
+            // toggleModal={() => toggleModal()}
+          />
         </Drawer>
       </div>
+
+      {modalState && spotId !== null && (
+        <Modal
+          currIndex={spotId}
+          setModalState={setModalState}
+          photoSpot={photoSpotData}
+        />
+      )}
     </Container>
   );
 }

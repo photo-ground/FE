@@ -1,10 +1,11 @@
+import RightChevronIcon from '@/assets/RightChevronIcon';
 import Text from '@/components/atoms/Text';
 import styled from 'styled-components';
 
 const UserInfoWrapper = styled.div`
-  padding: 1.5rem;
-  // background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  padding: 1.25rem;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray[700]};
+  color: ${({ theme }) => theme.colors.white};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,29 +14,15 @@ const UserInfoWrapper = styled.div`
 const Greeting = styled.div`
   display: flex;
   flex-direction: column;
-
-  span {
-    font-size: 1.2rem;
-  }
-
-  strong {
-    font-size: 1.4rem;
-    font-weight: bold;
-  }
-`;
-
-const TitleContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 1.25rem;
-  margin-top: 0;
 `;
 
 const EditButton = styled.button`
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 1rem;
+  display: flex;
+  margin-top: auto;
+  color: ${({ theme }) => theme.colors.gray[200]};
+  font-size: ${({ theme }) => theme.typography.body2_rg};
   cursor: pointer;
 
   &:hover {
@@ -53,14 +40,12 @@ export default function UserInfo({
   return (
     <UserInfoWrapper>
       <Greeting>
-        <TitleContainer>
-          <Text variant="title1_sb">
-            <p>{userName}님,</p>
-            <p>좋은 하루예요!</p>
-          </Text>
-        </TitleContainer>
+        <Text variant="title1_rg">{userName}님,</Text>
+        <Text variant="title1_rg">좋은 하루예요!</Text>
       </Greeting>
-      <EditButton onClick={onEdit}>내 정보 수정 ›</EditButton>
+      <EditButton onClick={onEdit}>
+        내 정보 수정 <RightChevronIcon size="20px" color="#8C8C8C" />
+      </EditButton>
     </UserInfoWrapper>
   );
 }
