@@ -15,6 +15,7 @@ import photoSpotData from '../_data/photoSpotData';
 // import { photoSpotData } from '../_data/photoSpotData';
 import { DrawerProps } from '../types';
 import { TextContainer } from '../style';
+import useSpotStore from '../_store';
 
 const CardContainer = styled.div`
   display: grid;
@@ -65,9 +66,19 @@ export default function DrawerContent({
   toggleDrawer,
   toggleModal,
 }: DrawerProps) {
+  // const spotId = useSpotStore((state) => state.spotId);
+  const setSpotId = useSpotStore((state) => state.setSpotId);
+  const clearSpotId = useSpotStore((state) => state.clearSpotId);
+
   const handleDrawerClose = () => {
     toggleDrawer(false);
+    clearSpotId();
   };
+  function handleCardModal(spotId: number) {
+    setSpotId(spotId);
+    toggleModal(spotId);
+    console.log(`handleDrawerContent${spotId}`);
+  }
 
   return (
     <Box
@@ -101,7 +112,7 @@ export default function DrawerContent({
             key={spot.postId}
             size="small"
             src={spot.imageUrl}
-            onClick={() => toggleModal(spot.postId)}
+            onClick={() => handleCardModal(spot.postId)}
           />
         ))}
       </CardContainer>

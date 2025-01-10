@@ -9,6 +9,7 @@ export interface DrawerProps {
   // src: string;
   toggleDrawer: (isOpen: boolean) => void; // 매개변수를 받도록 타입 변경
   toggleModal: (postId: number) => void;
+  // setSpotId: (postId: number) => void;
 }
 
 export interface spotPostImageProps {

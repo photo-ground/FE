@@ -7,6 +7,7 @@ import { IconButton } from '@mui/material';
 import CloseIcon from '@/assets/CloseIcon';
 import Slider from './Slider';
 import { photoSpotProps } from '../types';
+import useSpotStore from '../_store';
 
 const ModalContainer = styled.div`
   position: absolute;
@@ -52,34 +53,28 @@ export default function Modal({
   photoSpot,
   setModalState,
 }: ModalProps) {
-  const { imageInfo } = photoSpot;
+  // const spotId = useSpotStore((state) => state.spotId);
+  // const setSpotId = useSpotStore((state) => state.setSpotId);
+  // const clearSpotId = useSpotStore((state) => state.clearSpotId);
 
-  if (!imageInfo.spotPostImageList.length) {
-    return <div>No data found for this spot.</div>;
-  }
+  // const { imageInfo } = photoSpot;
+  const clearSpotId = useSpotStore((state) => state.clearSpotId);
 
+  const handleModalClose = () => {
+    setModalState(false);
+    clearSpotId();
+  };
   return (
     <>
       <Overlay onClick={() => window.history.back()} />
       <ModalContainer>
         <CloseHeader>
-          <IconButton onClick={() => setModalState(false)}>
+          <IconButton onClick={() => handleModalClose()}>
             <CloseIcon />
           </IconButton>
         </CloseHeader>
         <ContentWrapper>
-          <Slider
-            photoSpot={{
-              spotId: photoSpot.spotId,
-              spotName: photoSpot.spotName,
-              content: photoSpot.content,
-              imageInfo: {
-                spotPostImageList: imageInfo.spotPostImageList,
-                hasNext: imageInfo.hasNext,
-              },
-            }}
-            currIndex={currIndex} // currIndex가 있을 때 전달
-          />
+          <Slider photoSpot={photoSpot} currIndex={currIndex} />
         </ContentWrapper>
       </ModalContainer>
     </>

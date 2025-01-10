@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { IconButton } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { photoSpotProps, spotPostImageProps } from '../types';
+import { photoSpotProps } from '../types';
 
 const SliderContainer = styled.div`
   position: relative;
@@ -89,35 +89,34 @@ const RightButton = styled(NavigationButton)`
   top: 190px;
 `;
 
-// TODO : 여기에서 만약 hasnext가 true라면 다음 정보를 요청한다.(?)
-export default function Slider({
-  photoSpot,
-  currIndex,
-}: {
-  photoSpot: photoSpotProps; // photoSpotProps를 props로 받음
-  currIndex: number; // 별도의 number 타입
-}) {
-  const { spotId, spotName, content, imageInfo } = photoSpot;
-  const slideElement: spotPostImageProps[] = imageInfo.spotPostImageList;
+interface SliderProps {
+  photoSpot: photoSpotProps;
+  currIndex: number;
+}
 
+// TODO : 여기에서 만약 hasnext가 true라면 다음 정보를 요청한다.(?)
+export default function Slider({ photoSpot, currIndex }: SliderProps) {
+  const { spotPostImageList, hasNext } = photoSpot.imageInfo;
   // 만약 currIndex가 0이면 더이상 감소할 수 없다.
   // 만약 currIndex가 length라면 hasNext를 확인한다.
   const [currentSlide, setCurrentSlide] = useState(currIndex);
 
+  // const slideElement: spotPostImageProps[] = imageInfo.spotPostImageList;
+
+  // const [currentSlide, setCurrentSlide] = useState(currIndex);
+
   const handleNext = () => {
-    if (currentSlide < slideElement.length - 1) {
-      // 현재 슬라이드가 마지막이 아니면 이동
-      setCurrentSlide((prev) => prev + 1);
-    } else if (imageInfo.hasNext) {
-      // TODO: hasNext가 true일 경우, 추가 데이터를 로드하는 로직 추가
-      console.log('Load more slides...');
+    if (currentSlide < spotPostImageList.length - 1) {
+      setCurrentSlide(currentSlide + 1);
+    } else if (hasNext) {
+      // API 호출
+      console.log('Fetching more data...');
     }
   };
 
   const handlePrev = () => {
     if (currentSlide > 0) {
-      // 현재 슬라이드가 첫 번째가 아니면 이동
-      setCurrentSlide((prev) => prev - 1);
+      setCurrentSlide(currentSlide - 1);
     }
   };
 
@@ -128,21 +127,19 @@ export default function Slider({
       </LeftButton>
       <RightButton
         onClick={handleNext}
-        disabled={
-          currentSlide === slideElement.length - 1 && !imageInfo.hasNext
-        }
+        disabled={!hasNext && currentSlide === spotPostImageList.length - 1}
       >
         <ArrowForwardIosIcon />
       </RightButton>
       <ImageContainer>
         <Image
-          src={slideElement[currentSlide].imageUrl}
+          src={spotPostImageList[currentSlide].imageUrl}
           alt={`Slide ${currentSlide}`}
         />
       </ImageContainer>
       <Info>
-        <Title>{slideElement[currentSlide].photographerName}</Title>
-        <Description>{content}</Description>
+        <Title>{spotPostImageList[currentSlide].photographerName}</Title>
+        <Description>{photoSpot.content}</Description>
         <Button>게시물 보기</Button>
       </Info>
     </SliderContainer>

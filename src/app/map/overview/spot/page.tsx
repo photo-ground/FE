@@ -11,19 +11,26 @@ import { Container, CardContainerY, TextContainer } from '../../style';
 
 import photoSpotData from '../../_data/photoSpotData';
 import Modal from '../../_components/Modal';
+import useSpotStore from '../../_store';
 // school을 URL 매개변수로 전달
 export default function Overview() {
   // const searchParams = useSearchParams();
   const { univ } = useSchoolStore();
   const [modalState, setModalState] = useState<boolean>(false);
-  const [spotId, setSpotId] = useState<number>(0);
+  const spotId = useSpotStore((state) => state.spotId);
+  const setSpotId = useSpotStore((state) => state.setSpotId);
+  // const clearSpotId = useSpotStore((state) => state.clearSpotId);
 
-  function toggleModal(id: number) {
-    console.log(id);
-    setSpotId(id);
-    // redirect(`spot/@modal?spotId=${currSpot}`);
-    setModalState(!modalState);
+  function handleCardModal(postId: number) {
+    console.log(postId);
+    const index = photoSpotData.imageInfo.spotPostImageList.findIndex(
+      (item) => item.postId === postId,
+    );
+    console.log(index);
+    setSpotId(index); // index를 저장
+    setModalState(true); // 모달 열기
   }
+
   const spotTitle = photoSpotData.spotName;
   const spotDetail = photoSpotData.content;
 
@@ -43,12 +50,12 @@ export default function Overview() {
             key={spot.postId}
             size="small"
             src={spot.imageUrl}
-            onClick={() => toggleModal(spotId)}
+            onClick={() => handleCardModal(spot.postId)}
           />
         ))}
       </CardContainerY>
 
-      {modalState && (
+      {modalState && spotId !== null && (
         <Modal
           currIndex={spotId}
           setModalState={setModalState}

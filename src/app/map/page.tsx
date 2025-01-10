@@ -23,6 +23,7 @@ import { School } from './types';
 import schoolList from './_data/schoolList'; // 더미 데이터
 import Modal from './_components/Modal';
 import photoSpotData from './_data/photoSpotData';
+import useSpotStore from './_store';
 
 const MapContainer = styled.div`
   width: 100%;
@@ -78,13 +79,13 @@ export default function MapPage() {
 
   const [open, setOpen] = useState(false);
   const [modalState, setModalState] = useState<boolean>(false);
-  const [spotId, setSpotId] = useState<number>(0);
+  const setSpotId = useSpotStore((state) => state.setSpotId);
 
-  function toggleModal(id: number) {
-    console.log(id);
-    setSpotId(id);
-    // redirect(`spot/@modal?spotId=${currSpot}`);
-    setModalState(!modalState);
+  const spotId = useSpotStore((state) => state.spotId);
+
+  function toggleModal(index: number) {
+    setSpotId(index); // 배열의 인덱스를 저장
+    setModalState(true); // 모달 열기
   }
 
   // 드로어 열기/닫기 및 마커 정보 설정
@@ -187,12 +188,19 @@ export default function MapPage() {
           }}
         >
           <DrawerContent
+            toggleModal={(imageId) => {
+              const index = photoSpotData.imageInfo.spotPostImageList.findIndex(
+                (item) => item.imageId === imageId,
+              );
+              toggleModal(index); // index를 전달
+            }}
             toggleDrawer={() => toggleDrawer(false)}
-            toggleModal={toggleModal}
+            // toggleModal={() => toggleModal()}
           />
         </Drawer>
       </div>
-      {modalState && (
+
+      {modalState && spotId !== null && (
         <Modal
           currIndex={spotId}
           setModalState={setModalState}
