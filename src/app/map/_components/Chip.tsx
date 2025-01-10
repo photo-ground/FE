@@ -2,6 +2,7 @@ import styled, { DefaultTheme } from 'styled-components';
 import Text from '@/components/atoms/Text';
 
 type Variant = 'primary' | 'secondary';
+type Size = 'fit-content' | 'dynamic';
 
 const getBackgroundColor = ({
   theme,
@@ -22,11 +23,13 @@ const getBackgroundColor = ({
 };
 
 // non-boolean문제 때문에 props늘려씀
-const Button = styled.button<{ variant: Variant; $active: boolean }>`
-  width: 100%;
-  min-width: 70px;
-  max-width: 12rem;
-  padding: 0.75rem 1.25rem;
+const Button = styled.button<{
+  variant: Variant;
+  $active: boolean;
+  size: Size;
+}>`
+  width: ${(props) => (props.size === 'fit-content' ? 'fit-content' : '100%')};
+  padding: 10px 1.25rem;
   background: ${(props) =>
     getBackgroundColor({
       theme: props.theme,
@@ -48,15 +51,17 @@ export default function Chip({
   text,
   variant = 'primary',
   active = false,
+  size = 'fit-content', // 기본 크기: 글자에 맞춤
   onClick = () => {},
 }: {
   text: string;
   variant?: Variant;
   active?: boolean;
+  size?: Size; // 크기 옵션 추가
   onClick?: () => void;
 }) {
   return (
-    <Button $active={active} variant={variant} onClick={onClick}>
+    <Button $active={active} variant={variant} size={size} onClick={onClick}>
       {active ? (
         <ButtonText variant="body1_md">{text}</ButtonText>
       ) : (

@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { useState } from 'react';
+// import { useState } from 'react';
 // import { redirect } from 'next/navigation';
 import { Box, Divider, IconButton } from '@mui/material';
 import styled from 'styled-components';
@@ -8,7 +8,7 @@ import CloseIcon from '@/assets/CloseIcon';
 import Text from '@/components/atoms/Text';
 import Link from 'next/link';
 import Chip from './Chip';
-import Modal from './Modal';
+// import Modal from './Modal';
 
 import photoSpotData from '../_data/photoSpotData';
 
@@ -18,20 +18,29 @@ import { TextContainer } from '../style';
 
 const CardContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 0 auto;
-  justify-content: center;
+  grid-template-columns: repeat(3, 1fr); /* 3열 */
+  gap: 1rem; /* 각 이미지 간격 */
 `;
+
+const CardWrapper = styled(Card)`
+  position: relative;
+  width: 100%; /* 부모 그리드 셀의 너비 */
+  aspect-ratio: 1/1; /* 정방형 비율 */
+  overflow: hidden; /* 이미지가 넘칠 경우 숨김 */
+
+  img {
+    width: 100%;
+    min-height: 100%;
+    object-fit: cover; /* 이미지를 정방형 안에 꽉 채움 */
+  }
+`;
+
 const StickyHeader = styled.div`
   position: sticky;
   top: 0;
   z-index: 10;
   display: flex;
   justify-content: space-between; /* 양쪽 정렬 */
-  background-color: ${({ theme }) => theme.colors.black};
 `;
 
 const DrawerHandle = styled.div`
@@ -40,6 +49,7 @@ const DrawerHandle = styled.div`
   transform: translateX(-50%); /* 중앙 정렬 */
   width: 134px;
   height: 5px;
+  margin-top: 1rem;
   border-radius: 100px;
   background: ${({ theme }) => theme.colors.white};
 `;
@@ -51,25 +61,20 @@ const ChipContainer = styled.div`
   text-align: center;
 `;
 
-export default function DrawerContent({ toggleDrawer }: DrawerProps) {
-  const [modalState, setModalState] = useState<boolean>(false);
-
-  // const currSpot = photoSpotData.spotId;
+export default function DrawerContent({
+  toggleDrawer,
+  toggleModal,
+}: DrawerProps) {
   const handleDrawerClose = () => {
     toggleDrawer(false);
   };
 
-  function onClick() {
-    // redirect(`spot/@modal?spotId=${currSpot}`);
-    setModalState(!modalState);
-  }
-
   return (
     <Box
       sx={{
-        width: '100%',
-        maxWidth: '100%',
+        width: 'inherit',
         padding: '1rem',
+        paddingTop: '0',
         boxSizing: 'border-box',
       }}
       role="presentation"
@@ -92,11 +97,11 @@ export default function DrawerContent({ toggleDrawer }: DrawerProps) {
       </TextContainer>
       <CardContainer>
         {photoSpotData.imageInfo.spotPostImageList.slice(0, 6).map((spot) => (
-          <Card
+          <CardWrapper
             key={spot.postId}
             size="small"
             src={spot.imageUrl}
-            onClick={() => onClick()}
+            onClick={() => toggleModal(spot.postId)}
           />
         ))}
       </CardContainer>
@@ -106,12 +111,6 @@ export default function DrawerContent({ toggleDrawer }: DrawerProps) {
           query: { spotId: photoSpotData.spotId },
         }}
       >
-        {modalState && (
-          <Modal
-            setModalState={setModalState}
-            photoSpot={photoSpotData.imageInfo}
-          />
-        )}
         <ChipContainer>
           <Chip text="더보기" variant="secondary" />
         </ChipContainer>

@@ -6,7 +6,6 @@ import useSchoolStore from '@/store';
 import Card from '@/components/Card';
 import Back from '@/components/TNB/Back';
 import Text from '@/components/atoms/Text';
-// import { photoSpotProps, spotPostImageProps } from '../../types';
 // import { useSearchParams } from 'next/navigation';
 import { Container, CardContainerY, TextContainer } from '../../style';
 
@@ -17,16 +16,17 @@ export default function Overview() {
   // const searchParams = useSearchParams();
   const { univ } = useSchoolStore();
   const [modalState, setModalState] = useState<boolean>(false);
-  // const currSpot = photoSpotData.spotId;
+  const [spotId, setSpotId] = useState<number>(0);
 
+  function toggleModal(id: number) {
+    console.log(id);
+    setSpotId(id);
+    // redirect(`spot/@modal?spotId=${currSpot}`);
+    setModalState(!modalState);
+  }
   const spotTitle = photoSpotData.spotName;
   const spotDetail = photoSpotData.content;
 
-  // const router = useRouter();
-
-  function onClick() {
-    setModalState(!modalState);
-  }
   return (
     <Container>
       <Back text={`${univ}`} />
@@ -43,15 +43,16 @@ export default function Overview() {
             key={spot.postId}
             size="small"
             src={spot.imageUrl}
-            onClick={() => onClick()}
+            onClick={() => toggleModal(spotId)}
           />
         ))}
       </CardContainerY>
 
       {modalState && (
         <Modal
+          currIndex={spotId}
           setModalState={setModalState}
-          photoSpot={photoSpotData.imageInfo}
+          photoSpot={photoSpotData}
         />
       )}
     </Container>

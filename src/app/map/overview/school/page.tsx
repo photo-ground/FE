@@ -19,13 +19,14 @@ function SearchParamsHandler() {
 
 export default function Overview() {
   const [modalState, setModalState] = useState<boolean>(false);
-  // const router = useRouter();
+  const [spotId, setSpotId] = useState<number>(0);
 
-  function onClick() {
-    console.log('눌럿어');
+  function toggleModal(id: number) {
+    console.log(id);
+    setSpotId(id);
+    // redirect(`spot/@modal?spotId=${currSpot}`);
     setModalState(!modalState);
   }
-
   return (
     <Container>
       <Suspense fallback={<div>Loading...</div>}>
@@ -39,15 +40,16 @@ export default function Overview() {
             key={spot.postId}
             size="small"
             src={spot.imageUrl}
-            onClick={() => onClick()}
+            onClick={() => toggleModal(spot.postId)}
           />
           // </Link>
         ))}
       </CardContainerY>
       {modalState && (
         <Modal
+          currIndex={spotId}
           setModalState={setModalState}
-          photoSpot={photoSpotData.imageInfo}
+          photoSpot={photoSpotData}
         />
       )}
     </Container>

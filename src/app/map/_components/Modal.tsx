@@ -2,13 +2,9 @@
 
 import React from 'react';
 import styled from 'styled-components';
-// import { redirect } from 'next/navigation';
 
-import Text from '@/components/atoms/Text';
-// import Card from '@/components/Card';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@/assets/CloseIcon';
-import photoSpotData from '../_data/photoSpotData';
 import Slider from './Slider';
 import { photoSpotProps } from '../types';
 
@@ -18,15 +14,12 @@ const ModalContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.9); /* 모달 배경 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: ${({ theme }) => theme.colors.black};
   z-index: 1000;
   padding: 1rem;
-  overflow: auto; /* 콘텐츠가 넘칠 경우 스크롤 */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  // justify-content: center;
-  align-items: center;
 `;
 
 const Overlay = styled.div`
@@ -35,24 +28,33 @@ const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(17, 17, 225, 0.5); /* 투명도 있는 배경 */
   z-index: 999;
 `;
 
 const CloseHeader = styled.div`
   margin-right: auto;
 `;
-
+const ContentWrapper = styled.div`
+  flex: 1; /* 남은 공간을 채움 */
+  display: flex;
+  align-items: center; /* 세로 기준으로 가운데 정렬 */
+  justify-content: center; /* 가로 기준으로 가운데 정렬 */
+`;
 interface ModalProps {
+  currIndex: number;
   photoSpot: photoSpotProps;
   setModalState: React.Dispatch<React.SetStateAction<boolean>>;
 }
-export default function Modal({ photoSpot, setModalState }: ModalProps) {
-  const spotArr = photoSpot.spotPostImageList;
-  const spotTitle = photoSpotData.spotName;
-  // const spotContent = photoSpotData.content;
 
-  if (!spotArr.length) {
+// TODO : photoSpot배열에서 currIndex를 먼저 찾아 보여주고 그 기준으로 좌우왔다갔다
+export default function Modal({
+  currIndex,
+  photoSpot,
+  setModalState,
+}: ModalProps) {
+  const { imageInfo } = photoSpot;
+
+  if (!imageInfo.spotPostImageList.length) {
     return <div>No data found for this spot.</div>;
   }
 
@@ -65,8 +67,20 @@ export default function Modal({ photoSpot, setModalState }: ModalProps) {
             <CloseIcon />
           </IconButton>
         </CloseHeader>
-        <Text variant="title2_sb">{spotTitle}</Text>
-        <Slider spotPostImageList={spotArr} hasNext={false} />
+        <ContentWrapper>
+          <Slider
+            photoSpot={{
+              spotId: photoSpot.spotId,
+              spotName: photoSpot.spotName,
+              content: photoSpot.content,
+              imageInfo: {
+                spotPostImageList: imageInfo.spotPostImageList,
+                hasNext: imageInfo.hasNext,
+              },
+            }}
+            currIndex={currIndex} // currIndex가 있을 때 전달
+          />
+        </ContentWrapper>
       </ModalContainer>
     </>
   );
