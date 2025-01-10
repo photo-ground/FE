@@ -37,7 +37,7 @@ const SignUpText = styled(Text)`
 
 export default function SignInForm() {
   return (
-    <Form action={signin} method="POST">
+    <Form action={signin}>
       <Wrapper>
         <InputList />
 
