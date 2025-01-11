@@ -6,7 +6,7 @@ import './card.css';
 
 export interface CardProps {
   /** How large should the card be? */
-  size?: 'small' | 'medium' | 'large' | 'dynamic';
+  size?: 'round' | 'small' | 'medium' | 'large' | 'dynamic';
   /** What card image to use */
   src: string;
   /** Card Title */
@@ -15,6 +15,7 @@ export interface CardProps {
   content?: string;
   /** Optional click handler */
   onClick?: () => void;
+  etc?: React.ReactNode;
 }
 
 const CardWrapper = styled.div`
@@ -23,9 +24,12 @@ const CardWrapper = styled.div`
   cursor: pointer;
 `;
 
+const CardTitle = styled(Text)`
+  margin-top: 0.75rem;
+`;
+
 const CardImage = styled.img`
   object-fit: cover;
-  margin-bottom: 0.5rem;
   border-radius: 0.125rem;
 `;
 
@@ -38,13 +42,15 @@ export default function Card({
   src,
   title,
   content,
+  etc, // 제 3의 디자인..이 나오는 경우 활용
   onClick,
 }: CardProps) {
   return (
     <CardWrapper onClick={onClick} className={`card ${size}`}>
       <CardImage src={src} alt={title} />
-      <Text variant="body1_md">{title}</Text>
-      <CardContent variant="body3">{content}</CardContent>
+      {title && <CardTitle variant="body1_md">{title}</CardTitle>}
+      {content && <CardContent variant="body3">{content}</CardContent>}
+      {etc}
     </CardWrapper>
   );
 }

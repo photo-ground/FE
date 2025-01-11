@@ -17,7 +17,6 @@ const TabHeaderWrapper = styled.div`
   display: flex;
   width: 100%;
   padding: 0 1.25rem;
-  border: 1px solid black;
 `;
 const TabHeader = styled.button`
   flex: 1;

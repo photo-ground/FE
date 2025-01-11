@@ -1,6 +1,7 @@
-import Card from '@/components/Card';
 import { useEffect } from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
+import Card from '@/components/Card';
 
 const Container = styled.div`
   display: grid;
@@ -10,6 +11,10 @@ const Container = styled.div`
 
   padding: 1.25rem;
   padding-bottom: calc(3rem + 4.875rem);
+`;
+
+const CardWrapper = styled(Link)`
+  text-decoration: none;
 `;
 
 export default function PhotographerList() {
@@ -47,12 +52,14 @@ export default function PhotographerList() {
     <Container className="masonry-container">
       {data.map((datum) => (
         <div id="masonry-card" key={datum.id}>
-          <Card
-            size="dynamic"
-            src={datum.src}
-            title={datum.title}
-            content="24세, 여성"
-          />
+          <CardWrapper href="/photographer/1">
+            <Card
+              size="dynamic"
+              src={datum.src}
+              title={datum.title}
+              content="24세, 여성"
+            />
+          </CardWrapper>
         </div>
       ))}
     </Container>

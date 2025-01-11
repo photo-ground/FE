@@ -20,14 +20,14 @@ const SloganArea = styled.header`
 export default function OnboardingPage() {
   const schoolList: SchoolButtonProps[] = [
     {
-      title: '연세대학교',
-      src: '/images/yonsei.jpg',
-      link: '/home?school=yonsei',
-    },
-    {
       title: '서강대학교',
       src: '/images/sogang.jpg',
       link: '/home?school=sogang',
+    },
+    {
+      title: '연세대학교',
+      src: '/images/yonsei.jpg',
+      link: '/home?school=yonsei',
     },
     {
       title: '이화여자대학교',
@@ -45,13 +45,14 @@ export default function OnboardingPage() {
       <TNB.Main />
       <Container>
         <SloganArea>
-          {/* [todo] : 현재 사용자 이름으로 업데이트  */}
+          {/* TODO : 현재 사용자 이름으로 업데이트  */}
           <Text variant="title1_rg">김사진님,</Text>
           <Text variant="title1_rg">어떤 장소를 기록할까요?</Text>
         </SloganArea>
         <div>
           {schoolList.map((item) => (
             <SchoolButtonItem
+              key={item.title}
               title={item.title}
               src={item.src}
               link={item.link}

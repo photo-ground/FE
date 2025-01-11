@@ -30,16 +30,14 @@ const Background = styled.img`
 `;
 
 const CardContainerX = styled.div`
-  // position: relative; /* z-index 적용 가능하게 설정 */
   display: flex;
   overflow-x: scroll;
-  gap: 10px;
+  gap: 1rem;
   margin: 0 auto 0 20px;
   height: 114px;
 `;
 const CardTitle = styled.div`
   margin-top: 0.75rem;
-
   color: ${({ theme }) => theme.colors.gray[200]};
   text-align: center;
   text: ${({ theme }) => theme.typography.body3};
@@ -78,13 +76,13 @@ const BannerContent = styled.div`
 export default function HomePage() {
   const [univ, setUniv] = useState<UnivValue | null>('yonsei');
   const [univTitle, setUnivTitle] = useState<UnivLabel | null>('연세대학교');
-  // 10개의 카드 데이터를 생성
+  // TODO : 10개의 카드 데이터를 생성 (임시데이터) -> api 명세서보고 수정
   const cards = Array.from({ length: 10 }, (_, index) => ({
     id: index,
     content: 'This is a card.',
     size: 'small',
     src: 'https://via.placeholder.com/150',
-    title: `Small Card ${index + 1}`,
+    title: `Card ${index + 1}`,
   }));
   const onChangeUniv = (prop: Option) => {
     setUniv(prop.value);
@@ -95,33 +93,32 @@ export default function HomePage() {
       <Background src="/images/background1.webp" alt="background" />
       <TNB.Main />
       <SearchEngine />
-      <Spacer size="1.5rem" />
       <TitleContainer>
         <Text variant="title1_sb">이 달의 작가</Text>
         <IconTextLink href="/photographer">
           <Text variant="caption1_rg" color="#8C8C8C">
             더보기
           </Text>
-
           <RightChevronIcon size="20px" color="#8C8C8C" />
         </IconTextLink>
-        {/* </Link> */}
       </TitleContainer>
       <CardContainerX>
         {cards.map((card) => (
           <Card
             key={card.id}
-            content={card.content}
-            size="small"
+            size="round"
             src={card.src}
-            title={card.title}
+            etc={<CardTitle>{card.title}</CardTitle>}
           />
         ))}
       </CardContainerX>
+
+      <Spacer size="3rem" />
+      <Banner>
+        <BannerContent>졸업 파격 할인</BannerContent>
+      </Banner>
       <Spacer size="3rem" />
 
-      <Banner src="https://via.placeholder.com/150" />
-      <Spacer size="3rem" />
       <TitleContainer>
         <Text variant="title1_sb">{univTitle} 스냅 사진</Text>
         <Filter
