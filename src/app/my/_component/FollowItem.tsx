@@ -1,4 +1,3 @@
-import Chip from '@/components/atoms/Chip';
 import SmallButton from '@/components/atoms/SmallButton';
 import styled from 'styled-components';
 
@@ -48,7 +47,10 @@ export default function FollowItem({
       <UserInfo>
         <span>{photographerName}</span>
       </UserInfo>
-      <SmallButton.Tertiary text="팔로우" onClick={handleFollowButton} />
+      <SmallButton.Tertiary
+        text="팔로우"
+        onClick={() => handleFollowButton()}
+      />
     </UserCardWrapper>
   );
 }

@@ -1,40 +1,29 @@
 'use client';
 
 import styled from 'styled-components';
+import TNB from '@/components/TNB';
+import Text from '@/components/atoms/Text';
 import ReviewItem from '../_component/ReviewItem';
 
-const ReviewPageWrapper = styled.div`
-  background-color: #121212;
-  min-height: 100vh;
-  color: white;
-  padding: 1rem;
-`;
-
-const Header = styled.div`
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
+const Container = styled.div`
+  position: relative;
+  height: 100dvh;
 `;
 
 const StatsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1rem;
-  margin-bottom: 1rem;
+  margin: 1.5rem 1.25rem;
+  margin-bottom: 0;
+`;
 
-  .count {
-    font-size: 1rem;
-    font-weight: bold;
-    color: rgba(255, 255, 255, 0.8);
-  }
+const ReviewItemContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+    margin 12px 20px;
 
-  .averageScore {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: orange;
-  }
 `;
 
 export default function Reviews() {
@@ -46,6 +35,7 @@ export default function Reviews() {
         reviewId: 4,
         reservationId: 9,
         photographerName: '뚱이',
+        photographerProfileUrl: '/images/ewha.jpg',
         content:
           '작가님 보정 너무 마음에 들었습니다. 좋은 추억 만들어주셔서 감사합니다',
         score: 5,
@@ -55,6 +45,8 @@ export default function Reviews() {
         reviewId: 1,
         reservationId: 6,
         photographerName: '뚱이',
+        photographerProfileUrl: '/images/ewha.jpg',
+
         content:
           '작가님 보정 너무 마음에 들었습니다. 좋은 추억 만들어주셔서 감사합니다',
         score: 4,
@@ -64,26 +56,33 @@ export default function Reviews() {
   };
 
   return (
-    <ReviewPageWrapper>
+    <Container>
       {/* 상단 헤더 */}
-      <Header>내가 쓴 리뷰</Header>
+      <TNB.Back text="내가 쓴 리뷰" />
 
       {/* 리뷰 통계 */}
       <StatsWrapper>
-        <span className="count">리뷰 {data.count}개</span>
-        <span className="averageScore">평균 ★ {data.averageScore}</span>
+        <Text variant="caption1_md" color="#a6a6a6">
+          리뷰 {data.count}개
+        </Text>
+        <Text variant="caption1_md" color="#a6a6a6">
+          최신순
+        </Text>
       </StatsWrapper>
 
-      {/* 리뷰 목록 */}
-      {data.reviews.map((review) => (
-        <ReviewItem
-          key={review.reviewId}
-          photographerName={review.photographerName}
-          createdAt={new Date(review.createdAt).toLocaleDateString('ko-KR')}
-          score={review.score}
-          content={review.content}
-        />
-      ))}
-    </ReviewPageWrapper>
+      <ReviewItemContainer>
+        {/* 리뷰 목록 */}
+        {data.reviews.map((review) => (
+          <ReviewItem
+            key={review.reviewId}
+            photographerName={review.photographerName}
+            photographerProfileUrl={review.photographerProfileUrl}
+            createdAt={new Date(review.createdAt).toLocaleDateString('ko-KR')}
+            score={review.score}
+            content={review.content}
+          />
+        ))}
+      </ReviewItemContainer>
+    </Container>
   );
 }
