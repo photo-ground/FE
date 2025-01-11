@@ -1,6 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-// import { useState } from 'react';
-// import { redirect } from 'next/navigation';
 import { Box, Divider, IconButton } from '@mui/material';
 import styled from 'styled-components';
 import Card from '@/components/Card';
@@ -8,15 +6,12 @@ import CloseIcon from '@/assets/CloseIcon';
 import Text from '@/components/atoms/Text';
 import Link from 'next/link';
 import Chip from './Chip';
-// import Modal from './Modal';
 
 import photoSpotData from '../_data/photoSpotData';
 
-// import { photoSpotData } from '../_data/photoSpotData';
 import { DrawerProps } from '../types';
 import { TextContainer } from '../style';
 import useSpotStore from '../_store';
-import { useEffect } from 'react';
 
 const CardContainer = styled.div`
   display: grid;
@@ -68,8 +63,6 @@ export default function DrawerContent({
   toggleDrawer,
   toggleModal,
 }: DrawerProps) {
-  const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
-  // const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
   const clearCurrPostIdIndex = useSpotStore(
     (state) => state.clearCurrPostIdIndex,
   );
@@ -87,9 +80,6 @@ export default function DrawerContent({
     toggleModal(index); // index를 직접 전달
   }
 
-  useEffect(() => {
-    console.log(`Updated currPostIdIndex: ${currPostIdIndex}`);
-  }, [currPostIdIndex]);
   return (
     <Box
       sx={{
