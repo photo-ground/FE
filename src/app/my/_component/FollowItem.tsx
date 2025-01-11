@@ -1,4 +1,4 @@
-import Chip from '@/app/map/_components/Chip';
+import SmallButton from '@/components/atoms/SmallButton';
 import styled from 'styled-components';
 
 const UserCardWrapper = styled.div`
@@ -27,32 +27,30 @@ const UserInfo = styled.div`
 `;
 
 export default function FollowItem({
-  avatar,
-  name,
-  buttonText,
+  photographerId,
+  profileUrl,
+  photographerName,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onButtonClick,
 }: {
-  avatar: string;
-  name: string;
-  buttonText?: string;
+  photographerId: number;
+  profileUrl: string;
+  photographerName: string;
   onButtonClick?: () => void;
 }) {
+  function handleFollowButton() {
+    console.log(photographerId);
+  }
   return (
     <UserCardWrapper>
-      <Avatar src={avatar} alt={name} />
+      <Avatar src={profileUrl} alt={photographerName} />
       <UserInfo>
-        <span>{name}</span>
+        <span>{photographerName}</span>
       </UserInfo>
-      {buttonText && (
-        <Chip
-          active={false}
-          key="updateconformchip"
-          text="수정하기"
-          variant="secondary"
-          //   onClick={() => onButtonClick()}
-        />
-      )}
+      <SmallButton.Tertiary
+        text="팔로우"
+        onClick={() => handleFollowButton()}
+      />
     </UserCardWrapper>
   );
 }
