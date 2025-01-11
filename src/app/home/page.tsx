@@ -13,6 +13,7 @@ import RightChevronIcon from '@/assets/RightChevronIcon';
 import SearchEngine from './_components/SearchEngine';
 import Filter from './_components/Filter';
 import { Option, UNIV_LIST, UnivLabel, UnivValue } from './type/Option';
+import postByUnivData from './_data/postByUnivData';
 
 const Container = styled.div`
   position: relative;
@@ -45,10 +46,7 @@ const CardTitle = styled.div`
 
 const CardContainerY = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-
-  // justify-content: center;
-
+  grid: 1fr 1fr / auto-flow;
   flex-wrap: wrap;
   overflow-y: scroll;
   gap: 10px;
@@ -84,6 +82,9 @@ export default function HomePage() {
     src: 'https://via.placeholder.com/150',
     title: `Card ${index + 1}`,
   }));
+
+  // TODO : /api/posts?univ=yonsei&cursor={postId}
+  // (첫 조회인 경우 : /api/posts?univ=yonsei)
   const onChangeUniv = (prop: Option) => {
     setUniv(prop.value);
     setUnivTitle(prop.label);
@@ -130,17 +131,17 @@ export default function HomePage() {
       </TitleContainer>
 
       <CardContainerY>
-        {cards.map((card) => (
+        {postByUnivData.postList.map((card) => (
           <Card
             key={card.id}
-            content={card.content}
+            content={card.firstImageSpot}
             size="medium"
-            src={card.src}
-            title={card.title}
+            src={card.firstImageUrl}
+            title={card.photographerName}
           />
         ))}
       </CardContainerY>
-      <Spacer size="32px" />
+      <Spacer size="88px" />
     </Container>
   );
 }
