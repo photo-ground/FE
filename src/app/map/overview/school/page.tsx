@@ -6,7 +6,7 @@ import { Suspense, useState } from 'react';
 import Card from '@/components/Card';
 import Back from '@/components/TNB/Back';
 import { Container, CardContainerY } from '../../style';
-import photoSpotData from '../../_data/photoSpotData';
+import postData from '../../_data/postData';
 import Modal from '../../_components/Modal';
 import useSpotStore from '../../_store';
 
@@ -23,11 +23,19 @@ export default function Overview() {
   const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
   const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
 
+<<<<<<< Updated upstream
   function handleCardModal(postId: number) {
     const index = photoSpotData.imageInfo.spotPostImageList.findIndex(
       (item) => item.postId === postId,
     );
     setCurrPostIdIndex(index); // index를 저장
+=======
+  function handleCardModal(id: number) {
+    // console.log(id);
+    const index = postData.postList.findIndex((item) => item.id === id);
+    console.log(index);
+    setSpotId(index); // index를 저장
+>>>>>>> Stashed changes
     setModalState(true); // 모달 열기
   }
 
