@@ -20,16 +20,14 @@ function SearchParamsHandler() {
 
 export default function Overview() {
   const [modalState, setModalState] = useState<boolean>(false);
-  const spotId = useSpotStore((state) => state.spotId);
-  const setSpotId = useSpotStore((state) => state.setSpotId);
+  const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
+  const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
 
   function handleCardModal(postId: number) {
-    console.log(postId);
     const index = photoSpotData.imageInfo.spotPostImageList.findIndex(
       (item) => item.postId === postId,
     );
-    console.log(index);
-    setSpotId(index); // index를 저장
+    setCurrPostIdIndex(index); // index를 저장
     setModalState(true); // 모달 열기
   }
 
@@ -48,9 +46,9 @@ export default function Overview() {
           />
         ))}
       </CardContainerY>
-      {modalState && spotId !== null && (
+      {modalState && currPostIdIndex !== null && (
         <Modal
-          currIndex={spotId}
+          // currIndex={currPostIdIndex}
           setModalState={setModalState}
           photoSpot={photoSpotData}
         />

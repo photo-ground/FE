@@ -46,9 +46,6 @@ const CardTitle = styled.div`
 const CardContainerY = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-
-  // justify-content: center;
-
   flex-wrap: wrap;
   overflow-y: scroll;
   gap: 10px;

@@ -16,6 +16,7 @@ import photoSpotData from '../_data/photoSpotData';
 import { DrawerProps } from '../types';
 import { TextContainer } from '../style';
 import useSpotStore from '../_store';
+import { useEffect } from 'react';
 
 const CardContainer = styled.div`
   display: grid;
@@ -38,6 +39,7 @@ const CardWrapper = styled(Card)`
 
 const StickyHeader = styled.div`
   position: sticky;
+  background-color: ${({ theme }) => theme.colors.black};
   top: 0;
   z-index: 10;
   display: flex;
@@ -66,20 +68,28 @@ export default function DrawerContent({
   toggleDrawer,
   toggleModal,
 }: DrawerProps) {
-  // const spotId = useSpotStore((state) => state.spotId);
-  const setSpotId = useSpotStore((state) => state.setSpotId);
-  const clearSpotId = useSpotStore((state) => state.clearSpotId);
+  const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
+  // const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
+  const clearCurrPostIdIndex = useSpotStore(
+    (state) => state.clearCurrPostIdIndex,
+  );
 
   const handleDrawerClose = () => {
     toggleDrawer(false);
-    clearSpotId();
+    clearCurrPostIdIndex();
   };
-  function handleCardModal(spotId: number) {
-    setSpotId(spotId);
-    toggleModal(spotId);
-    console.log(`handleDrawerContent${spotId}`);
+  function handleCardModal(postId: number) {
+    console.log(postId);
+    const index = photoSpotData.imageInfo.spotPostImageList.findIndex(
+      (item) => item.postId === postId,
+    );
+    console.log(`Found index: ${index}`);
+    toggleModal(index); // index를 직접 전달
   }
 
+  useEffect(() => {
+    console.log(`Updated currPostIdIndex: ${currPostIdIndex}`);
+  }, [currPostIdIndex]);
   return (
     <Box
       sx={{
