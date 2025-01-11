@@ -22,8 +22,7 @@ const ReviewItemContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-    margin 12px 20px;
-
+  margin: 12px 20px;
 `;
 
 export default function Reviews() {
