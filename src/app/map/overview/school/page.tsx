@@ -6,7 +6,7 @@ import { Suspense, useState } from 'react';
 import Card from '@/components/Card';
 import Back from '@/components/TNB/Back';
 import { Container, CardContainerY } from '../../style';
-import postData from '../../_data/postData';
+import postByUnivData from '../../_data/postByUnivData';
 import Modal from '../../_components/Modal';
 import useSpotStore from '../../_store';
 
@@ -23,19 +23,9 @@ export default function Overview() {
   const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
   const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
 
-<<<<<<< Updated upstream
-  function handleCardModal(postId: number) {
-    const index = photoSpotData.imageInfo.spotPostImageList.findIndex(
-      (item) => item.postId === postId,
-    );
-    setCurrPostIdIndex(index); // index를 저장
-=======
   function handleCardModal(id: number) {
-    // console.log(id);
-    const index = postData.postList.findIndex((item) => item.id === id);
-    console.log(index);
-    setSpotId(index); // index를 저장
->>>>>>> Stashed changes
+    const index = postByUnivData.postList.findIndex((item) => item.id === id);
+    setCurrPostIdIndex(index); // index를 저장
     setModalState(true); // 모달 열기
   }
 
@@ -45,12 +35,12 @@ export default function Overview() {
         <SearchParamsHandler />
       </Suspense>
       <CardContainerY>
-        {photoSpotData.imageInfo.spotPostImageList.map((spot) => (
+        {postByUnivData.postList.map((spot) => (
           <Card
-            key={spot.postId}
+            key={spot.id}
             size="small"
-            src={spot.imageUrl}
-            onClick={() => handleCardModal(spot.postId)}
+            src={spot.firstImageUrl}
+            onClick={() => handleCardModal(spot.id)}
           />
         ))}
       </CardContainerY>
@@ -58,7 +48,7 @@ export default function Overview() {
         <Modal
           // currIndex={currPostIdIndex}
           setModalState={setModalState}
-          photoSpot={photoSpotData}
+          photoSpot={postByUnivData}
         />
       )}
     </Container>
