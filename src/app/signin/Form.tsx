@@ -1,4 +1,6 @@
+import { FormEvent } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
 import CTAButton from '@/components/atoms/CTAButton';
@@ -36,8 +38,22 @@ const SignUpText = styled(Text)`
 `;
 
 export default function SignInForm() {
+  const router = useRouter();
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    try {
+      await signin(formData);
+      router.push('/home');
+    } catch {
+      alert('로그인 정보를 다시 확인해주세요');
+    }
+  };
+
   return (
-    <Form action={signin}>
+    <Form onSubmit={handleSubmit}>
       <Wrapper>
         <InputList />
 

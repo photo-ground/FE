@@ -1,8 +1,3 @@
-'use server';
-
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
-
 export default async function signin(formData: FormData) {
   try {
     const rawResponse = await fetch(
@@ -14,22 +9,19 @@ export default async function signin(formData: FormData) {
           password: formData.get('password'),
         }),
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
       },
     );
+
+    const accessToken = rawResponse.headers.get('access')!;
+    localStorage.setItem('accessToken', accessToken);
 
     if (!rawResponse.ok) {
       const response = await rawResponse.json();
       throw new Error(response.message);
     }
-
-    const accessToken = rawResponse.headers.get('Authorization')!;
-    const cookieStore = await cookies();
-    cookieStore.set('accessToken', accessToken);
   } catch (error: unknown) {
     console.error(error);
     console.error((error as Error).message || '문제가 발생했습니다.');
-    return;
   }
-
-  redirect('/home');
 }
