@@ -17,6 +17,7 @@ export const InputContainer = styled.div<{ $isError?: boolean }>`
 
 export const Input = styled.input`
   flex: 1;
+  width: 0px;
 
   background: transparent;
   border: none;
