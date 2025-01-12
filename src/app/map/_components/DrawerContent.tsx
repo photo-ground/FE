@@ -1,6 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-// import { useState } from 'react';
-// import { redirect } from 'next/navigation';
 import { Box, Divider, IconButton } from '@mui/material';
 import styled from 'styled-components';
 import Card from '@/components/Card';
@@ -8,19 +6,28 @@ import CloseIcon from '@/assets/CloseIcon';
 import Text from '@/components/atoms/Text';
 import Link from 'next/link';
 import Chip from './Chip';
-// import Modal from './Modal';
 
 import photoSpotData from '../_data/photoSpotData';
 
-// import { photoSpotData } from '../_data/photoSpotData';
 import { DrawerProps } from '../types';
-import { TextContainer } from '../style';
 import useSpotStore from '../_store';
 
 const CardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3열 */
   gap: 1rem; /* 각 이미지 간격 */
+`;
+
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 10px;
+  margin-bottom: 3rem;
+  .text-pre {
+    white-space: pre-line;
+    color: ${({ theme }) => theme.colors.gray[200]};
+  }
 `;
 
 const CardWrapper = styled(Card)`
@@ -38,6 +45,7 @@ const CardWrapper = styled(Card)`
 
 const StickyHeader = styled.div`
   position: sticky;
+  background-color: ${({ theme }) => theme.colors.black};
   top: 0;
   z-index: 10;
   display: flex;
@@ -66,18 +74,21 @@ export default function DrawerContent({
   toggleDrawer,
   toggleModal,
 }: DrawerProps) {
-  // const spotId = useSpotStore((state) => state.spotId);
-  const setSpotId = useSpotStore((state) => state.setSpotId);
-  const clearSpotId = useSpotStore((state) => state.clearSpotId);
+  const clearCurrPostIdIndex = useSpotStore(
+    (state) => state.clearCurrPostIdIndex,
+  );
 
   const handleDrawerClose = () => {
     toggleDrawer(false);
-    clearSpotId();
+    clearCurrPostIdIndex();
   };
-  function handleCardModal(spotId: number) {
-    setSpotId(spotId);
-    toggleModal(spotId);
-    console.log(`handleDrawerContent${spotId}`);
+  function handleCardModal(postId: number) {
+    console.log(postId);
+    const index = photoSpotData.imageInfo.spotPostImageList.findIndex(
+      (item) => item.postId === postId,
+    );
+    console.log(`Found index: ${index}`);
+    toggleModal(index); // index를 직접 전달
   }
 
   return (

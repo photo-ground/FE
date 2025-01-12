@@ -22,15 +22,3 @@ export const CardContainerY = styled.div`
   gap: 10px;
   margin: 0 auto;
 `;
-
-export const TextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  gap: 10px;
-  margin-bottom: 3rem;
-  .text-pre {
-    white-space: pre-line;
-    color: ${({ theme }) => theme.colors.gray[200]};
-  }
-`;
