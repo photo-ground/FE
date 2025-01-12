@@ -10,13 +10,24 @@ import Chip from './Chip';
 import photoSpotData from '../_data/photoSpotData';
 
 import { DrawerProps } from '../types';
-import { TextContainer } from '../style';
 import useSpotStore from '../_store';
 
 const CardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3열 */
   gap: 1rem; /* 각 이미지 간격 */
+`;
+
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 10px;
+  margin-bottom: 3rem;
+  .text-pre {
+    white-space: pre-line;
+    color: ${({ theme }) => theme.colors.gray[200]};
+  }
 `;
 
 const CardWrapper = styled(Card)`

@@ -14,7 +14,7 @@ import photoSpotData from '../../_data/photoSpotData';
 import Modal from '../../_components/Modal';
 import useSpotStore from '../../_store';
 
-export const TextContainer = styled.div`
+const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -37,11 +37,9 @@ export default function Overview() {
   // const clearCurrPostIdIndex = useSpotStore((state) => state.clearCurrPostIdIndex);
 
   function handleCardModal(postId: number) {
-    console.log(postId);
     const index = photoSpotData.imageInfo.spotPostImageList.findIndex(
       (item) => item.postId === postId,
     );
-    console.log(index);
     setCurrPostIdIndex(index); // index를 저장
     setModalState(true); // 모달 열기
   }
@@ -52,12 +50,12 @@ export default function Overview() {
   return (
     <Container>
       <Back text={`${univ}`} />
-      <TextContainer>
+      <HeaderContainer>
         <Text variant="title2_sb">{spotTitle}</Text>
         <Text variant="body2_rg" className="text-pre">
           {spotDetail}
         </Text>
-      </TextContainer>
+      </HeaderContainer>
       {/* 칩 버튼 */}
       <CardContainerY>
         {photoSpotData.imageInfo.spotPostImageList.map((spot) => (
