@@ -8,7 +8,7 @@ export default async function fetchWithAuth(
   const accessToken = localStorage.getItem('accessToken');
 
   const defaultHeaders = {
-    Authorization: `Bearer ${accessToken}`,
+    Authorization: `${accessToken}`,
     'Content-Type': 'application/json',
   };
 
@@ -21,7 +21,7 @@ export default async function fetchWithAuth(
     if (response.status === 401) {
       const newAccessToken = await refreshAccessToken();
       const newHeaders = {
-        Authorization: `Bearer ${newAccessToken}`,
+        Authorization: `${newAccessToken}`,
         'Content-Type': 'application/json',
       };
 

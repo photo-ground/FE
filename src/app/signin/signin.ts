@@ -13,7 +13,7 @@ export default async function signin(formData: FormData) {
       },
     );
 
-    const accessToken = rawResponse.headers.get('access')!;
+    const accessToken = rawResponse.headers.get('Authorization')!;
     localStorage.setItem('accessToken', accessToken);
 
     if (!rawResponse.ok) {
