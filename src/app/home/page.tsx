@@ -19,7 +19,6 @@ import { Option, UNIV_LIST, UnivLabel, UnivValue } from './type/Option';
 import PostByUniv from './_components/PostByUniv';
 import RecommendedPhotographer from './_components/RecommendedPhotographer';
 
-
 const Container = styled.div`
   position: relative;
   height: 100dvh;
@@ -34,7 +33,6 @@ const Background = styled.img`
   object-fit: cover;
   z-index: -1;
 `;
-
 
 const TitleContainer = styled.div`
   display: flex;
@@ -112,7 +110,6 @@ export default function HomePage() {
       {univ && <PostByUniv univ={univ} />}
 
       {/* ============================================ */}
-
 
       <Spacer size="88px" />
     </Container>
