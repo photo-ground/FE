@@ -16,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
     License: none (public domain)
   */
   @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://rsms.me/inter/inter.css");
 
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
