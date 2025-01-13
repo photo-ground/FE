@@ -23,11 +23,11 @@ export default function BottomNavigationBar() {
   const pathname = usePathname();
 
   if (
-    pathname === '/splash' ||
-    pathname === '/onboarding' ||
-    pathname === '/signin' ||
-    pathname === '/signup' ||
-    pathname === '/photographer/1'
+    pathname !== '/photographer' &&
+    pathname !== '/map' &&
+    pathname !== '/home' &&
+    pathname !== '/reserve' &&
+    pathname !== '/my'
   ) {
     return null;
   }
