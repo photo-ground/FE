@@ -1,9 +1,13 @@
+import { FormEvent } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import styled from 'styled-components';
+
 import CTAButton from '@/components/atoms/CTAButton';
 import Text from '@/components/atoms/Text';
 import { convertToViewportHeight } from '@/styles/convertSize';
-import Link from 'next/link';
-import styled from 'styled-components';
 import InputList from './InputList';
+import signin from './signin';
 
 const Form = styled.form`
   display: flex;
@@ -34,18 +38,31 @@ const SignUpText = styled(Text)`
 `;
 
 export default function SignInForm() {
+  const router = useRouter();
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    try {
+      await signin(formData);
+      router.push('/home');
+    } catch {
+      alert('로그인 정보를 다시 확인해주세요');
+    }
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Wrapper>
         <InputList />
 
-        {/* [todo] 링크 변경 */}
         <StyledLink href="/signup">
-          <SignUpText variant="caption1_rg">회원가입 </SignUpText>
+          <SignUpText variant="caption1_rg">회원가입</SignUpText>
         </StyledLink>
       </Wrapper>
 
-      <CTAButton text="로그인" />
+      <CTAButton text="로그인" type="submit" />
     </Form>
   );
 }
