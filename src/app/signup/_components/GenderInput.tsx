@@ -27,7 +27,7 @@ const Button = styled.button<{ $isSelected: boolean }>`
 
   border: 1px solid
     ${({ theme, $isSelected }) =>
-      $isSelected ? theme.colors.white : theme.colors.gray[600]};
+      $isSelected ? theme.colors.gray[200] : theme.colors.gray[600]};
   border-radius: 0.5rem;
 
   cursor: pointer;
