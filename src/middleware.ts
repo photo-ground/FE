@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const accessToken = localStorage.get('isVisited');
+  const accessToken = request.cookies.get('accessToken')?.value;
   const isVisited = request.cookies.get('isVisited')?.value === 'true';
 
   // 로그인한 경우, 어느 페이지든 이동 가능
