@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import EmailIcon from '@/assets/EmailIcon';
+import Text from '@/components/atoms/Text';
 import { Input, InputContainer } from '@/styles/input';
 import sendEmail from './sendEmail';
 import confirmEmail from './confirmEmail';
@@ -162,7 +163,7 @@ export default function EmailInput({
                 onClick={onClickConfirm}
                 $isError={!!verificationErrorCode}
               >
-                확인
+                <Text variant="body2_rg">확인</Text>
               </ConfirmButton>
             </PasskeyInputContainer>
             {isConfirmed ? (

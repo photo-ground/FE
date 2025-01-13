@@ -15,12 +15,16 @@ const SloganArea = styled.header`
   padding: 0 1.25rem;
 `;
 
+const SloganText = styled(Text)`
+  font-family: Inter;
+`;
+
 export default function SignInPage() {
   return (
     <Container>
       <SloganArea>
-        <Text variant="title1_rg">여기 위치에</Text>
-        <Text variant="title1_rg">슬로건을 적어볼까요</Text>
+        <SloganText variant="title1_rg">Snap Your Day,</SloganText>
+        <SloganText variant="title1_rg">Cherish Your Life</SloganText>
       </SloganArea>
 
       <Tabs />
