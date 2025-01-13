@@ -1,5 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import Link from 'next/link';
 
@@ -13,7 +16,7 @@ import RightChevronIcon from '@/assets/RightChevronIcon';
 import SearchEngine from './_components/SearchEngine';
 import Filter from './_components/Filter';
 import { Option, UNIV_LIST, UnivLabel, UnivValue } from './type/Option';
-import useActivePhotographer from './_services/getActivePhotographer';
+import getActivePhotographer from './_services/getActivePhotographer';
 import postByUnivData from './_data/postByUnivData';
 
 const Container = styled.div`
@@ -71,7 +74,18 @@ const BannerContent = styled.div`
   padding: 1rem;
   height: inherit;
 `;
+interface Photographer {
+  photographerName: string;
+  photographerId: number;
+  age: number;
+  gender: string;
+  profileUrl: string;
+}
 
+interface PhotographerResponse {
+  photographerList: Photographer[];
+  hasNext: boolean;
+}
 export default function HomePage() {
   const [univ, setUniv] = useState<UnivValue | null>('yonsei');
   const [univTitle, setUnivTitle] = useState<UnivLabel | null>('연세대학교');
@@ -82,14 +96,21 @@ export default function HomePage() {
     setUnivTitle(prop.label);
   };
 
-  const { data, isLoading, isError, error } = useActivePhotographer();
-  if (isLoading) {
-    return <div>Loading...</div>;
+  const { isPending, isError, data, error } = useQuery<PhotographerResponse>({
+    queryKey: ['photographerList', 'hasNext'],
+    queryFn: getActivePhotographer,
+    // staleTime: 60 * 1000, // fresh -> stale, 5분이라는 기준
+    // gcTime: 300 * 1000,
+  });
+  if (isPending) {
+    return <span>Loading...</span>;
   }
 
   if (isError) {
-    return <div>Error: {(error as Error).message}</div>;
+    console.log(data);
+    return <span>Error: {error.message}</span>;
   }
+
   return (
     <Container>
       <Background src="/images/background1.webp" alt="background" />

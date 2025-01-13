@@ -1,5 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { useQuery } from '@tanstack/react-query';
 
 interface Photographer {
   photographerName: string;
@@ -14,25 +13,21 @@ interface PhotographerResponse {
   hasNext: boolean;
 }
 
-async function getActivePhotographer(): Promise<PhotographerResponse> {
-  const rawResponse = await fetch(
+export default async function getActivePhotographer(): Promise<PhotographerResponse> {
+  // const res = await fetch('https://jsonplaceholder.typicode.com/users');
+  const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer/active`,
-    { method: 'GET' },
   );
-
-  if (!rawResponse.ok) {
-    const response = await rawResponse.json();
-    throw new Error(response.message || '문제가 발생했습니다.');
+  // TODO :
+  console.log(res);
+  console.log(res.headers);
+  console.log(res.status);
+  // console.log(res.json());
+  console.log(res.ok);
+  if (!res.ok) {
+    const errorResponse = await res.json();
+    throw new Error(errorResponse.message || '문제가 발생했습니다.');
   }
 
-  return rawResponse.json(); // 응답 데이터를 반환
-}
-
-export default function useActivePhotographer() {
-  return useQuery({
-    queryKey: ['activePhotographer'],
-    queryFn: getActivePhotographer,
-    staleTime: 5 * 60 * 1000, // 데이터 캐싱 시간 설정 (5분)
-    retry: 2, // 실패 시 재시도 횟수
-  });
+  return res.json(); // 성공적인 JSON 데이터 반환
 }
