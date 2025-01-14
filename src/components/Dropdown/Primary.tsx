@@ -1,20 +1,20 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import DownChevronIcon from '@/assets/DownChevronIcon';
 import Text from '@/components/atoms/Text';
-import { SignUpData } from '../type';
 
 export interface Option {
   value: string;
   label: string;
 }
 
-const Container = styled.div<{ $isOpen: boolean; $isSelected: boolean }>`
+const Container = styled.div<{ $isOpen: boolean; $isSelected?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.125rem;
 
+  width: ${({ $isOpen }) => ($isOpen ? 'calc(10rem + 2px)' : 'fit-content')};
   padding: 0.5rem 1rem;
   background: transparent;
   border: 1px solid
@@ -45,7 +45,6 @@ const OptionWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
 
-  width: 100%;
   background: ${({ theme }) => theme.colors.background.primary};
   border: 1px solid ${({ theme }) => theme.colors.gray[200]};
   border-top: none;
@@ -55,7 +54,7 @@ const OptionWrapper = styled.div`
 `;
 
 const OptionItem = styled.button`
-  width: 100%;
+  width: 10rem;
   padding: 0.5rem 1rem;
 
   background: transparent;
@@ -67,24 +66,18 @@ const OptionItem = styled.button`
   cursor: pointer;
 `;
 
-const OPTION_LIST: { label: string; value: SignUpData['myUniv'] }[] = [
-  { label: '서강대학교', value: '서강' },
-  { label: '연세대학교', value: '연세' },
-  { label: '이화여자대학교', value: '이화' },
-  { label: '홍익대학교', value: '홍익' },
-  { label: '선택 안 함', value: '선택안함' },
-];
-
-export default function UnivInput({
+export default function Primary({
   value,
   onChange,
+  optionList,
+  placeholder,
 }: {
-  value: SignUpData['myUniv'];
-  onChange: (newValue: SignUpData['myUniv']) => void;
+  value: string | null;
+  onChange: (newValue: string) => void;
+  optionList: Option[];
+  placeholder: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const selectorRef = useRef<HTMLDivElement | null>(null);
-  const optionRef = useRef<HTMLDivElement | null>(null);
 
   const onOpen = () => {
     setIsOpen(true);
@@ -93,20 +86,15 @@ export default function UnivInput({
     setIsOpen(false);
   };
 
-  const currentLabel = OPTION_LIST.find(
+  const currentLabel = optionList.find(
     (option) => option.value === value,
   )?.label;
 
   return (
-    <div style={{ position: 'relative' }}>
-      <Container
-        ref={selectorRef}
-        onClick={onOpen}
-        $isOpen={isOpen}
-        $isSelected={!!currentLabel}
-      >
-        <FilterText variant="body1_rg" $isSelected={!!currentLabel}>
-          {currentLabel || '학교 선택'}
+    <div>
+      <Container onClick={onOpen} $isOpen={isOpen} $isSelected={!!currentLabel}>
+        <FilterText variant="body2_rg" $isSelected={!!currentLabel}>
+          {currentLabel || placeholder}
         </FilterText>
         <DownChevronIcon />
       </Container>
@@ -114,8 +102,8 @@ export default function UnivInput({
       {isOpen && (
         <>
           <Backdrop onClick={onClose} />
-          <OptionWrapper ref={optionRef}>
-            {OPTION_LIST.map((option) => (
+          <OptionWrapper>
+            {optionList.map((option) => (
               <OptionItem
                 key={option.value}
                 onClick={() => {
@@ -123,7 +111,7 @@ export default function UnivInput({
                   onClose();
                 }}
               >
-                <FilterText variant="body1_rg">{option.label}</FilterText>
+                <FilterText variant="body2_rg">{option.label}</FilterText>
               </OptionItem>
             ))}
           </OptionWrapper>

@@ -83,6 +83,9 @@ export default function Filter({
       return () => {};
     }
 
+    console.log(optionRef.current.scrollWidth);
+    console.log(optionRef.current.getBoundingClientRect().width);
+
     selectorRef.current.style.width = `${optionRef.current.scrollWidth}px`;
 
     return () => {

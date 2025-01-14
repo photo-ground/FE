@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import styled from 'styled-components';
 import CTAButton from '@/components/atoms/CTAButton';
 import BREAK_POINT from '@/styles/constants';
@@ -18,7 +19,7 @@ const DivideLine = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray[700]};
 `;
 
-const ButtonWrapper = styled.div`
+const ButtonWrapper = styled(Link)`
   position: fixed;
   bottom: 2rem;
 
@@ -48,7 +49,7 @@ export default function PhotographerDetailScreen() {
 
       <Feed />
 
-      <ButtonWrapper>
+      <ButtonWrapper href="/photographer/1/reserve">
         <CTAButton text="예약하기" />
       </ButtonWrapper>
     </Container>
