@@ -3,6 +3,7 @@ import PeopleIcon from '@/assets/PeopleIcon';
 import Chip from '@/components/atoms/Chip';
 import SmallButton from '@/components/atoms/SmallButton';
 import Text from '@/components/atoms/Text';
+import { useRouter } from 'next/navigation';
 import BackButton from './BackButton';
 
 const ThumbnailWrapper = styled.div`
@@ -81,7 +82,12 @@ export default function PhotographerProfile() {
   const age = 25;
   const gender = '여성';
   const univList = ['서강대학교', '연세대학교', '이화여자대학교', '홍익대학교'];
+  const router = useRouter();
 
+  // TODO : 수정로직 구현
+  const handleWritePost = () => {
+    router.push('/photographerProfile/writePost');
+  };
   return (
     <ThumbnailWrapper>
       <Thumbnail src="/images/ewha.jpg" alt="thumbnail" />
@@ -96,7 +102,10 @@ export default function PhotographerProfile() {
 
           <ButtonArea>
             <Chip icon={PeopleIcon} text="14" />
-            <SmallButton.Primary text="팔로우" />
+            <SmallButton.Primary
+              text="글 작성"
+              onClick={() => handleWritePost()}
+            />
           </ButtonArea>
         </Header>
 
