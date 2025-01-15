@@ -12,9 +12,9 @@ import styled from 'styled-components';
 
 import RightChevronIcon from '@/assets/RightChevronIcon';
 
+import { Option, UNIV_LIST, UnivLabel, UnivValue } from '@/types/univOption';
 import SearchEngine from './_components/SearchEngine';
 import Filter from './_components/Filter';
-import { Option, UNIV_LIST, UnivLabel, UnivValue } from './type/Option';
 
 import PostByUniv from './_components/PostByUniv';
 import RecommendedPhotographer from './_components/RecommendedPhotographer';

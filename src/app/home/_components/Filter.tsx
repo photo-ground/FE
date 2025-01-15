@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import DownChevronIcon from '@/assets/DownChevronIcon';
 import Text from '@/components/atoms/Text';
-import { Option } from '../type/Option';
+import { Option } from '@/types/univOption';
 
 const Container = styled.div<{ $isOpen: boolean }>`
   display: flex;
