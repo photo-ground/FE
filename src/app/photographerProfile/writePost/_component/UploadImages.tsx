@@ -2,7 +2,7 @@ import AddImageIcon from '@/assets/AddImageIcon';
 import DeleteImageIcon from '@/assets/DeleteImageIcon';
 import Text from '@/components/atoms/Text';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import useImageStore from '@/store/useImageStore';
 
@@ -54,13 +54,13 @@ const PreviewImage = styled(Image)`
   border-radius: 2px;
 `;
 export default function UploadImages() {
-  const [imageFiles, setImageFiles] = useState<string[]>([]);
+  const { images, addImage, removeImage } = useImageStore();
 
   const addImageFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = e.target.files;
     if (!selectedFiles) return;
 
-    if (imageFiles.length + selectedFiles.length > 9) {
+    if (images.length + selectedFiles.length > 9) {
       alert('이미지는 최대 9장까지 업로드할 수 있습니다.');
       return;
     }
@@ -82,16 +82,16 @@ export default function UploadImages() {
     try {
       // 모든 파일을 읽은 후 상태 업데이트
       const results = await Promise.all(fileReaders);
-      setImageFiles((prev) => [...prev, ...results]);
+      results.forEach((result) => addImage(result)); // Zustand 상태에 추가
     } catch (error) {
       console.error('이미지 파일 읽기 중 오류 발생:', error);
     }
   };
 
-  // X버튼 클릭 시 이미지 삭제
-  const removeImageFile = (idx: number) => {
-    setImageFiles(imageFiles.filter((e, i) => i !== idx));
-  };
+  // // X버튼 클릭 시 이미지 삭제
+  // const removeImageFile = (idx: number) => {
+  //   setImageFiles(imageFiles.filter((e, i) => i !== idx));
+  // };
   return (
     <form>
       <Title>
@@ -101,15 +101,15 @@ export default function UploadImages() {
         </Text>
       </Title>
       <UploadArea>
-        {imageFiles.map((e, i) => (
+        {images.map((e, i) => (
           <ImagePreviewItem key={e}>
-            <IconContainer onClick={() => removeImageFile(i)}>
+            <IconContainer onClick={() => removeImage(i)}>
               <DeleteImageIcon />
             </IconContainer>
             <PreviewImage src={e} alt={`Upload File[${i}]`} layout="fill" />
           </ImagePreviewItem>
         ))}
-        {imageFiles.length < 9 && (
+        {images.length < 9 && (
           <AddImage htmlFor="input-file">
             <input
               style={{ display: 'none' }}

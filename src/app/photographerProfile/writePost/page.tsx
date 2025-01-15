@@ -14,7 +14,7 @@ export default function WritePostPage() {
   const [goNext, setGoNext] = useState(false);
 
   const handleGoNext = () => {
-    router.push('/photograherProfile/setPostDetail ');
+    router.push('/photographerProfile/setPostDetail ');
   };
 
   useEffect(() => {
