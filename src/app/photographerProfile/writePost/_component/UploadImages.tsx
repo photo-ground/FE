@@ -1,10 +1,10 @@
 import AddImageIcon from '@/assets/AddImageIcon';
 import DeleteImageIcon from '@/assets/DeleteImageIcon';
 import Text from '@/components/atoms/Text';
+import useImageStore from '@/store/useImageStore';
 import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
-import useImageStore from '@/store/useImageStore';
 
 const Title = styled.div`
   display: flex;

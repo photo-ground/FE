@@ -26,9 +26,6 @@ const IconContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  //   background-color: yellow;
-  //   width: 1.5rem;
-  //   height: 1.5rem;
 `;
 
 export default function Checkbox({ text, checked, onChange }: CheckboxProps) {
