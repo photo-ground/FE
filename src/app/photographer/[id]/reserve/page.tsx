@@ -8,7 +8,7 @@ import { DivideLine } from '@/app/signup/styles';
 import Info from './_components/Info';
 import Place from './_components/Place';
 import NumberSelector from './_components/NumberSelector';
-import DateSelector from './_components/DateSelector';
+import DateTime from './_components/DateTime';
 import Request from './_components/Request';
 import Price from './_components/Price';
 
@@ -26,11 +26,13 @@ export default function PhotographerReservePage() {
     reserveNum: number;
     date: Date | null;
     requirement: string;
+    startTime: string | null;
   }>({
     univName: null,
     reserveNum: 1,
     date: null,
     requirement: '',
+    startTime: null,
   });
 
   const onChangeUniv = (newValue: string) => {
@@ -52,6 +54,10 @@ export default function PhotographerReservePage() {
     setData({ ...data, requirement: newValue });
   };
 
+  const onChangeTime = (newValue: string) => {
+    setData({ ...data, startTime: newValue });
+  };
+
   return (
     <div>
       <TNB.SubTitle text="예약 신청" />
@@ -66,7 +72,12 @@ export default function PhotographerReservePage() {
 
       <DivideLine />
 
-      <DateSelector value={data.date} onChange={onChangeDate} />
+      <DateTime
+        date={data.date}
+        onChangeDate={onChangeDate}
+        time={data.startTime}
+        onChangeTime={onChangeTime}
+      />
 
       <DivideLine />
 
