@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
+import { PhotographerDetail } from '../getPhotographerData';
 
 const Container = styled.div`
   display: flex;
@@ -28,12 +29,16 @@ function formatPrice(value: number) {
     .replace('₩', '');
 }
 
-export default function Price() {
+export default function Price({
+  price,
+}: {
+  price: PhotographerDetail['price'];
+}) {
   return (
     <Container>
       <Header>
         <Text variant="title2_sb">촬영 상세</Text>
-        <Text variant="title2_sb">{formatPrice(70000)}₩</Text>
+        <Text variant="title2_sb">{formatPrice(price)}₩</Text>
       </Header>
 
       <Message variant="caption1_rg">* 1:1 50분 야와촬영 기준</Message>
