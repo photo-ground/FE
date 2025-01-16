@@ -30,7 +30,6 @@ export default function Place({
         optionList={UNIV_LIST}
         placeholder="학교 선택"
       />
-      {/* <UnivInput value={'서강'} onChange={() => {}} /> */}
     </Container>
   );
 }
