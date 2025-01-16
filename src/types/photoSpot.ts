@@ -15,6 +15,14 @@ export interface photoSpotProps {
   };
 }
 
+export interface PhotoSpotListProps {
+  spotId: number;
+  spotName: string;
+  latitude: number;
+  longitude: number;
+  spotImageUrl: string;
+}
+
 export interface postListProps {
   id: number;
   photographerId: number;

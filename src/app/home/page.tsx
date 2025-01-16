@@ -12,7 +12,12 @@ import styled from 'styled-components';
 
 import RightChevronIcon from '@/assets/RightChevronIcon';
 
-import { Option, UNIV_LIST, UnivLabel, UnivValue } from '@/types/univOption';
+import {
+  UnivOption,
+  UNIV_LIST,
+  UnivLabel,
+  UnivValue,
+} from '@/types/univOption';
 import SearchEngine from './_components/SearchEngine';
 import Filter from './_components/Filter';
 
@@ -56,7 +61,7 @@ export default function HomePage() {
   const [univ, setUniv] = useState<UnivValue | null>('yonsei');
   const [univTitle, setUnivTitle] = useState<UnivLabel | null>('연세대학교');
 
-  const onChangeUniv = (prop: Option) => {
+  const onChangeUniv = (prop: UnivOption) => {
     setUniv(prop.value); // 영문
     setUnivTitle(prop.label); // 국문
   };

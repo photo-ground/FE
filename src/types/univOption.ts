@@ -1,8 +1,8 @@
-export interface Option {
+export interface UnivOption {
   value: string;
   label: string;
 }
-export const UNIV_LIST: Option[] = [
+export const UNIV_LIST: UnivOption[] = [
   { value: 'sogang', label: '서강대학교' },
   { value: 'yonsei', label: '연세대학교' },
   { value: 'ewha', label: '이화여자대학교' },
