@@ -13,6 +13,7 @@ const Container = styled.div<{ $isOpen: boolean }>`
   align-items: center;
   justify-content: space-between;
   gap: 0.125rem;
+  flex-shrink: 0;
 
   padding: 0.375rem 1rem;
   background: ${({ theme }) => theme.colors.gray[900]};
@@ -47,7 +48,7 @@ const OptionWrapper = styled.div`
   z-index: 21; // 임의로 설정
 `;
 const OptionItem = styled.button`
-  width: 100%;
+  width: 10rem;
   padding: 0.375rem 1rem;
   padding-right: calc(1rem + 1.25rem + 0.125rem + 0.1rem);
   // padding right + icon size + gap + 0.1rem
@@ -61,14 +62,13 @@ const OptionItem = styled.button`
   cursor: pointer;
 `;
 
-export default function Filter({
+export default function Secondary({
   value,
   onChange,
   optionList,
   placeholder,
 }: {
   value: string | null;
-  // eslint-disable-next-line
   onChange: (newValue: string) => void;
   optionList: Option[];
   placeholder: string;
@@ -89,10 +89,7 @@ export default function Filter({
       return () => {};
     }
 
-    console.log(optionRef.current.scrollWidth);
-    console.log(optionRef.current.getBoundingClientRect().width);
-
-    selectorRef.current.style.width = `${optionRef.current.scrollWidth}px`;
+    selectorRef!.current!.style.width = '10rem';
 
     return () => {
       selectorRef!.current!.style.width = 'fit-content';
