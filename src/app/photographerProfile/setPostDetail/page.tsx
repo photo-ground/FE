@@ -4,12 +4,15 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import useImageStore from '@/store/useImageStore';
 import TNB from '@/components/TNB';
-import { UNIV_LIST } from '@/types/univOption';
+import { UNIV_LIST, UnivOption } from '@/types/univOption';
 import { PhotoSpotListProps } from '@/types/photoSpot';
-import { getUnivSpotList } from '@/app/photographerProfile/_services/getActivePhotographer';
+import {
+  getUnivSpotList,
+  postNewContent,
+} from '@/app/photographerProfile/_services/getActivePhotographer';
 import Text from '@/components/atoms/Text';
 import styled from 'styled-components';
 import Spacer from '@/components/Spacer';
@@ -19,6 +22,7 @@ import UnivRadioGroup from './_component/UnivRadioGroup';
 import ImagePreviewItem from '../_components/ImagePreviewItem';
 import PhotoSpotByUniv from '../_data/PhotospotByUniv';
 import CTAButton from '@/components/atoms/CTAButton';
+import { PostInfoProps, PostUploadContainerProps } from '@/types/post';
 // import Filter from '@/app/home/_components/Filter';
 
 const Title = styled(Text)`
@@ -84,7 +88,7 @@ export default function PostDetailPage() {
   // TODO :
 
   const [isComplete, setIsComplete] = useState<boolean>(false);
-
+  const [textareaContent, setTextareaContent] = useState<string>('');
   // 이미지 리스트 & 포토스팟 선택 리스트 (zustand)
   const {
     images,
@@ -108,16 +112,58 @@ export default function PostDetailPage() {
   });
 
   // 선택된 대학 상태
-  const [selectedUniv, setSelectedUniv] = useState<string | null>(null);
+  const [selectedUniv, setSelectedUniv] = useState<UnivOption | null>(null);
 
+  // 이미지 : File[] -> base64로 변환
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  useEffect(() => {
+    // File[]을 base64 URL로 변환
+    const generateImageUrls = async () => {
+      const urls = await Promise.all(
+        images.map((file) => {
+          return new Promise<string>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              if (reader.result) {
+                resolve(reader.result as string);
+              }
+            };
+            reader.onerror = (error) => reject(error);
+            reader.readAsDataURL(file);
+          });
+        }),
+      );
+      setImageUrls(urls);
+    };
+
+    if (images.length > 0) {
+      generateImageUrls();
+    }
+  });
   // Univ 정보를 가져오는 useQuery
   const { isLoading, isError, data, error } = useQuery<PhotoSpotListProps[]>({
     queryKey: ['univSpotList', selectedUniv],
     queryFn: () =>
-      selectedUniv ? getUnivSpotList(selectedUniv) : Promise.resolve([]),
+      selectedUniv ? getUnivSpotList(selectedUniv.value) : Promise.resolve([]),
     enabled: !!selectedUniv, // selectedUniv가 null일 때는 쿼리를 비활성화
   });
 
+  // Mutations
+  const createPostMutation = useMutation({
+    mutationFn: ({
+      photographerId,
+      newContent,
+    }: {
+      photographerId: number;
+      newContent: PostUploadContainerProps;
+    }) => postNewContent(photographerId, newContent),
+    onSuccess: () => {
+      console.log('Post created successfully');
+    },
+    onError: (error) => {
+      console.error('Error creating post:', error);
+    },
+  });
   useEffect(() => {
     // 이미지 리스트 크기와 동일한 빈 배열 생성
     // console.log(spotIds);
@@ -129,8 +175,8 @@ export default function PostDetailPage() {
   }, [spotIds, selectedUniv]);
 
   // 대학 선택 핸들러
-  const handleSelectionChange = (univ: string) => {
-    setSelectedUniv(univ);
+  const handleSelectionChange = (univData: UnivOption) => {
+    setSelectedUniv(univData);
   };
 
   // 이미지 통 삭제
@@ -145,31 +191,45 @@ export default function PostDetailPage() {
     selectSpotId(index, spotId); // 선택한 스팟 ID 추가
   };
 
-  const handleFormSubmit = () => {
-    if (spotIds.includes(-1)) {
-      alert('모든 이미지에 포토스팟을 지정해야 합니다.');
-      return;
+  // 새로운 포스트 업로드
+  const handleFormSubmit = (event: React.FormEvent) => {
+    event?.preventDefault();
+
+    if (selectedUniv) {
+      const postInfoData: PostInfoProps = {
+        univId: selectedUniv.univId,
+        content: textareaContent,
+        spotIds: spotIds,
+      };
+
+      const newContent: PostUploadContainerProps = {
+        postInfo: postInfoData,
+        photos: images,
+      };
+
+      createPostMutation.mutate({
+        photographerId: 3,
+        newContent: newContent,
+      });
     }
-    setIsComplete(true);
-    alert('완료되었습니다!');
   };
 
   return (
-    <div>
+    <form onSubmit={handleFormSubmit}>
       <TNB.Back text="게시글 작성" />
       <Spacer />
       <Title variant="title2_sb">촬영 장소 선택</Title>
       <UnivRadioGroup options={UNIV_LIST} onChange={handleSelectionChange} />
+      {/* 로딩 상태 */}
+      {isLoading && <span>Loading...</span>}
+      {/* 에러 처리 */}
+      {isError && <span>Error: {error?.message}</span>}
       <Spacer />
       <Divider />
       <Spacer />
       <Title variant="title2_sb">포토스팟 지정</Title>
 
       <UploadArea>
-        {/* 로딩 상태 */}
-        {isLoading && <span>Loading...</span>}
-        {/* 에러 처리 */}
-        {isError && <span>Error: {error?.message}</span>}
         {/* 데이터 표시 */}
         {data && (
           <div>
@@ -181,8 +241,8 @@ export default function PostDetailPage() {
             </ul>
           </div>
         )}
-        {images.length > 0 ? (
-          images.map((src, index) => (
+        {imageUrls.length > 0 ? (
+          imageUrls.map((src, index) => (
             <SelectPhotoSpot>
               <ImagePreviewItem
                 key={src}
@@ -210,11 +270,15 @@ export default function PostDetailPage() {
 
       <Title variant="title2_sb">글 작성</Title>
 
-      <Textarea placeholder="사진을 소개해주세요!" />
+      <Textarea
+        onChange={(e) => setTextareaContent(e.target.value)}
+        placeholder="사진을 소개해주세요!"
+      />
 
       <Spacer size="80px" />
       <ButtonBox>
         <CTAButton
+          type="submit"
           text="완료하기"
           variant="primary"
           disabled={!isComplete}
@@ -223,6 +287,6 @@ export default function PostDetailPage() {
       </ButtonBox>
 
       <Spacer size="60px" />
-    </div>
+    </form>
   );
 }

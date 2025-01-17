@@ -31,7 +31,7 @@ interface RadioBtnProps {
 // RadioBtnGroup 컴포넌트의 props
 interface RadioBtnGroupProps {
   options: UnivOption[];
-  onChange: (selectedValue: string) => void;
+  onChange: (univData: UnivOption) => void;
 }
 
 function RadioBtn({ label, id, active, onClick }: RadioBtnProps) {
@@ -53,28 +53,28 @@ export default function UnivRadioGroup({
   options,
   onChange,
 }: RadioBtnGroupProps) {
-  const [selectedValue, setSelectedValue] = useState<string>('');
+  const [selectedValue, setSelectedValue] = useState<UnivOption | null>(null);
 
   useEffect(() => {
     console.log(selectedValue);
   }, [selectedValue]);
 
-  const handleSelect = (value: string) => {
-    setSelectedValue(value);
-    onChange(value);
+  const handleSelect = (univData: UnivOption) => {
+    setSelectedValue(univData);
+    onChange(univData);
   };
   return (
     <RadioGroup>
-      {options.map(({ label, value }) => {
-        const optionId = `radio-option-${value}`;
+      {options.map((univOption) => {
+        const optionId = `radio-option-${univOption.value}`;
         return (
           <RadioBtn
             key={optionId}
-            label={label}
+            label={univOption.label}
             id={optionId}
             // value={value}
-            active={selectedValue === value}
-            onClick={() => handleSelect(value)} // 클릭 이벤트로 선택 처리
+            active={selectedValue?.value === univOption.value}
+            onClick={() => handleSelect(univOption)} // 클릭 이벤트로 선택 처리
           />
         );
       })}
