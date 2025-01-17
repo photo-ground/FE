@@ -16,7 +16,9 @@ interface Actions {
 // useSchoolStore
 const useUnivStore = create<States & Actions>((set) => ({
   // States
-  univ: '',
+  // TODO : 로그인 한 경우 - 회원가입시의 학교 기준
+  // TODO : 로그인 안 한 경우 - onboarding에서 선택한 학교 기준
+  univ: 'yonsei',
 
   // Actions
   setUniv: (newUniv) => set(() => ({ univ: newUniv })), // 상태 업데이트 로직

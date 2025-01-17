@@ -10,7 +10,7 @@ import {
   postByUnivProps,
   postListProps,
   spotPostImageProps,
-} from '../types';
+} from '@/types/photoSpot';
 import useSpotStore from '../_store';
 
 const SliderContainer = styled.div`
