@@ -1,10 +1,9 @@
 import AddImageIcon from '@/assets/AddImageIcon';
-import DeleteImageIcon from '@/assets/DeleteImageIcon';
 import Text from '@/components/atoms/Text';
 import useImageStore from '@/store/useImageStore';
-import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
+import ImagePreviewItem from '../../_components/ImagePreviewItem';
 
 const Title = styled.div`
   display: flex;
@@ -35,24 +34,6 @@ const AddImage = styled.label`
   border-radius: 2px;
 `;
 
-const ImagePreviewItem = styled.div`
-  position: relative;
-  aspect-ratio: 1/1;
-  width: 100%;
-`;
-
-const IconContainer = styled.div`
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  cursor: pointer;
-  z-index: 9;
-`;
-
-const PreviewImage = styled(Image)`
-  object-fit: cover;
-  border-radius: 2px;
-`;
 export default function UploadImages() {
   const { images, addImage, removeImage } = useImageStore();
 
@@ -101,13 +82,13 @@ export default function UploadImages() {
         </Text>
       </Title>
       <UploadArea>
-        {images.map((e, i) => (
-          <ImagePreviewItem key={e}>
-            <IconContainer onClick={() => removeImage(i)}>
-              <DeleteImageIcon />
-            </IconContainer>
-            <PreviewImage src={e} alt={`Upload File[${i}]`} layout="fill" />
-          </ImagePreviewItem>
+        {images.map((src, index) => (
+          <ImagePreviewItem
+            key={src}
+            src={src}
+            alt={`Upload File[${index}]`}
+            onDelete={() => removeImage(index)}
+          />
         ))}
         {images.length < 9 && (
           <AddImage htmlFor="input-file">

@@ -1,31 +1,29 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PostUnivSelectButton from '@/components/atoms/PostUnivSelectButton';
 import { UnivOption } from '@/types/univOption';
 
+const RadioGroup = styled.div`
+  display: grid;
+  grid: 1fr 1fr/1fr 1fr;
+  gap: 8px;
+  margin: 16px 20px;
+`;
+
 const RadioContainer = styled.label`
-  display: flex;
-  align-items: center;
-  margin: 0 20px;
-  padding: 1rem 0;
-  justify-content: space-between;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray[700]};
+  width: 100%;
 
   input[type='radio'] {
-    // display: none; /* 기본 체크박스 숨김 */
-    // position: absolute; /* 화면에서 벗어나게 */
-    // opacity: 0; /* 보이지 않게 */
-    // width: 0;
-    // height: 0;
+    display: none; /* 기본 체크박스 숨김 */
   }
 `;
 // RadioBtn 컴포넌트의 props
 interface RadioBtnProps {
   label: string;
-  value: string;
+  // value: string;
   id: string;
   active: boolean;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onClick: () => void; // 변경: onChange 대신 onClick 사용
 }
 
 // 라디오 버튼 옵션
@@ -36,19 +34,16 @@ interface RadioBtnGroupProps {
   onChange: (selectedValue: string) => void;
 }
 
-function RadioBtn({ label, value, id, active, onChange }: RadioBtnProps) {
+function RadioBtn({ label, id, active, onClick }: RadioBtnProps) {
   return (
-    <RadioContainer htmlFor={id}>
-      <input
-        type="radio"
-        value={value}
-        id={id}
-        name="univ-radio"
-        onChange={onChange}
-      />
+    <RadioContainer>
+      {/* input은 숨기지만 접근성 보장을 위해 포함 */}
+      <input type="radio" id={id} name="univ-radio" />
+      {/* 사용자 정의 버튼 */}
       <PostUnivSelectButton
         text={label}
         active={active ? 'active' : 'inactive'}
+        onClick={onClick} // 버튼 클릭 시 호출
       />
     </RadioContainer>
   );
@@ -64,31 +59,25 @@ export default function UnivRadioGroup({
     console.log(selectedValue);
   }, [selectedValue]);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setSelectedValue(newValue);
-    onChange(newValue);
+  const handleSelect = (value: string) => {
+    setSelectedValue(value);
+    onChange(value);
   };
-
   return (
-    <>
+    <RadioGroup>
       {options.map(({ label, value }) => {
         const optionId = `radio-option-${value}`;
         return (
-          <div>
-            {label}
-            {value}
-            <RadioBtn
-              key={optionId}
-              label={label}
-              id={optionId}
-              value={value}
-              active={selectedValue === value}
-              onChange={handleChange}
-            />
-          </div>
+          <RadioBtn
+            key={optionId}
+            label={label}
+            id={optionId}
+            // value={value}
+            active={selectedValue === value}
+            onClick={() => handleSelect(value)} // 클릭 이벤트로 선택 처리
+          />
         );
       })}
-    </>
+    </RadioGroup>
   );
 }
