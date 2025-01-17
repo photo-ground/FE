@@ -4,7 +4,7 @@ import DownChevronIcon from '@/assets/DownChevronIcon';
 import Text from '@/components/atoms/Text';
 
 export interface Option {
-  value: string | number;
+  value: number;
   label: string;
 }
 
@@ -135,7 +135,7 @@ interface DropdownProps {
   variant?: 'default' | 'filter' | 'mini';
   options: Option[];
   placeholder?: string;
-  onSelect: (value: string) => void;
+  onSelect: (value: number) => void; // 객체의 id를 저장하는 것으로 하자
 }
 
 export default function Dropdown({
@@ -145,19 +145,20 @@ export default function Dropdown({
   onSelect,
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState<string | null>(null);
+  const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
+  const [selectedValue, setSelectedValue] = useState<number | null>(null);
 
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
 
-  const handleSelect = (value: string) => {
-    setSelectedValue(value);
+  const handleSelect = (value: number, label: string) => {
+    setSelectedLabel(label);
     onSelect(value);
     handleClose();
   };
 
   const currentLabel = options.find(
-    (option) => option.label === selectedValue,
+    (option) => option.label === selectedLabel,
   )?.label;
 
   return (
@@ -176,7 +177,7 @@ export default function Dropdown({
             {options.map((option) => (
               <OptionItem
                 key={option.value}
-                onClick={() => handleSelect(option.label)}
+                onClick={() => handleSelect(option.value, option.label)}
                 $variant={variant}
               >
                 <FilterText variant="body1_rg" $variant={variant}>

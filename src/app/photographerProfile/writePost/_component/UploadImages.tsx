@@ -69,10 +69,6 @@ export default function UploadImages() {
     }
   };
 
-  // // X버튼 클릭 시 이미지 삭제
-  // const removeImageFile = (idx: number) => {
-  //   setImageFiles(imageFiles.filter((e, i) => i !== idx));
-  // };
   return (
     <form>
       <Title>

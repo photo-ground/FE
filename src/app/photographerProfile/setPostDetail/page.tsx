@@ -3,7 +3,7 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useImageStore from '@/store/useImageStore';
 import TNB from '@/components/TNB';
@@ -72,21 +72,44 @@ const SelectPhotoSpot = styled.div`
 const ButtonBox = styled.div`
   margin: 0 20px;
 `;
-interface Options {
+interface Option {
+  value: number;
   label: string;
-  value: string | number;
 }
 export default function PostDetailPage() {
-  //
+  // TODO : 학교 선택 전, 사진 별 스팟 선택 비활성화
+  // TODO : 이미지 별 포토 스팟 선택 -> 사진 갯수만큼 크기의 빈 배열 생성(zustand), 이후 스팟 선택시, 해당 idx에 스팟 아이디 추가
+  // TODO : 모든 학교 선택 완료 후, 업로드 버튼 활성화
   // TODO : 추후 spotData를 선택된 대학 기준으로 가져오도록
+  // TODO :
 
-  const spotData: Options[] = PhotoSpotByUniv.map((e) => {
+  const [isComplete, setIsComplete] = useState<boolean>(false);
+
+  // 이미지 리스트 & 포토스팟 선택 리스트 (zustand)
+  const {
+    images,
+    spotIds,
+    removeImage,
+    selectSpotId,
+    removeSpotId,
+    setSpotIds,
+  } = useImageStore();
+
+  useEffect(() => {
+    // 이미지 리스트 크기와 동일한 빈 배열 생성
+    const initialSpotIds = Array(images.length).fill(-1);
+    setSpotIds(initialSpotIds);
+  }, []);
+  useEffect(() => {
+    // 이미지 리스트 크기와 동일한 빈 배열 생성
+    console.log(spotIds);
+  }, [spotIds]);
+
+  // 임시 데이터 -> api연결 후 변경
+  const spotData: Option[] = PhotoSpotByUniv.map((e) => {
     const { spotId, spotName } = e;
-    return { label: spotName, value: spotId };
+    return { value: spotId, label: spotName };
   });
-
-  // 이미지 리스트
-  const { images, removeImage } = useImageStore();
 
   // 선택된 대학 상태
   const [selectedUniv, setSelectedUniv] = useState<string | null>(null);
@@ -104,12 +127,26 @@ export default function PostDetailPage() {
     setSelectedUniv(univ);
   };
 
-  // 스팟 선택 핸들러
-  const handleDropdown = (value: string) => {
-    alert(value);
+  // 이미지 통 삭제
+  const handleRemoveItem = (index: number) => {
+    removeImage(index);
+    removeSpotId(index);
   };
 
-  const handleFormSubmit = () => {};
+  // 스팟 선택 핸들러
+  const handleDropdown = (index: number, spotId: number) => {
+    console.log(spotId);
+    selectSpotId(index, spotId); // 선택한 스팟 ID 추가
+  };
+
+  const handleFormSubmit = () => {
+    if (spotIds.includes(-1)) {
+      alert('모든 이미지에 포토스팟을 지정해야 합니다.');
+      return;
+    }
+    setIsComplete(true);
+    alert('완료되었습니다!');
+  };
 
   return (
     <div>
@@ -145,16 +182,15 @@ export default function PostDetailPage() {
                 key={src}
                 src={src}
                 alt={`Upload File[${index}]`}
-                onDelete={() => removeImage(index)}
+                onDelete={() => handleRemoveItem(index)}
               />
               <Dropdown
                 variant="filter"
                 key={index}
                 options={spotData}
                 placeholder="포토스팟 추가"
-                onSelect={handleDropdown}
+                onSelect={(value) => handleDropdown(index, Number(value))}
               />
-              {/* <Filter optionList={} /> */}
             </SelectPhotoSpot>
           ))
         ) : (
@@ -173,14 +209,14 @@ export default function PostDetailPage() {
       <Spacer size="80px" />
       <ButtonBox>
         <CTAButton
-          text="다음으로"
+          text="완료하기"
           variant="primary"
-          // disabled={goNext}
+          disabled={!isComplete}
           onClick={handleFormSubmit}
         />
       </ButtonBox>
 
-      <Spacer size="6 0px" />
+      <Spacer size="60px" />
     </div>
   );
 }
