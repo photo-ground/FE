@@ -100,10 +100,6 @@ export default function PostDetailPage() {
     const initialSpotIds = Array(images.length).fill(-1);
     setSpotIds(initialSpotIds);
   }, []);
-  useEffect(() => {
-    // 이미지 리스트 크기와 동일한 빈 배열 생성
-    console.log(spotIds);
-  }, [spotIds]);
 
   // 임시 데이터 -> api연결 후 변경
   const spotData: Option[] = PhotoSpotByUniv.map((e) => {
@@ -121,6 +117,16 @@ export default function PostDetailPage() {
       selectedUniv ? getUnivSpotList(selectedUniv) : Promise.resolve([]),
     enabled: !!selectedUniv, // selectedUniv가 null일 때는 쿼리를 비활성화
   });
+
+  useEffect(() => {
+    // 이미지 리스트 크기와 동일한 빈 배열 생성
+    // console.log(spotIds);
+    if (spotIds.includes(-1) || !selectedUniv) {
+      // alert('모든 이미지에 포토스팟을 지정해야 합니다.');
+      return;
+    }
+    setIsComplete(true);
+  }, [spotIds, selectedUniv]);
 
   // 대학 선택 핸들러
   const handleSelectionChange = (univ: string) => {
