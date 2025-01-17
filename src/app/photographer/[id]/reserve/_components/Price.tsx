@@ -1,7 +1,9 @@
 'use client';
 
-import Text from '@/components/atoms/Text';
 import styled from 'styled-components';
+import Text from '@/components/atoms/Text';
+import formatPrice from '@/lib/formatPrice';
+import { PhotographerReserve } from '../getPhotographerData';
 
 const Container = styled.div`
   display: flex;
@@ -24,12 +26,22 @@ const Message = styled(Text)`
   color: ${({ theme }) => theme.colors.gray[200]};
 `;
 
-export default function Price() {
+export default function Price({
+  price,
+  addPrice,
+  reserveNum,
+}: {
+  price: PhotographerReserve['price'];
+  addPrice: PhotographerReserve['addPrice'];
+  reserveNum: number;
+}) {
   return (
     <Container>
       <Line>
         <Text variant="title2_sb">금액</Text>
-        <PriceText variant="title2_sb">70,000 원</PriceText>
+        <PriceText variant="title2_sb">
+          {formatPrice(price + addPrice * (reserveNum - 1))} 원
+        </PriceText>
       </Line>
 
       <Message variant="caption1_rg">

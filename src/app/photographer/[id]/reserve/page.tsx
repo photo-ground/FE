@@ -1,98 +1,16 @@
-'use client';
+import getPhotographerData from './getPhotographerData';
+import PhotographerReserveScreen from './screen';
 
-import { useState } from 'react';
-import styled from 'styled-components';
-import TNB from '@/components/TNB';
-import CTAButton from '@/components/atoms/CTAButton';
-import { DivideLine } from '@/app/signup/styles';
-import Info from './_components/Info';
-import Place from './_components/Place';
-import NumberSelector from './_components/NumberSelector';
-import DateTime from './_components/DateTime';
-import Request from './_components/Request';
-import Price from './_components/Price';
+export default async function PhotographerReservePage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const photographerData = await getPhotographerData(params.id);
 
-const ButtonWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 0.5rem;
+  if (!photographerData) {
+    return null;
+  }
 
-  padding: 1.25rem;
-`;
-
-export default function PhotographerReservePage() {
-  const [data, setData] = useState<{
-    univName: string | null;
-    reserveNum: number;
-    date: Date | null;
-    requirement: string;
-    startTime: string | null;
-  }>({
-    univName: null,
-    reserveNum: 1,
-    date: null,
-    requirement: '',
-    startTime: null,
-  });
-
-  const onChangeUniv = (newValue: string) => {
-    setData({ ...data, univName: newValue });
-  };
-
-  const onChangeNum = (newValue: number) => {
-    if (newValue <= 0) {
-      return;
-    }
-    setData({ ...data, reserveNum: newValue });
-  };
-
-  const onChangeDate = (newValue: Date) => {
-    setData({ ...data, date: newValue });
-  };
-
-  const onChangeRequest = (newValue: string) => {
-    setData({ ...data, requirement: newValue });
-  };
-
-  const onChangeTime = (newValue: string) => {
-    setData({ ...data, startTime: newValue });
-  };
-
-  return (
-    <div>
-      <TNB.SubTitle text="예약 신청" />
-
-      <Info />
-
-      <Place value={data.univName} onChange={onChangeUniv} />
-
-      <DivideLine />
-
-      <NumberSelector value={data.reserveNum} onChange={onChangeNum} />
-
-      <DivideLine />
-
-      <DateTime
-        date={data.date}
-        onChangeDate={onChangeDate}
-        time={data.startTime}
-        onChangeTime={onChangeTime}
-      />
-
-      <DivideLine />
-
-      <Request value={data.requirement} onChange={onChangeRequest} />
-
-      <DivideLine />
-
-      <Price />
-
-      <DivideLine />
-
-      <ButtonWrapper>
-        <CTAButton text="취소" variant="secondary" />
-        <CTAButton text="신청하기" disabled />
-      </ButtonWrapper>
-    </div>
-  );
+  return <PhotographerReserveScreen photographerData={photographerData} />;
 }

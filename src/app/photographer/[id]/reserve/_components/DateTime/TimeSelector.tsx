@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import Text from '@/components/atoms/Text';
+import { PhotographerReserve } from '../../getPhotographerData';
 
 const Container = styled.div`
   display: flex;
@@ -81,9 +82,11 @@ function TimeBlock({
 export default function TimeSelector({
   value,
   onChange,
+  timeSlot,
 }: {
   value: string | null;
   onChange: (newValue: string) => void;
+  timeSlot: number[];
 }) {
   return (
     <Container>

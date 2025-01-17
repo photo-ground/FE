@@ -18,6 +18,10 @@ const calendar = getDateList(new Date());
 
 const DAY_LIST = ['일', '월', '화', '수', '목', '금', '토'];
 
+function formatDate(date: Date) {
+  return `${date.getFullYear()}. ${date.getMonth() + 1}`;
+}
+
 export default function CalendarSmall({
   value,
   onChange,
@@ -29,7 +33,7 @@ export default function CalendarSmall({
     <Container>
       <Header>
         <LeftChevronIcon />
-        <Text variant="header3">2024.12</Text>
+        <Text variant="header3">{formatDate(new Date())}</Text>
         <RightChevronIcon />
       </Header>
 

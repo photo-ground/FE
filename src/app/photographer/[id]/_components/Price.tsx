@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
+import formatPrice from '@/lib/formatPrice';
 import { PhotographerDetail } from '../getPhotographerData';
 
 const Container = styled.div`
@@ -19,15 +20,6 @@ const Message = styled(Text)`
   color: ${({ theme }) => theme.colors.gray[400]};
   text-align: right;
 `;
-
-function formatPrice(value: number) {
-  return new Intl.NumberFormat('ko-KR', {
-    style: 'currency',
-    currency: 'KRW',
-  })
-    .format(value)
-    .replace('₩', '');
-}
 
 export default function Price({
   price,
