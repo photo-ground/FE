@@ -1,38 +1,36 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { useQuery } from '@tanstack/react-query';
 
-interface Photographer {
-  photographerName: string;
-  photographerId: number;
-  age: number;
-  gender: string;
-  profileUrl: string;
-}
+import { PhotographerProps } from '@/types/photographer';
+import { PostProps } from '@/types/post';
 
-interface PhotographerResponse {
-  photographerList: Photographer[];
-  hasNext: boolean;
-}
-
-async function getActivePhotographer(): Promise<PhotographerResponse> {
-  const rawResponse = await fetch(
+export async function getActivePhotographer(): Promise<PhotographerProps> {
+  // const res = await fetch('https://jsonplaceholder.typicode.com/users');
+  const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer/active`,
-    { method: 'GET' },
   );
-
-  if (!rawResponse.ok) {
-    const response = await rawResponse.json();
-    throw new Error(response.message || '문제가 발생했습니다.');
+  console.log(res.ok);
+  if (!res.ok) {
+    const errorResponse = await res.json();
+    throw new Error(errorResponse.message || '문제가 발생했습니다.');
   }
 
-  return rawResponse.json(); // 응답 데이터를 반환
+  return res.json(); // 성공적인 JSON 데이터 반환
 }
 
-export default function useActivePhotographer() {
-  return useQuery({
-    queryKey: ['activePhotographer'],
-    queryFn: getActivePhotographer,
-    staleTime: 5 * 60 * 1000, // 데이터 캐싱 시간 설정 (5분)
-    retry: 2, // 실패 시 재시도 횟수
-  });
+export async function getPostByUniv(univ: string): Promise<PostProps> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts?univ=${univ}
+`,
+    {
+      next: {
+        tags: ['postList', 'hasNext', univ],
+      },
+    },
+  );
+  if (!res.ok) {
+    const errorResponse = await res.json();
+    throw new Error(errorResponse.message || '문제가 발생했습니다.');
+  }
+
+  return res.json(); // 성공적인 JSON 데이터 반환
 }

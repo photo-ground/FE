@@ -5,8 +5,8 @@ import styled from 'styled-components';
 
 import { IconButton } from '@mui/material';
 import CloseIcon from '@/assets/CloseIcon';
+import { photoSpotProps, postByUnivProps } from '@/types/photoSpot';
 import Slider from './Slider';
-import { photoSpotProps, postByUnivProps } from '../types';
 import useSpotStore from '../_store';
 
 const ModalContainer = styled.div`
