@@ -4,14 +4,15 @@ import Text from '@/components/atoms/Text';
 type ActiveState = 'active' | 'inactive';
 
 const Button = styled.button<{ active: ActiveState }>`
-  padding: 0.688rem 1.25rem;
+  width: inherit;
+  padding: 8px;
   background: ${({ theme, active }) =>
     active === 'active' ? theme.colors.primary[100] : 'transparent'};
   color: ${({ theme, active }) =>
     active === 'active' ? theme.colors.white : theme.colors.gray[200]};
   border: ${({ theme, active }) =>
     active === 'active' ? 'none' : `1px solid ${theme.colors.gray[200]}`};
-  border-radius: 1.5rem;
+  border-radius: 8px;
   cursor: pointer;
 
   &:hover {

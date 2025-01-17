@@ -29,6 +29,7 @@ export async function getUnivSpotList(
       },
     },
   );
+  console.log(res);
   if (!res.ok) {
     const errorResponse = await res.json();
     throw new Error(errorResponse.message || '문제가 발생했습니다.');
