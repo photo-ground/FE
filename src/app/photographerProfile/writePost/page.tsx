@@ -1,12 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import TNB from '@/components/TNB';
 import { useRouter } from 'next/navigation';
 import CTAButton from '@/components/atoms/CTAButton';
 import UploadImages from './_component/UploadImages';
 import Checkbox from './_component/CheckBoxInput';
-import styled from 'styled-components';
 
 const ButtonBox = styled.div`
   margin: 0 20px;

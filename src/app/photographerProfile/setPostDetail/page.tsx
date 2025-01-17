@@ -18,11 +18,11 @@ import styled from 'styled-components';
 import Spacer from '@/components/Spacer';
 import Divider from '@/components/Divider';
 import Dropdown from '@/components/Dropdown';
+import CTAButton from '@/components/atoms/CTAButton';
+import { PostInfoProps, PostUploadContainerProps } from '@/types/post';
 import UnivRadioGroup from './_component/UnivRadioGroup';
 import ImagePreviewItem from '../_components/ImagePreviewItem';
 import PhotoSpotByUniv from '../_data/PhotospotByUniv';
-import CTAButton from '@/components/atoms/CTAButton';
-import { PostInfoProps, PostUploadContainerProps } from '@/types/post';
 // import Filter from '@/app/home/_components/Filter';
 
 const Title = styled(Text)`
@@ -104,7 +104,7 @@ export default function PostDetailPage() {
       const initialSpotIds = Array(images.length).fill(-1);
       setSpotIds(initialSpotIds);
     }
-  }, [images.length]);
+  });
 
   // 임시 데이터 -> api연결 후 변경
   const spotData: Option[] = PhotoSpotByUniv.map((e) => {
@@ -162,8 +162,8 @@ export default function PostDetailPage() {
     onSuccess: () => {
       console.log('Post created successfully');
     },
-    onError: (error) => {
-      console.error('Error creating post:', error);
+    onError: (err) => {
+      console.error('Error creating post:', err);
     },
   });
   useEffect(() => {
@@ -201,7 +201,7 @@ export default function PostDetailPage() {
       const postInfoData: PostInfoProps = {
         univId: selectedUniv.univId,
         content: textareaContent,
-        spotIds: spotIds,
+        spotIds,
       };
 
       const newContent: PostUploadContainerProps = {
@@ -211,10 +211,10 @@ export default function PostDetailPage() {
 
       createPostMutation.mutate({
         photographerId: 5,
-        newContent: newContent,
+        newContent,
       });
       console.log({
-        newContent: newContent,
+        newContent,
       });
     }
   };

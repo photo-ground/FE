@@ -1,5 +1,4 @@
 // src/store/useImageStore.ts
-import { Stats } from 'fs';
 import { create } from 'zustand';
 
 interface ImageStore {

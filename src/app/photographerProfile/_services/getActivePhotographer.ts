@@ -61,13 +61,13 @@ export async function postNewContent(
     formData.append(`file${index}`, photo);
   });
   // FormData 데이터 확인
-  for (const [key, value] of formData.entries()) {
-    if (value instanceof Blob) {
-      console.log(`Key: ${key}, Value: [Blob], Type: ${value.type}`);
-    } else {
-      console.log(`Key: ${key}, Value: ${value}`);
-    }
-  }
+  // for (const [key, value] of formData.entries()) {
+  //   if (value instanceof Blob) {
+  //     console.log(`Key: ${key}, Value: [Blob], Type: ${value.type}`);
+  //   } else {
+  //     console.log(`Key: ${key}, Value: ${value}`);
+  //   }
+  // }
   // 기본 헤더 구성
   const getHeaders = (token: string) => ({
     Authorization: `${token}`,
@@ -83,7 +83,7 @@ export async function postNewContent(
 
   try {
     // 1. Access Token 가져오기
-    let accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem('accessToken');
     console.log(accessToken);
     console.log(formData);
 

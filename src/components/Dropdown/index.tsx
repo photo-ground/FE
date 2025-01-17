@@ -146,7 +146,7 @@ export default function Dropdown({
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
-  const [selectedValue, setSelectedValue] = useState<number | null>(null);
+  // const [selectedValue, setSelectedValue] = useState<number | null>(null);
 
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
