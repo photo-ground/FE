@@ -6,7 +6,7 @@ export default async function PhotographerReservePage({
 }: {
   params: { id: string };
 }) {
-  const photographerData = await getPhotographerData(params.id);
+  const photographerData = await getPhotographerData(await params.id);
 
   if (!photographerData) {
     return null;

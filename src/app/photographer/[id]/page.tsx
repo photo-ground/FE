@@ -8,7 +8,12 @@ export default async function PhotographerDetailPage({
 }) {
   const photographerData = await getPhotographerData(await params.id);
 
-  return <PhotographerDetailScreen data={photographerData} />;
+  return (
+    <PhotographerDetailScreen
+      photographerId={await params.id}
+      data={photographerData}
+    />
+  );
 }
 
 export const runtime = 'edge';

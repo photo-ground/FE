@@ -30,8 +30,10 @@ const ButtonWrapper = styled(Link)`
 `;
 
 export default function PhotographerDetailScreen({
+  photographerId,
   data,
 }: {
+  photographerId: string;
   data: PhotographerDetail;
 }) {
   const {
@@ -65,13 +67,13 @@ export default function PhotographerDetailScreen({
 
       <DivideLine />
 
-      <Review />
+      <Review photographerId={photographerId} />
 
       <DivideLine />
 
       <Feed />
 
-      <ButtonWrapper href="/photographer/1/reserve">
+      <ButtonWrapper href={`/photographer/${photographerId}/reserve`}>
         <CTAButton text="예약하기" />
       </ButtonWrapper>
     </Container>
