@@ -22,6 +22,7 @@
     "@mui/system": "^6.3.0",
     "@tanstack/react-query-devtools": "^5.64.0",
     "@types/navermaps": "^3.7.8",
+    "axios": "^1.7.9",
     "next": "15.0.1",
     "react": "19.0.0-rc-69d4b800-20241021",
     "react-dom": "19.0.0-rc-69d4b800-20241021",
