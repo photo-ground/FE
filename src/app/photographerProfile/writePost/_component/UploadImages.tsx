@@ -1,7 +1,7 @@
 import AddImageIcon from '@/assets/AddImageIcon';
 import Text from '@/components/atoms/Text';
 import useImageStore from '@/store/useImageStore';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ImagePreviewItem from '../../_components/ImagePreviewItem';
 
@@ -36,38 +36,47 @@ const AddImage = styled.label`
 
 export default function UploadImages() {
   const { images, addImage, removeImage } = useImageStore();
+  // 이미지 : File[] -> base64로 변환
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
 
   const addImageFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = e.target.files;
     if (!selectedFiles) return;
 
-    if (images.length + selectedFiles.length > 9) {
+    const newFiles = Array.from(selectedFiles);
+
+    if (images.length + newFiles.length > 9) {
       alert('이미지는 최대 9장까지 업로드할 수 있습니다.');
       return;
     }
 
-    // 각 파일에 대해 FileReader 생성
-    const fileReaders = Array.from(selectedFiles).map(
-      (file) =>
-        new Promise<string>((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () => {
-            if (reader.result) resolve(reader.result as string);
-          };
-          reader.onerror = () => reject(new Error('파일 읽기 실패'));
-          reader.readAsDataURL(file);
-        }),
-    );
-
-    console.log(fileReaders);
-    try {
-      // 모든 파일을 읽은 후 상태 업데이트
-      const results = await Promise.all(fileReaders);
-      results.forEach((result) => addImage(result)); // Zustand 상태에 추가
-    } catch (error) {
-      console.error('이미지 파일 읽기 중 오류 발생:', error);
-    }
+    newFiles.forEach((file) => addImage(file)); // File 객체를 상태에 추가
   };
+
+  useEffect(() => {
+    // File[]을 base64 URL로 변환
+    const generateImageUrls = async () => {
+      const urls = await Promise.all(
+        images.map((file) => {
+          return new Promise<string>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              if (reader.result) {
+                resolve(reader.result as string);
+              }
+            };
+            reader.onerror = (error) => reject(error);
+            reader.readAsDataURL(file);
+          });
+        }),
+      );
+      setImageUrls(urls);
+    };
+
+    if (images.length > 0) {
+      generateImageUrls();
+    }
+  }, [images]);
 
   return (
     <form>
@@ -78,7 +87,7 @@ export default function UploadImages() {
         </Text>
       </Title>
       <UploadArea>
-        {images.map((src, index) => (
+        {imageUrls.map((src, index) => (
           <ImagePreviewItem
             key={src}
             src={src}

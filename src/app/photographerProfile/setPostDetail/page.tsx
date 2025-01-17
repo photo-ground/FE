@@ -139,7 +139,8 @@ export default function PostDetailPage() {
     if (images.length > 0) {
       generateImageUrls();
     }
-  });
+  }, [images]);
+
   // Univ 정보를 가져오는 useQuery
   const { isLoading, isError, data, error } = useQuery<PhotoSpotListProps[]>({
     queryKey: ['univSpotList', selectedUniv],
