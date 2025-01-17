@@ -100,10 +100,11 @@ export default function PostDetailPage() {
   } = useImageStore();
 
   useEffect(() => {
-    // 이미지 리스트 크기와 동일한 빈 배열 생성
-    const initialSpotIds = Array(images.length).fill(-1);
-    setSpotIds(initialSpotIds);
-  }, []);
+    if (spotIds.length !== images.length) {
+      const initialSpotIds = Array(images.length).fill(-1);
+      setSpotIds(initialSpotIds);
+    }
+  }, [images.length]);
 
   // 임시 데이터 -> api연결 후 변경
   const spotData: Option[] = PhotoSpotByUniv.map((e) => {
@@ -209,7 +210,10 @@ export default function PostDetailPage() {
       };
 
       createPostMutation.mutate({
-        photographerId: 3,
+        photographerId: 5,
+        newContent: newContent,
+      });
+      console.log({
         newContent: newContent,
       });
     }
@@ -244,7 +248,7 @@ export default function PostDetailPage() {
         )}
         {imageUrls.length > 0 ? (
           imageUrls.map((src, index) => (
-            <SelectPhotoSpot>
+            <SelectPhotoSpot key={src}>
               <ImagePreviewItem
                 key={src}
                 src={src}
