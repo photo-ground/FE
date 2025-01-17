@@ -13,6 +13,7 @@ import RightChevronIcon from '@/assets/RightChevronIcon';
 import SearchEngine from './_components/SearchEngine';
 import Filter from './_components/Filter';
 import { Option, UNIV_LIST, UnivLabel, UnivValue } from './type/Option';
+import useActivePhotographer from './_services/getActivePhotographer';
 import postByUnivData from './_data/postByUnivData';
 
 const Container = styled.div`
@@ -75,13 +76,13 @@ export default function HomePage() {
   const [univ, setUniv] = useState<UnivValue | null>('yonsei');
   const [univTitle, setUnivTitle] = useState<UnivLabel | null>('연세대학교');
   // TODO : 10개의 카드 데이터를 생성 (임시데이터) -> api 명세서보고 수정
-  const cards = Array.from({ length: 10 }, (_, index) => ({
-    id: index,
-    content: 'This is a card.',
-    size: 'small',
-    src: 'https://via.placeholder.com/150',
-    title: `Card ${index + 1}`,
-  }));
+  // const cards = Array.from({ length: 10 }, (_, index) => ({
+  //   id: index,
+  //   content: 'This is a card.',
+  //   size: 'small',
+  //   src: 'https://via.placeholder.com/150',
+  //   title: `Card ${index + 1}`,
+  // }));
 
   // TODO : /api/posts?univ=yonsei&cursor={postId}
   // (첫 조회인 경우 : /api/posts?univ=yonsei)
@@ -89,6 +90,15 @@ export default function HomePage() {
     setUniv(prop.value);
     setUnivTitle(prop.label);
   };
+
+  const { data, isLoading, isError, error } = useActivePhotographer();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error: {(error as Error).message}</div>;
+  }
   return (
     <Container>
       <Background src="/images/background1.webp" alt="background" />
@@ -104,12 +114,12 @@ export default function HomePage() {
         </IconTextLink>
       </TitleContainer>
       <CardContainerX>
-        {cards.map((card) => (
+        {data?.photographerList.map((card) => (
           <Card
-            key={card.id}
+            key={card.photographerId}
             size="round"
-            src={card.src}
-            etc={<CardTitle>{card.title}</CardTitle>}
+            src={card.profileUrl}
+            etc={<CardTitle>{card.photographerName}</CardTitle>}
           />
         ))}
       </CardContainerX>
