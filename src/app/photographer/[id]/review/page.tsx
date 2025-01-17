@@ -6,7 +6,7 @@ export default async function PhotographerReviewPage({
 }: {
   params: { id: string };
 }) {
-  const reviewData = await getReviewData(await params.id);
+  const reviewData = await getReviewData(params.id);
 
   return <PhotographerReviewScreen data={reviewData} />;
 }

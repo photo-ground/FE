@@ -6,11 +6,11 @@ export default async function PhotographerDetailPage({
 }: {
   params: { id: string };
 }) {
-  const photographerData = await getPhotographerData(await params.id);
+  const photographerData = await getPhotographerData(params.id);
 
   return (
     <PhotographerDetailScreen
-      photographerId={await params.id}
+      photographerId={params.id}
       data={photographerData}
     />
   );
