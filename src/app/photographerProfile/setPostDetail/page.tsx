@@ -14,8 +14,11 @@ import Text from '@/components/atoms/Text';
 import styled from 'styled-components';
 import Spacer from '@/components/Spacer';
 import Divider from '@/components/Divider';
+import Dropdown from '@/components/Dropdown';
 import UnivRadioGroup from './_component/UnivRadioGroup';
 import ImagePreviewItem from '../_components/ImagePreviewItem';
+import PhotoSpotByUniv from '../_data/PhotospotByUniv';
+import CTAButton from '@/components/atoms/CTAButton';
 // import Filter from '@/app/home/_components/Filter';
 
 const Title = styled(Text)`
@@ -26,16 +29,33 @@ const UploadArea = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   width: inherit;
-  gap: 8px;
+  gap: 16px 10px;
 `;
 const Textarea = styled.textarea`
-  border: 1px solid ${({ theme }) => theme.colors.gray[100]};
+  border: 1px solid ${({ theme }) => theme.colors.gray[600]};
   border-radius: 8px;
   background-color: transparent;
   padding: 20px;
   height: 120px;
   width: calc(100% - 40px);
   margin: 20px;
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    sans-serif;
+
   resize: none;
   outline: none;
   &::placeholder {
@@ -48,7 +68,23 @@ const SelectPhotoSpot = styled.div`
   flex-direction: column;
   gap: 8px;
 `;
+
+const ButtonBox = styled.div`
+  margin: 0 20px;
+`;
+interface Options {
+  label: string;
+  value: string | number;
+}
 export default function PostDetailPage() {
+  //
+  // TODO : 추후 spotData를 선택된 대학 기준으로 가져오도록
+
+  const spotData: Options[] = PhotoSpotByUniv.map((e) => {
+    const { spotId, spotName } = e;
+    return { label: spotName, value: spotId };
+  });
+
   // 이미지 리스트
   const { images, removeImage } = useImageStore();
 
@@ -67,6 +103,13 @@ export default function PostDetailPage() {
   const handleSelectionChange = (univ: string) => {
     setSelectedUniv(univ);
   };
+
+  // 스팟 선택 핸들러
+  const handleDropdown = (value: string) => {
+    alert(value);
+  };
+
+  const handleFormSubmit = () => {};
 
   return (
     <div>
@@ -104,7 +147,13 @@ export default function PostDetailPage() {
                 alt={`Upload File[${index}]`}
                 onDelete={() => removeImage(index)}
               />
-              <div>hello</div>
+              <Dropdown
+                variant="filter"
+                key={index}
+                options={spotData}
+                placeholder="포토스팟 추가"
+                onSelect={handleDropdown}
+              />
               {/* <Filter optionList={} /> */}
             </SelectPhotoSpot>
           ))
@@ -120,6 +169,18 @@ export default function PostDetailPage() {
       <Title variant="title2_sb">글 작성</Title>
 
       <Textarea placeholder="사진을 소개해주세요!" />
+
+      <Spacer size="80px" />
+      <ButtonBox>
+        <CTAButton
+          text="다음으로"
+          variant="primary"
+          // disabled={goNext}
+          onClick={handleFormSubmit}
+        />
+      </ButtonBox>
+
+      <Spacer size="6 0px" />
     </div>
   );
 }

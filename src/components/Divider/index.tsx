@@ -7,7 +7,7 @@ type DividerProps = {
 
 const Divider = styled.div<DividerProps>`
   height: ${(props) => props.size || '1px'};
-  color: ${(props) => props.color || '#333333'};
+  background: ${(props) => props.color || '#333333'};
   width: 100%;
 `;
 

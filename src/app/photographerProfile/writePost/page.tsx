@@ -6,7 +6,11 @@ import { useRouter } from 'next/navigation';
 import CTAButton from '@/components/atoms/CTAButton';
 import UploadImages from './_component/UploadImages';
 import Checkbox from './_component/CheckBoxInput';
+import styled from 'styled-components';
 
+const ButtonBox = styled.div`
+  margin: 0 20px;
+`;
 export default function WritePostPage() {
   const router = useRouter();
   const [isPermitted, setIsPermitted] = useState(true);
@@ -40,12 +44,14 @@ export default function WritePostPage() {
         text="동일한 학교 내의 사진이에요"
       />
 
-      <CTAButton
-        text="다음으로"
-        variant="primary"
-        disabled={goNext}
-        onClick={handleGoNext}
-      />
+      <ButtonBox>
+        <CTAButton
+          text="다음으로"
+          variant="primary"
+          disabled={goNext}
+          onClick={handleGoNext}
+        />
+      </ButtonBox>
     </div>
   );
 }
