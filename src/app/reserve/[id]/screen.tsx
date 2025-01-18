@@ -36,7 +36,7 @@ export default function ReserveDetailScreen() {
 
         <State />
 
-        <CTAButton variant="secondary" text="예약 취소하기" />
+        <CTAButton variant="tertiary" text="예약 취소하기" />
       </Wrapper>
     </Container>
   );

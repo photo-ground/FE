@@ -1,7 +1,7 @@
 import getPhotographerData from './getPhotographerData';
-import PhotographerDetailScreen from './screen';
+import PhotographerReserveScreen from './screen';
 
-export default async function PhotographerDetailPage({
+export default async function PhotographerReservePage({
   params,
 }: {
   params: Promise<{ id: string }>;
@@ -9,9 +9,11 @@ export default async function PhotographerDetailPage({
   const id = (await params).id!;
   const photographerData = await getPhotographerData(id);
 
-  return (
-    <PhotographerDetailScreen photographerId={id} data={photographerData} />
-  );
+  if (!photographerData) {
+    return null;
+  }
+
+  return <PhotographerReserveScreen photographerData={photographerData} />;
 }
 
 export const runtime = 'edge';
