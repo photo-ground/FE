@@ -28,11 +28,18 @@ const DivideLine = styled.div`
 
 const ButtonWrapper = styled(Link)`
   position: fixed;
-  bottom: 2rem;
+  bottom: 0;
 
   width: 100%;
   max-width: ${BREAK_POINT}px;
   padding: 0 1.25rem;
+  padding-bottom: 2rem;
+
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    ${({ theme }) => theme.colors.background.primary} 50%
+  );
 `;
 
 export default function PhotographerDetailScreen({
