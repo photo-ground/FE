@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
 import { PhotographerDetail } from '../getPhotographerData';
+import { PostSummary } from '../getPhotographerPosts';
 
 const Container = styled.div`
   display: flex;
@@ -32,12 +33,15 @@ const Image = styled.img`
   width: 100%;
   aspect-ratio: 1/1;
   border-radius: 0.125rem;
+  object-fit: cover;
 `;
 
 export default function Feed({
   styleList,
+  postList,
 }: {
   styleList: PhotographerDetail['styleList'];
+  postList: PostSummary[];
 }) {
   return (
     <Container>
@@ -50,16 +54,9 @@ export default function Feed({
       </TagArea>
 
       <Images>
-        <Image src="/images/yonsei.jpg" />
-        <Image src="/images/yonsei.jpg" />
-        <Image src="/images/yonsei.jpg" />
-        <Image src="/images/yonsei.jpg" />
-        <Image src="/images/yonsei.jpg" />
-        <Image src="/images/yonsei.jpg" />
-        <Image src="/images/yonsei.jpg" />
-        <Image src="/images/yonsei.jpg" />
-        <Image src="/images/yonsei.jpg" />
-        <Image src="/images/yonsei.jpg" />
+        {postList.map((post) => (
+          <Image key={post.postId} src={post.firstImageUrl} />
+        ))}
       </Images>
     </Container>
   );
