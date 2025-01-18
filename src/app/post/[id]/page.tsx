@@ -9,7 +9,5 @@ export default async function PostPage({
   const id = (await params).id!;
   const postData = await getPostData(id);
 
-  console.log(postData);
-
   return <PostScreen postData={postData} />;
 }

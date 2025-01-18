@@ -27,6 +27,7 @@
     "react-dom": "19.0.0-rc-69d4b800-20241021",
     "styled-components": "^6.1.13",
     "styled-normalize": "^8.1.1",
+    "swiper": "^11.2.1",
     "vercel": "^32.3.0",
     "zustand": "^5.0.2"
   },
