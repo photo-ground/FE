@@ -41,7 +41,7 @@ export default function PhotographerList({
 
   return (
     <Container className="masonry-container">
-      {photographerList.map((photographer: PhotographerSummary) => (
+      {photographerList?.map((photographer: PhotographerSummary) => (
         <div id="masonry-card" key={photographer.photographerId}>
           <CardWrapper href={`/photographer/${photographer.photographerId}`}>
             <Card

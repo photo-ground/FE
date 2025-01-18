@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
+
 import { PhotographerDetail } from '../getPhotographerData';
 import { PostSummary } from '../getPhotographerPosts';
 
