@@ -7,7 +7,7 @@ import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import CTAButton from '@/components/atoms/CTAButton';
-import BREAK_POINT from '@/styles/constants';
+import FloatingButton from '@/components/FloatingButton';
 
 import PhotographerProfile from './_components/PhotographerProfile';
 import Price from './_components/Price';
@@ -16,7 +16,6 @@ import Review from './_components/Review';
 import Feed from './_components/Feed';
 import { PhotographerDetail } from './getPhotographerData';
 import getPhotographerPosts, { PostSummary } from './getPhotographerPosts';
-import FloatingButton from '@/components/FloatingButton';
 
 const Container = styled.div`
   padding-bottom: 6.125rem;

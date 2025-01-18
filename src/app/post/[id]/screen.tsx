@@ -5,11 +5,10 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import TNB from '@/components/TNB';
 import CTAButton from '@/components/atoms/CTAButton';
-import BREAK_POINT from '@/styles/constants';
+import FloatingButton from '@/components/FloatingButton';
 import { PostDetail } from './getPostData';
 import PostInfo from './_components/PostInfo';
 import Photo from './_components/Photo';
-import FloatingButton from '@/components/FloatingButton';
 
 const Container = styled.div`
   padding-bottom: 7rem; // todo
