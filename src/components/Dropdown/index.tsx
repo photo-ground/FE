@@ -2,11 +2,7 @@ import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import DownChevronIcon from '@/assets/DownChevronIcon';
 import Text from '@/components/atoms/Text';
-
-export interface Option {
-  value: number;
-  label: string;
-}
+import { Option } from '@/types/option';
 
 const Container = styled.div`
   display: flex;
@@ -146,7 +142,6 @@ export default function Dropdown({
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
-  // const [selectedValue, setSelectedValue] = useState<number | null>(null);
 
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);

@@ -13,82 +13,27 @@ import {
   getUnivSpotList,
   postNewContent,
 } from '@/app/photographerProfile/_services/getActivePhotographer';
-import Text from '@/components/atoms/Text';
-import styled from 'styled-components';
+
 import Spacer from '@/components/Spacer';
 import Divider from '@/components/Divider';
 import Dropdown from '@/components/Dropdown';
 import CTAButton from '@/components/atoms/CTAButton';
 import { PostInfoProps, PostUploadContainerProps } from '@/types/post';
+import { Option } from '@/types/option';
 import UnivRadioGroup from './_component/UnivRadioGroup';
 import ImagePreviewItem from '../_components/ImagePreviewItem';
-import PhotoSpotByUniv from '../_data/PhotospotByUniv';
-// import Filter from '@/app/home/_components/Filter';
+import {
+  ButtonBox,
+  SelectPhotoSpot,
+  Textarea,
+  Title,
+  UploadArea,
+} from './style';
 
-const Title = styled(Text)`
-  margin: 0 20px;
-`;
-const UploadArea = styled.div`
-  margin: 20px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  width: inherit;
-  gap: 16px 10px;
-`;
-const Textarea = styled.textarea`
-  border: 1px solid ${({ theme }) => theme.colors.gray[600]};
-  border-radius: 8px;
-  background-color: transparent;
-  padding: 20px;
-  height: 120px;
-  width: calc(100% - 40px);
-  margin: 20px;
-  font-family:
-    'Pretendard Variable',
-    Pretendard,
-    -apple-system,
-    BlinkMacSystemFont,
-    system-ui,
-    Roboto,
-    'Helvetica Neue',
-    'Segoe UI',
-    'Apple SD Gothic Neo',
-    'Noto Sans KR',
-    'Malgun Gothic',
-    'Apple Color Emoji',
-    'Segoe UI Emoji',
-    'Segoe UI Symbol',
-    sans-serif;
-
-  resize: none;
-  outline: none;
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.gray[100]};
-  }
-`;
-
-const SelectPhotoSpot = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
-const ButtonBox = styled.div`
-  margin: 0 20px;
-`;
-interface Option {
-  value: number;
-  label: string;
-}
 export default function PostDetailPage() {
-  // TODO : 학교 선택 전, 사진 별 스팟 선택 비활성화
-  // TODO : 이미지 별 포토 스팟 선택 -> 사진 갯수만큼 크기의 빈 배열 생성(zustand), 이후 스팟 선택시, 해당 idx에 스팟 아이디 추가
-  // TODO : 모든 학교 선택 완료 후, 업로드 버튼 활성화
-  // TODO : 추후 spotData를 선택된 대학 기준으로 가져오도록
-  // TODO :
-
   const [isComplete, setIsComplete] = useState<boolean>(false);
   const [textareaContent, setTextareaContent] = useState<string>('');
+  const [spotData, setSpotData] = useState<Option[]>([]);
   // 이미지 리스트 & 포토스팟 선택 리스트 (zustand)
   const {
     images,
@@ -107,16 +52,17 @@ export default function PostDetailPage() {
   });
 
   // 임시 데이터 -> api연결 후 변경
-  const spotData: Option[] = PhotoSpotByUniv.map((e) => {
-    const { spotId, spotName } = e;
-    return { value: spotId, label: spotName };
-  });
+  // const spotData: UnivOption[] = PhotoSpotByUniv.map((e) => {
+  //   const { spotId, spotName } = e;
+  //   return { value: spotId, label: spotName };
+  // });
 
   // 선택된 대학 상태
   const [selectedUniv, setSelectedUniv] = useState<UnivOption | null>(null);
 
   // 이미지 : File[] -> base64로 변환
   const [imageUrls, setImageUrls] = useState<string[]>([]);
+
   useEffect(() => {
     // File[]을 base64 URL로 변환
     const generateImageUrls = async () => {
@@ -150,6 +96,16 @@ export default function PostDetailPage() {
     enabled: !!selectedUniv, // selectedUniv가 null일 때는 쿼리를 비활성화
   });
 
+  useEffect(() => {
+    if (data && selectedUniv) {
+      const fetchData: Option[] = data.map((e) => {
+        const { spotId, spotName } = e;
+        return { value: spotId, label: spotName, univId: selectedUniv.univId };
+      });
+      setSpotData(fetchData);
+    }
+  }, [data, selectedUniv]);
+
   // Mutations
   const createPostMutation = useMutation({
     mutationFn: ({
@@ -166,11 +122,10 @@ export default function PostDetailPage() {
       console.error('Error creating post:', err);
     },
   });
+
   useEffect(() => {
     // 이미지 리스트 크기와 동일한 빈 배열 생성
-    // console.log(spotIds);
     if (spotIds.includes(-1) || !selectedUniv) {
-      // alert('모든 이미지에 포토스팟을 지정해야 합니다.');
       return;
     }
     setIsComplete(true);
@@ -197,7 +152,7 @@ export default function PostDetailPage() {
   const handleFormSubmit = (event: React.FormEvent) => {
     event?.preventDefault();
 
-    if (selectedUniv) {
+    if (selectedUniv && !spotIds.includes(-1)) {
       const postInfoData: PostInfoProps = {
         univId: selectedUniv.univId,
         content: textareaContent,
@@ -213,14 +168,11 @@ export default function PostDetailPage() {
         photographerId: 5,
         newContent,
       });
-      console.log({
-        newContent,
-      });
     }
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
+    <div>
       <TNB.Back text="게시글 작성" />
       <Spacer />
       <Title variant="title2_sb">촬영 장소 선택</Title>
@@ -292,6 +244,6 @@ export default function PostDetailPage() {
       </ButtonBox>
 
       <Spacer size="60px" />
-    </form>
+    </div>
   );
 }
