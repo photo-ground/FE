@@ -5,10 +5,7 @@ export default async function fetchWithAuth(
   // eslint-disable-next-line
   options: any = {},
 ) {
-  const accessToken = localStorage.getItem('accessToken');
-
   const defaultHeaders = {
-    Authorization: `${accessToken}`,
     'Content-Type': 'application/json',
   };
 
@@ -35,7 +32,7 @@ export default async function fetchWithAuth(
       throw new Error();
     }
 
-    return response.json();
+    return response;
   } catch (error) {
     console.error('요청 오류:', error);
     throw error;
