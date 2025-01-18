@@ -14,17 +14,20 @@ const Container = styled.div`
 `;
 
 export default function Place({
+  value,
   onChange,
 }: {
-  onChange: (newValue: string | number) => void;
+  value: string | null;
+  onChange: (newValue: string) => void;
 }) {
   return (
     <Container>
       <Text variant="title2_sb">촬영 장소</Text>
 
-      <DropDown
-        onSelect={onChange}
-        options={UNIV_LIST}
+      <DropDown.Primary
+        value={value}
+        onChange={onChange}
+        optionList={UNIV_LIST}
         placeholder="학교 선택"
       />
     </Container>

@@ -2,7 +2,11 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import DownChevronIcon from '@/assets/DownChevronIcon';
 import Text from '@/components/atoms/Text';
-import { Option } from '@/types/option';
+
+export interface Option {
+  value: string;
+  label: string;
+}
 
 const Container = styled.div<{ $isOpen: boolean; $isSelected?: boolean }>`
   display: flex;
@@ -68,8 +72,8 @@ export default function Primary({
   optionList,
   placeholder,
 }: {
-  value: string | number | null;
-  onChange: (newValue: string | number) => void;
+  value: string | null;
+  onChange: (newValue: string) => void;
   optionList: Option[];
   placeholder: string;
 }) {

@@ -16,7 +16,7 @@ import {
 
 import Spacer from '@/components/Spacer';
 import Divider from '@/components/Divider';
-import Dropdown from '@/components/Dropdown';
+import Dropdown from '@/components/Dropdown/index_2';
 import CTAButton from '@/components/atoms/CTAButton';
 import { PostInfoProps, PostUploadContainerProps } from '@/types/post';
 import { Option } from '@/types/option';
