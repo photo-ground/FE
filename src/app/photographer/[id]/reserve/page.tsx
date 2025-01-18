@@ -15,3 +15,5 @@ export default async function PhotographerReservePage({
 
   return <PhotographerReserveScreen photographerData={photographerData} />;
 }
+
+export const runtime = 'edge';
