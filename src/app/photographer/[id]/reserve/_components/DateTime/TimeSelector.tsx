@@ -88,6 +88,8 @@ export default function TimeSelector({
   onChange: (newValue: string) => void;
   timeSlot: number[];
 }) {
+  // console.log(timeSlot);
+
   return (
     <Container>
       <BlockWrapper>
