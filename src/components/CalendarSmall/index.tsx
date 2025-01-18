@@ -1,11 +1,11 @@
 'use client';
 
+import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
 import LeftChevronIcon from '@/assets/LeftChevronIcon';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import { PhotographerReserve } from '@/app/photographer/[id]/reserve/getPhotographerData';
 
-import getDateList from './getCalendar';
 import {
   Container,
   DateCell,
@@ -15,7 +15,7 @@ import {
   WeekList,
   WeekRow,
 } from './styles';
-import styled from 'styled-components';
+import getDateList from './getCalendar';
 
 const calendar = getDateList(new Date());
 

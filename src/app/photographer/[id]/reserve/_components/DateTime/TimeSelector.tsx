@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-
+import styled, { DefaultTheme } from 'styled-components';
 import Text from '@/components/atoms/Text';
 
 const Container = styled.div`
@@ -31,7 +30,7 @@ const getBorderColor = ({
   disabled,
   $isSelected,
 }: {
-  theme: any;
+  theme: DefaultTheme;
   disabled: boolean;
   $isSelected: boolean;
 }) => {
