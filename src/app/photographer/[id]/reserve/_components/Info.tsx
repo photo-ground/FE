@@ -3,6 +3,7 @@
 import InfoIcon from '@/assets/InfoIcon';
 import Text from '@/components/atoms/Text';
 import styled from 'styled-components';
+import { PhotographerReserve } from '../getPhotographerData';
 
 const Container = styled.div`
   display: flex;
@@ -22,10 +23,14 @@ const InfoText = styled(Text)`
   color: ${({ theme }) => theme.colors.gray[200]};
 `;
 
-export default function Info() {
+export default function Info({
+  nickname,
+}: {
+  nickname: PhotographerReserve['nickname'];
+}) {
   return (
     <Container>
-      <Text variant="body1_md">조은옹 작가님의 예약 페이지</Text>
+      <Text variant="body1_md">{nickname} 작가님의 예약 페이지</Text>
       <BottomArea>
         <InfoIcon />
         <InfoText variant="body3">

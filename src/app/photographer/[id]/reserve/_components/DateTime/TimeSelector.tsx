@@ -81,10 +81,15 @@ function TimeBlock({
 export default function TimeSelector({
   value,
   onChange,
+  // eslint-disable-next-line
+  timeSlot,
 }: {
   value: string | null;
   onChange: (newValue: string) => void;
+  timeSlot: number[];
 }) {
+  // console.log(timeSlot);
+
   return (
     <Container>
       <BlockWrapper>
