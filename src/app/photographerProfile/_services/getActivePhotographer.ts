@@ -58,7 +58,7 @@ export async function postNewContent(
 
   // 사진 파일 추가
   newContent.photos.forEach((photo, index) => {
-    formData.append(`file${index}`, photo);
+    formData.append(`photos`, photo);
   });
   // FormData 데이터 확인
   // for (const [key, value] of formData.entries()) {
@@ -79,7 +79,7 @@ export async function postNewContent(
   // });
 
   // 요청할 주소
-  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/post/${photographerId}`;
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${photographerId}`;
 
   try {
     // 1. Access Token 가져오기
@@ -94,6 +94,7 @@ export async function postNewContent(
     console.log(response);
 
     return response.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     // 3. 401 오류 발생 시 토큰 갱신
     if (error.response?.status === 401) {
@@ -105,6 +106,8 @@ export async function postNewContent(
       const retryResponse = await axios.post(url, formData, {
         headers: getHeaders(newAccessToken),
       });
+
+      console.log(retryResponse);
       return retryResponse.data;
     }
 
