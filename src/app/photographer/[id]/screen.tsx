@@ -9,6 +9,7 @@ import Price from './_components/Price';
 import Message from './_components/Message';
 import Review from './_components/Review';
 import Feed from './_components/Feed';
+import { PhotographerDetail } from './getPhotographerData';
 
 const Container = styled.div`
   padding-bottom: 6.125rem;
@@ -28,14 +29,37 @@ const ButtonWrapper = styled(Link)`
   padding: 0 1.25rem;
 `;
 
-export default function PhotographerDetailScreen() {
+export default function PhotographerDetailScreen({
+  photographerId,
+  data,
+}: {
+  photographerId: string;
+  data: PhotographerDetail;
+}) {
+  const {
+    profileUrl,
+    photographerName,
+    followerNum,
+    gender,
+    age,
+    univ,
+    price,
+  } = data;
+
   return (
     <Container>
-      <PhotographerProfile />
+      <PhotographerProfile
+        profileUrl={profileUrl}
+        photographerName={photographerName}
+        followerNum={followerNum}
+        gender={gender}
+        age={age}
+        univ={univ}
+      />
 
       <DivideLine />
 
-      <Price />
+      <Price price={price} />
 
       <DivideLine />
 
@@ -43,13 +67,13 @@ export default function PhotographerDetailScreen() {
 
       <DivideLine />
 
-      <Review />
+      <Review photographerId={photographerId} />
 
       <DivideLine />
 
       <Feed />
 
-      <ButtonWrapper href="/photographer/1/reserve">
+      <ButtonWrapper href={`/photographer/${photographerId}/reserve`}>
         <CTAButton text="예약하기" />
       </ButtonWrapper>
     </Container>
