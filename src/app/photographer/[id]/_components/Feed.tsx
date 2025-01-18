@@ -1,5 +1,7 @@
-import Text from '@/components/atoms/Text';
 import styled from 'styled-components';
+import Text from '@/components/atoms/Text';
+import { PhotographerDetail } from '../getPhotographerData';
+import { PostSummary } from '../getPhotographerPosts';
 
 const Container = styled.div`
   display: flex;
@@ -31,15 +33,20 @@ const Image = styled.img`
   width: 100%;
   aspect-ratio: 1/1;
   border-radius: 0.125rem;
+  object-fit: cover;
 `;
 
-export default function Feed() {
-  const TAG_LIST = ['세련된', '내추럴한', '투명한'];
-
+export default function Feed({
+  styleList,
+  postList,
+}: {
+  styleList: PhotographerDetail['styleList'];
+  postList: PostSummary[];
+}) {
   return (
     <Container>
       <TagArea>
-        {TAG_LIST.map((tag) => (
+        {styleList.map((tag) => (
           <Tag key={tag} variant="body3">
             {tag}
           </Tag>
@@ -47,16 +54,9 @@ export default function Feed() {
       </TagArea>
 
       <Images>
-        <Image src="/images/yonsei.jpg" />
-        <Image src="/images/yonsei.jpg" />
-        <Image src="/images/yonsei.jpg" />
-        <Image src="/images/yonsei.jpg" />
-        <Image src="/images/yonsei.jpg" />
-        <Image src="/images/yonsei.jpg" />
-        <Image src="/images/yonsei.jpg" />
-        <Image src="/images/yonsei.jpg" />
-        <Image src="/images/yonsei.jpg" />
-        <Image src="/images/yonsei.jpg" />
+        {postList.map((post) => (
+          <Image key={post.postId} src={post.firstImageUrl} />
+        ))}
       </Images>
     </Container>
   );

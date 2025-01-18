@@ -1,20 +1,12 @@
-export interface PhotographerDetail {
-  profileUrl: string;
-  photographerName: string;
-  followerNum: number;
-  gender: 'MALE' | 'FEMALE';
-  age: number;
-  univ: string[];
-  price: number;
-  addPrice: number;
-  introduction: string;
-  styleList: string[];
+export interface PostSummary {
+  postId: number;
+  firstImageUrl: string;
 }
 
-export default async function getPhotographerData(id: string) {
+export default async function getPhotographerPosts(id: string) {
   try {
     const rawResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer/${id}/intro`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer/${id}/bottom`,
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },

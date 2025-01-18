@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import CTAButton from '@/components/atoms/CTAButton';
@@ -10,6 +11,7 @@ import Message from './_components/Message';
 import Review from './_components/Review';
 import Feed from './_components/Feed';
 import { PhotographerDetail } from './getPhotographerData';
+import getPhotographerPosts from './getPhotographerPosts';
 
 const Container = styled.div`
   padding-bottom: 6.125rem;
@@ -44,7 +46,16 @@ export default function PhotographerDetailScreen({
     age,
     univ,
     price,
+    introduction,
+    styleList,
   } = data;
+  const [postList, setPostList] = useState([]);
+
+  useEffect(() => {
+    getPhotographerPosts(photographerId).then((response) => {
+      setPostList(response.posts.profilePostResponseDTOList || []);
+    });
+  }, [photographerId]);
 
   return (
     <Container>
@@ -63,7 +74,7 @@ export default function PhotographerDetailScreen({
 
       <DivideLine />
 
-      <Message />
+      <Message introduction={introduction} />
 
       <DivideLine />
 
@@ -71,7 +82,7 @@ export default function PhotographerDetailScreen({
 
       <DivideLine />
 
-      <Feed />
+      <Feed styleList={styleList} postList={postList} />
 
       <ButtonWrapper href={`/photographer/${photographerId}/reserve`}>
         <CTAButton text="예약하기" />
