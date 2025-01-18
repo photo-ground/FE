@@ -4,9 +4,10 @@ import PhotographerReserveScreen from './screen';
 export default async function PhotographerReservePage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const photographerData = await getPhotographerData(params.id);
+  const id = (await params).id!;
+  const photographerData = await getPhotographerData(id);
 
   if (!photographerData) {
     return null;

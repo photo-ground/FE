@@ -4,9 +4,10 @@ import PhotographerReviewScreen from './screen';
 export default async function PhotographerReviewPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const reviewData = await getReviewData(params.id);
+  const id = (await params).id!;
+  const reviewData = await getReviewData(id);
 
   return <PhotographerReviewScreen data={reviewData} />;
 }

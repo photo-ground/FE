@@ -4,15 +4,13 @@ import PhotographerDetailScreen from './screen';
 export default async function PhotographerDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const photographerData = await getPhotographerData(params.id);
+  const id = (await params).id!;
+  const photographerData = await getPhotographerData(id);
 
   return (
-    <PhotographerDetailScreen
-      photographerId={params.id}
-      data={photographerData}
-    />
+    <PhotographerDetailScreen photographerId={id} data={photographerData} />
   );
 }
 
