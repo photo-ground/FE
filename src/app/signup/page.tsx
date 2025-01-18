@@ -133,11 +133,13 @@ export default function SignUpPage() {
         </ButtonWrapper>
       </div>
 
-      <Modal
-        onClose={() => {
-          router.replace('/signin');
-        }}
-      />
+      {isCompleted && (
+        <Modal
+          onClose={() => {
+            router.replace('/signin');
+          }}
+        />
+      )}
     </div>
   );
 }
