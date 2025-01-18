@@ -15,7 +15,7 @@ export default async function signin(formData: FormData) {
 
     const accessToken = rawResponse.headers.get('Authorization')!;
     localStorage.setItem('accessToken', accessToken);
-    document.cookie = `accessToken=${accessToken}; Path=/; HttpOnly; Secure; SameSite=None;`;
+    document.cookie = `accessToken=${accessToken}; Path=/;`;
 
     if (!rawResponse.ok) {
       const response = await rawResponse.json();

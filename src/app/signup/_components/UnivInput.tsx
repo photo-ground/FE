@@ -53,6 +53,7 @@ const OptionWrapper = styled.div`
 
   z-index: 21; // 임의로 설정
 `;
+
 const OptionItem = styled.button`
   width: 100%;
   padding: 0.5rem 1rem;
