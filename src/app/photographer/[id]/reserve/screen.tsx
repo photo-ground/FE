@@ -98,7 +98,7 @@ export default function PhotographerReserveScreen({
       <DivideLine />
 
       <ButtonWrapper>
-        <CTAButton text="취소" variant="secondary" />
+        <CTAButton text="취소" variant="tertiary" />
         <CTAButton text="신청하기" disabled />
       </ButtonWrapper>
     </div>

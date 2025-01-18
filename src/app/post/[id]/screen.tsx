@@ -50,7 +50,7 @@ export default function PostScreen({ postData }: { postData: PostDetail }) {
 
       <ButtonWrapper>
         <Link href={`/photographer/${photographerId}`}>
-          <CTAButton text="작가 프로필 보기" variant="secondary" />
+          <CTAButton text="작가 프로필 보기" variant="tertiary" />
         </Link>
         <Link href={`/photographer/${photographerId}/reserve`}>
           <CTAButton text="예약하기" />
