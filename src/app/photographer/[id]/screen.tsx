@@ -44,6 +44,8 @@ export default function PhotographerDetailScreen({
     age,
     univ,
     price,
+    introduction,
+    styleList,
   } = data;
 
   return (
@@ -63,7 +65,7 @@ export default function PhotographerDetailScreen({
 
       <DivideLine />
 
-      <Message />
+      <Message introduction={introduction} />
 
       <DivideLine />
 
@@ -71,7 +73,7 @@ export default function PhotographerDetailScreen({
 
       <DivideLine />
 
-      <Feed />
+      <Feed styleList={styleList} />
 
       <ButtonWrapper href={`/photographer/${photographerId}/reserve`}>
         <CTAButton text="예약하기" />

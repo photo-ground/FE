@@ -1,5 +1,6 @@
-import Text from '@/components/atoms/Text';
 import styled from 'styled-components';
+import Text from '@/components/atoms/Text';
+import { PhotographerDetail } from '../getPhotographerData';
 
 const Container = styled.div`
   display: flex;
@@ -33,13 +34,15 @@ const Image = styled.img`
   border-radius: 0.125rem;
 `;
 
-export default function Feed() {
-  const TAG_LIST = ['세련된', '내추럴한', '투명한'];
-
+export default function Feed({
+  styleList,
+}: {
+  styleList: PhotographerDetail['styleList'];
+}) {
   return (
     <Container>
       <TagArea>
-        {TAG_LIST.map((tag) => (
+        {styleList.map((tag) => (
           <Tag key={tag} variant="body3">
             {tag}
           </Tag>

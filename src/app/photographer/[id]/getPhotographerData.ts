@@ -7,6 +7,8 @@ export interface PhotographerDetail {
   univ: string[];
   price: number;
   addPrice: number;
+  introduction: string;
+  styleList: string[];
 }
 
 export default async function getPhotographerData(id: string) {
