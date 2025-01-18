@@ -11,3 +11,5 @@ export default async function PostPage({
 
   return <PostScreen postData={postData} />;
 }
+
+export const runtime = 'edge';
