@@ -45,13 +45,14 @@ export default function OnboardingPage() {
       <TNB.Main />
       <Container>
         <SloganArea>
-          {/* [todo] : 현재 사용자 이름으로 업데이트  */}
+          {/* TODO : 현재 사용자 이름으로 업데이트  */}
           <Text variant="title1_rg">김사진님,</Text>
           <Text variant="title1_rg">어떤 장소를 기록할까요?</Text>
         </SloganArea>
         <div>
           {schoolList.map((item) => (
             <SchoolButtonItem
+              key={item.title}
               title={item.title}
               src={item.src}
               link={item.link}

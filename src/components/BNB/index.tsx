@@ -14,27 +14,20 @@ import { Container, Tab, TabText } from './styles';
 const MENU_LIST = [
   { title: '사진작가', route: '/photographer', icon: BNBPhotographerIcon },
   { title: '포토스팟', route: '/map', icon: BNBMapIcon },
-  { title: '홈', route: '/', icon: BNBHomeIcon },
-  { title: '예약', route: '/book', icon: BNBCalendarIcon },
+  { title: '홈', route: '/home', icon: BNBHomeIcon },
+  { title: '예약', route: '/reserve', icon: BNBCalendarIcon },
   { title: '마이페이지', route: '/my', icon: BNBProfileIcon },
 ];
-
-// [todo] 이후 고객/작가 구분하게 될 때 활성화하기
-// const MENU_LIST = [
-//   { title: '사진작가', route: '/photographer' },
-//   { title: '포토스팟', route: '/map' },
-//   { title: '홈', route: '/' },
-//   { title: '예약', route: '/book' },
-//   { title: '마이페이지', route: '/profile' },
-// ];
 
 export default function BottomNavigationBar() {
   const pathname = usePathname();
 
   if (
-    pathname === '/splash' ||
-    pathname === '/onboarding' ||
-    pathname === '/signin'
+    pathname !== '/photographer' &&
+    pathname !== '/map' &&
+    pathname !== '/home' &&
+    pathname !== '/reserve' &&
+    pathname !== '/my'
   ) {
     return null;
   }

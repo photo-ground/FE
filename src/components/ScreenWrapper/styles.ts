@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 export const FullPage = styled.div`
   height: 100dvh;
-  background: ${({ theme }) => theme.colors.background.primary};
 `;
 
 export const Container = styled.div`
@@ -12,5 +11,4 @@ export const Container = styled.div`
   max-width: ${BREAK_POINT}px;
   height: 100dvh;
   margin: auto;
-  overflow: auto;
 `;

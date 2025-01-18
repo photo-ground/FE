@@ -15,6 +15,8 @@ const GlobalStyle = createGlobalStyle`
     v2.0 | 20110126
     License: none (public domain)
   */
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://rsms.me/inter/inter.css");
 
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -43,6 +45,7 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     line-height: 1;
+    background: ${theme.colors.background.primary};
   }
   ol, ul {
     list-style: none;
@@ -59,10 +62,14 @@ const GlobalStyle = createGlobalStyle`
     border-collapse: collapse;
     border-spacing: 0;
   }
+  
+  body {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  }
 
   * {
-   box-sizing: border-box;
-   color: ${theme.colors.white}
+    box-sizing: border-box;
+    color: ${theme.colors.white}
   }
 `;
 

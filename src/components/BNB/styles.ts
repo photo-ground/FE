@@ -9,7 +9,7 @@ export const Container = styled.nav`
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 
   width: 100%;
   max-width: ${BREAK_POINT}px;
