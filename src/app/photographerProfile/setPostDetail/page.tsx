@@ -100,7 +100,7 @@ export default function PostDetailPage() {
     if (data && selectedUniv) {
       const fetchData: Option[] = data.map((e) => {
         const { spotId, spotName } = e;
-        return { value: spotId, label: spotName, univId: selectedUniv.univId };
+        return { value: spotId, label: spotName };
       });
       setSpotData(fetchData);
     }

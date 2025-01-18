@@ -29,20 +29,20 @@ export default function PhotographerReserveScreen({
   const { nickname, price, addPrice, schedule } = photographerData;
 
   const [data, setData] = useState<{
-    univName: string | null;
+    univName: string | number;
     reserveNum: number;
     date: Date | null;
     requirement: string;
     startTime: string | null;
   }>({
-    univName: null,
+    univName: '',
     reserveNum: 1,
     date: null,
     requirement: '',
     startTime: null,
   });
 
-  const onChangeUniv = (newValue: string) => {
+  const onChangeUniv = (newValue: string | number) => {
     setData({ ...data, univName: newValue });
   };
 
@@ -71,7 +71,7 @@ export default function PhotographerReserveScreen({
 
       <Info nickname={nickname} />
 
-      <Place value={data.univName} onChange={onChangeUniv} />
+      <Place onChange={onChangeUniv} />
 
       <DivideLine />
 
