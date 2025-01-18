@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
 import { PhotographerDetail } from '../getPhotographerData';
@@ -55,7 +56,9 @@ export default function Feed({
 
       <Images>
         {postList.map((post) => (
-          <Image key={post.postId} src={post.firstImageUrl} />
+          <Link key={post.postId} href={`/post/${post.postId}`}>
+            <Image src={post.firstImageUrl} />
+          </Link>
         ))}
       </Images>
     </Container>
