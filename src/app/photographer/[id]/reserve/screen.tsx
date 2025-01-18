@@ -26,7 +26,8 @@ export default function PhotographerReserveScreen({
 }: {
   photographerData: PhotographerReserve;
 }) {
-  const { nickname, price, addPrice, schedule } = photographerData;
+  const { nickname, price, addPrice, availableDate, schedule } =
+    photographerData;
 
   const [data, setData] = useState<{
     univName: string | null;
@@ -82,6 +83,7 @@ export default function PhotographerReserveScreen({
       <DateTime
         date={data.date}
         onChangeDate={onChangeDate}
+        availableDate={availableDate}
         time={data.startTime}
         onChangeTime={onChangeTime}
         schedule={schedule}

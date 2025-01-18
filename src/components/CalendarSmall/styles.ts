@@ -45,7 +45,10 @@ export const WeekRow = styled.div`
   justify-content: space-between;
 `;
 
-export const DateCell = styled.div<{ $isSelected: boolean }>`
+export const DateCell = styled.button<{
+  $isSelected: boolean;
+  disabled: boolean;
+}>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,10 +56,11 @@ export const DateCell = styled.div<{ $isSelected: boolean }>`
   width: 2.75rem;
   height: 2.75rem;
   margin: 2px;
+  background: transparent;
 
   border: ${({ theme, $isSelected }) =>
-    $isSelected ? `1px solid ${theme.colors.orange[500]}` : ''};
+    $isSelected ? `1px solid ${theme.colors.orange[500]}` : 'none'};
   border-radius: 100%;
 
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'auto' : 'pointer')};
 `;
