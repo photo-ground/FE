@@ -16,6 +16,7 @@ import Review from './_components/Review';
 import Feed from './_components/Feed';
 import { PhotographerDetail } from './getPhotographerData';
 import getPhotographerPosts, { PostSummary } from './getPhotographerPosts';
+import FloatingButton from '@/components/FloatingButton';
 
 const Container = styled.div`
   padding-bottom: 6.125rem;
@@ -24,22 +25,6 @@ const Container = styled.div`
 const DivideLine = styled.div`
   width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray[700]};
-`;
-
-const ButtonWrapper = styled(Link)`
-  position: fixed;
-  bottom: 0;
-
-  width: 100%;
-  max-width: ${BREAK_POINT}px;
-  padding: 0 1.25rem;
-  padding-bottom: 2rem;
-
-  background: linear-gradient(
-    to bottom,
-    transparent 50%,
-    ${({ theme }) => theme.colors.background.primary} 50%
-  );
 `;
 
 export default function PhotographerDetailScreen({
@@ -127,9 +112,11 @@ export default function PhotographerDetailScreen({
       <Feed styleList={styleList} postList={postList || []} />
       <div ref={ref} />
 
-      <ButtonWrapper href={`/photographer/${photographerId}/reserve`}>
-        <CTAButton text="예약하기" />
-      </ButtonWrapper>
+      <FloatingButton>
+        <Link href={`/photographer/${photographerId}/reserve`}>
+          <CTAButton text="예약하기" />
+        </Link>
+      </FloatingButton>
     </Container>
   );
 }
