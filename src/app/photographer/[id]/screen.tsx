@@ -78,8 +78,8 @@ export default function PhotographerDetailScreen({
     const pages = postData?.pages;
     if (!pages || !pages?.length) return;
 
-    setPostList([
-      ...postList,
+    setPostList((prev) => [
+      ...prev,
       ...pages[pages.length - 1].profilePostResponseDTOList,
     ]);
 
