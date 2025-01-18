@@ -10,6 +10,10 @@ import { PostDetail } from './getPostData';
 import PostInfo from './_components/PostInfo';
 import Photo from './_components/Photo';
 
+const Container = styled.div`
+  padding-bottom: 7rem; // todo
+`;
+
 const ButtonWrapper = styled.div`
   position: fixed;
   display: grid;
@@ -32,7 +36,7 @@ export default function PostScreen({ postData }: { postData: PostDetail }) {
   };
 
   return (
-    <>
+    <Container>
       <TNB.Back text="게시글" />
 
       <Photo
@@ -56,6 +60,6 @@ export default function PostScreen({ postData }: { postData: PostDetail }) {
           <CTAButton text="예약하기" />
         </Link>
       </ButtonWrapper>
-    </>
+    </Container>
   );
 }
