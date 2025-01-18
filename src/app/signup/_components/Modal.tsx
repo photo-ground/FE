@@ -8,7 +8,9 @@ const Backdrop = styled.div`
   top: 0;
   left: 0;
 
-  background: transparent;
+  background: black;
+  opacity: 60%;
+
   width: 100dvw;
   height: 100dvh;
 
@@ -25,8 +27,7 @@ const ModalContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  background: ${({ theme }) => `${theme.colors.gray[800]}CC`}; // 80% opacity
-  backdrop-filter: blur(0.25rem);
+  background: ${({ theme }) => theme.colors.gray[800]};
   width: 20.375rem;
   padding: 1.5rem;
   border-radius: 1.25rem;

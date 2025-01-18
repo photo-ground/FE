@@ -7,7 +7,7 @@ import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import CTAButton from '@/components/atoms/CTAButton';
-import BREAK_POINT from '@/styles/constants';
+import FloatingButton from '@/components/FloatingButton';
 
 import PhotographerProfile from './_components/PhotographerProfile';
 import Price from './_components/Price';
@@ -24,15 +24,6 @@ const Container = styled.div`
 const DivideLine = styled.div`
   width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray[700]};
-`;
-
-const ButtonWrapper = styled(Link)`
-  position: fixed;
-  bottom: 2rem;
-
-  width: 100%;
-  max-width: ${BREAK_POINT}px;
-  padding: 0 1.25rem;
 `;
 
 export default function PhotographerDetailScreen({
@@ -120,9 +111,11 @@ export default function PhotographerDetailScreen({
       <Feed styleList={styleList} postList={postList || []} />
       <div ref={ref} />
 
-      <ButtonWrapper href={`/photographer/${photographerId}/reserve`}>
-        <CTAButton text="예약하기" />
-      </ButtonWrapper>
+      <FloatingButton>
+        <Link href={`/photographer/${photographerId}/reserve`}>
+          <CTAButton text="예약하기" />
+        </Link>
+      </FloatingButton>
     </Container>
   );
 }
