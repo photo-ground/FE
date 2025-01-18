@@ -33,7 +33,7 @@ export default function PhotographerReserveScreen({
     reserveNum: number;
     date: Date | null;
     requirement: string;
-    startTime: string | null;
+    startTime: number | null;
   }>({
     univName: null,
     reserveNum: 1,
@@ -54,14 +54,14 @@ export default function PhotographerReserveScreen({
   };
 
   const onChangeDate = (newValue: Date) => {
-    setData({ ...data, date: newValue });
+    setData({ ...data, date: newValue, startTime: null });
   };
 
   const onChangeRequest = (newValue: string) => {
     setData({ ...data, requirement: newValue });
   };
 
-  const onChangeTime = (newValue: string) => {
+  const onChangeTime = (newValue: number) => {
     setData({ ...data, startTime: newValue });
   };
 

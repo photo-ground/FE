@@ -40,8 +40,8 @@ export default function DateTime({
 }: {
   date: Date | null;
   onChangeDate: (newValue: Date) => void;
-  time: string | null;
-  onChangeTime: (newValue: string) => void;
+  time: number | null;
+  onChangeTime: (newValue: number) => void;
   schedule: PhotographerReserve['schedule'];
 }) {
   return (

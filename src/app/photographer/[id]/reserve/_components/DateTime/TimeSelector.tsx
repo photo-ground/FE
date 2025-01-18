@@ -26,45 +26,69 @@ const TimeList = styled.div`
   gap: 0.625rem;
 `;
 
-const BlockContainer = styled.button<{ $isSelected: boolean }>`
+const getBorderColor = ({
+  theme,
+  disabled,
+  $isSelected,
+}: {
+  theme: any;
+  disabled: boolean;
+  $isSelected: boolean;
+}) => {
+  if (disabled) return theme.colors.gray[600];
+  if ($isSelected) return theme.colors.primary[100];
+  return theme.colors.white;
+};
+
+const BlockContainer = styled.button<{
+  disabled: boolean;
+  $isSelected: boolean;
+}>`
   background: ${({ theme, $isSelected }) =>
     $isSelected ? theme.colors.primary[100] : 'transparent'};
   padding: 0.625rem 0;
 
   border: 1px solid
-    ${({ theme, $isSelected }) =>
-      $isSelected ? theme.colors.primary[100] : theme.colors.white};
+    ${({ theme, disabled, $isSelected }) =>
+      getBorderColor({ theme, disabled, $isSelected })};
   border-radius: 0.5rem;
 
   cursor: pointer;
 `;
 
+const BlockText = styled(Text)<{ $disabled: boolean }>`
+  color: ${({ theme, $disabled }) =>
+    $disabled ? theme.colors.gray[300] : theme.colors.white};
+`;
+
 const 오전 = [
-  { label: '9:00', value: '9:00' },
-  { label: '10:00', value: '10:00' },
-  { label: '11:00', value: '11:00' },
+  { label: '9:00', value: 9 },
+  { label: '10:00', value: 10 },
+  { label: '11:00', value: 11 },
 ];
 const 오후 = [
-  { label: '12:00', value: '12:00' },
-  { label: '1:00', value: '13:00' },
-  { label: '2:00', value: '14:00' },
-  { label: '3:00', value: '15:00' },
-  { label: '4:00', value: '16:00' },
-  { label: '5:00', value: '17:00' },
-  { label: '6:00', value: '18:00' },
-  { label: '7:00', value: '19:00' },
-  { label: '8:00', value: '20:00' },
-  { label: '9:00', value: '21:00' },
+  { label: '12:00', value: 12 },
+  { label: '1:00', value: 13 },
+  { label: '2:00', value: 14 },
+  { label: '3:00', value: 15 },
+  { label: '4:00', value: 16 },
+  { label: '5:00', value: 17 },
+  { label: '6:00', value: 18 },
+  { label: '7:00', value: 19 },
+  { label: '8:00', value: 20 },
+  { label: '9:00', value: 21 },
 ];
 
 function TimeBlock({
   time,
   value,
   onChange,
+  disabled,
 }: {
-  time: { label: string; value: string };
-  value: string | null;
-  onChange: (newValue: string) => void;
+  time: { label: string; value: number };
+  value: number | null;
+  onChange: (newValue: number) => void;
+  disabled: boolean;
 }) {
   const isSelected = time.value === value;
 
@@ -72,8 +96,11 @@ function TimeBlock({
     <BlockContainer
       onClick={() => onChange(time.value)}
       $isSelected={isSelected}
+      disabled={disabled}
     >
-      <Text variant="body3">{time.label}</Text>
+      <BlockText variant="body3" $disabled={disabled}>
+        {time.label}
+      </BlockText>
     </BlockContainer>
   );
 }
@@ -84,12 +111,10 @@ export default function TimeSelector({
   // eslint-disable-next-line
   timeSlot,
 }: {
-  value: string | null;
-  onChange: (newValue: string) => void;
+  value: number | null;
+  onChange: (newValue: number) => void;
   timeSlot: number[];
 }) {
-  // console.log(timeSlot);
-
   return (
     <Container>
       <BlockWrapper>
@@ -101,6 +126,7 @@ export default function TimeSelector({
               time={time}
               value={value}
               onChange={onChange}
+              disabled={!timeSlot.includes(time.value)}
             />
           ))}
         </TimeList>
@@ -110,13 +136,13 @@ export default function TimeSelector({
         <Text variant="body3">오후</Text>
         <TimeList>
           {오후.map((time) => (
-            <BlockContainer
+            <TimeBlock
               key={time.value}
-              onClick={() => onChange(time.value)}
-              $isSelected={time.value === value}
-            >
-              <Text variant="body3">{time.label}</Text>
-            </BlockContainer>
+              time={time}
+              value={value}
+              onChange={onChange}
+              disabled={!timeSlot.includes(time.value)}
+            />
           ))}
         </TimeList>
       </BlockWrapper>
