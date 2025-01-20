@@ -7,7 +7,7 @@ import { getActivePhotographer } from '../_services/getActivePhotographer';
 
 const CardContainerX = styled.div`
   display: flex;
-  overflow-x: scroll;
+  overflow-y: scroll;
   gap: 1rem;
   margin: 0 auto 0 20px;
   height: 114px;

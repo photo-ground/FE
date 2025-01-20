@@ -7,12 +7,17 @@ const Container = styled.div`
   position: relative;
   height: 96px;
   margin: 0.75rem auto;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 1) 100%
-  );
+  border-radius: 0.5rem;
+  overflow: hidden;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.02);
+    transition: transform 0.2s ease-in-out;
+  }
 `;
+
 const Background = styled.img`
   position: absolute;
   width: 100%;
@@ -26,29 +31,42 @@ const GradientOverlay = styled.div`
   width: 100%;
   height: 100%;
   background: linear-gradient(
-    to left,
+    to right,
     rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.9) 100%
+    rgba(0, 0, 0, 0.8) 100%
   );
 `;
 
-const Title = styled(Text)`
+const Title = styled.div`
   position: absolute;
-  top: 0.75rem;
-  left: 1.5rem;
+  top: 10px;
+  right: 16px;
+  color: white;
+  text-align: right;
+
+  p {
+    margin: 0;
+  }
 `;
 
 export default function SchoolButtonItem({
   title,
+  subTitle,
   src,
   link,
-}: SchoolButtonProps) {
+  onClick,
+}: SchoolButtonProps & { onClick?: () => void }) {
   return (
     <Link href={link} passHref>
-      <Container>
-        <Background src={src} alt={title} />
+      <Container onClick={onClick}>
+        <Background src={src} alt={`${title} 이미지`} />
         <GradientOverlay />
-        <Title variant="header3">{title}</Title>
+        <Title>
+          <Text variant="header3">{title}</Text>
+          <Text variant="body3" color="#bfbfbf">
+            {subTitle}
+          </Text>
+        </Title>
       </Container>
     </Link>
   );

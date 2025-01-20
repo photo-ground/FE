@@ -9,7 +9,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import styled, { useTheme } from 'styled-components';
-import useUnivStore from '@/store';
+import useUnivStore from '@/store/useUnivStore';
 import { Drawer } from '@mui/material';
 import { loadNaverMap } from './_util/naverMaps';
 import makeMarker from './_util/makeMarker';
