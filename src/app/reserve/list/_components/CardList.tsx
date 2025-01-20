@@ -43,7 +43,10 @@ const DivideLine = styled.hr`
 function mapCard(reservation: Reservation) {
   switch (reservation.status) {
     case '예약대기':
-      return <PaymentCard data={reservation} />;
+      return <PaymentCard data={reservation} state="wait" />;
+
+    case '결제대기':
+      return <PaymentCard data={reservation} state="check" />;
 
     // case 'confirm':
     //   return <ConfirmCard />;

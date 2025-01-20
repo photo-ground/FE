@@ -4,7 +4,7 @@ export interface Reservation {
   profileImage: string;
   univName: '연세대학교';
   bookingNum: 1;
-  status: '예약취소' | '예약대기';
+  status: '예약취소' | '예약대기' | '결제대기';
   price: number;
   date: string;
   startTime: string;
