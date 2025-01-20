@@ -13,7 +13,12 @@ export default async function PhotographerReservePage({
     return null;
   }
 
-  return <PhotographerReserveScreen photographerData={photographerData} />;
+  return (
+    <PhotographerReserveScreen
+      photographerId={id}
+      photographerData={photographerData}
+    />
+  );
 }
 
 export const runtime = 'edge';
