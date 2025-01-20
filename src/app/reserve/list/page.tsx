@@ -1,14 +1,13 @@
-import { ReserveTab } from './_components/Tabs';
+import getReservations from './getReservations';
 import ReservationListScreen from './screen';
 
-export const runtime = 'edge';
-
-export default async function ReservationListPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ tab?: ReserveTab }>;
-}) {
-  const { tab } = await searchParams;
-
-  return <ReservationListScreen currentTab={tab || 'reserve'} />;
+export default async function ReservationListPage() {
+  const reservationList = await getReservations();
+  return (
+    <ReservationListScreen
+      reservationList={reservationList.reservationInfoDTOList}
+    />
+  );
 }
+
+export const runtime = 'edge';
