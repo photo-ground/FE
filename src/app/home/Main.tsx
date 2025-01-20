@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 
 import Banner from '@/components/Banner';
@@ -13,7 +12,8 @@ import styled from 'styled-components';
 
 import RightChevronIcon from '@/assets/RightChevronIcon';
 
-import { UnivOption, UNIV_LIST, UnivLabel } from '@/types/univOption';
+import { UNIV_LIST } from '@/types/univOption';
+import useUnivStore from '@/store/useUnivStore';
 import SearchEngine from './_components/SearchEngine';
 import Filter from './_components/Filter';
 
@@ -54,25 +54,34 @@ const BannerContent = styled.div`
 `;
 
 // TODO : 만약 로그인한 회원이하면 회원정보에서부터 학교 정보를 가져와야 함.
-function GetUnivFromOnboarding() {
-  const searchParams = useSearchParams();
+// function GetUnivFromOnboarding(): string {
+//   return univ;
+// }
 
-  const univ = searchParams.get('univ');
+export default function Main() {
+  const { univ, isLoggedIn, setUniv } = useUnivStore();
+
+  // const searchParams = useSearchParams();
+  // const univParam = searchParams.get('univ');
 
   // URL -> `/dashboard?search=my-project`
   // `search` -> 'my-project'
+  // if (!univParam) {
+  //   throw new Error('University parameter (univ) is missing in the URL.');
+  // }
 
-  return { univ };
-}
+  // On initial load, set the university if not logged in
+  useEffect(() => {
+    if (!isLoggedIn) {
+      const univFromParams = univ;
+      if (univFromParams) {
+        setUniv(univFromParams);
+      }
+    }
+  }, [isLoggedIn, setUniv, univ]);
 
-export default function Main() {
-  const [currUniv, setUniv] = useState<UnivLabel | null>(
-    GetUnivFromOnboarding().univ,
-  );
-  console.log(currUniv);
-
-  const onChangeUniv = (prop: UnivOption) => {
-    setUniv(prop.value); // 국문
+  const onChangeUniv = (selectedUniv: { value: string }) => {
+    setUniv(selectedUniv.value); // Update Zustand state
   };
 
   return (
@@ -112,16 +121,16 @@ export default function Main() {
 
       {/* 학교별 포토스팟 */}
       <TitleContainer>
-        <Text variant="title1_sb">{currUniv} 스냅 사진</Text>
+        <Text variant="title1_sb">{univ} 스냅 사진</Text>
         <Filter
           optionList={UNIV_LIST}
           placeholder="학교 변경"
-          value={currUniv}
+          value={univ}
           onChange={onChangeUniv}
         />
       </TitleContainer>
 
-      {currUniv && <PostByUniv univ={currUniv} />}
+      {univ && <PostByUniv univ={univ} />}
 
       {/* ============================================ */}
 

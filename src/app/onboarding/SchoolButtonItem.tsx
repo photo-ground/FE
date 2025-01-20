@@ -7,11 +7,17 @@ const Container = styled.div`
   position: relative;
   height: 96px;
   margin: 0.75rem auto;
-
   border-radius: 0.5rem;
   overflow: hidden;
   text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.02);
+    transition: transform 0.2s ease-in-out;
+  }
 `;
+
 const Background = styled.img`
   position: absolute;
   width: 100%;
@@ -36,8 +42,10 @@ const Title = styled.div`
   top: 10px;
   right: 16px;
   color: white;
+  text-align: right;
+
   p {
-    text-align: right;
+    margin: 0;
   }
 `;
 
@@ -46,11 +54,12 @@ export default function SchoolButtonItem({
   subTitle,
   src,
   link,
-}: SchoolButtonProps) {
+  onClick,
+}: SchoolButtonProps & { onClick?: () => void }) {
   return (
     <Link href={link} passHref>
-      <Container>
-        <Background src={src} alt={title} />
+      <Container onClick={onClick}>
+        <Background src={src} alt={`${title} 이미지`} />
         <GradientOverlay />
         <Title>
           <Text variant="header3">{title}</Text>
