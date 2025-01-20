@@ -34,21 +34,28 @@ function getTimeSlot(date: Date, schedule: PhotographerReserve['schedule']) {
 export default function DateTime({
   date,
   onChangeDate,
+  availableDate,
   time,
   onChangeTime,
   schedule,
 }: {
   date: Date | null;
   onChangeDate: (newValue: Date) => void;
-  time: string | null;
-  onChangeTime: (newValue: string) => void;
+  availableDate: PhotographerReserve['availableDate'];
+  time: number | null;
+  onChangeTime: (newValue: number) => void;
   schedule: PhotographerReserve['schedule'];
 }) {
+  console.log(availableDate);
   return (
     <Container>
       <Text variant="title2_sb">예약 가능 시간</Text>
 
-      <CalendarSmall value={date} onChange={onChangeDate} />
+      <CalendarSmall
+        value={date}
+        onChange={onChangeDate}
+        availableDate={availableDate}
+      />
       {date && (
         <TimeSelector
           value={time}

@@ -16,8 +16,16 @@ export default function getDateList(date: Date) {
   while (currentDate <= endDateOfCalendar) {
     const dayList = [];
     for (let day = 0; day < 7; day += 1) {
-      dayList.push(new Date(currentDate)); // 날짜 복사
-      currentDate.setDate(currentDate.getDate() + 1); // 다음 날로 이동
+      dayList.push(
+        new Date(
+          Date.UTC(
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
+            currentDate.getDate(),
+          ),
+        ),
+      );
+      currentDate.setDate(currentDate.getDate() + 1);
     }
     weekList.push(dayList);
   }

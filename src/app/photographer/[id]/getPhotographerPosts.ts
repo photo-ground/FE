@@ -3,10 +3,13 @@ export interface PostSummary {
   firstImageUrl: string;
 }
 
-export default async function getPhotographerPosts(id: string) {
+export default async function getPhotographerPosts(
+  id: string,
+  lastPostId: number | null,
+) {
   try {
     const rawResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer/${id}/bottom`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer/${id}/bottom${lastPostId ? `?cursor=${lastPostId}` : ''}`,
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -19,7 +22,7 @@ export default async function getPhotographerPosts(id: string) {
     }
 
     const response = await rawResponse.json();
-    return response;
+    return response.posts;
   } catch (error: unknown) {
     console.error(error);
 

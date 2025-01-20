@@ -26,14 +26,15 @@ export default function PhotographerReserveScreen({
 }: {
   photographerData: PhotographerReserve;
 }) {
-  const { nickname, price, addPrice, schedule } = photographerData;
+  const { nickname, price, addPrice, availableDate, schedule } =
+    photographerData;
 
   const [data, setData] = useState<{
     univName: string | null;
     reserveNum: number;
     date: Date | null;
     requirement: string;
-    startTime: string | null;
+    startTime: number | null;
   }>({
     univName: null,
     reserveNum: 1,
@@ -54,14 +55,14 @@ export default function PhotographerReserveScreen({
   };
 
   const onChangeDate = (newValue: Date) => {
-    setData({ ...data, date: newValue });
+    setData({ ...data, date: newValue, startTime: null });
   };
 
   const onChangeRequest = (newValue: string) => {
     setData({ ...data, requirement: newValue });
   };
 
-  const onChangeTime = (newValue: string) => {
+  const onChangeTime = (newValue: number) => {
     setData({ ...data, startTime: newValue });
   };
 
@@ -82,6 +83,7 @@ export default function PhotographerReserveScreen({
       <DateTime
         date={data.date}
         onChangeDate={onChangeDate}
+        availableDate={availableDate}
         time={data.startTime}
         onChangeTime={onChangeTime}
         schedule={schedule}

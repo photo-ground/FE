@@ -1,9 +1,11 @@
 'use client';
 
+import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
 import LeftChevronIcon from '@/assets/LeftChevronIcon';
 import RightChevronIcon from '@/assets/RightChevronIcon';
-import getDateList from './getCalendar';
+import { PhotographerReserve } from '@/app/photographer/[id]/reserve/getPhotographerData';
+
 import {
   Container,
   DateCell,
@@ -13,6 +15,7 @@ import {
   WeekList,
   WeekRow,
 } from './styles';
+import getDateList from './getCalendar';
 
 const calendar = getDateList(new Date());
 
@@ -22,12 +25,19 @@ function formatDate(date: Date) {
   return `${date.getFullYear()}. ${date.getMonth() + 1}`;
 }
 
+const DateText = styled(Text)<{ disabled: boolean }>`
+  color: ${({ theme, disabled }) =>
+    disabled ? theme.colors.gray[200] : theme.colors.white};
+`;
+
 export default function CalendarSmall({
   value,
   onChange,
+  availableDate,
 }: {
   value: Date | null;
   onChange: (newValue: Date) => void;
+  availableDate: PhotographerReserve['availableDate'];
 }) {
   return (
     <Container>
@@ -53,8 +63,18 @@ export default function CalendarSmall({
                 key={date.toISOString()}
                 onClick={() => onChange(date)}
                 $isSelected={date === value}
+                disabled={
+                  !availableDate.includes(date.toISOString().split('T')[0])
+                }
               >
-                <Text variant="body1_rg">{date.getDate()}</Text>
+                <DateText
+                  variant="body1_rg"
+                  disabled={
+                    !availableDate.includes(date.toISOString().split('T')[0])
+                  }
+                >
+                  {date.getDate()}
+                </DateText>
               </DateCell>
             ))}
           </WeekRow>
