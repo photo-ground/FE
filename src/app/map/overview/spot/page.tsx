@@ -3,7 +3,7 @@
 // import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import styled from 'styled-components';
-import useSchoolStore from '@/store';
+import useSchoolStore from '@/store/useUnivStore';
 import Card from '@/components/Card';
 import Back from '@/components/TNB/Back';
 import Text from '@/components/atoms/Text';

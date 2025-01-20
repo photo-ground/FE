@@ -12,5 +12,5 @@ export default function Home() {
   // }
   // return <Main />; // 사용자가 없으면 splash(?)
 
-  redirect('/home');
+  redirect('/splash');
 }

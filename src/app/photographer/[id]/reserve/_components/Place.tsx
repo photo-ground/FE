@@ -1,8 +1,8 @@
 'use client';
 
-import { UNIV_LIST } from '@/app/home/type/Option';
 import Text from '@/components/atoms/Text';
 import DropDown from '@/components/Dropdown';
+import { UNIV_LIST } from '@/types/univOption';
 import styled from 'styled-components';
 
 const Container = styled.div`
