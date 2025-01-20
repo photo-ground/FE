@@ -13,9 +13,14 @@ import styled from 'styled-components';
 
 import RightChevronIcon from '@/assets/RightChevronIcon';
 
+import {
+  UnivOption,
+  UNIV_LIST,
+  UnivLabel,
+  UnivValue,
+} from '@/types/univOption';
 import SearchEngine from './_components/SearchEngine';
 import Filter from './_components/Filter';
-import { Option, UnivLabel } from './type/Option';
 
 import PostByUniv from './_components/PostByUniv';
 import RecommendedPhotographer from './_components/RecommendedPhotographer';
@@ -70,7 +75,7 @@ export default function HomePage() {
     }
   }, [univ]);
 
-  const onChangeUniv = (prop: Option) => {
+  const onChangeUniv = (prop: UnivOption) => {
     setUniv(prop.value); // 영문
     setUnivTitle(prop.label); // 국문
   };
