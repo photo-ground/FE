@@ -37,7 +37,8 @@ export default function ReserveDetailScreen({ data }: { data: ReserveDetail }) {
 
         <DivideLine />
 
-        <State state={data.status} />
+        {/* <State state={data.status} /> */}
+        <State />
 
         <CTAButton variant="tertiary" text="예약 취소하기" disabled />
       </Wrapper>
