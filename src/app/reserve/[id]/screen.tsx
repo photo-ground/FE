@@ -1,11 +1,14 @@
 'use client';
 
 import styled from 'styled-components';
+
 import TNB from '@/components/TNB';
 import CTAButton from '@/components/atoms/CTAButton';
+
 import Info from './_components/Info';
 import Message from './_components/Message';
 import State from './_components/State';
+import { ReserveDetail } from './type';
 
 const Container = styled.div`
   padding-bottom: 5rem;
@@ -23,20 +26,20 @@ const DivideLine = styled.hr`
   margin-bottom: 1.5rem;
 `;
 
-export default function ReserveDetailScreen() {
+export default function ReserveDetailScreen({ data }: { data: ReserveDetail }) {
   return (
     <Container>
       <TNB.Back text="예약 상세" />
 
       <Wrapper>
-        <Info />
-        <Message />
+        <Info data={data} />
+        <Message message={data.requirement} />
 
         <DivideLine />
 
-        <State />
+        <State state={data.status} />
 
-        <CTAButton variant="tertiary" text="예약 취소하기" />
+        <CTAButton variant="tertiary" text="예약 취소하기" disabled />
       </Wrapper>
     </Container>
   );

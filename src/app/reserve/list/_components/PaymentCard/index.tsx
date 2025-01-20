@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 
 import RightChevronIcon from '@/assets/RightChevronIcon';
@@ -84,7 +85,9 @@ export default function PaymentCard({
         <Header>
           <TitleArea>
             {PaymentTag(state)}
-            <RightChevronIcon size="20" />
+            <Link href={`/reserve/${data.reservationId}`}>
+              <RightChevronIcon size="20" />
+            </Link>
           </TitleArea>
         </Header>
 

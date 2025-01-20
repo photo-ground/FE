@@ -12,13 +12,20 @@ const Container = styled.div`
   border-radius: 0.5rem;
 `;
 
-export default function Message() {
+export default function Message({ message }: { message: string }) {
   return (
     <Container>
       <Text variant="title3">요청 사항</Text>
       <Text variant="body3">
-        보정 진짜 진짜 열심히 해주세요. 제가 거북목이 있어서 이 점 신경써주시면
-        감사하겠습니다.
+        {message
+          .split('\n')
+          .map((line) =>
+            line ? (
+              <span key={line}>{line}</span>
+            ) : (
+              <span key={line}>&nbsp;</span>
+            ),
+          )}
       </Text>
     </Container>
   );

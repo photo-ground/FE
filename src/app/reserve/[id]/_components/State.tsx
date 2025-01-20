@@ -1,6 +1,7 @@
 import CheckIcon from '@/assets/CheckIcon';
 import Text from '@/components/atoms/Text';
 import styled from 'styled-components';
+import { ReserveDetail } from '../type';
 
 const Container = styled.div`
   display: flex;
@@ -107,7 +108,7 @@ function DotItem({
   return <Dot $inProgress={inProgress} />;
 }
 
-export default function State() {
+export default function State({ state }: { state: ReserveDetail['status'] }) {
   return (
     <Container>
       <Text variant="title2_sb">진행 상황</Text>
