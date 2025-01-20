@@ -4,4 +4,5 @@ export interface ReserveData {
   date: Date | null;
   startTime: number | null;
   requirement: string;
+  price: number;
 }

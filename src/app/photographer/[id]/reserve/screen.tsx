@@ -50,6 +50,7 @@ export default function PhotographerReserveScreen({
     date: new Date(2025, 1, 13),
     requirement: '',
     startTime: null,
+    price,
   });
 
   const onChangeUniv = (newValue: string) => {
@@ -60,7 +61,11 @@ export default function PhotographerReserveScreen({
     if (newValue <= 0) {
       return;
     }
-    setData({ ...data, reserveNum: newValue });
+    setData({
+      ...data,
+      reserveNum: newValue,
+      price: price + newValue * addPrice,
+    });
   };
 
   const onChangeDate = (newValue: Date) => {
@@ -114,8 +119,10 @@ export default function PhotographerReserveScreen({
           text="신청하기"
           disabled={isDisabled(data)}
           onClick={() =>
-            reserve(photographerId, data).then(() => {
-              router.replace('/reserve');
+            reserve(photographerId, data).then((response) => {
+              if (response) {
+                router.replace('/reserve');
+              }
             })
           }
         />
