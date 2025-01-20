@@ -21,7 +21,7 @@ const useUnivStore = create<States & Actions>((set) => ({
   // TODO : 로그인 한 경우 - 회원가입시의 학교 기준
   // TODO : 로그인 안 한 경우 - onboarding에서 선택한 학교 기준
   isLoggedIn: false, // 기본값은 비로그인 상태
-  univ: 'undefined',
+  univ: '서강대학교',
 
   // Actions
   setIsLoggedIn: (status) => set(() => ({ isLoggedIn: status })),
