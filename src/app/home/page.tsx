@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
 import Banner from '@/components/Banner';
@@ -14,7 +15,7 @@ import RightChevronIcon from '@/assets/RightChevronIcon';
 
 import SearchEngine from './_components/SearchEngine';
 import Filter from './_components/Filter';
-import { Option, UNIV_LIST, UnivLabel, UnivValue } from './type/Option';
+import { Option, UnivLabel } from './type/Option';
 
 import PostByUniv from './_components/PostByUniv';
 import RecommendedPhotographer from './_components/RecommendedPhotographer';
@@ -53,8 +54,21 @@ const BannerContent = styled.div`
 `;
 
 export default function HomePage() {
-  const [univ, setUniv] = useState<UnivValue | null>('yonsei');
-  const [univTitle, setUnivTitle] = useState<UnivLabel | null>('연세대학교');
+  const searchParams = useSearchParams(); // App Router의 새로운 API
+  const univ = searchParams.get('univ'); // 'univ' 쿼리 파라미터 가져오기
+  console.log(univ);
+
+  const [currUniv, setUniv] = useState<UnivLabel | null>(null);
+  const [univTitle, setUnivTitle] = useState<UnivLabel | null>(null);
+
+  // 쿼리 파라미터가 변할 때 상태를 업데이트
+  useEffect(() => {
+    if (typeof univ === 'string') {
+      setUniv(univ);
+    } else {
+      setUniv(null); // 쿼리가 없거나 잘못된 경우 null로 설정
+    }
+  }, [univ]);
 
   const onChangeUniv = (prop: Option) => {
     setUniv(prop.value); // 영문
@@ -98,16 +112,16 @@ export default function HomePage() {
 
       {/* 학교별 포토스팟 */}
       <TitleContainer>
-        <Text variant="title1_sb">{univTitle} 스냅 사진</Text>
+        <Text variant="title1_sb">{currUniv} 스냅 사진</Text>
         <Filter
           optionList={UNIV_LIST}
           placeholder="학교 변경"
-          value={univ}
+          value={currUniv}
           onChange={onChangeUniv}
         />
       </TitleContainer>
 
-      {univ && <PostByUniv univ={univ} />}
+      {currUniv && <PostByUniv univ={currUniv} />}
 
       {/* ============================================ */}
 
