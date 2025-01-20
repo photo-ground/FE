@@ -37,7 +37,7 @@ export const PasskeyInputContainer = styled(InputContainer)`
 
 export const ConfirmButton = styled.button<{ $isError?: boolean }>`
   height: 100%;
-  padding: 0 1rem;
+  padding: calc(0.5rem + 1px) 1rem;
   background: transparent;
   white-space: nowrap;
 
@@ -45,7 +45,7 @@ export const ConfirmButton = styled.button<{ $isError?: boolean }>`
 
   border-left: 1px solid
     ${({ theme, $isError }) =>
-      $isError ? theme.colors.negative[500] : theme.colors.gray[600]};
+      $isError ? theme.colors.negative[500] : theme.colors.gray[700]};
   outline: none;
 
   cursor: pointer;

@@ -8,7 +8,9 @@ const Backdrop = styled.div`
   top: 0;
   left: 0;
 
-  background: transparent;
+  background: black;
+  opacity: 60%;
+
   width: 100dvw;
   height: 100dvh;
 

@@ -9,7 +9,7 @@ export interface Option {
   label: string;
 }
 
-const Container = styled.div<{ $isOpen: boolean }>`
+const Container = styled.div<{ $isOpen: boolean; $isSelected: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -17,12 +17,15 @@ const Container = styled.div<{ $isOpen: boolean }>`
 
   padding: 0.5rem 1rem;
   background: transparent;
-  border: 1px solid ${({ theme }) => theme.colors.gray[200]};
+  border: 1px solid
+    ${({ theme, $isSelected }) =>
+      $isSelected ? theme.colors.gray[200] : theme.colors.gray[400]};
   border-radius: ${({ $isOpen }) => ($isOpen ? '0.5rem 0.5rem 0 0' : '0.5rem')};
 `;
 
-const FilterText = styled(Text)`
-  color: ${({ theme }) => theme.colors.gray[200]};
+const FilterText = styled(Text)<{ $isSelected?: boolean }>`
+  color: ${({ theme, $isSelected }) =>
+    $isSelected ? theme.colors.white : theme.colors.gray[200]};
 `;
 
 const Backdrop = styled.div`
@@ -50,6 +53,7 @@ const OptionWrapper = styled.div`
 
   z-index: 21; // 임의로 설정
 `;
+
 const OptionItem = styled.button`
   width: 100%;
   padding: 0.5rem 1rem;
@@ -95,8 +99,13 @@ export default function UnivInput({
 
   return (
     <div style={{ position: 'relative' }}>
-      <Container ref={selectorRef} onClick={onOpen} $isOpen={isOpen}>
-        <FilterText variant="body1_rg">
+      <Container
+        ref={selectorRef}
+        onClick={onOpen}
+        $isOpen={isOpen}
+        $isSelected={!!currentLabel}
+      >
+        <FilterText variant="body1_rg" $isSelected={!!currentLabel}>
           {currentLabel || '학교 선택'}
         </FilterText>
         <DownChevronIcon />

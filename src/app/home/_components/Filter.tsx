@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import DownChevronIcon from '@/assets/DownChevronIcon';
 import Text from '@/components/atoms/Text';
-import { Option } from '../type/Option';
+import { UnivOption } from '@/types/univOption';
 
 const Container = styled.div<{ $isOpen: boolean }>`
   display: flex;
@@ -63,8 +63,8 @@ export default function Filter({
 }: {
   value: string | null;
   // eslint-disable-next-line
-  onChange: (newValue: Option) => void;
-  optionList: Option[];
+  onChange: (newValue: UnivOption) => void;
+  optionList: UnivOption[];
   placeholder: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -91,7 +91,7 @@ export default function Filter({
   }, [isOpen]);
 
   const currentLabel = optionList.find(
-    (option) => option.value === value,
+    (option) => option.label === value,
   )?.label;
 
   return (

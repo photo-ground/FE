@@ -1,28 +1,58 @@
+import { MouseEventHandler } from 'react';
 import styled, { DefaultTheme } from 'styled-components';
 import Text from '@/components/atoms/Text';
 
-type Variant = 'primary' | 'secondary';
+type Variant = 'primary' | 'secondary' | 'tertiary';
 
 const getBackgroundColor = ({
   theme,
-  variant,
+  $variant,
   disabled,
 }: {
   theme: DefaultTheme;
-  variant: Variant;
+  $variant: Variant;
   disabled: boolean;
 }) => {
   if (disabled) {
     return theme.colors.gray[600];
   }
-  if (variant === 'primary') {
+
+  if ($variant === 'primary') {
     return theme.colors.primary[100];
+  }
+
+  if ($variant === 'secondary') {
+    return theme.colors.white;
   }
 
   return theme.colors.gray[900];
 };
 
-const Button = styled.button<{ variant: Variant; disabled: boolean }>`
+const getTextColor = ({
+  theme,
+  $variant,
+  disabled,
+}: {
+  theme: DefaultTheme;
+  $variant: Variant;
+  disabled: boolean;
+}) => {
+  if (disabled) {
+    return theme.colors.gray[200];
+  }
+
+  if ($variant === 'primary') {
+    return theme.colors.white;
+  }
+
+  if ($variant === 'secondary') {
+    return theme.colors.background.primary;
+  }
+
+  return theme.colors.gray[100];
+};
+
+const Button = styled.button<{ $variant: Variant; disabled: boolean }>`
   width: 100%;
   padding: 1rem 0;
   background: ${(props) => getBackgroundColor(props)};
@@ -34,28 +64,33 @@ const Button = styled.button<{ variant: Variant; disabled: boolean }>`
   cursor: pointer;
 `;
 
-const ButtonText = styled(Text)`
-  color: ${({ theme }) => theme.colors.gray[200]};
+const ButtonText = styled(Text)<{ $variant: Variant; disabled: boolean }>`
+  color: ${(props) => getTextColor(props)};
 `;
 
 export default function CTAButton({
   text,
   variant = 'primary',
+  type = 'button',
   disabled = false,
   onClick = () => {},
 }: {
   text: string;
   variant?: Variant;
+  type?: 'button' | 'submit'; // 나중에 더 추가해주세요...
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }) {
   return (
-    <Button variant={variant} disabled={disabled} onClick={onClick}>
-      {disabled ? (
-        <ButtonText variant="title2_sb">{text}</ButtonText>
-      ) : (
-        <Text variant="title3">{text}</Text>
-      )}
+    <Button
+      type={type}
+      disabled={disabled}
+      onClick={onClick}
+      $variant={variant}
+    >
+      <ButtonText variant="title2_md" disabled={disabled} $variant={variant}>
+        {text}
+      </ButtonText>
     </Button>
   );
 }

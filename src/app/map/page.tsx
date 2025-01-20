@@ -9,7 +9,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import styled, { useTheme } from 'styled-components';
-import useUnivStore from '@/store';
+import useUnivStore from '@/store/useUnivStore';
 import { Drawer } from '@mui/material';
 import { loadNaverMap } from './_util/naverMaps';
 import makeMarker from './_util/makeMarker';
@@ -79,12 +79,12 @@ export default function MapPage() {
 
   const [open, setOpen] = useState(false);
   const [modalState, setModalState] = useState<boolean>(false);
-  const setSpotId = useSpotStore((state) => state.setSpotId);
+  const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
 
-  const spotId = useSpotStore((state) => state.spotId);
+  const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
 
   function toggleModal(index: number) {
-    setSpotId(index); // 배열의 인덱스를 저장
+    setCurrPostIdIndex(index); // 상태 저장
     setModalState(true); // 모달 열기
   }
 
@@ -188,21 +188,15 @@ export default function MapPage() {
           }}
         >
           <DrawerContent
-            toggleModal={(imageId) => {
-              const index = photoSpotData.imageInfo.spotPostImageList.findIndex(
-                (item) => item.imageId === imageId,
-              );
-              toggleModal(index); // index를 전달
-            }}
             toggleDrawer={() => toggleDrawer(false)}
-            // toggleModal={() => toggleModal()}
+            toggleModal={(index) => toggleModal(index)}
           />
         </Drawer>
       </div>
 
-      {modalState && spotId !== null && (
+      {modalState && currPostIdIndex !== null && (
         <Modal
-          currIndex={spotId}
+          // currIndex={currPostIdIndex}
           setModalState={setModalState}
           photoSpot={photoSpotData}
         />

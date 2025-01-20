@@ -37,11 +37,11 @@ export default function InputList() {
     <Container>
       <InputContainer>
         <EmailIcon size="1.25rem" />
-        <Input placeholder="이메일" />
+        <Input placeholder="이메일" name="email" type="email" />
       </InputContainer>
       <InputContainer>
         <PasswordIcon size="1.25rem" />
-        <Input type="password" placeholder="비밀번호" />
+        <Input placeholder="비밀번호" name="password" type="password" />
       </InputContainer>
     </Container>
   );

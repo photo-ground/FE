@@ -5,13 +5,19 @@ import styled from 'styled-components';
 import { IconButton } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { photoSpotProps } from '../types';
+import {
+  photoSpotProps,
+  postByUnivProps,
+  postListProps,
+  spotPostImageProps,
+} from '@/types/photoSpot';
+import useSpotStore from '../_store';
 
 const SliderContainer = styled.div`
   position: relative;
   width: 100%;
-  max-width: 300px; /* 슬라이드 최대 너비 */
-  margin: 0 auto; /* 중앙 정렬 */
+  max-width: 300px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,7 +29,7 @@ const ImageContainer = styled.div`
   width: 100%;
   height: auto;
   max-width: 286px;
-  aspect-ratio: 3 / 4; /* 비율 3:4 */
+  aspect-ratio: 3 / 4;
   text-align: center;
   overflow: hidden;
   background-color: ${({ theme }) => theme.colors.black};
@@ -90,33 +96,48 @@ const RightButton = styled(NavigationButton)`
 `;
 
 interface SliderProps {
-  photoSpot: photoSpotProps;
-  currIndex: number;
+  photoSpot: photoSpotProps | postByUnivProps;
 }
 
-// TODO : 여기에서 만약 hasnext가 true라면 다음 정보를 요청한다.(?)
-export default function Slider({ photoSpot, currIndex }: SliderProps) {
-  const { spotPostImageList, hasNext } = photoSpot.imageInfo;
-  // 만약 currIndex가 0이면 더이상 감소할 수 없다.
-  // 만약 currIndex가 length라면 hasNext를 확인한다.
-  const [currentSlide, setCurrentSlide] = useState(currIndex);
+export default function Slider({ photoSpot }: SliderProps) {
+  // 타입 가드
+  const isPhotoSpotProps = (
+    data: photoSpotProps | postByUnivProps,
+  ): data is photoSpotProps => {
+    return (data as photoSpotProps).imageInfo !== undefined;
+  };
 
-  // const slideElement: spotPostImageProps[] = imageInfo.spotPostImageList;
+  // 데이터 분리 : 타입에 따른 데이터 분리
+  const dataList: spotPostImageProps[] | postListProps[] = isPhotoSpotProps(
+    photoSpot,
+  )
+    ? photoSpot.imageInfo.spotPostImageList
+    : photoSpot.postList;
 
-  // const [currentSlide, setCurrentSlide] = useState(currIndex);
+  const hasNext = isPhotoSpotProps(photoSpot)
+    ? photoSpot.imageInfo.hasNext
+    : photoSpot.hasNext;
+
+  const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
+
+  const [currentSlide, setCurrentSlide] = useState(currPostIdIndex);
 
   const handleNext = () => {
-    if (currentSlide < spotPostImageList.length - 1) {
-      setCurrentSlide(currentSlide + 1);
-    } else if (hasNext) {
-      // API 호출
-      console.log('Fetching more data...');
+    if (currentSlide !== null) {
+      if (currentSlide < dataList.length - 1) {
+        setCurrentSlide(currentSlide + 1);
+      } else if (hasNext) {
+        // API 호출
+        console.log('Fetching more data...');
+      }
     }
   };
 
   const handlePrev = () => {
-    if (currentSlide > 0) {
-      setCurrentSlide(currentSlide - 1);
+    if (currentSlide !== null) {
+      if (currentSlide > 0) {
+        setCurrentSlide(currentSlide - 1);
+      }
     }
   };
 
@@ -127,21 +148,38 @@ export default function Slider({ photoSpot, currIndex }: SliderProps) {
       </LeftButton>
       <RightButton
         onClick={handleNext}
-        disabled={!hasNext && currentSlide === spotPostImageList.length - 1}
+        disabled={!hasNext && currentSlide === dataList.length - 1}
       >
         <ArrowForwardIosIcon />
       </RightButton>
-      <ImageContainer>
-        <Image
-          src={spotPostImageList[currentSlide].imageUrl}
-          alt={`Slide ${currentSlide}`}
-        />
-      </ImageContainer>
-      <Info>
-        <Title>{spotPostImageList[currentSlide].photographerName}</Title>
-        <Description>{photoSpot.content}</Description>
-        <Button>게시물 보기</Button>
-      </Info>
+      {currentSlide !== null && (
+        <>
+          <ImageContainer>
+            <Image
+              src={
+                isPhotoSpotProps(photoSpot)
+                  ? (dataList as spotPostImageProps[])[currentSlide].imageUrl
+                  : (dataList as postListProps[])[currentSlide].firstImageUrl
+              }
+              alt={`Slide ${currentSlide}`}
+            />
+          </ImageContainer>
+          <Info>
+            <Title>
+              {isPhotoSpotProps(photoSpot)
+                ? dataList[currentSlide].photographerName
+                : dataList[currentSlide].photographerName}
+            </Title>
+            <Description>
+              데이터 처리 진짜 빡셉니다.....하..
+              {/* {isPhotoSpotProps(photoSpot)
+                ? (dataList as spotPostImageProps[])[currentSlide].
+                : (dataList as postListProps[])[currentSlide].firstImageSpot} */}
+            </Description>
+            <Button>게시물 보기</Button>
+          </Info>
+        </>
+      )}
     </SliderContainer>
   );
 }
