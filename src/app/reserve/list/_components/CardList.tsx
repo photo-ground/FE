@@ -64,10 +64,10 @@ export default function CardList({
   return (
     <Container>
       {reservationList.map((reservation) => (
-        <>
+        <div key={reservation.reservationId}>
           {mapCard(reservation)}
           <DivideLine />
-        </>
+        </div>
       ))}
 
       <InfoArea>

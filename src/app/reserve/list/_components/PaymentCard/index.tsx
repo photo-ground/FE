@@ -120,7 +120,7 @@ export default function PaymentCard({
         )}
       </Container>
 
-      {state === 'wait' && <Request />}
+      {state === 'wait' && <Request reservationId={data.reservationId} />}
     </Wrapper>
   );
 }

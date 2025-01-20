@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
+
 import Text from '@/components/atoms/Text';
 import LargeButton from '@/components/atoms/LargeButton';
+import pay from '../../_libs/pay';
 
 const Container = styled.div`
   margin-top: 1rem;
@@ -39,7 +42,8 @@ const Input = styled.input`
   line-height: ${({ theme }) => theme.typography.body2_rg.lineHeight};
 `;
 
-export default function Request() {
+export default function Request({ reservationId }: { reservationId: number }) {
+  const router = useRouter();
   const [isChecked, setIsChecked] = useState(false);
   const [name, setName] = useState('');
 
@@ -66,6 +70,13 @@ export default function Request() {
         text="입금 확인 요청하기"
         variant="secondary"
         disabled={!(isChecked || (!isChecked && !!name))}
+        onClick={() => {
+          pay(reservationId).then((response) => {
+            if (response) {
+              router.push(`/reserve/${reservationId}`);
+            }
+          });
+        }}
       />
     </Container>
   );
