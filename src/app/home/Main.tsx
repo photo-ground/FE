@@ -61,15 +61,6 @@ const BannerContent = styled.div`
 export default function Main() {
   const { univ, isLoggedIn, setUniv } = useUnivStore();
 
-  // const searchParams = useSearchParams();
-  // const univParam = searchParams.get('univ');
-
-  // URL -> `/dashboard?search=my-project`
-  // `search` -> 'my-project'
-  // if (!univParam) {
-  //   throw new Error('University parameter (univ) is missing in the URL.');
-  // }
-
   // On initial load, set the university if not logged in
   useEffect(() => {
     if (!isLoggedIn) {
