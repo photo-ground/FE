@@ -51,7 +51,7 @@ export default function SchoolButtonItem({
   link,
 }: SchoolButtonProps) {
   return (
-    <Link href={link} passHref>
+    <Link href={link}>
       <Container aria-label={`${title}로 이동`}>
         <Background src={src} alt={title} fill />
         <GradientOverlay />
