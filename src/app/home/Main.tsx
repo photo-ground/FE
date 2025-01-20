@@ -124,7 +124,7 @@ export default function Main() {
 
       {/* ============================================ */}
 
-      <Spacer size="88px" />
+      <Spacer size="108px" />
     </Container>
   );
 }
