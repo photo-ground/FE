@@ -17,46 +17,13 @@ import Chip from './_components/Chip';
 
 import photoSpots from './_data/photoSpots'; // dummy data
 import DrawerContent from './_components/DrawerContent';
-import { Container } from './style';
+import { AbsContainer, ChipContainer, Container, MapContainer } from './style';
 import { School } from './types';
 
 import schoolList from './_data/schoolList'; // 더미 데이터
 import Modal from './_components/Modal';
 import photoSpotData from './_data/photoSpotData';
 import useSpotStore from './_store';
-
-const MapContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-`;
-
-// 칩 버튼들을 담을 컨테이너 스타일
-const ChipContainer = styled.div`
-  width: 100%;
-  max-width: 100vw;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  gap: 0.5rem;
-  display: flex;
-  overflow-x: scroll;
-  margin: 0 auto 0 1.25rem;
-  padding: 1.25rem;
-  padding-left: 0;
-  padding-right: 1.75rem;
-`;
-const AbsContainer = styled.div`
-  position: absolute;
-  bottom: 1.25rem;
-  left: calc(50% - 75px);
-  width: 150px;
-  z-index: 2;
-`;
 
 // naver.maps.*은 네이버 지도 API 스크립트가 로드된 후에만 사용할 수 있다.
 export default function MapPage() {
