@@ -5,12 +5,19 @@ import styled from 'styled-components';
 import TNB from '@/components/TNB';
 import Text from '@/components/atoms/Text';
 import { convertToViewportHeight } from '@/styles/convertSize';
+import Spacer from '@/components/Spacer';
 import { ScreenWithBottomButton } from '../splash/styles';
 import SchoolButtonItem from './SchoolButtonItem';
 import { SchoolButtonProps } from './interface';
 
 const Container = styled(ScreenWithBottomButton)`
   gap: ${convertToViewportHeight(36)};
+`;
+
+const Caption = styled.div`
+  p {
+    text-align: center;
+  }
 `;
 
 export default function OnboardingPage() {
@@ -62,6 +69,13 @@ export default function OnboardingPage() {
               link={item.link}
             />
           ))}
+
+          <Spacer size="12px" />
+          <Caption>
+            <Text variant="caption1_rg" color="#737373">
+              더 많은 장소를 기록할 수 있도록 포그가 달리고 있어요!
+            </Text>
+          </Caption>
         </div>
       </Container>
     </main>
