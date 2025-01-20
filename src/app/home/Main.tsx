@@ -69,6 +69,7 @@ export default function Main() {
   const [currUniv, setUniv] = useState<UnivLabel | null>(
     GetUnivFromOnboarding().univ,
   );
+  console.log(currUniv);
 
   const onChangeUniv = (prop: UnivOption) => {
     setUniv(prop.value); // 국문
