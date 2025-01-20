@@ -5,6 +5,7 @@ import ReserveInfo from '@/components/ReserveInfo';
 import LargeButton from '@/components/atoms/LargeButton';
 import InfoIcon from '@/assets/InfoIcon';
 import Tag from './Tag';
+import { Reservation } from '../type';
 
 const Wrapper = styled.div`
   display: flex;
@@ -47,7 +48,7 @@ const DivideLine = styled.hr`
   margin: 1rem 0;
 `;
 
-export default function ReserveCard() {
+export default function ReserveCard({ data }: { data: Reservation }) {
   return (
     <Wrapper>
       <Container>
@@ -67,7 +68,7 @@ export default function ReserveCard() {
 
         <DivideLine />
 
-        <ReserveInfo chipType="tertiary" />
+        <ReserveInfo data={data} chipType="tertiary" />
       </Container>
 
       <LargeButton variant="tertiary" text="예약 취소하기" />

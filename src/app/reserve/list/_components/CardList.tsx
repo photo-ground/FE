@@ -49,10 +49,10 @@ function mapCard(reservation: Reservation) {
     //   return <ConfirmCard />;
 
     case '예약취소':
-      return <CancelCard />;
+      return <CancelCard data={reservation} />;
 
     default:
-      return <ReserveCard />;
+      return <ReserveCard data={reservation} />;
   }
 }
 

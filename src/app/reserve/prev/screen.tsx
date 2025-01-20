@@ -1,7 +1,7 @@
 'use client';
 
 import LargeButton from '@/components/atoms/LargeButton';
-import ReserveInfo from '@/components/ReserveInfo';
+// import ReserveInfo from '@/components/ReserveInfo';
 import TNB from '@/components/TNB';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -24,7 +24,7 @@ const DivideLine = styled.hr`
 function Card() {
   return (
     <CardWrapper>
-      <ReserveInfo />
+      {/* <ReserveInfo /> */}
 
       <Link href="/reserve/review/1">
         <LargeButton text="후기 작성" variant="secondary" />
