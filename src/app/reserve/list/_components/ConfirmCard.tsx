@@ -4,6 +4,7 @@ import Text from '@/components/atoms/Text';
 import ReserveInfo from '@/components/ReserveInfo';
 import LargeButton from '@/components/atoms/LargeButton';
 import Tag from './Tag';
+import { Reservation } from '../type';
 
 const Wrapper = styled.div`
   display: flex;
@@ -43,7 +44,7 @@ const Message = styled(Text)`
   color: ${({ theme }) => theme.colors.gray[200]};
 `;
 
-export default function ConfirmCard() {
+export default function ConfirmCard({ data }: { data: Reservation }) {
   return (
     <Wrapper>
       <Container>
@@ -56,11 +57,11 @@ export default function ConfirmCard() {
 
         <DivideLine />
 
-        <ReserveInfo chipType="link" />
+        <ReserveInfo data={data} chipType="link" />
       </Container>
 
       <Message variant="body3">
-        최종 촬영이 완료되었다면, 하단 버튼을 눌러주세요.{' '}
+        최종 촬영이 완료되었다면, 하단 버튼을 눌러주세요.
       </Message>
 
       <LargeButton variant="tertiary" text="최종 촬영 완료" />

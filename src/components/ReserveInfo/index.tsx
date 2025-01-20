@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import LocationIcon from '@/assets/LocationIcon';
 import PeopleIcon from '@/assets/PeopleIcon';
 import PhotographerIcon from '@/assets/PhotographerIcon';
+import { Reservation } from '@/app/reserve/list/type';
 import Chip from '@/components/atoms/Chip';
 import Text from '@/components/atoms/Text';
 import SmallButton from '../atoms/SmallButton';
@@ -47,33 +48,54 @@ const InfoText = styled(Text)`
   color: ${({ theme }) => theme.colors.gray[200]};
 `;
 
+function formatTime(date: string, time: string) {
+  const [year, month, dateNum] = date.split('-');
+  const [hours, minutes] = time.split(':');
+  const days = ['일', '월', '화', '수', '목', '금', '토'];
+
+  const dateObj = new Date(+year, +month - 1, +dateNum, +hours, +minutes);
+  const period = +hours > 12 ? '오후' : '오전';
+  const formattedHours = +hours > 12 ? +hours - 12 : hours;
+
+  // Return the formatted string
+  return `${+month}.${+dateNum}(${days[dateObj.getDay()]}) ${period} ${formattedHours}:${minutes}`;
+}
+
 export default function ReserveInfo({
+  data,
   chipType = 'tertiary',
 }: {
+  data: Reservation;
   chipType?: 'tertiary' | 'brand' | 'link';
 }) {
   return (
     <CardContainer>
       <Profile src="/images/yonsei.jpg" />
       <TextArea>
-        <Text variant="body1_md">11.03(일) 오후 3:00</Text>
+        <Text variant="body1_md">{formatTime(data.date, data.startTime)}</Text>
 
         <Content>
           <InfoArea>
             <InfoLine>
               <PhotographerIcon />
-              <InfoText variant="body1_md">이채린 작가</InfoText>
+              <InfoText variant="body1_md">
+                {data.photographerName} 작가
+              </InfoText>
             </InfoLine>
             <InfoLine>
               <LocationIcon />
-              <InfoText variant="body1_md">홍익대학교</InfoText>
+              <InfoText variant="body1_md">{data.univName}</InfoText>
             </InfoLine>
           </InfoArea>
 
           {chipType === 'link' ? (
             <SmallButton.Primary text="채팅방" />
           ) : (
-            <Chip icon={PeopleIcon} text="2인" type={chipType} />
+            <Chip
+              icon={PeopleIcon}
+              text={`${data.bookingNum}인`}
+              type={chipType}
+            />
           )}
         </Content>
       </TextArea>

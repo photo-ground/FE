@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import CalendarLarge from '@/components/CalendarLarge';
 import TNB from '@/components/TNB';
 import ReserveLinks from './_components/ReserveLinks';
-import Notification from './_components/Notification';
+// import Notification from './_components/Notification';
 import Upcoming from './_components/Upcoming';
 
 const Wrapper = styled.div`
@@ -41,7 +41,7 @@ export default function ReserveScreen() {
       <Container>
         <CalendarLarge />
         <ReserveLinks />
-        <Notification />
+        {/* <Notification /> */}
         <Upcoming />
       </Container>
     </Wrapper>

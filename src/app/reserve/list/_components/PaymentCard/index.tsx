@@ -1,10 +1,14 @@
 import styled from 'styled-components';
+
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import Text from '@/components/atoms/Text';
 import ReserveInfo from '@/components/ReserveInfo';
 import CopyIcon from '@/assets/CopyIcon';
+import formatPrice from '@/lib/formatPrice';
+
 import Request from './Request';
 import Tag from '../Tag';
+import { Reservation } from '../../type';
 
 type PaymentStatus = 'wait' | 'check' | 'error';
 
@@ -68,8 +72,10 @@ function PaymentTag(state: PaymentStatus) {
 }
 
 export default function PaymentCard({
+  data,
   state = 'wait',
 }: {
+  data: Reservation;
   state?: PaymentStatus;
 }) {
   return (
@@ -81,12 +87,16 @@ export default function PaymentCard({
             <RightChevronIcon size="20" />
           </TitleArea>
         </Header>
+
         <DivideLine />
-        <ReserveInfo chipType="tertiary" />
+
+        <ReserveInfo chipType="tertiary" data={data} />
+
         <DivideLine />
+
         <PriceArea>
           <Text variant="title1_sb">금액</Text>
-          <Text variant="title1_sb">70,000 원</Text>
+          <Text variant="title1_sb">{formatPrice(data.price)} 원</Text>
         </PriceArea>
         {(state === 'wait' || state === 'error') && (
           <>

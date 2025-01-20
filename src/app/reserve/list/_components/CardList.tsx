@@ -4,9 +4,9 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import ReserveCard from './ReserveCard';
 import PaymentCard from './PaymentCard';
-import { ReserveTab } from './Tabs';
-import ConfirmCard from './ConfirmCard';
+// import ConfirmCard from './ConfirmCard';
 import CancelCard from './CancelCard';
+import { Reservation } from '../type';
 
 const Container = styled.div`
   padding: 1.5rem 0;
@@ -40,29 +40,35 @@ const DivideLine = styled.hr`
   margin-bottom: 1.5rem;
 `;
 
-function mapCard(type: ReserveTab) {
-  switch (type) {
-    case 'payment':
-      return <PaymentCard />;
+function mapCard(reservation: Reservation) {
+  switch (reservation.status) {
+    case '예약대기':
+      return <PaymentCard data={reservation} />;
 
-    case 'confirm':
-      return <ConfirmCard />;
+    // case 'confirm':
+    //   return <ConfirmCard />;
 
-    case 'cancel':
-      return <CancelCard />;
+    case '예약취소':
+      return <CancelCard data={reservation} />;
 
     default:
-      return <ReserveCard />;
+      return <ReserveCard data={reservation} />;
   }
 }
 
-export default function CardList({ type }: { type: ReserveTab }) {
+export default function CardList({
+  reservationList,
+}: {
+  reservationList: Reservation[];
+}) {
   return (
     <Container>
-      {mapCard(type)}
-      <DivideLine />
-      {mapCard(type)}
-      <DivideLine />
+      {reservationList.map((reservation) => (
+        <>
+          {mapCard(reservation)}
+          <DivideLine />
+        </>
+      ))}
 
       <InfoArea>
         <div>

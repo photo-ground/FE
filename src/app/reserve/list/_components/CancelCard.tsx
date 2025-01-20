@@ -4,6 +4,7 @@ import Text from '@/components/atoms/Text';
 import ReserveInfo from '@/components/ReserveInfo';
 import InfoIcon from '@/assets/InfoIcon';
 import Tag from './Tag';
+import { Reservation } from '../type';
 
 const Wrapper = styled.div`
   display: flex;
@@ -45,7 +46,7 @@ const DivideLine = styled.hr`
   margin: 1rem 0;
 `;
 
-export default function CancelCard() {
+export default function CancelCard({ data }: { data: Reservation }) {
   return (
     <Wrapper>
       <Container>
@@ -65,7 +66,7 @@ export default function CancelCard() {
 
         <DivideLine />
 
-        <ReserveInfo chipType="tertiary" />
+        <ReserveInfo data={data} chipType="tertiary" />
       </Container>
     </Wrapper>
   );

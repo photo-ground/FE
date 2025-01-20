@@ -68,10 +68,10 @@ const OptionItem = styled.button`
 `;
 
 const OPTION_LIST: { label: string; value: SignUpData['myUniv'] }[] = [
-  { label: '서강대학교', value: '서강' },
-  { label: '연세대학교', value: '연세' },
-  { label: '이화여자대학교', value: '이화' },
-  { label: '홍익대학교', value: '홍익' },
+  { label: '서강대학교', value: '서강대학교' },
+  { label: '연세대학교', value: '연세대학교' },
+  { label: '이화여자대학교', value: '이화여자대학교' },
+  { label: '홍익대학교', value: '홍익대학교' },
   { label: '선택 안 함', value: '선택안함' },
 ];
 

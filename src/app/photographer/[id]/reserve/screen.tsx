@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import styled from 'styled-components';
+import { useRouter } from 'next/navigation';
+
 import TNB from '@/components/TNB';
 import CTAButton from '@/components/atoms/CTAButton';
 import { DivideLine } from '@/app/signup/styles';
@@ -12,6 +14,8 @@ import DateTime from './_components/DateTime';
 import Request from './_components/Request';
 import Price from './_components/Price';
 import { PhotographerReserve } from './getPhotographerData';
+import reserve from './reserve';
+import { ReserveData } from './type';
 
 const ButtonWrapper = styled.div`
   display: grid;
@@ -21,26 +25,32 @@ const ButtonWrapper = styled.div`
   padding: 1.25rem;
 `;
 
+function isDisabled(data: ReserveData) {
+  if (!data.univName || !data.date || !data.startTime) {
+    return true;
+  }
+
+  return false;
+}
+
 export default function PhotographerReserveScreen({
+  photographerId,
   photographerData,
 }: {
+  photographerId: string;
   photographerData: PhotographerReserve;
 }) {
+  const router = useRouter();
   const { nickname, price, addPrice, availableDate, schedule } =
     photographerData;
 
-  const [data, setData] = useState<{
-    univName: string | null;
-    reserveNum: number;
-    date: Date | null;
-    requirement: string;
-    startTime: number | null;
-  }>({
+  const [data, setData] = useState<ReserveData>({
     univName: null,
     reserveNum: 1,
-    date: null,
+    date: new Date(2025, 1, 13),
     requirement: '',
     startTime: null,
+    price,
   });
 
   const onChangeUniv = (newValue: string) => {
@@ -51,7 +61,11 @@ export default function PhotographerReserveScreen({
     if (newValue <= 0) {
       return;
     }
-    setData({ ...data, reserveNum: newValue });
+    setData({
+      ...data,
+      reserveNum: newValue,
+      price: price + newValue * addPrice,
+    });
   };
 
   const onChangeDate = (newValue: Date) => {
@@ -101,7 +115,17 @@ export default function PhotographerReserveScreen({
 
       <ButtonWrapper>
         <CTAButton text="취소" variant="tertiary" />
-        <CTAButton text="신청하기" disabled />
+        <CTAButton
+          text="신청하기"
+          disabled={isDisabled(data)}
+          onClick={() =>
+            reserve(photographerId, data).then((response) => {
+              if (response) {
+                router.replace('/reserve');
+              }
+            })
+          }
+        />
       </ButtonWrapper>
     </div>
   );
