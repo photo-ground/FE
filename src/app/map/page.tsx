@@ -8,22 +8,26 @@
 // components/NaverMap.js
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import styled, { useTheme } from 'styled-components';
+import { PhotoSpotListProps, PhotoSpotProps } from '@/types/photoSpot';
+import { useTheme } from 'styled-components';
 import useUnivStore from '@/store/useUnivStore';
+import { useQuery } from '@tanstack/react-query';
 import { Drawer } from '@mui/material';
+
 import { loadNaverMap } from './_util/naverMaps';
 import makeMarker from './_util/makeMarker';
 import Chip from './_components/Chip';
-
-import photoSpots from './_data/photoSpots'; // dummy data
-import DrawerContent from './_components/DrawerContent';
 import { AbsContainer, ChipContainer, Container, MapContainer } from './style';
 import { School } from './types';
 
 import schoolList from './_data/schoolList'; // 더미 데이터
 import Modal from './_components/Modal';
-import photoSpotData from './_data/photoSpotData';
 import useSpotStore from './_store';
+import {
+  getPhotoSpotByUniv,
+  getSelectedSpotInfo,
+} from './_services/getPhotoSpot';
+import DrawerContent from './_components/DrawerContent';
 
 // naver.maps.*은 네이버 지도 API 스크립트가 로드된 후에만 사용할 수 있다.
 export default function MapPage() {
@@ -31,68 +35,83 @@ export default function MapPage() {
 
   const mapElement = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<naver.maps.Map>();
-  const [schoolArr, setSchoolArr] = useState<School[]>([]);
-  // zustand상태관리
 
+  // zustand상태관리
   const { univ, setUniv } = useUnivStore();
+  const [schoolArr, setSchoolArr] = useState<School[]>([]);
+  const [open, setOpen] = useState(false); // Drawer 열림 상태
+  const [selectedSpotInfo, setSelectedSpotInfo] =
+    useState<PhotoSpotProps | null>(null);
+
   const drawerContainerRef = useRef<HTMLDivElement>(null);
 
-  const clientId = process.env.NEXT_PUBLIC_NAVER_CLIENT_ID || '';
-  // 상태: 드로어 열림 여부 및 마커 정보
-  const [, setSelectedMarker] = useState<{
-    title: string;
-    src: string;
-  } | null>(null);
+  // spot data 가져오기
+  const { data: photoSpots } = useQuery<PhotoSpotListProps[]>({
+    queryKey: ['photoSpotList', univ],
+    queryFn: () => getPhotoSpotByUniv(univ),
+  });
 
-  const [open, setOpen] = useState(false);
   const [modalState, setModalState] = useState<boolean>(false);
   const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
 
   const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
 
-  function toggleModal(index: number) {
-    setCurrPostIdIndex(index); // 상태 저장
-    setModalState(true); // 모달 열기
-  }
+  // function toggleModal(index: number) {
+  //   setCurrPostIdIndex(index); // 상태 저장
+  //   setModalState(true); // 모달 열기
+  // }
 
   // 드로어 열기/닫기 및 마커 정보 설정
-  const toggleDrawer = (
-    newOpen: boolean,
-    markerInfo?: { title: string; src: string },
+  const toggleDrawer = async (
+    isOpen: boolean,
+    markerInfo?: { title: string; src: string; spotId: number },
   ) => {
-    setOpen(newOpen);
-    if (markerInfo) {
-      setSelectedMarker(markerInfo); // 클릭한 마커 정보 저장
+    setOpen(isOpen);
+    // if (markerInfo) {
+    //   setSelectedMarker(markerInfo); // 클릭한 마커 정보 저장
+    // }
+    if (isOpen && markerInfo) {
+      try {
+        const spotInfo = await getSelectedSpotInfo(markerInfo.spotId);
+        setSelectedSpotInfo(spotInfo);
+        // console.log(spotInfo);
+      } catch (error) {
+        console.error('Failed to fetch spot info:', error);
+      }
+    } else {
+      setSelectedSpotInfo(null);
     }
   };
 
   // map/_components/NaverMap.tsx?
   useEffect(() => {
-    loadNaverMap(clientId, () => {
+    loadNaverMap(process.env.NEXT_PUBLIC_NAVER_CLIENT_ID || '', () => {
       if (!mapElement.current) return;
 
       // 지도 객체 생성
       mapInstance.current = new naver.maps.Map(mapElement.current, {
         center: new naver.maps.LatLng(37.5511, 126.9407),
-        zoom: 18,
+        zoom: 17,
       });
 
-      // 포토스팟 로드
-      photoSpots.forEach((spot, idx) => {
-        makeMarker(
-          mapInstance.current!,
-          new naver.maps.LatLng(spot.latitude, spot.longitude),
-          spot.spotName,
-          idx,
-          spot.spotImageUrl,
-          toggleDrawer,
-        );
-      });
+      if (photoSpots) {
+        // 포토스팟 로드
+        photoSpots.forEach((spot, idx) => {
+          makeMarker(
+            mapInstance.current!,
+            new naver.maps.LatLng(spot.latitude, spot.longitude),
+            spot.spotName,
+            spot.spotId,
+            spot.spotImageUrl,
+            toggleDrawer,
+          );
+        });
+      }
 
       // 학교 로드
       setSchoolArr(schoolList);
     });
-  }, [clientId]);
+  }, [photoSpots]);
 
   // 학교 위치로 이동하는 함수
   const moveToSchool = (school: School) => {
@@ -155,19 +174,19 @@ export default function MapPage() {
           }}
         >
           <DrawerContent
+            photoSpotData={selectedSpotInfo}
             toggleDrawer={() => toggleDrawer(false)}
-            toggleModal={(index) => toggleModal(index)}
+            // toggleModal={(index) => toggleModal(index)}
           />
         </Drawer>
       </div>
-
+      {/* 
       {modalState && currPostIdIndex !== null && (
         <Modal
-          // currIndex={currPostIdIndex}
           setModalState={setModalState}
-          photoSpot={photoSpotData}
+          photoSpot={photoSpotDataRef.current} // Safely pass the value
         />
-      )}
+      )} */}
     </Container>
   );
 }

@@ -1,16 +1,16 @@
-export interface spotPostImageProps {
+export interface SpotPostImageProps {
   imageId: number;
   imageUrl: string;
   postId: number;
   photographerName: string;
 }
 
-export interface photoSpotProps {
+export interface PhotoSpotProps {
   spotId: number;
   spotName: string;
   content: string;
   imageInfo: {
-    spotPostImageList: spotPostImageProps[];
+    spotPostImageList: SpotPostImageProps[];
     hasNext: boolean;
   };
 }
@@ -23,7 +23,7 @@ export interface PhotoSpotListProps {
   spotImageUrl: string;
 }
 
-export interface postListProps {
+export interface PostListProps {
   id: number;
   photographerId: number;
   photographerName: string;
@@ -31,7 +31,7 @@ export interface postListProps {
   firstImageSpot: string;
   createdAt: string;
 }
-export interface postByUnivProps {
-  postList: postListProps[];
+export interface PostByUnivProps {
+  postList: PostListProps[];
   hasNext: boolean;
 }

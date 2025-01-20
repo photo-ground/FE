@@ -6,10 +6,10 @@ import { IconButton } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {
-  photoSpotProps,
-  postByUnivProps,
-  postListProps,
-  spotPostImageProps,
+  PhotoSpotProps,
+  PostByUnivProps,
+  PostListProps,
+  SpotPostImageProps,
 } from '@/types/photoSpot';
 import useSpotStore from '../_store';
 
@@ -96,19 +96,19 @@ const RightButton = styled(NavigationButton)`
 `;
 
 interface SliderProps {
-  photoSpot: photoSpotProps | postByUnivProps;
+  photoSpot: PhotoSpotProps | PostByUnivProps;
 }
 
 export default function Slider({ photoSpot }: SliderProps) {
   // 타입 가드
   const isPhotoSpotProps = (
-    data: photoSpotProps | postByUnivProps,
-  ): data is photoSpotProps => {
-    return (data as photoSpotProps).imageInfo !== undefined;
+    data: PhotoSpotProps | PostByUnivProps,
+  ): data is PhotoSpotProps => {
+    return (data as PhotoSpotProps).imageInfo !== undefined;
   };
 
   // 데이터 분리 : 타입에 따른 데이터 분리
-  const dataList: spotPostImageProps[] | postListProps[] = isPhotoSpotProps(
+  const dataList: SpotPostImageProps[] | PostListProps[] = isPhotoSpotProps(
     photoSpot,
   )
     ? photoSpot.imageInfo.spotPostImageList
@@ -158,8 +158,8 @@ export default function Slider({ photoSpot }: SliderProps) {
             <Image
               src={
                 isPhotoSpotProps(photoSpot)
-                  ? (dataList as spotPostImageProps[])[currentSlide].imageUrl
-                  : (dataList as postListProps[])[currentSlide].firstImageUrl
+                  ? (dataList as SpotPostImageProps[])[currentSlide].imageUrl
+                  : (dataList as PostListProps[])[currentSlide].firstImageUrl
               }
               alt={`Slide ${currentSlide}`}
             />

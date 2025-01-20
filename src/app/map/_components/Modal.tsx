@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { IconButton } from '@mui/material';
 import CloseIcon from '@/assets/CloseIcon';
-import { photoSpotProps, postByUnivProps } from '@/types/photoSpot';
+import { PhotoSpotProps, PostByUnivProps } from '@/types/photoSpot';
 import Slider from './Slider';
 import useSpotStore from '../_store';
 
@@ -42,7 +42,7 @@ const ContentWrapper = styled.div`
   justify-content: center; /* 가로 기준으로 가운데 정렬 */
 `;
 interface ModalProps {
-  photoSpot: photoSpotProps | postByUnivProps;
+  photoSpot: PhotoSpotProps | PostByUnivProps;
   setModalState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
