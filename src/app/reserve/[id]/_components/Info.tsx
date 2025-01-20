@@ -4,6 +4,7 @@ import LocationIcon from '@/assets/LocationIcon';
 import PeopleIcon from '@/assets/PeopleIcon';
 import Text from '@/components/atoms/Text';
 import Chip from '@/components/atoms/Chip';
+import { ReserveDetail } from '../type';
 
 const Container = styled.div`
   display: flex;
@@ -48,26 +49,41 @@ const InfoText = styled(Text)`
   color: ${({ theme }) => theme.colors.gray[200]};
 `;
 
-export default function Info() {
+function formatTime(date: string, time: string) {
+  const [year, month, dateNum] = date.split('-');
+  const [hours, minutes] = time.split(':');
+  const days = ['일', '월', '화', '수', '목', '금', '토'];
+
+  const dateObj = new Date(+year, +month - 1, +dateNum, +hours, +minutes);
+  const period = +hours > 12 ? '오후' : '오전';
+  const formattedHours = +hours > 12 ? +hours - 12 : hours;
+
+  // Return the formatted string
+  return `${+month}.${+dateNum}(${days[dateObj.getDay()]}) ${period} ${formattedHours}:${minutes}`;
+}
+
+export default function Info({ data }: { data: ReserveDetail }) {
+  const { date, startTime, photographerName, univName, reserveNum } = data;
+
   return (
     <Container>
       <Profile src="/images/yonsei.jpg" />
       <Card>
-        <Text variant="body1_md">11.03(일) 오후 3:00</Text>
+        <Text variant="body1_md">{formatTime(date, startTime)}</Text>
 
         <Content>
           <InfoArea>
             <InfoLine>
               <PhotographerIcon />
-              <InfoText variant="body1_md">이채린 작가</InfoText>
+              <InfoText variant="body1_md">{photographerName} 작가</InfoText>
             </InfoLine>
             <InfoLine>
               <LocationIcon />
-              <InfoText variant="body1_md">홍익대학교</InfoText>
+              <InfoText variant="body1_md">{univName}</InfoText>
             </InfoLine>
           </InfoArea>
 
-          <Chip type="brand" icon={PeopleIcon} text="2인" />
+          <Chip type="brand" icon={PeopleIcon} text={`${reserveNum}인`} />
         </Content>
       </Card>
     </Container>

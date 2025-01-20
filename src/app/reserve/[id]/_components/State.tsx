@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
+// import { ReserveDetail } from '../type';
 import ProgressBar from './ProgressBar';
 
 const Container = styled.div`
@@ -18,6 +19,7 @@ const Box = styled.div`
   border-radius: 0.5rem;
 `;
 
+// export default function State({ state }: { state: ReserveDetail['status'] }) {
 export default function State() {
   return (
     <Container>
