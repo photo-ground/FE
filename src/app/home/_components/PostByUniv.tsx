@@ -7,9 +7,9 @@ import { getPostByUniv } from '../_services/getActivePhotographer';
 
 const CardContainerY = styled.div`
   display: grid;
-  grid: 1fr 1fr / auto-flow;
+  grid-template-columns: 1fr 1fr;
   flex-wrap: wrap;
-  overflow-y: scroll;
+  // overflow-y: scroll;
   gap: 10px;
   margin: 0 20px;
 `;
