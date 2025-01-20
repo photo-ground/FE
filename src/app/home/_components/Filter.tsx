@@ -91,7 +91,7 @@ export default function Filter({
   }, [isOpen]);
 
   const currentLabel = optionList.find(
-    (option) => option.value === value,
+    (option) => option.label === value,
   )?.label;
 
   return (

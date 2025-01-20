@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
 import Link from 'next/link';
+import Image from 'next/image';
 import { SchoolButtonProps } from './interface';
 
 const Container = styled.div`
   position: relative;
+  display: block;
   height: 96px;
   margin: 0.75rem auto;
   background: linear-gradient(
@@ -12,13 +14,17 @@ const Container = styled.div`
     rgba(0, 0, 0, 0) 0%,
     rgba(0, 0, 0, 1) 100%
   );
+  border-radius: 0.5rem;
+  overflow: hidden;
+  text-decoration: none;
 `;
-const Background = styled.img`
+
+const Background = styled(Image)`
   position: absolute;
   width: 100%;
   height: 96px;
   object-fit: cover;
-  border-radius: 0.5rem;
+  z-index: -1;
 `;
 
 const GradientOverlay = styled.div`
@@ -36,6 +42,7 @@ const Title = styled(Text)`
   position: absolute;
   top: 0.75rem;
   left: 1.5rem;
+  color: white;
 `;
 
 export default function SchoolButtonItem({
@@ -44,9 +51,9 @@ export default function SchoolButtonItem({
   link,
 }: SchoolButtonProps) {
   return (
-    <Link href={link} passHref>
-      <Container>
-        <Background src={src} alt={title} />
+    <Link href={link}>
+      <Container aria-label={`${title}로 이동`}>
+        <Background src={src} alt={title} fill />
         <GradientOverlay />
         <Title variant="header3">{title}</Title>
       </Container>

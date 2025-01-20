@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 'use client';
 
 import { useEffect, useState } from 'react';
