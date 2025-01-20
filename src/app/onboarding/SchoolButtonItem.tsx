@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { SchoolButtonProps } from './interface';
 
-const Container = styled.a`
+const Container = styled.div`
   position: relative;
   display: block;
   height: 96px;

@@ -13,12 +13,7 @@ import styled from 'styled-components';
 
 import RightChevronIcon from '@/assets/RightChevronIcon';
 
-import {
-  UnivOption,
-  UNIV_LIST,
-  UnivLabel,
-  UnivValue,
-} from '@/types/univOption';
+import { UnivOption, UNIV_LIST, UnivLabel } from '@/types/univOption';
 import SearchEngine from './_components/SearchEngine';
 import Filter from './_components/Filter';
 
@@ -64,9 +59,8 @@ export default function HomePage() {
   console.log(univ);
 
   const [currUniv, setUniv] = useState<UnivLabel | null>(null);
-  const [univTitle, setUnivTitle] = useState<UnivLabel | null>(null);
 
-  // 쿼리 파라미터가 변할 때 상태를 업데이트
+  // init : 쿼리 파라미터가 변할 때 상태를 업데이트
   useEffect(() => {
     if (typeof univ === 'string') {
       setUniv(univ);
@@ -76,8 +70,7 @@ export default function HomePage() {
   }, [univ]);
 
   const onChangeUniv = (prop: UnivOption) => {
-    setUniv(prop.value); // 영문
-    setUnivTitle(prop.label); // 국문
+    setUniv(prop.value); // 국문
   };
 
   return (
