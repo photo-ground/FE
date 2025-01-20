@@ -22,22 +22,22 @@ export default function OnboardingPage() {
     {
       title: '서강대학교',
       src: '/images/sogang.jpg',
-      link: '/home?univ=서강대학교',
+      link: '/home?school=서강대학교',
     },
     {
       title: '연세대학교',
       src: '/images/yonsei.jpg',
-      link: '/home?univ=연세대학교',
+      link: '/home?school=연세대학교교',
     },
     {
       title: '이화여자대학교',
       src: '/images/ewha.jpg',
-      link: '/home?univ=이화여자대학교',
+      link: '/home?school=이화여자대학교교',
     },
     {
       title: '홍익대학교',
       src: '/images/hongik.jpg',
-      link: '/home?univ=홍익대학교',
+      link: '/home?school=홍익대학교',
     },
   ];
   return (
