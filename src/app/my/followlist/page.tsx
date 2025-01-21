@@ -6,3 +6,5 @@ export default async function FollowPage() {
 
   return <FollowScreen data={data} />;
 }
+
+export const runtime = 'edge';
