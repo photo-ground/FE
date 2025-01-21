@@ -16,6 +16,8 @@ import {
 } from '../../_services/getPhotoSpot';
 import { SliderData } from '../../_components/Slider';
 
+export const runtime = 'edge'; // Edge Runtime 사용 선언
+
 // Suspense로 감싼 SearchParams를 가져오는 컴포넌트
 
 // 특정학교 전체 포토스팟 위치정보 조회로 각 학교별 포토스팟 위치,이름, 사진정보 받아오고
