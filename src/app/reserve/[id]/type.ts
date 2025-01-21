@@ -1,3 +1,5 @@
+import { ReserveStatus } from '../list/type';
+
 export interface ReserveDetail {
   date: string;
   photographerName: string;
@@ -5,6 +7,6 @@ export interface ReserveDetail {
   requirement: string;
   reserveNum: number;
   startTime: string;
-  status: '예약취소';
+  status: ReserveStatus;
   univName: '서강대학교' | '연세대학교' | '이화여자대학교' | '홍익대학교';
 }

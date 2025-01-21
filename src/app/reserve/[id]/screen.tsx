@@ -9,6 +9,7 @@ import Info from './_components/Info';
 import Message from './_components/Message';
 import State from './_components/State';
 import { ReserveDetail } from './type';
+import cancelReservation from './_libs/cancelReservation';
 
 const Container = styled.div`
   padding-bottom: 5rem;
@@ -26,7 +27,13 @@ const DivideLine = styled.hr`
   margin-bottom: 1.5rem;
 `;
 
-export default function ReserveDetailScreen({ data }: { data: ReserveDetail }) {
+export default function ReserveDetailScreen({
+  reservationId,
+  data,
+}: {
+  reservationId: string;
+  data: ReserveDetail;
+}) {
   return (
     <Container>
       <TNB.Back text="예약 상세" />
@@ -39,7 +46,21 @@ export default function ReserveDetailScreen({ data }: { data: ReserveDetail }) {
 
         <State state={data.status} />
 
-        <CTAButton variant="tertiary" text="예약 취소하기" disabled />
+        {data.status === '예약대기' && (
+          <CTAButton
+            variant="tertiary"
+            text="예약 취소하기"
+            onClick={() => {
+              cancelReservation(reservationId).then((response) => {
+                if (!response) {
+                  alert('문제가 발생했습니다');
+                } else {
+                  window.location.reload();
+                }
+              });
+            }}
+          />
+        )}
       </Wrapper>
     </Container>
   );
