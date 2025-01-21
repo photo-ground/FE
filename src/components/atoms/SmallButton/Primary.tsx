@@ -5,7 +5,8 @@ import Button from './styles';
 const PrimaryButton = styled(Button)<{ disabled: boolean }>`
   background: ${({ theme, disabled }) =>
     disabled ? theme.colors.gray[600] : theme.colors.primary[100]};
-  cursor: ${({ disabled }) => (disabled ? 'auto' : 'cursor')};
+  border: 1px solid transparent;
+  cursor: ${({ disabled }) => (disabled ? 'auto' : 'pointer')};
 `;
 
 const DisabledText = styled(Text)`

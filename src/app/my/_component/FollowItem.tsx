@@ -1,56 +1,73 @@
-import SmallButton from '@/components/atoms/SmallButton';
+import { useState } from 'react';
 import styled from 'styled-components';
+
+import follow from '@/app/photographer/[id]/_libs/follow';
+import unfollow from '@/app/photographer/[id]/_libs/unfollow';
+import SmallButton from '@/components/atoms/SmallButton';
+import Text from '@/components/atoms/Text';
 
 const UserCardWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  padding: 0.625rem 1.25rem;
+  background: ${({ theme }) => theme.colors.gray[900]};
+  border-radius: 0.5rem;
+`;
+
+const PhotographerInfo = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Avatar = styled.img`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 100%;
 `;
 
-const UserInfo = styled.div`
-  flex: 1;
+const PhotographerName = styled(Text)`
   margin-left: 1rem;
-  color: white;
-
-  span {
-    font-size: 1rem;
-    font-weight: bold;
-  }
 `;
 
 export default function FollowItem({
   photographerId,
   profileUrl,
   photographerName,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onButtonClick,
 }: {
   photographerId: number;
   profileUrl: string;
   photographerName: string;
-  onButtonClick?: () => void;
 }) {
-  function handleFollowButton() {
-    console.log(photographerId);
-  }
+  const [isFollowing, setIsFollowing] = useState(true);
+
   return (
     <UserCardWrapper>
-      <Avatar src={profileUrl} alt={photographerName} />
-      <UserInfo>
-        <span>{photographerName}</span>
-      </UserInfo>
-      <SmallButton.Tertiary
-        text="팔로우"
-        onClick={() => handleFollowButton()}
-      />
+      <PhotographerInfo>
+        <Avatar src={profileUrl} alt={photographerName} />
+        <PhotographerName variant="body1_md">
+          {photographerName}
+        </PhotographerName>
+      </PhotographerInfo>
+
+      {isFollowing ? (
+        <SmallButton.Tertiary
+          text="팔로잉"
+          onClick={() => {
+            unfollow(photographerId.toString());
+            setIsFollowing(false);
+          }}
+        />
+      ) : (
+        <SmallButton.Primary
+          text="팔로우"
+          onClick={() => {
+            follow(photographerId.toString());
+            setIsFollowing(true);
+          }}
+        />
+      )}
     </UserCardWrapper>
   );
 }

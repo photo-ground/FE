@@ -14,8 +14,10 @@ import Price from './_components/Price';
 import Message from './_components/Message';
 import Review from './_components/Review';
 import Feed from './_components/Feed';
-import { PhotographerDetail } from './getPhotographerData';
-import getPhotographerPosts, { PostSummary } from './getPhotographerPosts';
+import { PhotographerDetail } from './_libs/getPhotographerData';
+import getPhotographerPosts, {
+  PostSummary,
+} from './_libs/getPhotographerPosts';
 
 const Container = styled.div`
   padding-bottom: 6.125rem;
@@ -33,17 +35,7 @@ export default function PhotographerDetailScreen({
   photographerId: string;
   data: PhotographerDetail;
 }) {
-  const {
-    profileUrl,
-    photographerName,
-    followerNum,
-    gender,
-    age,
-    univ,
-    price,
-    introduction,
-    styleList,
-  } = data;
+  const { price, introduction, styleList } = data;
   const [postList, setPostList] = useState<PostSummary[]>([]);
   const [hasNext, setHasNext] = useState(true);
 
@@ -85,14 +77,7 @@ export default function PhotographerDetailScreen({
 
   return (
     <Container>
-      <PhotographerProfile
-        profileUrl={profileUrl}
-        photographerName={photographerName}
-        followerNum={followerNum}
-        gender={gender}
-        age={age}
-        univ={univ}
-      />
+      <PhotographerProfile data={data} photographerId={photographerId} />
 
       <DivideLine />
 

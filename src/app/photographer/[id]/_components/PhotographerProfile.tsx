@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import PeopleIcon from '@/assets/PeopleIcon';
 import Chip from '@/components/atoms/Chip';
@@ -5,7 +6,9 @@ import SmallButton from '@/components/atoms/SmallButton';
 import Text from '@/components/atoms/Text';
 import genderMap from '@/lib/genderMap';
 import BackButton from './BackButton';
-import { PhotographerDetail } from '../getPhotographerData';
+import { PhotographerDetail } from '../_libs/getPhotographerData';
+import follow from '../_libs/follow';
+import unfollow from '../_libs/unfollow';
 
 const ThumbnailWrapper = styled.div`
   position: relative;
@@ -80,20 +83,23 @@ function UnivList({ list }: { list: string[] }) {
 }
 
 export default function PhotographerProfile({
-  profileUrl,
-  photographerName,
-  followerNum,
-  gender,
-  age,
-  univ,
+  data,
+  photographerId,
 }: {
-  profileUrl: PhotographerDetail['profileUrl'];
-  photographerName: PhotographerDetail['photographerName'];
-  followerNum: PhotographerDetail['followerNum'];
-  gender: PhotographerDetail['gender'];
-  age: PhotographerDetail['age'];
-  univ: PhotographerDetail['univ'];
+  data: PhotographerDetail;
+  photographerId: string;
 }) {
+  const {
+    profileUrl,
+    photographerName,
+    followerNum,
+    gender,
+    age,
+    univ,
+    following,
+  } = data;
+  const [isFollowing, setIsFollowing] = useState(following);
+
   return (
     <ThumbnailWrapper>
       <Thumbnail src={profileUrl} alt="thumbnail" />
@@ -108,7 +114,30 @@ export default function PhotographerProfile({
 
           <ButtonArea>
             <Chip icon={PeopleIcon} text={followerNum.toString()} />
-            <SmallButton.Primary text="팔로우" />
+
+            {isFollowing ? (
+              <SmallButton.Tertiary
+                text="팔로잉"
+                onClick={() => {
+                  unfollow(photographerId).then((response) => {
+                    if (response) {
+                      setIsFollowing(false);
+                    }
+                  });
+                }}
+              />
+            ) : (
+              <SmallButton.Primary
+                text="팔로우"
+                onClick={() => {
+                  follow(photographerId).then((response) => {
+                    if (response) {
+                      setIsFollowing(true);
+                    }
+                  });
+                }}
+              />
+            )}
           </ButtonArea>
         </Header>
 

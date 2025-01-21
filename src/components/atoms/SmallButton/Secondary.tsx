@@ -4,6 +4,8 @@ import Button from './styles';
 
 const SecondaryButton = styled(Button)`
   background: ${({ theme }) => theme.colors.gray[900]};
+  border: 1px solid transparent;
+  cursor: pointer;
 `;
 
 export default function Secondary({

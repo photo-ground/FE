@@ -5,7 +5,7 @@ import TNB from '@/components/TNB';
 import styled from 'styled-components';
 import SearchArea from './_components/SearchArea';
 import PhotographerList from './_components/PhotographerList';
-import getPhotographerList from './getPhotographerList';
+import getPhotographerList from './_libs/getPhotographerList';
 
 const Container = styled.div`
   position: relative;

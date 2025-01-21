@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import Card from '@/components/Card';
 import genderMap from '@/lib/genderMap';
-import { PhotographerSummary } from '../../getPhotographerList';
+import { PhotographerSummary } from '../../_libs/getPhotographerList';
 
 const Container = styled.div`
   display: grid;
