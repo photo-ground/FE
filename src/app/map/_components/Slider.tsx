@@ -95,11 +95,21 @@ const RightButton = styled(NavigationButton)`
   top: 190px;
 `;
 
+export interface SliderData {
+  imageUrl: string;
+  univ: string;
+  spotName: string;
+  photographerName: string;
+  postId: number;
+  hasNext: boolean;
+  // onClicked: ()=> void();
+}
 interface SliderProps {
-  photoSpot: PhotoSpotProps | PostByUnivProps;
+  sliderData: SliderData[];
+  currPostIdIndex: number;
 }
 
-export default function Slider({ photoSpot }: SliderProps) {
+export default function Slider({ sliderData, currPostIdIndex }: SliderProps) {
   // 타입 가드
   const isPhotoSpotProps = (
     data: PhotoSpotProps | PostByUnivProps,
@@ -107,26 +117,13 @@ export default function Slider({ photoSpot }: SliderProps) {
     return (data as PhotoSpotProps).imageInfo !== undefined;
   };
 
-  // 데이터 분리 : 타입에 따른 데이터 분리
-  const dataList: SpotPostImageProps[] | PostListProps[] = isPhotoSpotProps(
-    photoSpot,
-  )
-    ? photoSpot.imageInfo.spotPostImageList
-    : photoSpot.postList;
-
-  const hasNext = isPhotoSpotProps(photoSpot)
-    ? photoSpot.imageInfo.hasNext
-    : photoSpot.hasNext;
-
-  const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
-
   const [currentSlide, setCurrentSlide] = useState(currPostIdIndex);
 
   const handleNext = () => {
     if (currentSlide !== null) {
-      if (currentSlide < dataList.length - 1) {
+      if (currentSlide < sliderData.length - 1) {
         setCurrentSlide(currentSlide + 1);
-      } else if (hasNext) {
+      } else if (sliderData[currentSlide].hasNext) {
         // API 호출
         console.log('Fetching more data...');
       }
@@ -148,7 +145,10 @@ export default function Slider({ photoSpot }: SliderProps) {
       </LeftButton>
       <RightButton
         onClick={handleNext}
-        disabled={!hasNext && currentSlide === dataList.length - 1}
+        disabled={
+          !sliderData[currentSlide].hasNext &&
+          currentSlide === sliderData.length - 1
+        }
       >
         <ArrowForwardIosIcon />
       </RightButton>
@@ -156,25 +156,15 @@ export default function Slider({ photoSpot }: SliderProps) {
         <>
           <ImageContainer>
             <Image
-              src={
-                isPhotoSpotProps(photoSpot)
-                  ? (dataList as SpotPostImageProps[])[currentSlide].imageUrl
-                  : (dataList as PostListProps[])[currentSlide].firstImageUrl
-              }
+              src={sliderData[currentSlide].imageUrl}
               alt={`Slide ${currentSlide}`}
             />
           </ImageContainer>
           <Info>
-            <Title>
-              {isPhotoSpotProps(photoSpot)
-                ? dataList[currentSlide].photographerName
-                : dataList[currentSlide].photographerName}
-            </Title>
+            <Title>{sliderData[currentSlide].photographerName}</Title>
             <Description>
-              데이터 처리 진짜 빡셉니다.....하..
-              {/* {isPhotoSpotProps(photoSpot)
-                ? (dataList as spotPostImageProps[])[currentSlide].
-                : (dataList as postListProps[])[currentSlide].firstImageSpot} */}
+              {sliderData[currentSlide].univ} |{' '}
+              {sliderData[currentSlide].spotName}
             </Description>
             <Button>게시물 보기</Button>
           </Info>

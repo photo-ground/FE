@@ -5,6 +5,12 @@ export interface SpotPostImageProps {
   photographerName: string;
 }
 
+export interface SpotPostImageMetaProps {
+  spotPostImageProps: SpotPostImageProps[];
+  spotName: string;
+  univ: string;
+}
+
 export interface PhotoSpotProps {
   spotId: number;
   spotName: string;

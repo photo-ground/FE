@@ -1,18 +1,20 @@
 'use client';
 
-// import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useSchoolStore from '@/store/useUnivStore';
 import Card from '@/components/Card';
 import Back from '@/components/TNB/Back';
 import Text from '@/components/atoms/Text';
-// import { useSearchParams } from 'next/navigation';
 import { Container, CardContainerY } from '../../style';
 
-import photoSpotData from '../../_data/photoSpotData';
 import Modal from '../../_components/Modal';
 import useSpotStore from '../../_store';
+import { PhotoSpotProps } from '@/types/photoSpot';
+import { useQuery } from '@tanstack/react-query';
+import { getSelectedSpotInfo } from '../../_services/getPhotoSpot';
+import { SliderData } from '../../_components/Slider';
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -34,31 +36,72 @@ export default function Overview() {
   const [modalState, setModalState] = useState<boolean>(false);
   const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
   const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
-  // const clearCurrPostIdIndex = useSpotStore((state) => state.clearCurrPostIdIndex);
+  const [spotPostImages, setSpotPostImages] = useState<SliderData[]>([]);
 
-  function handleCardModal(postId: number) {
-    const index = photoSpotData.imageInfo.spotPostImageList.findIndex(
+  const searchParams = useSearchParams();
+  const photoSpotId = searchParams.get('spotId');
+
+  console.log(photoSpotId);
+  // Fetch photo spot data using the spotId
+  const {
+    data: photoSpotData,
+    error,
+    isLoading,
+  } = useQuery<PhotoSpotProps>({
+    queryKey: ['photoSpotData', photoSpotId],
+    queryFn: () => getSelectedSpotInfo(Number(photoSpotId)),
+    enabled: !!photoSpotId, // Ensure the query runs only if spotId is available
+  });
+
+  useEffect(() => {
+    if (photoSpotData) {
+      const sliderData = photoSpotData.imageInfo.spotPostImageList.map(
+        (imageData, index) => {
+          let hasNext = false;
+          if (
+            photoSpotData.imageInfo.hasNext &&
+            index === photoSpotData.imageInfo.spotPostImageList.length - 1
+          ) {
+            hasNext = true;
+          }
+          return {
+            imageUrl: imageData.imageUrl,
+            univ: univ,
+            spotName: photoSpotData.spotName,
+            photographerName: imageData.photographerName,
+            postId: imageData.postId,
+            hasNext: hasNext,
+          };
+        },
+      );
+
+      console.log(sliderData);
+      setSpotPostImages(sliderData); // 상태 업데이트를 useEffect 내부에서 수행
+    }
+  }, [photoSpotData]); // photoSpotData 또는 univ가 변경될 때만 실행
+
+  const handleCardModal = (postId: number) => {
+    const index = photoSpotData?.imageInfo.spotPostImageList.findIndex(
       (item) => item.postId === postId,
     );
-    setCurrPostIdIndex(index); // index를 저장
-    setModalState(true); // 모달 열기
-  }
-
-  const spotTitle = photoSpotData.spotName;
-  const spotDetail = photoSpotData.content;
+    if (index !== undefined && index >= 0) {
+      setCurrPostIdIndex(index);
+      setModalState(true);
+    }
+  };
 
   return (
     <Container>
       <Back text={`${univ}`} />
       <HeaderContainer>
-        <Text variant="title2_sb">{spotTitle}</Text>
+        <Text variant="title2_sb">{photoSpotData?.spotName}</Text>
         <Text variant="body2_rg" className="text-pre">
-          {spotDetail}
+          {photoSpotData?.content}
         </Text>
       </HeaderContainer>
       {/* 칩 버튼 */}
       <CardContainerY>
-        {photoSpotData.imageInfo.spotPostImageList.map((spot) => (
+        {photoSpotData?.imageInfo.spotPostImageList.map((spot) => (
           <Card
             key={spot.postId}
             size="small"
@@ -68,12 +111,8 @@ export default function Overview() {
         ))}
       </CardContainerY>
 
-      {modalState && currPostIdIndex !== null && (
-        <Modal
-          // currIndex={currPostIdIndex}
-          setModalState={setModalState}
-          photoSpot={photoSpotData}
-        />
+      {modalState && currPostIdIndex !== null && photoSpotData && (
+        <Modal setModalState={setModalState} sliderData={spotPostImages} />
       )}
     </Container>
   );

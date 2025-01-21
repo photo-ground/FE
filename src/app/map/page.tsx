@@ -38,7 +38,7 @@ export default function MapPage() {
 
   // zustand상태관리
   const { univ, setUniv } = useUnivStore();
-  const [schoolArr, setSchoolArr] = useState<School[]>([]);
+  const [schoolArr, setSchoolArr] = useState<School[]>(schoolList);
   const [open, setOpen] = useState(false); // Drawer 열림 상태
   const [selectedSpotInfo, setSelectedSpotInfo] =
     useState<PhotoSpotProps | null>(null);
@@ -52,9 +52,9 @@ export default function MapPage() {
   });
 
   const [modalState, setModalState] = useState<boolean>(false);
-  const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
+  // const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
 
-  const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
+  // const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
 
   // function toggleModal(index: number) {
   //   setCurrPostIdIndex(index); // 상태 저장
@@ -67,9 +67,7 @@ export default function MapPage() {
     markerInfo?: { title: string; src: string; spotId: number },
   ) => {
     setOpen(isOpen);
-    // if (markerInfo) {
-    //   setSelectedMarker(markerInfo); // 클릭한 마커 정보 저장
-    // }
+
     if (isOpen && markerInfo) {
       try {
         const spotInfo = await getSelectedSpotInfo(markerInfo.spotId);
@@ -85,6 +83,8 @@ export default function MapPage() {
 
   // map/_components/NaverMap.tsx?
   useEffect(() => {
+    // 클라이언트 전용 로직 안전 처리
+
     loadNaverMap(process.env.NEXT_PUBLIC_NAVER_CLIENT_ID || '', () => {
       if (!mapElement.current) return;
 
@@ -96,7 +96,7 @@ export default function MapPage() {
 
       if (photoSpots) {
         // 포토스팟 로드
-        photoSpots.forEach((spot, idx) => {
+        photoSpots.forEach((spot) => {
           makeMarker(
             mapInstance.current!,
             new naver.maps.LatLng(spot.latitude, spot.longitude),
@@ -107,11 +107,8 @@ export default function MapPage() {
           );
         });
       }
-
-      // 학교 로드
-      setSchoolArr(schoolList);
     });
-  }, [photoSpots]);
+  }, [photoSpots?.map((spot) => spot.spotId).join(',')]);
 
   // 학교 위치로 이동하는 함수
   const moveToSchool = (school: School) => {
@@ -119,7 +116,7 @@ export default function MapPage() {
       mapInstance.current.setCenter(
         new naver.maps.LatLng(school.lat, school.lng),
       );
-      setUniv(school.name); // TODO : zustand적용
+      setUniv(school.name); // zustand적용
     }
   };
 
@@ -141,8 +138,7 @@ export default function MapPage() {
       <AbsContainer>
         <Link
           href={{
-            pathname: '/map/overview/school',
-            query: { univ },
+            pathname: `/map/overview/${univ}`, // Replace ":univ" with the actual value of "univ"
           }}
         >
           <Chip size="dynamic" text="스냅 전체보기" variant="primary" />

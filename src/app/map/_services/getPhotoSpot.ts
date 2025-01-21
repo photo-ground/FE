@@ -1,6 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-import { PhotoSpotListProps, PhotoSpotProps } from '@/types/photoSpot';
+import {
+  PhotoSpotListProps,
+  PhotoSpotProps,
+  PostByUnivProps,
+} from '@/types/photoSpot';
 
 export async function getPhotoSpotByUniv(
   univ: string,
