@@ -3,7 +3,6 @@
 import { useParams } from 'next/navigation';
 import { Container } from '../../../style';
 import Main from './Main';
-export const runtime = 'edge'; // Edge Runtime 사용 선언
 
 // school을 URL 매개변수로 전달
 export default function Page() {
@@ -20,3 +19,5 @@ export default function Page() {
     </Container>
   );
 }
+
+export const runtime = 'edge'; // Edge Runtime 사용 선언
