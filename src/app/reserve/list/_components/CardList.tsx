@@ -4,7 +4,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import ReserveCard from './ReserveCard';
 import PaymentCard from './PaymentCard';
-// import ConfirmCard from './ConfirmCard';
+import ConfirmCard from './ConfirmCard';
 import CancelCard from './CancelCard';
 import { Reservation } from '../type';
 
@@ -48,8 +48,11 @@ function mapCard(reservation: Reservation) {
     case '결제대기':
       return <PaymentCard data={reservation} state="check" />;
 
-    // case 'confirm':
-    //   return <ConfirmCard />;
+    case '결제오류':
+      return <PaymentCard data={reservation} state="error" />;
+
+    case '예약확정':
+      return <ConfirmCard data={reservation} />;
 
     case '예약취소':
       return <CancelCard data={reservation} />;
