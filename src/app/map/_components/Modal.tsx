@@ -1,15 +1,11 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import { IconButton } from '@mui/material';
 import CloseIcon from '@/assets/CloseIcon';
-import {
-  PhotoSpotProps,
-  PostByUnivProps,
-  SpotPostImageMetaProps,
-} from '@/types/photoSpot';
+
 import Slider, { SliderData } from './Slider';
 import useSpotStore from '../_store';
 
@@ -64,9 +60,6 @@ export default function Modal({ sliderData, setModalState }: ModalProps) {
     clearCurrPostIdIndex();
   };
 
-  useEffect(() => {
-    console.log(sliderData);
-  }, []);
   return (
     <>
       <Overlay onClick={() => window.history.back()} />

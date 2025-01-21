@@ -1,26 +1,19 @@
 'use client';
 
 // import Link from 'next/link';
-import { useParams, useSearchParams } from 'next/navigation';
-import { Suspense, useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import Card from '@/components/Card';
 import Back from '@/components/TNB/Back';
+import { PhotoSpotListProps } from '@/types/photoSpot';
+import { useQuery } from '@tanstack/react-query';
 import { Container, CardContainerY } from '../../style';
-// import postByUnivData from '../../_data/postByUnivData';
 import Modal from '../../_components/Modal';
 import useSpotStore from '../../_store';
-import useUnivStore from '@/store/useUnivStore';
 import {
   getPhotoSpotByUniv,
   getSelectedSpotInfo,
 } from '../../_services/getPhotoSpot';
-import {
-  PhotoSpotListProps,
-  PostByUnivProps,
-  SpotPostImageMetaProps,
-  SpotPostImageProps,
-} from '@/types/photoSpot';
-import { useQuery } from '@tanstack/react-query';
 import { SliderData } from '../../_components/Slider';
 
 // Suspense로 감싼 SearchParams를 가져오는 컴포넌트
@@ -62,7 +55,7 @@ export default function Overview() {
         const validSpotImages: SliderData[] = spotImageData.flatMap((tmpData) =>
           tmpData.imageInfo.spotPostImageList.map((imageData, index) => ({
             imageUrl: imageData.imageUrl,
-            univ: univ,
+            univ,
             spotName: tmpData.spotName,
             photographerName: imageData.photographerName,
             postId: imageData.postId,
@@ -80,7 +73,7 @@ export default function Overview() {
     };
 
     fetchSpotImages();
-  }, [postByUnivData]); // postByUnivData만 의존성으로 설정
+  }, [univ, postByUnivData]); // postByUnivData만 의존성으로 설정
 
   const handleCardClick = (spotIndex: number) => {
     // const selectedSpot = spotPostImages[spotIndex];
@@ -95,7 +88,7 @@ export default function Overview() {
       <CardContainerY>
         {spotPostImages.map((spot, spotDataIndex) => (
           <Card
-            key={`${spot.postId}-${spotDataIndex}`}
+            key={`${spot.postId}`}
             size="small"
             src={spot.imageUrl}
             onClick={() => handleCardClick(spotDataIndex)}

@@ -1,18 +1,18 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useSchoolStore from '@/store/useUnivStore';
 import Card from '@/components/Card';
 import Back from '@/components/TNB/Back';
 import Text from '@/components/atoms/Text';
+import { PhotoSpotProps } from '@/types/photoSpot';
+import { useQuery } from '@tanstack/react-query';
 import { Container, CardContainerY } from '../../style';
 
 import Modal from '../../_components/Modal';
 import useSpotStore from '../../_store';
-import { PhotoSpotProps } from '@/types/photoSpot';
-import { useQuery } from '@tanstack/react-query';
 import { getSelectedSpotInfo } from '../../_services/getPhotoSpot';
 import { SliderData } from '../../_components/Slider';
 
@@ -38,16 +38,13 @@ export default function Overview() {
   const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
   const [spotPostImages, setSpotPostImages] = useState<SliderData[]>([]);
 
-  const searchParams = useSearchParams();
-  const photoSpotId = searchParams.get('spotId');
+  const params = useParams<{ spotId: string }>(); // 'spotId'를 string으로 선언
+  console.log(params.spotId);
+  const photoSpotId = params.spotId ? parseInt(params.spotId, 10) : -1; // 문자열을 숫자로 변환
 
   console.log(photoSpotId);
   // Fetch photo spot data using the spotId
-  const {
-    data: photoSpotData,
-    error,
-    isLoading,
-  } = useQuery<PhotoSpotProps>({
+  const { data: photoSpotData } = useQuery<PhotoSpotProps>({
     queryKey: ['photoSpotData', photoSpotId],
     queryFn: () => getSelectedSpotInfo(Number(photoSpotId)),
     enabled: !!photoSpotId, // Ensure the query runs only if spotId is available
@@ -66,11 +63,11 @@ export default function Overview() {
           }
           return {
             imageUrl: imageData.imageUrl,
-            univ: univ,
+            univ,
             spotName: photoSpotData.spotName,
             photographerName: imageData.photographerName,
             postId: imageData.postId,
-            hasNext: hasNext,
+            hasNext,
           };
         },
       );
@@ -78,7 +75,7 @@ export default function Overview() {
       console.log(sliderData);
       setSpotPostImages(sliderData); // 상태 업데이트를 useEffect 내부에서 수행
     }
-  }, [photoSpotData]); // photoSpotData 또는 univ가 변경될 때만 실행
+  }, [univ, photoSpotData]); // photoSpotData 또는 univ가 변경될 때만 실행
 
   const handleCardModal = (postId: number) => {
     const index = photoSpotData?.imageInfo.spotPostImageList.findIndex(

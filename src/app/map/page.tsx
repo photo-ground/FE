@@ -21,8 +21,7 @@ import { AbsContainer, ChipContainer, Container, MapContainer } from './style';
 import { School } from './types';
 
 import schoolList from './_data/schoolList'; // 더미 데이터
-import Modal from './_components/Modal';
-import useSpotStore from './_store';
+// import Modal from './_components/Modal';
 import {
   getPhotoSpotByUniv,
   getSelectedSpotInfo,
@@ -38,7 +37,7 @@ export default function MapPage() {
 
   // zustand상태관리
   const { univ, setUniv } = useUnivStore();
-  const [schoolArr, setSchoolArr] = useState<School[]>(schoolList);
+  const [schoolArr] = useState<School[]>(schoolList);
   const [open, setOpen] = useState(false); // Drawer 열림 상태
   const [selectedSpotInfo, setSelectedSpotInfo] =
     useState<PhotoSpotProps | null>(null);
@@ -51,7 +50,7 @@ export default function MapPage() {
     queryFn: () => getPhotoSpotByUniv(univ),
   });
 
-  const [modalState, setModalState] = useState<boolean>(false);
+  // const [modalState, setModalState] = useState<boolean>(false);
   // const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
 
   // const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
@@ -108,7 +107,7 @@ export default function MapPage() {
         });
       }
     });
-  }, [photoSpots?.map((spot) => spot.spotId).join(',')]);
+  }, [photoSpots]);
 
   // 학교 위치로 이동하는 함수
   const moveToSchool = (school: School) => {

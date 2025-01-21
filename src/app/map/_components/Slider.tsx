@@ -5,13 +5,6 @@ import styled from 'styled-components';
 import { IconButton } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import {
-  PhotoSpotProps,
-  PostByUnivProps,
-  PostListProps,
-  SpotPostImageProps,
-} from '@/types/photoSpot';
-import useSpotStore from '../_store';
 
 const SliderContainer = styled.div`
   position: relative;
@@ -111,11 +104,11 @@ interface SliderProps {
 
 export default function Slider({ sliderData, currPostIdIndex }: SliderProps) {
   // 타입 가드
-  const isPhotoSpotProps = (
-    data: PhotoSpotProps | PostByUnivProps,
-  ): data is PhotoSpotProps => {
-    return (data as PhotoSpotProps).imageInfo !== undefined;
-  };
+  // const isPhotoSpotProps = (
+  //   data: PhotoSpotProps | PostByUnivProps,
+  // ): data is PhotoSpotProps => {
+  //   return (data as PhotoSpotProps).imageInfo !== undefined;
+  // };
 
   const [currentSlide, setCurrentSlide] = useState(currPostIdIndex);
 
