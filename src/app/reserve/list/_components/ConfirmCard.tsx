@@ -17,6 +17,8 @@ const Wrapper = styled.div`
 const Container = styled.div`
   background: ${({ theme }) => theme.colors.gray[900]};
   padding: 1rem;
+
+  border: 1px solid ${({ theme }) => theme.colors.gray[600]};
   border-radius: 0.5rem;
 
   margin-bottom: 1.5rem;

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 import LocationIcon from '@/assets/LocationIcon';
 import PeopleIcon from '@/assets/PeopleIcon';
@@ -89,7 +90,9 @@ export default function ReserveInfo({
           </InfoArea>
 
           {chipType === 'link' ? (
-            <SmallButton.Primary text="채팅방" />
+            <Link href={data.chatUrl || '/'}>
+              <SmallButton.Primary text="채팅방" />
+            </Link>
           ) : (
             <Chip
               icon={PeopleIcon}
