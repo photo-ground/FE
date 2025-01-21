@@ -21,7 +21,15 @@ export default function getDateList(date: Date) {
   while (currentDate <= lastDateOfCalendar) {
     const dayList = [];
     for (let day = 0; day < 7; day += 1) {
-      dayList.push(new Date(currentDate));
+      dayList.push(
+        new Date(
+          Date.UTC(
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
+            currentDate.getDate(),
+          ),
+        ),
+      );
       currentDate.setDate(currentDate.getDate() + 1);
     }
     weekList.push(dayList);

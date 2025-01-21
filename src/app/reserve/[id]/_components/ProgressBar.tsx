@@ -1,6 +1,7 @@
 import CheckIcon from '@/assets/CheckIcon';
 import Text from '@/components/atoms/Text';
 import styled from 'styled-components';
+import { ReserveDetail } from '../type';
 
 const LINE_WIDTH = '1.5px';
 const LINE_MARGIN = '1rem';
@@ -10,11 +11,11 @@ const DOT_SIZE = '0.5rem';
 const LARGE_DOT_SIZE = '2rem';
 
 const STEP_LIST = [
-  '예약 신청',
-  '결제 대기',
-  '예약 확정',
-  '촬영 진행',
-  '보정본 전달 및 스냅 종료',
+  { label: '예약 신청', value: '예약대기' },
+  { label: '결제 대기', value: '결제대기' },
+  { label: '예약 확정', value: '결제확인' },
+  { label: '촬영 진행', value: '예약확정' },
+  { label: '보정본 전달 및 스냅 종료', value: '촬영완료' },
 ];
 
 const Wrapper = styled.div`
@@ -88,22 +89,26 @@ const StateText = styled(Text)<{ $inProgress?: boolean }>`
     $inProgress ? theme.colors.white : theme.colors.gray[500]};
 `;
 
-export default function ProgressBar() {
-  const currentStep = STEP_LIST.findIndex((step) => step === '결제 대기');
+export default function ProgressBar({
+  state,
+}: {
+  state: ReserveDetail['status'];
+}) {
+  const currentStep = STEP_LIST.findIndex((step) => step.value === state);
 
   return (
     <Wrapper>
       <LineColumn>
         {STEP_LIST.slice(0, -1).map((step, index) => (
-          <Line key={step} $inProgress={index < currentStep} />
+          <Line key={step.label} $inProgress={index < currentStep} />
         ))}
       </LineColumn>
 
       <TextColumn>
         {STEP_LIST.map((step, index) => (
-          <Item key={step}>
+          <Item key={step.label}>
             <StateText variant="body1_md" $inProgress={index <= currentStep}>
-              {step}
+              {step.label}
             </StateText>
 
             {index < currentStep - 1 && <PrevDot />}

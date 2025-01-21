@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 import Text from '@/components/atoms/Text';
 import LargeButton from '@/components/atoms/LargeButton';
+import CheckBoxIcon from '@/assets/CheckBoxIcon';
+import { COLORS } from '@/styles/theme';
 import pay from '../../_libs/pay';
 
 const Container = styled.div`
@@ -14,11 +16,17 @@ const CheckArea = styled.div`
   display: flex;
   gap: 0.5rem;
   margin-bottom: 1rem;
+  width: fit-content;
 `;
 
 const Checkbox = styled.div<{ $isChecked: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 1.25rem;
   height: 1.25rem;
+
   background: ${({ theme, $isChecked }) =>
     $isChecked ? theme.colors.primary[100] : 'transparent'};
   border: 1px solid
@@ -54,7 +62,9 @@ export default function Request({ reservationId }: { reservationId: number }) {
           setIsChecked(!isChecked);
         }}
       >
-        <Checkbox $isChecked={isChecked} />
+        <Checkbox $isChecked={isChecked}>
+          <CheckBoxIcon color={isChecked ? COLORS.WHITE : 'transparent'} />
+        </Checkbox>
         <Text variant="body3">사용자 이름과 입금자명이 일치합니다.</Text>
       </CheckArea>
 

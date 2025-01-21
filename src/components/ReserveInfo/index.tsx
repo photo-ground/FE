@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 import LocationIcon from '@/assets/LocationIcon';
 import PeopleIcon from '@/assets/PeopleIcon';
@@ -55,7 +56,7 @@ function formatTime(date: string, time: string) {
 
   const dateObj = new Date(+year, +month - 1, +dateNum, +hours, +minutes);
   const period = +hours > 12 ? '오후' : '오전';
-  const formattedHours = +hours > 12 ? +hours - 12 : hours;
+  const formattedHours = +hours > 12 ? +hours - 12 : +hours;
 
   // Return the formatted string
   return `${+month}.${+dateNum}(${days[dateObj.getDay()]}) ${period} ${formattedHours}:${minutes}`;
@@ -89,7 +90,9 @@ export default function ReserveInfo({
           </InfoArea>
 
           {chipType === 'link' ? (
-            <SmallButton.Primary text="채팅방" />
+            <Link href={data.chatUrl || '/'}>
+              <SmallButton.Primary text="채팅방" />
+            </Link>
           ) : (
             <Chip
               icon={PeopleIcon}

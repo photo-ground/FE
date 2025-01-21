@@ -34,7 +34,7 @@ const Button = styled.button<{ $variant: Variant; $disabled: boolean }>`
   border: none;
   border-radius: 0.5rem;
 
-  cursor: pointer;
+  cursor: ${({ $disabled }) => ($disabled ? 'auto' : 'pointer')};
 `;
 
 const getTextColor = ({
@@ -75,7 +75,12 @@ export default function LargeButton({
   onClick?: () => void;
 }) {
   return (
-    <Button $variant={variant} $disabled={disabled} onClick={onClick}>
+    <Button
+      $variant={variant}
+      disabled={disabled}
+      $disabled={disabled}
+      onClick={onClick}
+    >
       <ButtonText variant="body1_md" $variant={variant} $disabled={disabled}>
         {text}
       </ButtonText>

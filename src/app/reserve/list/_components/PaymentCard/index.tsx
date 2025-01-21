@@ -10,6 +10,7 @@ import formatPrice from '@/lib/formatPrice';
 import Request from './Request';
 import Tag from '../Tag';
 import { Reservation } from '../../type';
+import Error from './Error';
 
 type PaymentStatus = 'wait' | 'check' | 'error';
 
@@ -23,6 +24,7 @@ const Container = styled.div`
   background: ${({ theme }) => theme.colors.gray[900]};
   padding: 1rem;
 
+  border: 1px solid ${({ theme }) => theme.colors.gray[600]};
   border-radius: 0.5rem;
 `;
 
@@ -120,7 +122,11 @@ export default function PaymentCard({
         )}
       </Container>
 
-      {state === 'wait' && <Request reservationId={data.reservationId} />}
+      {state === 'error' && <Error />}
+
+      {(state === 'wait' || state === 'error') && (
+        <Request reservationId={data.reservationId} />
+      )}
     </Wrapper>
   );
 }

@@ -7,8 +7,6 @@ export default async function refreshAccessToken() {
     },
   );
 
-  console.log(response);
-
   if (!response.ok) {
     throw new Error('access token 재발급에 실패했습니다.');
   }

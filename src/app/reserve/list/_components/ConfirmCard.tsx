@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import Text from '@/components/atoms/Text';
@@ -16,6 +17,8 @@ const Wrapper = styled.div`
 const Container = styled.div`
   background: ${({ theme }) => theme.colors.gray[900]};
   padding: 1rem;
+
+  border: 1px solid ${({ theme }) => theme.colors.gray[600]};
   border-radius: 0.5rem;
 
   margin-bottom: 1.5rem;
@@ -51,7 +54,9 @@ export default function ConfirmCard({ data }: { data: Reservation }) {
         <Header>
           <TitleArea>
             <Tag text="예약 확정" type="success" />
-            <RightChevronIcon size="20" />
+            <Link href={`/reserve/${data.reservationId}`}>
+              <RightChevronIcon size="20" />
+            </Link>
           </TitleArea>
         </Header>
 

@@ -6,6 +6,7 @@ import TNB from '@/components/TNB';
 import ReserveLinks from './_components/ReserveLinks';
 // import Notification from './_components/Notification';
 import Upcoming from './_components/Upcoming';
+import { ReservationInfo } from './type';
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -32,17 +33,19 @@ const Background = styled.img`
   overflow: hidden;
 `;
 
-export default function ReserveScreen() {
+export default function ReserveScreen({ data }: { data: ReservationInfo }) {
+  console.log(data);
+
   return (
     <Wrapper>
       <Background src="/images/background2.webp" alt="background" />
       <TNB.SubTitle text="예약관리" />
 
       <Container>
-        <CalendarLarge />
+        <CalendarLarge currentDate={new Date()} schedule={data.reserveDates} />
         <ReserveLinks />
         {/* <Notification /> */}
-        <Upcoming />
+        <Upcoming data={data.upcomingSchedule} />
       </Container>
     </Wrapper>
   );
