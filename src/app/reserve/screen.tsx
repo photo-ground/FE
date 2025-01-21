@@ -39,7 +39,7 @@ export default function ReserveScreen() {
       <TNB.SubTitle text="예약관리" />
 
       <Container>
-        <CalendarLarge />
+        <CalendarLarge currentDate={new Date()} />
         <ReserveLinks />
         {/* <Notification /> */}
         <Upcoming />

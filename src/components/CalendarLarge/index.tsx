@@ -5,31 +5,63 @@ import LeftChevronIcon from '@/assets/LeftChevronIcon';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import getDateList from './getCalendar';
 import {
+  Button,
   Container,
   DateCell,
+  DateText,
   DayList,
   DayText,
   Header,
   WeekList,
   WeekRow,
 } from './styles';
-
-const calendar = getDateList(new Date());
+import { useEffect, useState } from 'react';
 
 const DAY_LIST = ['일', '월', '화', '수', '목', '금', '토'];
 
-export default function CalendarLarge() {
+function checkAvailable(dateA: Date, dateB: Date) {
+  return dateA.getTime() < dateB.getTime();
+}
+
+export default function CalendarLarge({ currentDate }: { currentDate: Date }) {
+  const [startDate, setStartDate] = useState(
+    new Date(currentDate.getFullYear(), currentDate.getMonth(), 1),
+  );
+  const [calendar, setCalendar] = useState(getDateList(startDate));
+
+  useEffect(() => {
+    setCalendar(getDateList(startDate));
+  }, [startDate]);
+
+  function goPrevMonth() {
+    setStartDate(
+      new Date(startDate.getFullYear(), startDate.getMonth() - 1, 1),
+    );
+  }
+
+  function goNextMonth() {
+    setStartDate(
+      new Date(startDate.getFullYear(), startDate.getMonth() + 1, 1),
+    );
+  }
+
   return (
     <Container>
       <Header>
-        <LeftChevronIcon />
-        <Text variant="header2">2024.12</Text>
-        <RightChevronIcon />
+        <Button onClick={goPrevMonth}>
+          <LeftChevronIcon />
+        </Button>
+        <Text variant="header2">
+          {startDate.getFullYear()}. {startDate.getMonth() + 1}
+        </Text>
+        <Button onClick={goNextMonth}>
+          <RightChevronIcon />
+        </Button>
       </Header>
 
       <DayList>
         {DAY_LIST.map((day) => (
-          <DayText key={day} variant="caption3">
+          <DayText key={day} variant="caption1_rg">
             {day}
           </DayText>
         ))}
@@ -39,8 +71,16 @@ export default function CalendarLarge() {
         {calendar.map((week) => (
           <WeekRow key={week[0].toISOString()}>
             {week.map((date) => (
-              <DateCell key={date.toISOString()}>
-                <Text variant="body1_rg">{date.getDate()}</Text>
+              <DateCell
+                key={date.toISOString()}
+                $isAvailable={checkAvailable(currentDate, date)}
+              >
+                <DateText
+                  variant="body1_rg"
+                  $isAvailable={checkAvailable(currentDate, date)}
+                >
+                  {date.getDate()}
+                </DateText>
               </DateCell>
             ))}
           </WeekRow>
