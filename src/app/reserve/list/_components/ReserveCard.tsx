@@ -1,4 +1,6 @@
+import Link from 'next/link';
 import styled from 'styled-components';
+
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import Text from '@/components/atoms/Text';
 import ReserveInfo from '@/components/ReserveInfo';
@@ -55,7 +57,9 @@ export default function ReserveCard({ data }: { data: Reservation }) {
         <Header>
           <TitleArea>
             <Tag text="예약 확인 중" />
-            <RightChevronIcon size="20" />
+            <Link href={`/reserve/${data.reservationId}`}>
+              <RightChevronIcon size="20" />
+            </Link>
           </TitleArea>
 
           <MessageArea>

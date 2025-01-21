@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import Text from '@/components/atoms/Text';
@@ -53,7 +54,9 @@ export default function CancelCard({ data }: { data: Reservation }) {
         <Header>
           <TitleArea>
             <Tag text="예약 취소" type="error" />
-            <RightChevronIcon size="20" />
+            <Link href={`/reserve/${data.reservationId}`}>
+              <RightChevronIcon size="20" />
+            </Link>
           </TitleArea>
 
           <MessageArea>
