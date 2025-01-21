@@ -5,7 +5,7 @@ import SmallButton from '@/components/atoms/SmallButton';
 import Text from '@/components/atoms/Text';
 import genderMap from '@/lib/genderMap';
 import BackButton from './BackButton';
-import { PhotographerDetail } from '../getPhotographerData';
+import { PhotographerDetail } from '../_libs/getPhotographerData';
 
 const ThumbnailWrapper = styled.div`
   position: relative;

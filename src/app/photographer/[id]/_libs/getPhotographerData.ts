@@ -1,3 +1,5 @@
+import { cookies } from 'next/headers';
+
 export interface PhotographerDetail {
   profileUrl: string;
   photographerName: string;
@@ -13,11 +15,16 @@ export interface PhotographerDetail {
 
 export default async function getPhotographerData(id: string) {
   try {
+    const headers = { 'Content-Type': 'application/json' };
+    const cookieStore = await cookies();
+    if (cookieStore.get('accessToken')?.value) {
+      headers.Authorization = cookieStore.get('accessToken')!.value;
+    }
     const rawResponse = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer/${id}/intro`,
       {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
+        headers: headers,
       },
     );
 
@@ -27,6 +34,7 @@ export default async function getPhotographerData(id: string) {
     }
 
     const response = await rawResponse.json();
+    console.log(response);
     return response;
   } catch (error: unknown) {
     console.error(error);

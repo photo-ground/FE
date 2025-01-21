@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
 import DownChevronIcon from '@/assets/DownChevronIcon';
-import { PhotographerDetail } from '../getPhotographerData';
+import { PhotographerDetail } from '../_libs/getPhotographerData';
 
 const Container = styled.div`
   display: flex;

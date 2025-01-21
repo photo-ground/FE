@@ -14,8 +14,10 @@ import Price from './_components/Price';
 import Message from './_components/Message';
 import Review from './_components/Review';
 import Feed from './_components/Feed';
-import { PhotographerDetail } from './getPhotographerData';
-import getPhotographerPosts, { PostSummary } from './getPhotographerPosts';
+import { PhotographerDetail } from './_libs/getPhotographerData';
+import getPhotographerPosts, {
+  PostSummary,
+} from './_libs/getPhotographerPosts';
 
 const Container = styled.div`
   padding-bottom: 6.125rem;

@@ -1,4 +1,4 @@
-import getPhotographerData from './getPhotographerData';
+import getPhotographerData from './_libs/getPhotographerData';
 import PhotographerDetailScreen from './screen';
 
 export default async function PhotographerDetailPage({
