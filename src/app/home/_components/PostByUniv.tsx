@@ -30,14 +30,11 @@ export default function PostByUniv({ univ }: { univ: string }) {
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
-  if (data) {
-    console.log('postbyuniv정보');
-    console.log(data);
-  }
+
   return (
     <CardContainerY>
       {data?.postList.map((card) => (
-        <CardWrapper key={card.id} href={`/post/${card.photographerId}`}>
+        <CardWrapper key={card.createdAt} href={`/post/${card.photographerId}`}>
           <Card
             key={card.id}
             content={card.firstImageSpot}

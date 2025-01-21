@@ -14,11 +14,11 @@ export default function makeMarker(
   map: naver.maps.Map | undefined,
   position: naver.maps.LatLng,
   title: string,
-  index: number,
+  spotId: number,
   src: string,
   toggleDrawer: (
     open: boolean,
-    markerInfo: { title: string; src: string },
+    markerInfo: { title: string; src: string; spotId: number },
   ) => void,
 ): naver.maps.Marker {
   const marker = new naver.maps.Marker({
@@ -36,7 +36,7 @@ export default function makeMarker(
 
   marker.addListener('click', () => {
     // console.log('Marker clicked');
-    toggleDrawer(true, { title, src });
+    toggleDrawer(true, { title, src, spotId });
   });
 
   return marker;

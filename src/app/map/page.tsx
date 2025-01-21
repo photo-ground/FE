@@ -8,55 +8,25 @@
 // components/NaverMap.js
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import styled, { useTheme } from 'styled-components';
+import { PhotoSpotListProps, PhotoSpotProps } from '@/types/photoSpot';
+import { useTheme } from 'styled-components';
 import useUnivStore from '@/store/useUnivStore';
+import { useQuery } from '@tanstack/react-query';
 import { Drawer } from '@mui/material';
+
 import { loadNaverMap } from './_util/naverMaps';
 import makeMarker from './_util/makeMarker';
 import Chip from './_components/Chip';
-
-import photoSpots from './_data/photoSpots'; // dummy data
-import DrawerContent from './_components/DrawerContent';
-import { Container } from './style';
+import { AbsContainer, ChipContainer, Container, MapContainer } from './style';
 import { School } from './types';
 
 import schoolList from './_data/schoolList'; // 더미 데이터
-import Modal from './_components/Modal';
-import photoSpotData from './_data/photoSpotData';
-import useSpotStore from './_store';
-
-const MapContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-`;
-
-// 칩 버튼들을 담을 컨테이너 스타일
-const ChipContainer = styled.div`
-  width: 100%;
-  max-width: 100vw;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  gap: 0.5rem;
-  display: flex;
-  overflow-x: scroll;
-  margin: 0 auto 0 1.25rem;
-  padding: 1.25rem;
-  padding-left: 0;
-  padding-right: 1.75rem;
-`;
-const AbsContainer = styled.div`
-  position: absolute;
-  bottom: 1.25rem;
-  left: calc(50% - 75px);
-  width: 150px;
-  z-index: 2;
-`;
+// import Modal from './_components/Modal';
+import {
+  getPhotoSpotByUniv,
+  getSelectedSpotInfo,
+} from './_services/getPhotoSpot';
+import DrawerContent from './_components/DrawerContent';
 
 // naver.maps.*은 네이버 지도 API 스크립트가 로드된 후에만 사용할 수 있다.
 export default function MapPage() {
@@ -64,68 +34,80 @@ export default function MapPage() {
 
   const mapElement = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<naver.maps.Map>();
-  const [schoolArr, setSchoolArr] = useState<School[]>([]);
-  // zustand상태관리
 
+  // zustand상태관리
   const { univ, setUniv } = useUnivStore();
+  const [schoolArr] = useState<School[]>(schoolList);
+  const [open, setOpen] = useState(false); // Drawer 열림 상태
+  const [selectedSpotInfo, setSelectedSpotInfo] =
+    useState<PhotoSpotProps | null>(null);
+
   const drawerContainerRef = useRef<HTMLDivElement>(null);
 
-  const clientId = process.env.NEXT_PUBLIC_NAVER_CLIENT_ID || '';
-  // 상태: 드로어 열림 여부 및 마커 정보
-  const [, setSelectedMarker] = useState<{
-    title: string;
-    src: string;
-  } | null>(null);
+  // spot data 가져오기
+  const { data: photoSpots } = useQuery<PhotoSpotListProps[]>({
+    queryKey: ['photoSpotList', univ],
+    queryFn: () => getPhotoSpotByUniv(univ),
+  });
 
-  const [open, setOpen] = useState(false);
-  const [modalState, setModalState] = useState<boolean>(false);
-  const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
+  // const [modalState, setModalState] = useState<boolean>(false);
+  // const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
 
-  const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
+  // const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
 
-  function toggleModal(index: number) {
-    setCurrPostIdIndex(index); // 상태 저장
-    setModalState(true); // 모달 열기
-  }
+  // function toggleModal(index: number) {
+  //   setCurrPostIdIndex(index); // 상태 저장
+  //   setModalState(true); // 모달 열기
+  // }
 
   // 드로어 열기/닫기 및 마커 정보 설정
-  const toggleDrawer = (
-    newOpen: boolean,
-    markerInfo?: { title: string; src: string },
+  const toggleDrawer = async (
+    isOpen: boolean,
+    markerInfo?: { title: string; src: string; spotId: number },
   ) => {
-    setOpen(newOpen);
-    if (markerInfo) {
-      setSelectedMarker(markerInfo); // 클릭한 마커 정보 저장
+    setOpen(isOpen);
+
+    if (isOpen && markerInfo) {
+      try {
+        const spotInfo = await getSelectedSpotInfo(markerInfo.spotId);
+        setSelectedSpotInfo(spotInfo);
+        // console.log(spotInfo);
+      } catch (error) {
+        console.error('Failed to fetch spot info:', error);
+      }
+    } else {
+      setSelectedSpotInfo(null);
     }
   };
 
   // map/_components/NaverMap.tsx?
   useEffect(() => {
-    loadNaverMap(clientId, () => {
+    // 클라이언트 전용 로직 안전 처리
+
+    loadNaverMap(process.env.NEXT_PUBLIC_NAVER_CLIENT_ID || '', () => {
       if (!mapElement.current) return;
 
       // 지도 객체 생성
       mapInstance.current = new naver.maps.Map(mapElement.current, {
         center: new naver.maps.LatLng(37.5511, 126.9407),
-        zoom: 18,
+        zoom: 17,
       });
 
-      // 포토스팟 로드
-      photoSpots.forEach((spot, idx) => {
-        makeMarker(
-          mapInstance.current!,
-          new naver.maps.LatLng(spot.latitude, spot.longitude),
-          spot.spotName,
-          idx,
-          spot.spotImageUrl,
-          toggleDrawer,
-        );
-      });
-
-      // 학교 로드
-      setSchoolArr(schoolList);
+      if (photoSpots) {
+        // 포토스팟 로드
+        photoSpots.forEach((spot) => {
+          makeMarker(
+            mapInstance.current!,
+            new naver.maps.LatLng(spot.latitude, spot.longitude),
+            spot.spotName,
+            spot.spotId,
+            spot.spotImageUrl,
+            toggleDrawer,
+          );
+        });
+      }
     });
-  }, [clientId]);
+  }, [photoSpots]);
 
   // 학교 위치로 이동하는 함수
   const moveToSchool = (school: School) => {
@@ -133,7 +115,7 @@ export default function MapPage() {
       mapInstance.current.setCenter(
         new naver.maps.LatLng(school.lat, school.lng),
       );
-      setUniv(school.name); // TODO : zustand적용
+      setUniv(school.name); // zustand적용
     }
   };
 
@@ -155,8 +137,7 @@ export default function MapPage() {
       <AbsContainer>
         <Link
           href={{
-            pathname: '/map/overview/school',
-            query: { univ },
+            pathname: `/map/overview/${univ}`,
           }}
         >
           <Chip size="dynamic" text="스냅 전체보기" variant="primary" />
@@ -188,19 +169,19 @@ export default function MapPage() {
           }}
         >
           <DrawerContent
+            photoSpotData={selectedSpotInfo}
             toggleDrawer={() => toggleDrawer(false)}
-            toggleModal={(index) => toggleModal(index)}
+            // toggleModal={(index) => toggleModal(index)}
           />
         </Drawer>
       </div>
-
+      {/* 
       {modalState && currPostIdIndex !== null && (
         <Modal
-          // currIndex={currPostIdIndex}
           setModalState={setModalState}
-          photoSpot={photoSpotData}
+          photoSpot={photoSpotDataRef.current} // Safely pass the value
         />
-      )}
+      )} */}
     </Container>
   );
 }

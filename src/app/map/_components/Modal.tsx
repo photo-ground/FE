@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import { IconButton } from '@mui/material';
 import CloseIcon from '@/assets/CloseIcon';
-import { photoSpotProps, postByUnivProps } from '@/types/photoSpot';
-import Slider from './Slider';
+
+import Slider, { SliderData } from './Slider';
 import useSpotStore from '../_store';
 
 const ModalContainer = styled.div`
@@ -41,17 +41,15 @@ const ContentWrapper = styled.div`
   align-items: center; /* 세로 기준으로 가운데 정렬 */
   justify-content: center; /* 가로 기준으로 가운데 정렬 */
 `;
+
 interface ModalProps {
-  photoSpot: photoSpotProps | postByUnivProps;
+  sliderData: SliderData[];
   setModalState: React.Dispatch<React.SetStateAction<boolean>>;
 }
+// onClicked: ()=> void();
 
 // photoSpot배열에서 currIndex를 먼저 찾아 보여주고 그 기준으로 좌우왔다갔다
-export default function Modal({
-  // currIndex,
-  photoSpot,
-  setModalState,
-}: ModalProps) {
+export default function Modal({ sliderData, setModalState }: ModalProps) {
   const clearCurrPostIdIndex = useSpotStore(
     (state) => state.clearCurrPostIdIndex,
   );
@@ -62,9 +60,6 @@ export default function Modal({
     clearCurrPostIdIndex();
   };
 
-  useEffect(() => {
-    console.log(currPostIdIndex);
-  });
   return (
     <>
       <Overlay onClick={() => window.history.back()} />
@@ -75,7 +70,10 @@ export default function Modal({
           </IconButton>
         </CloseHeader>
         <ContentWrapper>
-          <Slider photoSpot={photoSpot} />
+          <Slider
+            sliderData={sliderData}
+            currPostIdIndex={currPostIdIndex ?? 0} // Default to 0 if null
+          />
         </ContentWrapper>
       </ModalContainer>
     </>
