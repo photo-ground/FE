@@ -27,7 +27,7 @@ export default async function getPhotographerData(id: string) {
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer/${id}/intro`,
       {
         method: 'GET',
-        headers: headers,
+        headers,
       },
     );
 
