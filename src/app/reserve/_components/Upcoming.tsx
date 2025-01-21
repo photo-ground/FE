@@ -7,6 +7,7 @@ import PhotographerIcon from '@/assets/PhotographerIcon';
 import LocationIcon from '@/assets/LocationIcon';
 import TimeIcon from '@/assets/TimeIcon';
 import Link from 'next/link';
+import { ReservationInfo } from '../type';
 
 const Container = styled.div`
   display: flex;
@@ -86,7 +87,11 @@ function formatTime(startTime: string) {
   return `${period} ${formattedHours}:${minutes} - ${formattedEndHours}:${minutes}`;
 }
 
-export default function Upcoming({ data }) {
+export default function Upcoming({
+  data,
+}: {
+  data: ReservationInfo['upcomingSchedule'];
+}) {
   return (
     <Container>
       <TitleArea>

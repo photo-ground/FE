@@ -1,8 +1,11 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import Text from '@/components/atoms/Text';
 import LeftChevronIcon from '@/assets/LeftChevronIcon';
 import RightChevronIcon from '@/assets/RightChevronIcon';
+import { ReservationInfo } from '@/app/reserve/type';
 import getDateList from './getCalendar';
 import {
   Button,
@@ -15,8 +18,6 @@ import {
   WeekList,
   WeekRow,
 } from './styles';
-import { useEffect, useState } from 'react';
-import { ReservationInfo } from '@/app/reserve/type';
 
 const DAY_LIST = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -40,17 +41,17 @@ export default function CalendarLarge({
     setCalendar(getDateList(startDate));
   }, [startDate]);
 
-  function goPrevMonth() {
+  const goPrevMonth = () => {
     setStartDate(
       new Date(startDate.getFullYear(), startDate.getMonth() - 1, 1),
     );
-  }
+  };
 
-  function goNextMonth() {
+  const goNextMonth = () => {
     setStartDate(
       new Date(startDate.getFullYear(), startDate.getMonth() + 1, 1),
     );
-  }
+  };
 
   return (
     <Container>
