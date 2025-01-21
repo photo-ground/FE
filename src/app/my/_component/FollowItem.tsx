@@ -1,7 +1,10 @@
+import { useState } from 'react';
+import styled from 'styled-components';
+
 import follow from '@/app/photographer/[id]/_libs/follow';
+import unfollow from '@/app/photographer/[id]/_libs/unfollow';
 import SmallButton from '@/components/atoms/SmallButton';
 import Text from '@/components/atoms/Text';
-import styled from 'styled-components';
 
 const UserCardWrapper = styled.div`
   display: flex;
@@ -36,8 +39,9 @@ export default function FollowItem({
   photographerId: number;
   profileUrl: string;
   photographerName: string;
-  onButtonClick?: () => void;
 }) {
+  const [isFollowing, setIsFollowing] = useState(true);
+
   return (
     <UserCardWrapper>
       <PhotographerInfo>
@@ -47,10 +51,23 @@ export default function FollowItem({
         </PhotographerName>
       </PhotographerInfo>
 
-      <SmallButton.Tertiary
-        text="팔로우"
-        onClick={() => follow(photographerId.toString())}
-      />
+      {isFollowing ? (
+        <SmallButton.Tertiary
+          text="팔로잉"
+          onClick={() => {
+            unfollow(photographerId.toString());
+            setIsFollowing(false);
+          }}
+        />
+      ) : (
+        <SmallButton.Primary
+          text="팔로우"
+          onClick={() => {
+            follow(photographerId.toString());
+            setIsFollowing(true);
+          }}
+        />
+      )}
     </UserCardWrapper>
   );
 }

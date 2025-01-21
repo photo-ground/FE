@@ -37,7 +37,6 @@ export default async function getPhotographerData(id: string) {
     }
 
     const response = await rawResponse.json();
-    console.log(response);
     return response;
   } catch (error: unknown) {
     console.error(error);
