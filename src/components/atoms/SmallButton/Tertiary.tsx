@@ -5,6 +5,7 @@ import Button from './styles';
 const TertiaryButton = styled(Button)`
   background: transparent;
   border: 1px solid ${({ theme }) => theme.colors.primary[100]};
+  cursor: pointer;
 `;
 
 const ButtonText = styled(Text)`
@@ -20,7 +21,7 @@ export default function Tertiary({
 }) {
   return (
     <TertiaryButton onClick={onClick}>
-      <ButtonText variant="body3">{text}</ButtonText>
+      <ButtonText variant="body1_md">{text}</ButtonText>
     </TertiaryButton>
   );
 }

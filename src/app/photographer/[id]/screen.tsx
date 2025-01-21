@@ -35,17 +35,7 @@ export default function PhotographerDetailScreen({
   photographerId: string;
   data: PhotographerDetail;
 }) {
-  const {
-    profileUrl,
-    photographerName,
-    followerNum,
-    gender,
-    age,
-    univ,
-    price,
-    introduction,
-    styleList,
-  } = data;
+  const { price, introduction, styleList } = data;
   const [postList, setPostList] = useState<PostSummary[]>([]);
   const [hasNext, setHasNext] = useState(true);
 
@@ -87,14 +77,7 @@ export default function PhotographerDetailScreen({
 
   return (
     <Container>
-      <PhotographerProfile
-        profileUrl={profileUrl}
-        photographerName={photographerName}
-        followerNum={followerNum}
-        gender={gender}
-        age={age}
-        univ={univ}
-      />
+      <PhotographerProfile data={data} photographerId={photographerId} />
 
       <DivideLine />
 
