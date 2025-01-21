@@ -16,6 +16,7 @@ import {
   WeekRow,
 } from './styles';
 import { useEffect, useState } from 'react';
+import { ReservationInfo } from '@/app/reserve/type';
 
 const DAY_LIST = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -23,7 +24,13 @@ function checkAvailable(dateA: Date, dateB: Date) {
   return dateA.getTime() < dateB.getTime();
 }
 
-export default function CalendarLarge({ currentDate }: { currentDate: Date }) {
+export default function CalendarLarge({
+  currentDate,
+  schedule,
+}: {
+  currentDate: Date;
+  schedule: ReservationInfo['reserveDates'];
+}) {
   const [startDate, setStartDate] = useState(
     new Date(currentDate.getFullYear(), currentDate.getMonth(), 1),
   );
@@ -74,6 +81,7 @@ export default function CalendarLarge({ currentDate }: { currentDate: Date }) {
               <DateCell
                 key={date.toISOString()}
                 $isAvailable={checkAvailable(currentDate, date)}
+                $isActive={schedule.includes(date.toISOString().split('T')[0])}
               >
                 <DateText
                   variant="body1_rg"

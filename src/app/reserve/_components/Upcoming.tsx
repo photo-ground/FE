@@ -71,7 +71,22 @@ const ButtonArea = styled.div`
   justify-content: space-between;
 `;
 
-export default function Upcoming() {
+function formatDate(date: string) {
+  const dateObj = new Date(date);
+  const days = ['일', '월', '화', '수', '목', '금', '토'];
+  return `${dateObj.getMonth() + 1}.${dateObj.getDate()} (${days[dateObj.getDay()]})`;
+}
+
+function formatTime(startTime: string) {
+  const [hours, minutes] = startTime.split(':');
+  const period = +hours > 12 ? '오후' : '오전';
+  const formattedHours = +hours > 12 ? +hours - 12 : +hours;
+  const formattedEndHours = +hours + 1 > 12 ? +hours + 1 - 12 : +hours + 1;
+
+  return `${period} ${formattedHours}:${minutes} - ${formattedEndHours}:${minutes}`;
+}
+
+export default function Upcoming({ data }) {
   return (
     <Container>
       <TitleArea>
@@ -80,7 +95,7 @@ export default function Upcoming() {
           <Text variant="title3">다가오는 일정</Text>
         </TitleTextWrapper>
 
-        <DateText variant="caption1_rg">12.28 (토)</DateText>
+        <DateText variant="caption1_rg">{formatDate(data.date)}</DateText>
       </TitleArea>
 
       <DivideLine />
@@ -89,22 +104,24 @@ export default function Upcoming() {
         <InfoArea>
           <InfoLine>
             <PhotographerIcon />
-            <InfoText variant="body1_rg">이채린 작가</InfoText>
+            <InfoText variant="body1_rg">{data.photographerName} 작가</InfoText>
           </InfoLine>
           <InfoLine>
             <LocationIcon />
-            <InfoText variant="body1_rg">홍익대학교</InfoText>
+            <InfoText variant="body1_rg">{data.university}</InfoText>
           </InfoLine>
           <InfoLine>
             <TimeIcon />
-            <InfoText variant="body1_rg">오후 12:00 - 1:00</InfoText>
+            <InfoText variant="body1_rg">{formatTime(data.startTime)}</InfoText>
           </InfoLine>
         </InfoArea>
         <ButtonArea>
-          <Link href="/reserve/1">
+          <Link href={`/reserve/${data.reservationId}`}>
             <RightChevronIcon size="20px" />
           </Link>
-          <SmallButton.Tertiary text="채팅방" />
+          <Link href={data.chatUrl || '/'}>
+            <SmallButton.Tertiary text="채팅방" />
+          </Link>
         </ButtonArea>
       </Content>
     </Container>

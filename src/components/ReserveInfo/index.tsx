@@ -56,7 +56,7 @@ function formatTime(date: string, time: string) {
 
   const dateObj = new Date(+year, +month - 1, +dateNum, +hours, +minutes);
   const period = +hours > 12 ? '오후' : '오전';
-  const formattedHours = +hours > 12 ? +hours - 12 : hours;
+  const formattedHours = +hours > 12 ? +hours - 12 : +hours;
 
   // Return the formatted string
   return `${+month}.${+dateNum}(${days[dateObj.getDay()]}) ${period} ${formattedHours}:${minutes}`;

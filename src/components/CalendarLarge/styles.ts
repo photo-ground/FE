@@ -46,7 +46,10 @@ export const WeekRow = styled.div`
   justify-content: space-between;
 `;
 
-export const DateCell = styled.div<{ $isAvailable?: boolean }>`
+export const DateCell = styled.div<{
+  $isAvailable?: boolean;
+  $isActive?: boolean;
+}>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,6 +57,11 @@ export const DateCell = styled.div<{ $isAvailable?: boolean }>`
   width: 2.5rem;
   height: 2.5rem;
   margin: 2px;
+
+  border: 1px solid
+    ${({ theme, $isActive }) =>
+      $isActive ? theme.colors.orange[500] : 'transparent'};
+  border-radius: 100%;
 
   cursor: ${({ $isAvailable }) => ($isAvailable ? 'pointer' : 'auto')};
 `;
