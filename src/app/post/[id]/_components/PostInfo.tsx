@@ -44,16 +44,18 @@ const ContentText = styled(Text)`
 export default function PostInfo({
   photographerId,
   photographerName,
+  profileUrl,
   content,
 }: {
   photographerId: PostDetail['photographerId'];
   photographerName: PostDetail['photographerName'];
+  profileUrl: PostDetail['profileUrl'];
   content: PostDetail['content'];
 }) {
   return (
     <Container>
       <PhotographerInfoArea href={`/photographer/${photographerId}`}>
-        <Profile src="" />
+        <Profile src={profileUrl} alt={photographerName} />
         <PhotographerInfo>
           <Text variant="title2_sb">{photographerName} 작가</Text>
           <DateText variant="caption1_rg">{photographerName}</DateText>

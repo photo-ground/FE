@@ -2,6 +2,7 @@ export interface PostDetail {
   id: number;
   photographerId: number;
   photographerName: string;
+  profileUrl: string;
   content: string;
   univName: string;
   imageList: {

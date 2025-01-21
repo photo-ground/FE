@@ -24,8 +24,14 @@ const ButtonWrapper = styled.div`
 
 export default function PostScreen({ postData }: { postData: PostDetail }) {
   const [currentPage, setCurrentPage] = useState(0);
-  const { photographerId, photographerName, content, univName, imageList } =
-    postData;
+  const {
+    photographerId,
+    photographerName,
+    profileUrl,
+    content,
+    univName,
+    imageList,
+  } = postData;
 
   const onChangePage = (newPage: number) => {
     setCurrentPage(newPage);
@@ -45,6 +51,7 @@ export default function PostScreen({ postData }: { postData: PostDetail }) {
       <PostInfo
         photographerId={photographerId}
         photographerName={photographerName}
+        profileUrl={profileUrl}
         content={content}
       />
 

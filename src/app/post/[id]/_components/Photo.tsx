@@ -24,6 +24,7 @@ const TagArea = styled.div`
   display: flex;
   gap: 0.5rem;
   margin-top: 24px;
+  padding: 0 1.25rem;
 `;
 
 const TagItem = styled.div`
