@@ -1,20 +1,15 @@
-'use client';
-
-import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import useSchoolStore from '@/store/useUnivStore';
 import Card from '@/components/Card';
 import Back from '@/components/TNB/Back';
 import Text from '@/components/atoms/Text';
-import { PhotoSpotProps } from '@/types/photoSpot';
 import { useQuery } from '@tanstack/react-query';
-import { Container, CardContainerY } from '../../style';
-
-import Modal from '../../_components/Modal';
-import useSpotStore from '../../_store';
-import { getSelectedSpotInfo } from '../../_services/getPhotoSpot';
-import { SliderData } from '../../_components/Slider';
+import { PhotoSpotProps } from '@/types/photoSpot';
+import Modal from '../../../_components/Modal';
+import useSpotStore from '../../../_store';
+import { getSelectedSpotInfo } from '../../../_services/getPhotoSpot';
+import { SliderData } from '../../../_components/Slider';
+import { CardContainerY } from '../../../style';
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -29,53 +24,40 @@ const HeaderContainer = styled.div`
   }
 `;
 
-// school을 URL 매개변수로 전달
-export default function Overview() {
-  // const searchParams = useSearchParams();
-  const { univ } = useSchoolStore();
-  const [modalState, setModalState] = useState<boolean>(false);
+interface MainProps {
+  univ: string;
+  spotId: number;
+}
+
+export default function Main({ univ, spotId }: MainProps) {
+  const [modalState, setModalState] = useState(false);
   const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
   const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
   const [spotPostImages, setSpotPostImages] = useState<SliderData[]>([]);
 
-  const params = useParams<{ spotId: string }>(); // 'spotId'를 string으로 선언
-  console.log(params.spotId);
-  const photoSpotId = params.spotId ? parseInt(params.spotId, 10) : -1; // 문자열을 숫자로 변환
-
-  console.log(photoSpotId);
-  // Fetch photo spot data using the spotId
   const { data: photoSpotData } = useQuery<PhotoSpotProps>({
-    queryKey: ['photoSpotData', photoSpotId],
-    queryFn: () => getSelectedSpotInfo(Number(photoSpotId)),
-    enabled: !!photoSpotId, // Ensure the query runs only if spotId is available
+    queryKey: ['photoSpotData', spotId],
+    queryFn: () => getSelectedSpotInfo(Number(spotId)),
+    enabled: !!spotId,
   });
 
   useEffect(() => {
     if (photoSpotData) {
       const sliderData = photoSpotData.imageInfo.spotPostImageList.map(
-        (imageData, index) => {
-          let hasNext = false;
-          if (
+        (imageData, index) => ({
+          imageUrl: imageData.imageUrl,
+          univ,
+          spotName: photoSpotData.spotName,
+          photographerName: imageData.photographerName,
+          postId: imageData.postId,
+          hasNext:
             photoSpotData.imageInfo.hasNext &&
-            index === photoSpotData.imageInfo.spotPostImageList.length - 1
-          ) {
-            hasNext = true;
-          }
-          return {
-            imageUrl: imageData.imageUrl,
-            univ,
-            spotName: photoSpotData.spotName,
-            photographerName: imageData.photographerName,
-            postId: imageData.postId,
-            hasNext,
-          };
-        },
+            index === photoSpotData.imageInfo.spotPostImageList.length - 1,
+        }),
       );
-
-      console.log(sliderData);
-      setSpotPostImages(sliderData); // 상태 업데이트를 useEffect 내부에서 수행
+      setSpotPostImages(sliderData);
     }
-  }, [univ, photoSpotData]); // photoSpotData 또는 univ가 변경될 때만 실행
+  }, [photoSpotData, univ]);
 
   const handleCardModal = (postId: number) => {
     const index = photoSpotData?.imageInfo.spotPostImageList.findIndex(
@@ -88,15 +70,14 @@ export default function Overview() {
   };
 
   return (
-    <Container>
-      <Back text={`${univ}`} />
+    <>
+      <Back text={univ} />
       <HeaderContainer>
         <Text variant="title2_sb">{photoSpotData?.spotName}</Text>
         <Text variant="body2_rg" className="text-pre">
           {photoSpotData?.content}
         </Text>
       </HeaderContainer>
-      {/* 칩 버튼 */}
       <CardContainerY>
         {photoSpotData?.imageInfo.spotPostImageList.map((spot) => (
           <Card
@@ -107,10 +88,9 @@ export default function Overview() {
           />
         ))}
       </CardContainerY>
-
       {modalState && currPostIdIndex !== null && photoSpotData && (
         <Modal setModalState={setModalState} sliderData={spotPostImages} />
       )}
-    </Container>
+    </>
   );
 }

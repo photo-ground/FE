@@ -4,6 +4,7 @@ import Card from '@/components/Card';
 import CloseIcon from '@/assets/CloseIcon';
 import Text from '@/components/atoms/Text';
 import Link from 'next/link';
+import useUnivStore from '@/store/useUnivStore';
 import Chip from './Chip';
 
 import { DrawerProps } from '../types';
@@ -72,6 +73,7 @@ export default function DrawerContent({
   toggleDrawer,
   toggleModal,
 }: DrawerProps) {
+  const { univ } = useUnivStore();
   const clearCurrPostIdIndex = useSpotStore(
     (state) => state.clearCurrPostIdIndex,
   );
@@ -158,8 +160,7 @@ export default function DrawerContent({
       </CardContainer>
       <Link
         href={{
-          pathname: '/map/overview/spot',
-          query: { spotId: photoSpotData.spotId },
+          pathname: `/map/overview/${univ}/${photoSpotData.spotId}`,
         }}
       >
         <ChipContainer>

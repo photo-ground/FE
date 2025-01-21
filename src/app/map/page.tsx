@@ -137,7 +137,7 @@ export default function MapPage() {
       <AbsContainer>
         <Link
           href={{
-            pathname: `/map/overview/${univ}`, // Replace ":univ" with the actual value of "univ"
+            pathname: `/map/overview/${univ}`,
           }}
         >
           <Chip size="dynamic" text="스냅 전체보기" variant="primary" />
