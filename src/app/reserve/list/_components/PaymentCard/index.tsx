@@ -10,6 +10,7 @@ import formatPrice from '@/lib/formatPrice';
 import Request from './Request';
 import Tag from '../Tag';
 import { Reservation } from '../../type';
+import Error from './Error';
 
 type PaymentStatus = 'wait' | 'check' | 'error';
 
@@ -121,7 +122,11 @@ export default function PaymentCard({
         )}
       </Container>
 
-      {state === 'wait' && <Request reservationId={data.reservationId} />}
+      {state === 'error' && <Error />}
+
+      {(state === 'wait' || state === 'error') && (
+        <Request reservationId={data.reservationId} />
+      )}
     </Wrapper>
   );
 }
