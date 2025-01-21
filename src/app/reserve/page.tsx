@@ -6,3 +6,5 @@ export default async function ReservePage() {
 
   return <ReserveScreen data={data} />;
 }
+
+export const runtime = 'edge';
