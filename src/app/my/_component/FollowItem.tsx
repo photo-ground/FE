@@ -47,7 +47,7 @@ export default function FollowItem({
       <PhotographerInfo>
         <Avatar src={profileUrl} alt={photographerName} />
         <PhotographerName variant="body1_md">
-          {photographerName}
+          {photographerName} 작가
         </PhotographerName>
       </PhotographerInfo>
 
