@@ -12,7 +12,8 @@ export default function generateCustomMarkerHTML({
         <!-- 카드 내용 -->
         <div style="width: 5rem; padding: 0.25rem; background-color: #bfbfbf; border-radius: 0.5rem; text-align: center;">
           <img src="${src}" alt="${title}" style="width: 4.5rem; height: 4rem; object-fit: cover; border-radius: 0.25rem;" />
-          <div style="color: #404040; font-size: 0.875rem; font-weight: 600; margin-top: 0.25rem;">${title}</div>
+          <div style="color: #404040; font-size: 0.875rem; font-weight: 600; margin-top: 0.25rem; word-break: keep-all; line-height: 20px;
+">${title}</div>
         </div>
 
         <!-- 삼각형 -->
