@@ -96,8 +96,6 @@ export default function ProgressBar({
 }) {
   const currentStep = STEP_LIST.findIndex((step) => step.value === state);
 
-  console.log(state);
-
   return (
     <Wrapper>
       <LineColumn>
