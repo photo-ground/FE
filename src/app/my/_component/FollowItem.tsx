@@ -1,55 +1,55 @@
+import follow from '@/app/photographer/[id]/_libs/follow';
 import SmallButton from '@/components/atoms/SmallButton';
+import Text from '@/components/atoms/Text';
 import styled from 'styled-components';
 
 const UserCardWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  padding: 0.625rem 1.25rem;
+  background: ${({ theme }) => theme.colors.gray[900]};
+  border-radius: 0.5rem;
+`;
+
+const PhotographerInfo = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Avatar = styled.img`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 100%;
 `;
 
-const UserInfo = styled.div`
-  flex: 1;
+const PhotographerName = styled(Text)`
   margin-left: 1rem;
-  color: white;
-
-  span {
-    font-size: 1rem;
-    font-weight: bold;
-  }
 `;
 
 export default function FollowItem({
   photographerId,
   profileUrl,
   photographerName,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onButtonClick,
 }: {
   photographerId: number;
   profileUrl: string;
   photographerName: string;
   onButtonClick?: () => void;
 }) {
-  function handleFollowButton() {
-    console.log(photographerId);
-  }
   return (
     <UserCardWrapper>
-      <Avatar src={profileUrl} alt={photographerName} />
-      <UserInfo>
-        <span>{photographerName}</span>
-      </UserInfo>
+      <PhotographerInfo>
+        <Avatar src={profileUrl} alt={photographerName} />
+        <PhotographerName variant="body1_md">
+          {photographerName}
+        </PhotographerName>
+      </PhotographerInfo>
+
       <SmallButton.Tertiary
         text="팔로우"
-        onClick={() => handleFollowButton()}
+        onClick={() => follow(photographerId.toString())}
       />
     </UserCardWrapper>
   );
