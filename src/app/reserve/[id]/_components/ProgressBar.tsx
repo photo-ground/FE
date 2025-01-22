@@ -2,6 +2,7 @@ import CheckIcon from '@/assets/CheckIcon';
 import Text from '@/components/atoms/Text';
 import styled from 'styled-components';
 import { ReserveDetail } from '../type';
+import { ReserveStatus } from '../../list/type';
 
 const LINE_WIDTH = '1.5px';
 const LINE_MARGIN = '1rem';
@@ -10,12 +11,12 @@ const LINE_TEXT_GAP = '1rem';
 const DOT_SIZE = '0.5rem';
 const LARGE_DOT_SIZE = '2rem';
 
-const STEP_LIST = [
-  { label: '예약 신청', value: '예약대기' },
-  { label: '결제 대기', value: '결제대기' },
-  { label: '예약 확정', value: '결제확인' },
-  { label: '촬영 진행', value: '예약확정' },
-  { label: '보정본 전달 및 스냅 종료', value: '촬영완료' },
+const STEP_LIST: { label: string; value: ReserveStatus[] }[] = [
+  { label: '예약 신청', value: ['예약취소'] },
+  { label: '결제 대기', value: ['예약대기', '결제오류'] },
+  { label: '예약 확정', value: ['결제대기', '결제확인'] },
+  { label: '촬영 진행', value: ['예약확정'] },
+  { label: '보정본 전달 및 스냅 종료', value: ['촬영완료'] },
 ];
 
 const Wrapper = styled.div`
@@ -94,7 +95,7 @@ export default function ProgressBar({
 }: {
   state: ReserveDetail['status'];
 }) {
-  const currentStep = STEP_LIST.findIndex((step) => step.value === state);
+  const currentStep = STEP_LIST.findIndex((step) => step.value.includes(state));
 
   return (
     <Wrapper>

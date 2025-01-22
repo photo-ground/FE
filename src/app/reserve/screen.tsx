@@ -34,8 +34,6 @@ const Background = styled.img`
 `;
 
 export default function ReserveScreen({ data }: { data: ReservationInfo }) {
-  console.log(data);
-
   return (
     <Wrapper>
       <Background src="/images/background2.webp" alt="background" />
