@@ -1,4 +1,3 @@
-import CheckIcon from '@/assets/modal/CheckIcon';
 import WarningIcon from '@/assets/modal/WarningIcon';
 import LargeButton from '@/components/atoms/LargeButton';
 import Text from '@/components/atoms/Text';
