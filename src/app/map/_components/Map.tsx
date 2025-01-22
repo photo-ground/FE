@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Script from 'next/script';
 import { NaverMap } from '../_types/NaverMap';
 
@@ -9,12 +9,12 @@ type MapOptions = {
   onLoad?: (map: NaverMap) => void; // 선택
 };
 
-const MapComponent = ({
+function MapComponent({
   mapId,
   center = [37.5665, 126.978], // 기본 중심 좌표
   zoom = 10, // 기본 줌 레벨
   onLoad,
-}: MapOptions) => {
+}: MapOptions) {
   const mapRef = useRef<NaverMap | null>(null);
 
   const initializeMap = () => {
@@ -49,6 +49,6 @@ const MapComponent = ({
       />
     </>
   );
-};
+}
 
 export default MapComponent;

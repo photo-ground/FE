@@ -6,7 +6,7 @@
 // TODO : 페이지 접근할 때, 사용자의 학교 가져와야 함 -> 상단 chip에 적용
 
 // components/NaverMap.js
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { PhotoSpotListProps, PhotoSpotProps } from '@/types/photoSpot';
 import { useTheme } from 'styled-components';
@@ -30,7 +30,7 @@ import {
 } from './_services/getPhotoSpot';
 import DrawerContent from './_components/DrawerContent';
 import { NaverMap } from './_types/NaverMap';
-import { useMapStore } from './_store/mapStore';
+import useMapStore from './_store/mapStore';
 
 // naver.maps.*은 네이버 지도 API 스크립트가 로드된 후에만 사용할 수 있다.
 export default function MapPage() {
@@ -48,8 +48,7 @@ export default function MapPage() {
   const [isMapReady, setIsMapReady] = useState<boolean>(false); // 지도 준비 상태
 
   // zustand상태관리
-  const { center, zoom, markers, setCenter, setZoom, setMarkers } =
-    useMapStore();
+  const { center, zoom, setCenter, setMarkers } = useMapStore();
   const { univ, setUniv } = useUnivStore();
   const [schoolArr] = useState<School[]>(schoolList);
   // useState<PhotoSpotProps | null>(null);
@@ -115,15 +114,18 @@ export default function MapPage() {
   };
 
   // 지도 로드 시 초기 설정
-  const onMapLoad = (map: NaverMap) => {
-    mapInstance.current = map;
+  const onMapLoad = useCallback(
+    (map: NaverMap) => {
+      mapInstance.current = map;
 
-    // Zustand에 저장된 상태 복원
-    map.setCenter(new naver.maps.LatLng(...center));
-    map.setZoom(zoom);
+      // Zustand에 저장된 상태 복원
+      map.setCenter(new naver.maps.LatLng(...center));
+      map.setZoom(zoom);
 
-    setIsMapReady(true); // 지도 준비 상태 업데이트
-  };
+      setIsMapReady(true); // 지도 준비 상태 업데이트
+    },
+    [center, zoom, setIsMapReady], // 의존성 배열에 필요한 값만 추가
+  );
 
   // 지도 상태 확인 및 초기화
   useEffect(() => {
@@ -137,7 +139,7 @@ export default function MapPage() {
         onMapLoad(map); // 지도가 준비되지 않았다면 직접 초기화 호출
       }
     }
-  }, [isMapReady, center, zoom]);
+  }, [isMapReady, center, zoom, onMapLoad]);
   // `photoSpots`가 업데이트될 때 마커 갱신
   useEffect(() => {
     if (!isMapReady || !mapInstance.current) {
