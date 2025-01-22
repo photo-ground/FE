@@ -32,5 +32,8 @@
         "tsx": "never"
       }
     ]
+  },
+  "globals": {
+    "naver": "readonly"
   }
 }
