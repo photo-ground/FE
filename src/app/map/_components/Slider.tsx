@@ -7,6 +7,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import SmallButton from '@/components/atoms/SmallButton';
 import Text from '@/components/atoms/Text';
+import { useRouter } from 'next/navigation';
 
 const SliderContainer = styled.div`
   position: relative;
@@ -81,15 +82,13 @@ interface SliderProps {
 }
 
 export default function Slider({ sliderData, currPostIdIndex }: SliderProps) {
-  // 타입 가드
-  // const isPhotoSpotProps = (
-  //   data: PhotoSpotProps | PostByUnivProps,
-  // ): data is PhotoSpotProps => {
-  //   return (data as PhotoSpotProps).imageInfo !== undefined;
-  // };
-
   const [currentSlide, setCurrentSlide] = useState(currPostIdIndex);
+  const router = useRouter();
 
+  const handleSmallButton = (postId: number) => {
+    router.push(`/post/${postId}`);
+    // router.push('/editinfo', { query: name }); // 데이터 전달
+  };
   const handleNext = () => {
     if (currentSlide !== null) {
       if (currentSlide < sliderData.length - 1) {
@@ -140,7 +139,10 @@ export default function Slider({ sliderData, currPostIdIndex }: SliderProps) {
               {sliderData[currentSlide].spotName}
             </Text>
           </Info>
-          <SmallButton.Tertiary text="게시물 보기" />
+          <SmallButton.Tertiary
+            onClick={() => handleSmallButton(sliderData[currentSlide].postId)}
+            text="게시물 보기"
+          />
         </>
       )}
     </SliderContainer>
