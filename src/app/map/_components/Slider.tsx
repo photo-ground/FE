@@ -61,12 +61,12 @@ const NavigationButton = styled(IconButton)`
 
 const LeftButton = styled(NavigationButton)`
   left: -2rem;
-  top: 256px;
+  top: 276px;
 `;
 
 const RightButton = styled(NavigationButton)`
   right: -2rem;
-  top: 256px;
+  top: 276px;
 `;
 export interface SliderData {
   imageUrl: string;
