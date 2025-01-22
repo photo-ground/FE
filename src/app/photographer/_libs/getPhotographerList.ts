@@ -6,15 +6,30 @@ export interface PhotographerSummary {
   profileUrl: string;
 }
 
-export default async function getPhotographerList() {
+const createSearchParams = ({ univ, gender }) => {
+  const params = new URLSearchParams();
+
+  if (univ) {
+    params.append('univ', univ);
+  }
+  if (gender) {
+    params.append('gender', gender);
+  }
+
+  return params.toString();
+};
+
+export default async function getPhotographerList({ univ, gender }: {}) {
+  console.log(univ, gender);
+
+  const url = new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer`);
+  url.search = createSearchParams({ univ, gender });
+
   try {
-    const rawResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer`,
-      {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      },
-    );
+    const rawResponse = await fetch(url.toString(), {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
 
     if (!rawResponse.ok) {
       const response = await rawResponse.json();

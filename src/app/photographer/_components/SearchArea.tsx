@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import styled from 'styled-components';
 import SearchIcon from '@/assets/SearchIcon';
 import Filter, { Option } from './Filter';
@@ -13,8 +12,8 @@ const UNIV_LIST: Option[] = [
 ];
 
 const GENDER_LIST: Option[] = [
-  { value: 'male', label: '남성' },
-  { value: 'female', label: '여성' },
+  { value: 'MALE', label: '남성' },
+  { value: 'FEMALE', label: '여성' },
 ];
 
 type UnivValue = (typeof UNIV_LIST)[number]['value'];
@@ -63,17 +62,13 @@ const FilterWrapper = styled.div`
   gap: 0.5rem;
 `;
 
-export default function SearchArea() {
-  const [univ, setUniv] = useState<UnivValue | null>(null);
-  const [gender, setGender] = useState<GenderValue | null>(null);
-
-  const onChangeUniv = (newValue: string) => {
-    setUniv(newValue);
-  };
-  const onChangeGender = (newValue: string) => {
-    setGender(newValue);
-  };
-
+export default function SearchArea({
+  filter,
+  onChangeUniv,
+  onChangeGender,
+}: {
+  filter;
+}) {
   return (
     <Container>
       <InputContainer>
@@ -83,13 +78,13 @@ export default function SearchArea() {
 
       <FilterWrapper>
         <Filter
-          value={univ}
+          value={filter.univ}
           onChange={onChangeUniv}
           optionList={UNIV_LIST}
           placeholder="학교"
         />
         <Filter
-          value={gender}
+          value={filter.gender}
           onChange={onChangeGender}
           optionList={GENDER_LIST}
           placeholder="성별"

@@ -20,12 +20,21 @@ const Background = styled.img`
 
 export default function PhotographerPage() {
   const [photographerList, setPhotographerList] = useState([]);
+  const [filter, setFilter] = useState({ univ: null, gender: null });
+
+  const onChangeUniv = (newValue) => {
+    setFilter({ ...filter, univ: newValue });
+  };
+
+  const onChangeGender = (newValue) => {
+    setFilter({ ...filter, gender: newValue });
+  };
 
   useEffect(() => {
-    getPhotographerList().then((response) => {
+    getPhotographerList({ ...filter }).then((response) => {
       setPhotographerList(response?.photographerList);
     });
-  }, []);
+  }, [filter]);
 
   return (
     <Container>
@@ -33,7 +42,11 @@ export default function PhotographerPage() {
 
       <TNB.Title text="사진작가" />
 
-      <SearchArea />
+      <SearchArea
+        filter={filter}
+        onChangeUniv={onChangeUniv}
+        onChangeGender={onChangeGender}
+      />
 
       <PhotographerList photographerList={photographerList} />
     </Container>
