@@ -46,7 +46,6 @@ export default function DateTime({
   onChangeTime: (newValue: number) => void;
   schedule: PhotographerReserve['schedule'];
 }) {
-  console.log(availableDate);
   return (
     <Container>
       <Text variant="title2_sb">예약 가능 시간</Text>

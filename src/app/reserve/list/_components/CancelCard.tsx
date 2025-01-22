@@ -61,12 +61,14 @@ export default function CancelCard({ data }: { data: Reservation }) {
             </Link>
           </TitleArea>
 
-          <MessageArea>
-            <InfoIcon />
-            <Message variant="caption1_rg">
-              작가님의 사정으로 예약이 취소되었습니다.
-            </Message>
-          </MessageArea>
+          {data.canceledReason === '작가' && (
+            <MessageArea>
+              <InfoIcon />
+              <Message variant="caption1_rg">
+                작가님의 사정으로 예약이 취소되었습니다.
+              </Message>
+            </MessageArea>
+          )}
         </Header>
 
         <DivideLine />

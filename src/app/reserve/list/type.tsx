@@ -18,4 +18,5 @@ export interface Reservation {
   date: string;
   startTime: string;
   chatUrl: string | null;
+  canceledReason: string;
 }
