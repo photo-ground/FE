@@ -3,8 +3,9 @@ import styled from 'styled-components';
 export const Container = styled.div`
   position: relative;
   width: 100%;
+  background-color: blue;
   height: calc(100vh - 76px);
-  overflow: hidden;
+  // overflow: hidden;
   -ms-overflow-style: none;
   ::-webkit-scrollbar {
     display: none;
@@ -13,13 +14,15 @@ export const Container = styled.div`
 
 export const CardContainerY = styled.div`
   display: grid;
-  // grid로 수정
-  grid: auto-flow / 1fr 1fr 1fr;
-  // grid: repeat(3, 110px) / auto-flow 110px;
+
+  grid-template-columns: 1fr 1fr 1fr; /* 3열 */
   padding: 1rem 1.25rem;
-  overflow-y: scroll;
+
   gap: 10px;
   margin: 0 auto;
+  // height: 100%; /* 부모 컨테이너의 전체 높이 차지 */
+  // overflow-y: auto; /* 세로 스크롤 활성화 */
+  // overflow-x: hidden; /* 가로 스크롤 숨김 */
 `;
 
 export const MapContainer = styled.div`
