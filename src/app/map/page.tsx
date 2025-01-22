@@ -147,7 +147,6 @@ export default function MapPage() {
     }
     // 기존 마커를 다시 렌더링
     if (photoSpots) {
-      console.log('hihihi');
       markersRef.current.forEach((marker) => marker.setMap(null));
       markersRef.current = [];
 
