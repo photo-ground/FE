@@ -91,6 +91,7 @@ export default function MapPage() {
       new naver.maps.LatLng(school.lat, school.lng),
     );
     setUniv(school.name);
+    setCenter([school.lat, school.lng]);
 
     // 기존 마커 제거
     markersRef.current.forEach((marker) => marker.setMap(null));
