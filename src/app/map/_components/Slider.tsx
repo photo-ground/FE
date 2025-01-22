@@ -31,6 +31,7 @@ const ImageContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 86px;
 `;
 
 const Image = styled.img`
@@ -59,13 +60,13 @@ const NavigationButton = styled(IconButton)`
 `;
 
 const LeftButton = styled(NavigationButton)`
-  left: -10rem;
-  top: 270px;
+  left: -2rem;
+  top: 256px;
 `;
 
 const RightButton = styled(NavigationButton)`
-  right: -10.3rem;
-  top: 230px;
+  right: -2rem;
+  top: 256px;
 `;
 export interface SliderData {
   imageUrl: string;
