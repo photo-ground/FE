@@ -10,6 +10,7 @@ declare namespace naver {
         options: { center: naver.maps.LatLng; zoom: number },
       );
       setCenter(position: LatLng): void;
+      setZoom(level: number): void;
     }
     class LatLng {
       constructor(lat: number, lng: number);

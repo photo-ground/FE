@@ -30,20 +30,26 @@ import {
 } from './_services/getPhotoSpot';
 import DrawerContent from './_components/DrawerContent';
 import { NaverMap } from './_types/NaverMap';
+import { useMapStore } from './_store/mapStore';
 
 // naver.maps.*은 네이버 지도 API 스크립트가 로드된 후에만 사용할 수 있다.
 export default function MapPage() {
   const theme = useTheme();
 
+  // 서랍 내용 관리
   const drawerContainerRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false); // Drawer 열림 상태
   const [selectedSpotInfo, setSelectedSpotInfo] =
     useState<PhotoSpotProps | null>(null);
-  const mapInstance = useRef<NaverMap | null>(null); // `mapInstance` 관리
-  const [isMapReady, setIsMapReady] = useState<boolean>(false);
-  const markersRef = useRef<naver.maps.Marker[]>([]); // 현재 활성화된 마커 목록
+
+  // 지도 객체 관리
+  const mapInstance = useRef<NaverMap | null>(null); // 지도 인스턴스
+  const markersRef = useRef<naver.maps.Marker[]>([]); // 현재 활성화된 지도
+  const [isMapReady, setIsMapReady] = useState<boolean>(false); // 지도 준비 상태
 
   // zustand상태관리
+  const { center, zoom, markers, setCenter, setZoom, setMarkers } =
+    useMapStore();
   const { univ, setUniv } = useUnivStore();
   const [schoolArr] = useState<School[]>(schoolList);
   // useState<PhotoSpotProps | null>(null);
@@ -75,7 +81,7 @@ export default function MapPage() {
 
   // 특정 학교로 이동 및 마커 로드
   const moveToSchool = (school: School) => {
-    if (!mapInstance.current) {
+    if (!isMapReady || !mapInstance.current) {
       console.warn('Map instance is not ready yet.');
       return;
     }
@@ -103,36 +109,45 @@ export default function MapPage() {
         ),
       );
       markersRef.current = newMarkers; // 마커 목록 업데이트
+      setMarkers(newMarkers); // Zustand에 마커 저장
     }
   };
 
+  // 지도 로드 시 초기 설정
   const onMapLoad = (map: NaverMap) => {
     mapInstance.current = map;
-    setIsMapReady(true); // 맵 로드 상태를 업데이트
 
-    // 초기 마커 추가
-    if (photoSpots) {
-      const initialMarkers = photoSpots.map((spot) =>
-        makeMarker(
-          map,
-          new naver.maps.LatLng(spot.latitude, spot.longitude),
-          spot.spotName,
-          spot.spotId,
-          spot.spotImageUrl,
-          toggleDrawer,
-        ),
-      );
-      markersRef.current = initialMarkers;
-    }
+    // Zustand에 저장된 상태 복원
+    map.setCenter(new naver.maps.LatLng(...center));
+    map.setZoom(zoom);
+
+    setIsMapReady(true); // 지도 준비 상태 업데이트
   };
+
+  // 지도 상태 확인 및 초기화
+  useEffect(() => {
+    if (!isMapReady) {
+      const mapElement = document.getElementById('naverMap');
+      if (mapElement && !mapInstance.current) {
+        const map = new naver.maps.Map(mapElement, {
+          center: new naver.maps.LatLng(...center),
+          zoom,
+        });
+        onMapLoad(map); // 지도가 준비되지 않았다면 직접 초기화 호출
+      }
+    }
+  }, [isMapReady, center, zoom]);
   // `photoSpots`가 업데이트될 때 마커 갱신
   useEffect(() => {
-    if (isMapReady && photoSpots) {
-      // 기존 마커를 삭제
+    if (!isMapReady || !mapInstance.current) {
+      return;
+    }
+    // 기존 마커를 다시 렌더링
+    if (photoSpots) {
+      console.log('hihihi');
       markersRef.current.forEach((marker) => marker.setMap(null));
       markersRef.current = [];
 
-      // 새로운 마커 추가
       const newMarkers = photoSpots.map((spot) =>
         makeMarker(
           mapInstance.current!,
@@ -143,7 +158,7 @@ export default function MapPage() {
           toggleDrawer,
         ),
       );
-      markersRef.current = newMarkers; // 마커 목록 업데이트
+      markersRef.current = newMarkers;
     }
   }, [photoSpots, isMapReady]);
 
@@ -155,7 +170,7 @@ export default function MapPage() {
         center={[37.5511, 126.9407]}
         zoom={17}
         onLoad={onMapLoad}
-      />{' '}
+      />
       {/* 칩 버튼 */}
       <ChipContainer>
         {schoolArr.map((element) => (
@@ -209,7 +224,7 @@ export default function MapPage() {
           />
         </Drawer>
       </div>
-      {/* 
+      {/*       
       {modalState && currPostIdIndex !== null && (
         <Modal
           setModalState={setModalState}
