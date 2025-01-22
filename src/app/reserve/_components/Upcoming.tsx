@@ -1,4 +1,6 @@
+import Link from 'next/link';
 import styled from 'styled-components';
+
 import TaskIcon from '@/assets/TaskIcon';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import Text from '@/components/atoms/Text';
@@ -6,7 +8,9 @@ import SmallButton from '@/components/atoms/SmallButton';
 import PhotographerIcon from '@/assets/PhotographerIcon';
 import LocationIcon from '@/assets/LocationIcon';
 import TimeIcon from '@/assets/TimeIcon';
-import Link from 'next/link';
+import PeopleIcon from '@/assets/PeopleIcon';
+import Chip from '@/components/atoms/Chip';
+
 import { ReservationInfo } from '../type';
 
 const Container = styled.div`
@@ -124,9 +128,17 @@ export default function Upcoming({
           <Link href={`/reserve/${data.reservationId}`}>
             <RightChevronIcon size="20px" />
           </Link>
-          <Link href={data.chatUrl || '/'}>
-            <SmallButton.Tertiary text="채팅방" />
-          </Link>
+          {data.chatUrl ? (
+            <Link href={data.chatUrl}>
+              <SmallButton.Tertiary text="채팅방" />
+            </Link>
+          ) : (
+            <Chip
+              icon={PeopleIcon}
+              text={`${data.reserveNum}인`}
+              type="brand"
+            />
+          )}
         </ButtonArea>
       </Content>
     </Container>

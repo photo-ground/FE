@@ -1,9 +1,12 @@
 'use client';
 
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import TNB from '@/components/TNB';
 import CTAButton from '@/components/atoms/CTAButton';
+import Modal from '@/components/Modal';
+import WarningIcon from '@/assets/modal/WarningIcon';
 
 import Info from './_components/Info';
 import Message from './_components/Message';
@@ -34,6 +37,16 @@ export default function ReserveDetailScreen({
   reservationId: string;
   data: ReserveDetail;
 }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onOpen = () => {
+    setIsOpen(true);
+  };
+
+  const onClose = () => {
+    setIsOpen(false);
+  };
+
   return (
     <Container>
       <TNB.Back text="예약 상세" />
@@ -47,10 +60,14 @@ export default function ReserveDetailScreen({
         <State state={data.status} />
 
         {data.status === '예약대기' && (
-          <CTAButton
-            variant="tertiary"
-            text="예약 취소하기"
-            onClick={() => {
+          <CTAButton variant="tertiary" text="예약 취소하기" onClick={onOpen} />
+        )}
+
+        {isOpen && (
+          <Modal
+            icon={<WarningIcon />}
+            onCancel={onClose}
+            onConfirm={() => {
               cancelReservation(reservationId).then((response) => {
                 if (!response) {
                   alert('문제가 발생했습니다');
@@ -59,6 +76,10 @@ export default function ReserveDetailScreen({
                 }
               });
             }}
+            title="정말로 이 예약을 취소할까요?"
+            content="취소한 예약은 되돌릴 수 없어요"
+            confirmText="취소하기"
+            cancelText="유지하기"
           />
         )}
       </Wrapper>
