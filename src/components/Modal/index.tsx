@@ -48,17 +48,18 @@ const ModalText = styled(Text)`
 const ButtonArea = styled.div`
   display: flex;
   gap: 0.625rem;
+  width: 100%;
 `;
 
 export default function Modal({
-  onClose,
+  onCancel,
   onConfirm,
   title,
   content,
   cancelText = '취소',
   confirmText = '확인',
 }: {
-  onClose: () => void;
+  onCancel: () => void;
   onConfirm: () => void;
   title: string;
   content: string;
@@ -77,7 +78,7 @@ export default function Modal({
           <LargeButton
             text={cancelText}
             variant="secondary"
-            onClick={onClose}
+            onClick={onCancel}
           />
           <LargeButton
             text={confirmText}
