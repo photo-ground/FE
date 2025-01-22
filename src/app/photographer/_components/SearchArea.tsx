@@ -2,24 +2,9 @@
 
 import styled from 'styled-components';
 import SearchIcon from '@/assets/SearchIcon';
-import Filter, { Option } from './Filter';
-
-const UNIV_LIST: Option[] = [
-  { value: '서강대학교', label: '서강대학교' },
-  { value: '연세대학교', label: '연세대학교' },
-  { value: '이화여자대학교', label: '이화여자대학교' },
-  { value: '홍익대학교', label: '홍익대학교' },
-];
-
-const GENDER_LIST: Option[] = [
-  { value: 'MALE', label: '남성' },
-  { value: 'FEMALE', label: '여성' },
-];
-
-type UnivValue = (typeof UNIV_LIST)[number]['value'];
-type GenderValue = (typeof GENDER_LIST)[number]['value'];
-
-// --------------------------------------------------
+import { UNIV_LIST, UnivValue } from '@/types/univOption';
+import { GENDER_LIST, GenderValue } from '@/types/genderOption';
+import Filter from './Filter';
 
 const Container = styled.div`
   display: flex;
@@ -67,7 +52,9 @@ export default function SearchArea({
   onChangeUniv,
   onChangeGender,
 }: {
-  filter;
+  filter: { univ: UnivValue | null; gender: GenderValue | null };
+  onChangeUniv: (newValue: UnivValue) => void;
+  onChangeGender: (newValue: GenderValue) => void;
 }) {
   return (
     <Container>

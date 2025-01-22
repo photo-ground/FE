@@ -1,3 +1,11 @@
+import { GenderValue } from '@/types/genderOption';
+import { UnivValue } from '@/types/univOption';
+
+interface FilterOption {
+  univ: UnivValue | null;
+  gender: GenderValue | null;
+}
+
 export interface PhotographerSummary {
   photographerName: string;
   photographerId: number;
@@ -6,7 +14,7 @@ export interface PhotographerSummary {
   profileUrl: string;
 }
 
-const createSearchParams = ({ univ, gender }) => {
+const createSearchParams = ({ univ, gender }: FilterOption) => {
   const params = new URLSearchParams();
 
   if (univ) {
@@ -19,9 +27,10 @@ const createSearchParams = ({ univ, gender }) => {
   return params.toString();
 };
 
-export default async function getPhotographerList({ univ, gender }: {}) {
-  console.log(univ, gender);
-
+export default async function getPhotographerList({
+  univ,
+  gender,
+}: FilterOption) {
   const url = new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer`);
   url.search = createSearchParams({ univ, gender });
 

@@ -1,8 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import TNB from '@/components/TNB';
 import styled from 'styled-components';
+
+import TNB from '@/components/TNB';
+import { UnivValue } from '@/types/univOption';
+import { GenderValue } from '@/types/genderOption';
+
 import SearchArea from './_components/SearchArea';
 import PhotographerList from './_components/PhotographerList';
 import getPhotographerList from './_libs/getPhotographerList';
@@ -20,13 +24,16 @@ const Background = styled.img`
 
 export default function PhotographerPage() {
   const [photographerList, setPhotographerList] = useState([]);
-  const [filter, setFilter] = useState({ univ: null, gender: null });
+  const [filter, setFilter] = useState<{
+    univ: UnivValue | null;
+    gender: GenderValue | null;
+  }>({ univ: null, gender: null });
 
-  const onChangeUniv = (newValue) => {
+  const onChangeUniv = (newValue: UnivValue) => {
     setFilter({ ...filter, univ: newValue });
   };
 
-  const onChangeGender = (newValue) => {
+  const onChangeGender = (newValue: GenderValue) => {
     setFilter({ ...filter, gender: newValue });
   };
 
