@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   position: relative;
   width: 100%;
-  background-color: blue;
+  // background-color: blue;
   height: calc(100vh - 76px);
   // overflow: hidden;
   -ms-overflow-style: none;
@@ -38,17 +38,14 @@ export const MapContainer = styled.div`
 export const ChipContainer = styled.div`
   width: 100%;
   max-width: 100vw;
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   z-index: 2;
   gap: 0.5rem;
   display: flex;
   overflow-x: scroll;
-  margin: 0 auto 0 1.25rem;
-  padding: 1.25rem;
-  padding-left: 0;
-  padding-right: 1.75rem;
+  padding: 1.25rem 20px;
 `;
 export const AbsContainer = styled.div`
   position: absolute;
