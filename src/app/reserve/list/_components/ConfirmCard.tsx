@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 import RightChevronIcon from '@/assets/RightChevronIcon';
+import PhotoIcon from '@/assets/modal/PhotoIcon';
 import Text from '@/components/atoms/Text';
 import ReserveInfo from '@/components/ReserveInfo';
 import LargeButton from '@/components/atoms/LargeButton';
@@ -99,6 +100,7 @@ export default function ConfirmCard({ data }: { data: Reservation }) {
 
       {isOpen && (
         <Modal
+          icon={<PhotoIcon />}
           onCancel={onClose}
           onConfirm={onClose}
           title="사진 보정본까지 모두 받았나요?"

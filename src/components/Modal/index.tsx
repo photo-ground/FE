@@ -1,6 +1,8 @@
 import CheckIcon from '@/assets/modal/CheckIcon';
+import WarningIcon from '@/assets/modal/WarningIcon';
 import LargeButton from '@/components/atoms/LargeButton';
 import Text from '@/components/atoms/Text';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 const Backdrop = styled.div`
@@ -52,6 +54,7 @@ const ButtonArea = styled.div`
 `;
 
 export default function Modal({
+  icon = <WarningIcon />,
   onCancel,
   onConfirm,
   title,
@@ -59,6 +62,7 @@ export default function Modal({
   cancelText = '취소',
   confirmText = '확인',
 }: {
+  icon: ReactNode;
   onCancel: () => void;
   onConfirm: () => void;
   title: string;
@@ -70,7 +74,7 @@ export default function Modal({
     <>
       <Backdrop />
       <ModalContainer>
-        <CheckIcon />
+        {icon}
         <ModalTitle variant="body1_md">{title}</ModalTitle>
         <ModalText variant="caption1_rg">{content}</ModalText>
 
