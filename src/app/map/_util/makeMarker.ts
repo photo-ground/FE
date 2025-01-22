@@ -11,7 +11,7 @@ import generateCustomMarkerHTML from '../_components/generateCustomMapMarker';
  */
 
 export default function makeMarker(
-  map: naver.maps.Map | undefined,
+  map: naver.maps.Map,
   position: naver.maps.LatLng,
   title: string,
   spotId: number,
