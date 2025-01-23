@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { AccountSection, DivideLine } from '@/app/signup/styles';
 import CTAButton from '@/components/atoms/CTAButton';
@@ -56,12 +56,16 @@ export default function EditProfile() {
     queryFn: getUserInfo,
   });
 
-  if (userInfo) {
-    userData.gender = userInfo.gender;
-    userData.myUniv = userInfo.univ;
-    userData.name = userInfo.name;
-    userData.phone = userInfo.phone;
-  }
+  useEffect(() => {
+    if (userInfo) {
+      setUserData({
+        name: userInfo.name,
+        phone: userInfo.phone,
+        myUniv: userInfo.univ,
+        gender: userInfo.gender,
+      });
+    }
+  }, [userInfo]);
 
   const deleteUserMutation = useMutation({
     mutationFn: deleteUser,
@@ -88,8 +92,12 @@ export default function EditProfile() {
   //   univ: '이화여자대학교',
   // };
 
-  const handleUpdateInfo = () => {
+  const handleUpdateConfirm = () => {
     updateUserMutation.mutate(userData);
+  };
+  const handleUpdateInfo = (key: string, value: string) => {
+    setUserData({ ...userData, [key]: value });
+    console.log(userData);
   };
 
   const handleLeaveButton = () => {
@@ -111,20 +119,20 @@ export default function EditProfile() {
             <Text variant="title3">회원 정보</Text>
 
             <NameInput
-              value={userInfo.name}
-              onChange={(value) => setUserData({ ...userData, name: value })}
+              value={userData.name}
+              onChange={(value) => handleUpdateInfo('name', value)}
             />
             <PhoneInput
-              value={userInfo.phone}
-              onChange={(value) => setUserData({ ...userData, phone: value })}
+              value={userData.phone}
+              onChange={(value) => handleUpdateInfo('phone', value)}
             />
             <UnivInput
-              value={userInfo.univ}
-              onChange={(value) => setUserData({ ...userData, myUniv: value })}
+              value={userData.myUniv}
+              onChange={(value) => handleUpdateInfo('myUniv', value)}
             />
             <GenderInput
-              value={userInfo.gender}
-              onChange={(value) => setUserData({ ...userData, gender: value })}
+              value={userData.gender}
+              onChange={(value) => handleUpdateInfo('gender', value)}
             />
           </UserSection>
           <DivideLine />
@@ -136,7 +144,7 @@ export default function EditProfile() {
           </LeaveButton>
           <Spacer size="32px" />
 
-          <ButtonWrapper onClick={handleUpdateInfo}>
+          <ButtonWrapper onClick={handleUpdateConfirm}>
             <CTAButton text="수정완료" />
           </ButtonWrapper>
         </Container>

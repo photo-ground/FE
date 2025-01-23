@@ -67,7 +67,7 @@ const OptionItem = styled.button`
   cursor: pointer;
 `;
 
-const OPTION_LIST: { label: string; value: SignUpData['myUniv'] }[] = [
+const OPTION_LIST: { label: string; value: string }[] = [
   { label: '서강대학교', value: '서강대학교' },
   { label: '연세대학교', value: '연세대학교' },
   { label: '이화여자대학교', value: '이화여자대학교' },
@@ -79,8 +79,8 @@ export default function UnivInput({
   value,
   onChange,
 }: {
-  value: SignUpData['myUniv'];
-  onChange: (newValue: SignUpData['myUniv']) => void;
+  value: string;
+  onChange: (newValue: string) => void;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const selectorRef = useRef<HTMLDivElement | null>(null);

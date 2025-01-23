@@ -24,8 +24,8 @@ export default function PhoneInput({
   value,
   onChange,
 }: {
-  value: SignUpData['phone'];
-  onChange: (newValue: SignUpData['phone']) => void;
+  value: string;
+  onChange: (newValue: string) => void;
 }) {
   return (
     <Container>

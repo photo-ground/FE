@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
 import { SignUpData } from '../type';
 
-const OPTION_LIST: { title: string; value: SignUpData['gender'] }[] = [
+const OPTION_LIST: { title: string; value: string }[] = [
   { title: '남성', value: 'MALE' },
   { title: '여성', value: 'FEMALE' },
 ];
@@ -42,8 +42,8 @@ export default function GenderInput({
   value,
   onChange,
 }: {
-  value: SignUpData['gender'];
-  onChange: (newValue: SignUpData['gender']) => void;
+  value: string;
+  onChange: (newValue: string) => void;
 }) {
   return (
     <Container>

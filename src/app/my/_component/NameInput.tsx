@@ -19,8 +19,8 @@ export default function NameInput({
   value,
   onChange,
 }: {
-  value: SignUpData['name'];
-  onChange: (newValue: SignUpData['name']) => void;
+  value: string;
+  onChange: (newValue: string) => void;
 }) {
   return (
     <Container>

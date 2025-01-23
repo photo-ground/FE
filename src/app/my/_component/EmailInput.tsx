@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import { InputContainer } from '@/styles/input';
 import PersonIcon from '@/assets/PersonIcon';
-import { SignUpData } from '../type';
 const Input = styled.input`
   background: transparent;
   border: none;
@@ -28,8 +27,8 @@ export default function EmailInput({
   value,
   onChange,
 }: {
-  value: SignUpData['name'];
-  onChange: (newValue: SignUpData['name']) => void;
+  value: string;
+  onChange?: (newValue: string) => void;
 }) {
   return (
     <Container>
@@ -40,9 +39,7 @@ export default function EmailInput({
           type="text"
           name="name"
           value={value}
-          onChange={(event) => {
-            onChange(event.target.value);
-          }}
+          disabled
         />
       </InputContainer>
     </Container>
