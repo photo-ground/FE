@@ -1,19 +1,19 @@
 'use client';
 
 // TODO : 이 페이지 담는 폴더 이름 [customerId] 로 수정해야함
-import TNB from '@/components/TNB';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
+import TNB from '@/components/TNB';
+import { UserInfoProps } from '@/types/user';
+import { useQuery } from '@tanstack/react-query';
 
 import UserInfo from './_component/UserInfo';
 import ListItem from './_component/ListItem';
 
-import { useQuery } from '@tanstack/react-query';
-import { UserInfoProps } from '@/types/user';
 import { getUserInfo } from './_services/getUserInfo';
-import { useState } from 'react';
 import Modal from './_component/Modal';
-import { GetServerSideProps } from 'next';
 
 const Container = styled.div`
   position: relative;

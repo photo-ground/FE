@@ -95,7 +95,7 @@ export async function updateUserInfo(userUpdateInfo: UpdateUserInfoProps) {
 export async function updateUserPassword({ password }: { password: string }) {
   // 요청할 주소
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/customer/password`;
-  const passwordInfo = { password: password };
+  const passwordInfo = { password };
   try {
     // 1. Access Token 가져오기
     const accessToken = localStorage.getItem('accessToken');

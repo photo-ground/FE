@@ -17,14 +17,13 @@ import {
 } from '@/app/my/_component';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { UpdateUserInfoProps, UserInfoProps } from '@/types/user';
 import {
   deleteUser,
   getUserInfo,
   updateUserInfo,
 } from '../_services/getUserInfo';
-import { UpdateUserInfoProps, UserInfoProps } from '@/types/user';
 import Modal from '../_component/Modal';
-import { useRouter } from 'next/navigation';
 /* eslint-disable jsx-a11y/label-has-associated-control */
 const ButtonWrapper = styled.div`
   padding: 0 1.25rem;
@@ -42,9 +41,6 @@ const LeaveButton = styled.div`
   padding: 12px 1.25rem;
 `;
 export default function EditProfile() {
-  const router = useRouter();
-  // const { query } = router;
-
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [userData, setUserData] = useState<UpdateUserInfoProps>({
     name: '',

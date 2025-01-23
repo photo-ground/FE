@@ -2,7 +2,6 @@
 
 import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
-import { SignUpData } from '../type';
 
 const OPTION_LIST: { title: string; value: string }[] = [
   { title: '남성', value: 'MALE' },

@@ -2,7 +2,6 @@ import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import DownChevronIcon from '@/assets/DownChevronIcon';
 import Text from '@/components/atoms/Text';
-import { SignUpData } from '../type';
 
 export interface Option {
   value: string;

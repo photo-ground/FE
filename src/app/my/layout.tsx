@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { redirect } from 'next/navigation';
 import { isUserAuthenticated } from '@/lib/authentication';
 
@@ -40,5 +40,5 @@ export default function ProtectedLayout({
     redirect('/signin');
   }
 
-  return <>{children}</>;
+  return { children };
 }

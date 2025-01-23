@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { Input, InputContainer } from '@/styles/input';
 import PhoneIcon from '@/assets/PhoneIcon';
 import Text from '@/components/atoms/Text';
-import { SignUpData } from '../type';
 
 const Container = styled.div`
   display: flex;

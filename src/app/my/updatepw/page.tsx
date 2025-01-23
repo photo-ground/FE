@@ -3,14 +3,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
-import { AccountSection, DivideLine } from '@/app/signup/styles';
+
+import { AccountSection } from '@/app/signup/styles';
 import CTAButton from '@/components/atoms/CTAButton';
 import Text from '@/components/atoms/Text';
 import Spacer from '@/components/Spacer';
 import TNB from '@/components/TNB';
-import { PasswordInput, PasswordForm } from '@/app/my/_component';
-import Modal from '../_component/Modal';
 import { useMutation } from '@tanstack/react-query';
+import { PasswordInput, PasswordForm } from '@/app/my/_component';
+
+import Modal from '../_component/Modal';
 import { updateUserPassword } from '../_services/getUserInfo';
 /* eslint-disable jsx-a11y/label-has-associated-control */
 const ButtonWrapper = styled.div`
@@ -19,10 +21,7 @@ const ButtonWrapper = styled.div`
   width: 100%;
   bottom: 2rem;
 `;
-export const UserSection = styled.div`
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-`;
+
 const Container = styled.div`
   min-height: 100vh;
 `;
@@ -65,11 +64,9 @@ export default function UpdatePassword() {
           <PasswordInput value="123asd12!" />
           <Spacer size="48px" />
           <Text variant="title3">새 비밀번호</Text>
-          {/* <Spacer size="16px" /> */}
 
           <PasswordForm
             onChange={(value) => handlePassword(value)}
-            // onCheckConfirmPassword={onCheckConfirmPassword}
             onCheckConfirmPassword={handlePasswordMatch}
             value={password.password}
           />

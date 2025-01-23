@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { InputContainer } from '@/styles/input';
 import PersonIcon from '@/assets/PersonIcon';
+
 const Input = styled.input`
   background: transparent;
   border: none;
@@ -23,13 +24,7 @@ const Container = styled.div`
   margin-bottom: 1rem;
 `;
 
-export default function EmailInput({
-  value,
-  onChange,
-}: {
-  value: string;
-  onChange?: (newValue: string) => void;
-}) {
+export default function EmailInput({ value }: { value: string }) {
   return (
     <Container>
       <InputContainer>

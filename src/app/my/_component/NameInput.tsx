@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import { Input, InputContainer } from '@/styles/input';
 import PersonIcon from '@/assets/PersonIcon';
-import { SignUpData } from '../type';
 
 const Container = styled.div`
   display: flex;
