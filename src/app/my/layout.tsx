@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { isUserAuthenticated } from '@/lib/authentication';
 import Modal from './_component/Modal';
 
