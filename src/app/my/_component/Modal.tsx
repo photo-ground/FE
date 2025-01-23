@@ -45,17 +45,27 @@ const ModalText = styled(Text)`
   margin-bottom: 1.5rem;
 `;
 
-export default function Modal({ onClose }: { onClose: () => void }) {
+interface ModalProps {
+  onClose: () => void;
+  modalTitle?: string;
+  modalText?: string;
+  buttonValue?: string;
+}
+
+export default function Modal({
+  onClose,
+  modalTitle = '내 정보 수정 완료!',
+  modalText = '변경해주신 회원정보를 반영했어요',
+  buttonValue = '확인',
+}: ModalProps) {
   return (
     <>
       <Backdrop />
       <ModalContainer>
         <CheckIcon />
-        <ModalTitle variant="body1_md">내 정보 수정 완료!</ModalTitle>
-        <ModalText variant="caption1_rg">
-          변경해주신 회원정보를 반영했어요{' '}
-        </ModalText>
-        <LargeButton text="확인" variant="secondary" onClick={onClose} />
+        <ModalTitle variant="body1_md">{modalTitle}</ModalTitle>
+        <ModalText variant="caption1_rg">{modalText}</ModalText>
+        <LargeButton text={buttonValue} variant="secondary" onClick={onClose} />
       </ModalContainer>
     </>
   );

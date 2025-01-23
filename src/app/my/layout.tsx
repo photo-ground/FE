@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { isUserAuthenticated } from '@/lib/authentication';
+import Modal from './_component/Modal';
 
 export default function ProtectedLayout({
   children,
@@ -11,6 +12,7 @@ export default function ProtectedLayout({
 }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     async function checkAuth() {
@@ -37,7 +39,14 @@ export default function ProtectedLayout({
 
   // Redirect if not authenticated
   if (!isAuthenticated) {
-    redirect('/signin');
+    return (
+      <Modal
+        onClose={() => router.replace('/signin')}
+        buttonValue="로그인 하기"
+        modalTitle="잠깐!"
+        modalText="로그인 후 시용할 수 있어요!"
+      />
+    );
   }
 
   return <div>{children}</div>;
