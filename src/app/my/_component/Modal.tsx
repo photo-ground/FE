@@ -51,9 +51,9 @@ export default function Modal({ onClose }: { onClose: () => void }) {
       <Backdrop />
       <ModalContainer>
         <CheckIcon />
-        <ModalTitle variant="body1_md">회원가입 완료!</ModalTitle>
+        <ModalTitle variant="body1_md">내 정보 수정 완료!</ModalTitle>
         <ModalText variant="caption1_rg">
-          다양한 스냅 촬영 콘텐츠를 둘러보세요
+          변경해주신 회원정보를 반영했어요{' '}
         </ModalText>
         <LargeButton text="확인" variant="secondary" onClick={onClose} />
       </ModalContainer>

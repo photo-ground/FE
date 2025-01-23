@@ -1,4 +1,5 @@
 import PasswordIcon from '@/assets/PasswordIcon';
+import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
 export const Input = styled.input`
@@ -39,6 +40,10 @@ const PasswordContainer = styled.div`
   width: 100%;
 `;
 export default function PasswordUpdate({ value }: { value: string }) {
+  const route = useRouter();
+  const handleUpdatePasswd = () => {
+    route.push('/my/updatepw');
+  };
   return (
     <PasswordContainer>
       <InputContainer>
@@ -52,7 +57,7 @@ export default function PasswordUpdate({ value }: { value: string }) {
           autoComplete="new-password"
         />
       </InputContainer>
-      <Button>비밀번호 변경</Button>
+      <Button onClick={() => handleUpdatePasswd()}>비밀번호 변경</Button>
     </PasswordContainer>
   );
 }

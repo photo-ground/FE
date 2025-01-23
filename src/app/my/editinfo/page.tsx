@@ -20,22 +20,16 @@ import RightChevronIcon from '@/assets/RightChevronIcon';
 const ButtonWrapper = styled.div`
   padding: 0 1.25rem;
 `;
-export const UserSection = styled.div`
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+const UserSection = styled.div`
+  padding: 3rem 20px;
 `;
 const Container = styled.div`
-  background-color: #121212;
   min-height: 100vh;
-  padding: 1rem;
-  color: white;
 `;
 const LeaveButton = styled.div`
   color: ${({ theme }) => theme.colors.gray[300]};
   display: flex;
-  // justify-content: center;
-  // text-align: center;
-  // all: unset;
+
   padding: 12px 1.25rem;
 `;
 export default function EditProfile() {
@@ -55,6 +49,10 @@ export default function EditProfile() {
     // if (response) {
     //   router.push('signin');
     // }
+  };
+
+  const handleUpdateInfo = () => {
+    console.log('update!');
   };
   return (
     <>
@@ -84,7 +82,7 @@ export default function EditProfile() {
         </LeaveButton>
         <Spacer size="32px" />
 
-        <ButtonWrapper>
+        <ButtonWrapper onClick={handleUpdateInfo}>
           <CTAButton text="수정완료" onClick={updateInfo} />
         </ButtonWrapper>
       </Container>
