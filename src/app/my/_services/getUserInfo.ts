@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import refreshAccessToken from '@/lib/refreshToken';
-import UpdateUserInfoProps from '@/types/user';
+import { UpdateUserInfoProps } from '@/types/user';
 import axios from 'axios';
 
 // 기본 헤더 구성
@@ -46,21 +46,9 @@ export async function getUserInfo() {
 }
 
 // my : 고객 정보 수정
-export async function updateUserInfo({
-  name,
-  phone,
-  myUniv,
-  gender,
-}: UpdateUserInfoProps) {
+export async function updateUserInfo(userUpdateInfo: UpdateUserInfoProps) {
   // 요청할 주소
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/customer`;
-
-  const userUpdateInfo = JSON.stringify({
-    name,
-    phone,
-    myUniv,
-    gender,
-  });
 
   try {
     // 1. Access Token 가져오기

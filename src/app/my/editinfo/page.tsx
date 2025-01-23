@@ -23,6 +23,8 @@ import {
   updateUserInfo,
 } from '../_services/getUserInfo';
 import { UpdateUserInfoProps, UserInfoProps } from '@/types/user';
+import Modal from '../_component/Modal';
+import { useRouter } from 'next/navigation';
 /* eslint-disable jsx-a11y/label-has-associated-control */
 const ButtonWrapper = styled.div`
   padding: 0 1.25rem;
@@ -40,7 +42,7 @@ const LeaveButton = styled.div`
   padding: 12px 1.25rem;
 `;
 export default function EditProfile() {
-  // const router = useRouter();
+  const router = useRouter();
   // const { query } = router;
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -83,16 +85,9 @@ export default function EditProfile() {
       setModalOpen(true);
     },
   });
-  // const userInfo = {
-  //   id: 1,
-  //   name: '문서영',
-  //   email: 'fhflwhwl5@naver.com',
-  //   phone: '010-1234-5678',
-  //   gender: 'FEMALE',
-  //   univ: '이화여자대학교',
-  // };
 
   const handleUpdateConfirm = () => {
+    console.log(userData);
     updateUserMutation.mutate(userData);
   };
   const handleUpdateInfo = (key: string, value: string) => {
@@ -150,6 +145,14 @@ export default function EditProfile() {
         </Container>
       )}
       <Spacer size="32px" />
+      {modalOpen && (
+        <Modal
+          onClose={() => {
+            router.replace('/my/editinfo');
+            setModalOpen(false);
+          }}
+        />
+      )}
     </>
   );
 }
