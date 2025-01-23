@@ -1,14 +1,19 @@
 'use client';
 
 // TODO : 이 페이지 담는 폴더 이름 [customerId] 로 수정해야함
-import TNB from '@/components/TNB';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
+import TNB from '@/components/TNB';
+import { UserInfoProps } from '@/types/user';
+import { useQuery } from '@tanstack/react-query';
 
 import UserInfo from './_component/UserInfo';
 import ListItem from './_component/ListItem';
 
-import customerData from './_data/customerData';
+import { getUserInfo } from './_services/getUserInfo';
+import Modal from './_component/Modal';
 
 const Container = styled.div`
   position: relative;
@@ -22,30 +27,44 @@ const Background = styled.img`
 `;
 export default function PhotographerPage() {
   const router = useRouter();
-  const { name } = customerData; // GET : /api/customer
+  const [showModal, setShowModal] = useState(false);
 
+  const { data: userInfo } = useQuery<UserInfoProps>({
+    queryKey: ['userInfo'],
+    queryFn: getUserInfo,
+  });
   // TODO : 수정로직 구현
   const handleEdit = () => {
     router.push('/my/editinfo');
-    // router.push('/editinfo', { query: name }); // 데이터 전달
   };
 
   return (
     <Container>
       <Background src="/images/background1.webp" alt="background" />
+      {showModal && (
+        <Modal
+          onClose={() => {
+            setShowModal(false);
+            router.push('/signin'); // 로그인 페이지로 이동
+          }}
+        />
+      )}
 
-      <TNB.Title text="마이페이지" />
-
-      <UserInfo userName={name} onEdit={handleEdit} />
-      <ListItem
-        text="팔로우 목록"
-        onClick={() => router.push('/my/followlist')}
-      />
-      <ListItem
-        text="내가 쓴 리뷰"
-        onClick={() => router.push('/my/reviews')}
-      />
-      <ListItem text="고객센터" />
+      {userInfo && (
+        <>
+          <TNB.Title text="마이페이지" />
+          <UserInfo userName={userInfo.name} onEdit={handleEdit} />
+          <ListItem
+            text="팔로우 목록"
+            onClick={() => router.push('/my/followlist')}
+          />
+          <ListItem
+            text="내가 쓴 리뷰"
+            onClick={() => router.push('/my/reviews')}
+          />
+          <ListItem text="고객센터" />
+        </>
+      )}
     </Container>
   );
 }

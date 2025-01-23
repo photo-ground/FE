@@ -5,6 +5,9 @@ import styled from 'styled-components';
 import { IconButton } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import SmallButton from '@/components/atoms/SmallButton';
+import Text from '@/components/atoms/Text';
+import { useRouter } from 'next/navigation';
 
 const SliderContainer = styled.div`
   position: relative;
@@ -20,50 +23,28 @@ const SliderContainer = styled.div`
 const ImageContainer = styled.div`
   position: relative;
   width: 100%;
-  height: auto;
   max-width: 286px;
   aspect-ratio: 3 / 4;
   text-align: center;
   overflow: hidden;
   background-color: ${({ theme }) => theme.colors.black};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 86px;
 `;
 
 const Image = styled.img`
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  object-fit: cover;
+  object-fit: contain;
 `;
 
 const Info = styled.div`
-  margin-top: 1.5rem;
+  margin-top: 24px;
+  margin-bottom: 16px;
   text-align: center;
-  color: white;
-`;
-
-const Title = styled.h2`
-  font-size: 1.5rem;
-`;
-
-const Description = styled.p`
-  font-size: 1rem;
-  margin-top: 0.5rem;
-  color: #ccc;
-`;
-
-const Button = styled.button`
-  background-color: transparent;
-  color: orange;
-  border: 1px solid orange;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 1rem;
-
-  &:hover {
-    background-color: orange;
-    color: black;
-  }
 `;
 
 const NavigationButton = styled(IconButton)`
@@ -80,14 +61,13 @@ const NavigationButton = styled(IconButton)`
 
 const LeftButton = styled(NavigationButton)`
   left: -2rem;
-  top: 190px;
+  top: 276px;
 `;
 
 const RightButton = styled(NavigationButton)`
   right: -2rem;
-  top: 190px;
+  top: 276px;
 `;
-
 export interface SliderData {
   imageUrl: string;
   univ: string;
@@ -103,15 +83,13 @@ interface SliderProps {
 }
 
 export default function Slider({ sliderData, currPostIdIndex }: SliderProps) {
-  // 타입 가드
-  // const isPhotoSpotProps = (
-  //   data: PhotoSpotProps | PostByUnivProps,
-  // ): data is PhotoSpotProps => {
-  //   return (data as PhotoSpotProps).imageInfo !== undefined;
-  // };
-
   const [currentSlide, setCurrentSlide] = useState(currPostIdIndex);
+  const router = useRouter();
 
+  const handleSmallButton = (postId: number) => {
+    router.push(`/post/${postId}`);
+    // router.push('/editinfo', { query: name }); // 데이터 전달
+  };
   const handleNext = () => {
     if (currentSlide !== null) {
       if (currentSlide < sliderData.length - 1) {
@@ -154,13 +132,18 @@ export default function Slider({ sliderData, currPostIdIndex }: SliderProps) {
             />
           </ImageContainer>
           <Info>
-            <Title>{sliderData[currentSlide].photographerName}</Title>
-            <Description>
+            <Text variant="header2">
+              {sliderData[currentSlide].photographerName}
+            </Text>
+            <Text variant="body3" color="#a6a6a6">
               {sliderData[currentSlide].univ} |{' '}
               {sliderData[currentSlide].spotName}
-            </Description>
-            <Button>게시물 보기</Button>
+            </Text>
           </Info>
+          <SmallButton.Tertiary
+            onClick={() => handleSmallButton(sliderData[currentSlide].postId)}
+            text="게시물 보기"
+          />
         </>
       )}
     </SliderContainer>

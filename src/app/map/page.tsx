@@ -167,12 +167,7 @@ export default function MapPage() {
   return (
     <Container>
       {/* 네이버 맵 컴포넌트 */}
-      <MapComponent
-        mapId="naverMap"
-        center={[37.5511, 126.9407]}
-        zoom={17}
-        onLoad={onMapLoad}
-      />
+      <MapComponent mapId="naverMap" onLoad={onMapLoad} />
       {/* 칩 버튼 */}
       <ChipContainer>
         {schoolArr.map((element) => (

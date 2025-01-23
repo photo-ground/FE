@@ -10,9 +10,9 @@ export default function ModalLayout({
   // modal: ReactNode;
 }) {
   return (
-    <>
+    <div id="modal-root">
       {/* {modal} */}
       {children}
-    </>
+    </div>
   );
 }
