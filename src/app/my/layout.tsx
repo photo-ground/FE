@@ -40,5 +40,5 @@ export default function ProtectedLayout({
     redirect('/signin');
   }
 
-  return { children };
+  return <div>{children}</div>;
 }
