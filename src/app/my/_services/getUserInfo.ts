@@ -50,6 +50,7 @@ export async function updateUserInfo(userUpdateInfo: UpdateUserInfoProps) {
   // 요청할 주소
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/customer`;
 
+  console.log(userUpdateInfo);
   try {
     // 1. Access Token 가져오기
     const accessToken = localStorage.getItem('accessToken');
@@ -91,15 +92,10 @@ export async function updateUserInfo(userUpdateInfo: UpdateUserInfoProps) {
 }
 
 // my : 고객 비밀번호 변경
-export async function updateUserPassword(password: string) {
+export async function updateUserPassword({ password }: { password: string }) {
   // 요청할 주소
-  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/customer`;
-
-  // 데이터를 FormData로 전송해야한다.
-  const passwordInfo = JSON.stringify({
-    password,
-  });
-
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/customer/password`;
+  const passwordInfo = { password: password };
   try {
     // 1. Access Token 가져오기
     const accessToken = localStorage.getItem('accessToken');

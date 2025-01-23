@@ -10,6 +10,8 @@ import Spacer from '@/components/Spacer';
 import TNB from '@/components/TNB';
 import { PasswordInput, PasswordForm } from '@/app/my/_component';
 import Modal from '../_component/Modal';
+import { useMutation } from '@tanstack/react-query';
+import { updateUserPassword } from '../_services/getUserInfo';
 /* eslint-disable jsx-a11y/label-has-associated-control */
 const ButtonWrapper = styled.div`
   padding: 0 1.25rem;
@@ -26,19 +28,31 @@ const Container = styled.div`
 `;
 
 export default function UpdatePassword() {
-  const [password, setPassword] = useState('');
-  const [isCompleted, setIsCompleted] = useState<boolean>(false);
+  const [password, setPassword] = useState({
+    password: '',
+  });
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const router = useRouter();
 
+  const updateUserMutation = useMutation({
+    mutationKey: ['updateUserInfo'],
+    mutationFn: updateUserPassword,
+    onSuccess: (data) => {
+      console.log(data);
+      setModalOpen(true);
+    },
+  });
   const updateInfo = async () => {
-    // const response = await signup({ data: signUpData });
-    // if (response) {
-    //   router.push('signin');
-    // }
+    updateUserMutation.mutate(password);
+  };
+
+  const handlePasswordMatch = (ok: boolean) => {
+    setButtonDisabled(!ok);
   };
 
   const handlePassword = (value: string) => {
-    setPassword(value);
+    setPassword({ password: value });
   };
   return (
     <>
@@ -55,22 +69,29 @@ export default function UpdatePassword() {
 
           <PasswordForm
             onChange={(value) => handlePassword(value)}
-            value={password}
+            // onCheckConfirmPassword={onCheckConfirmPassword}
+            onCheckConfirmPassword={handlePasswordMatch}
+            value={password.password}
           />
         </AccountSection>
 
         <Spacer size="32px" />
 
         <ButtonWrapper>
-          <CTAButton disabled={isCompleted} text="확인" onClick={updateInfo} />
+          <CTAButton
+            disabled={buttonDisabled}
+            text="확인"
+            onClick={updateInfo}
+          />
         </ButtonWrapper>
       </Container>
 
       <Spacer size="32px" />
 
-      {isCompleted && (
+      {modalOpen && (
         <Modal
           onClose={() => {
+            setModalOpen(false);
             router.replace('/my/editinfo');
           }}
         />

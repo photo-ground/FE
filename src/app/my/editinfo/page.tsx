@@ -148,7 +148,7 @@ export default function EditProfile() {
       {modalOpen && (
         <Modal
           onClose={() => {
-            router.replace('/my/editinfo');
+            // router.replace('/my/editinfo');
             setModalOpen(false);
           }}
         />
