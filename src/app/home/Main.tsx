@@ -103,9 +103,8 @@ export default function Main() {
       <Spacer size="3rem" />
 
       {/* 배너 */}
-      <Banner>
-        <BannerContent>졸업 파격 할인</BannerContent>
-      </Banner>
+      <Banner />
+
       <Spacer size="3rem" />
 
       {/* ============================================ */}
