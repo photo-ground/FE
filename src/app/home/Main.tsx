@@ -47,11 +47,6 @@ const IconTextLink = styled(Link)`
   text-decoration: none;
   color: red;
 `;
-const BannerContent = styled.div`
-  background: linear-gradient(95deg, #a5b4a6 4.32%, #ffa67d 170.81%);
-  padding: 1rem;
-  height: inherit;
-`;
 
 // TODO : 만약 로그인한 회원이하면 회원정보에서부터 학교 정보를 가져와야 함.
 // function GetUnivFromOnboarding(): string {
