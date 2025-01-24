@@ -32,7 +32,7 @@ export async function getUserInfo() {
       localStorage.setItem('accessToken', newAccessToken); // 갱신된 토큰 저장
 
       // 4. 갱신된 토큰으로 재요청
-      const retryResponse = await axios.post(url, {
+      const retryResponse = await axios.get(url, {
         headers: getHeaders(newAccessToken),
       });
 
