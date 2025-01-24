@@ -4,30 +4,44 @@ import styled from 'styled-components';
 export interface BannerProps {
   /** How large should the Banner be? */
   size?: 'small' | 'medium' | 'large';
-  /** What Banner image to use */
-  src?: string;
   /** Optional click handler */
   onClick?: () => void;
+  /** Children content or fallback for the banner */
   children?: React.ReactNode;
 }
 
 const BannerWrapper = styled.div`
+  @media (max-width: 402px) {
+    background-image: url('/images/banner~402.jpg');
+    min-height: 120px;
+  }
+  @media (min-width: 403px) {
+    background-image: url('/images/banner403~520.jpg');
+    min-height: 140px;
+  }
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  height: 120px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
 `;
 
-const BannerImage = styled.img`
-  object-fit: cover;
-  height: 120px;
+const BannerContent = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  padding: 1rem;
 `;
 
-// 이미지나 ReactNode타입의 children 중에 하나가 무조건 들어가야 한다.
-export default function Banner({ size, src, onClick, children }: BannerProps) {
+export default function Banner({ size, onClick, children }: BannerProps) {
   return (
     <BannerWrapper onClick={onClick} className={`Banner ${size}`}>
-      {src ? <BannerImage src={src} /> : children}
+      {/* <BannerImage src="/images/banner403~520.jpg" /> */}
+      {children && <BannerContent>{children}</BannerContent>}
     </BannerWrapper>
   );
 }
