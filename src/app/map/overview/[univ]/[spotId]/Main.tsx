@@ -64,7 +64,6 @@ export default function Main({ univ, spotId }: MainProps) {
 
   useEffect(() => {
     if (inView) {
-      console.log(photoSpotData);
       fetchNextPage();
     }
   }, [fetchNextPage, inView]);
