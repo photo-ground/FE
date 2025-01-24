@@ -13,6 +13,7 @@ const getHeaders = (token: string) => ({
 export async function getUserInfo() {
   // 요청할 주소
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/customer`;
+  console.log(url);
 
   try {
     // 1. Access Token 가져오기
