@@ -5,6 +5,11 @@ export function middleware(request: NextRequest) {
   const accessToken = request.cookies.get('accessToken')?.value;
   const isVisited = request.cookies.get('isVisited')?.value === 'true';
 
+  // POST 요청 차단
+  if (request.method === 'POST' && request.nextUrl.pathname === '/my') {
+    return new NextResponse('Method Not Allowed', { status: 405 });
+  }
+
   // 로그인한 경우, 어느 페이지든 이동 가능
   if (accessToken) {
     return NextResponse.next();
