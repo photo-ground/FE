@@ -1,10 +1,11 @@
 'use client';
 
 import LargeButton from '@/components/atoms/LargeButton';
-// import ReserveInfo from '@/components/ReserveInfo';
+import ReserveInfo from '@/components/ReserveInfo';
 import TNB from '@/components/TNB';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { Reservation } from '../list/type';
 
 const Container = styled.ol``;
 
@@ -21,29 +22,35 @@ const DivideLine = styled.hr`
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray[700]};
 `;
 
-function Card() {
+function Card({ data }: { data: Reservation }) {
   return (
     <CardWrapper>
-      {/* <ReserveInfo /> */}
+      <ReserveInfo data={data} />
 
-      <Link href="/reserve/review/1">
+      <Link href={`/reserve/review/${data.reservationId}`}>
         <LargeButton text="후기 작성" variant="secondary" />
       </Link>
     </CardWrapper>
   );
 }
 
-export default function PrevReservationScreen() {
+export default function PrevReservationScreen({
+  data,
+}: {
+  data: Reservation[];
+}) {
   return (
     <>
       <TNB.Back text="이전 스냅" />
 
       <Container>
-        <Card />
-        <DivideLine />
-        <Card />
-        <DivideLine />
-        <Card />
+        {data.map((reservation, index) => (
+          <>
+            {/* eslint-disable-next-line */}
+            {index !== 0 && <DivideLine key={index} />}
+            <Card key={reservation.reservationId} data={reservation} />
+          </>
+        ))}
       </Container>
     </>
   );
