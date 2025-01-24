@@ -23,7 +23,6 @@ import MapComponent from './_components/Map';
 import { School } from './types';
 
 import schoolList from './_data/schoolList'; // 더미 데이터
-// import Modal from './_components/Modal';
 import {
   getPhotoSpotByUniv,
   getSelectedSpotInfo,
@@ -130,14 +129,28 @@ export default function MapPage() {
   // 지도 상태 확인 및 초기화
   useEffect(() => {
     if (!isMapReady) {
-      const mapElement = document.getElementById('naverMap');
-      if (mapElement && !mapInstance.current) {
-        const map = new naver.maps.Map(mapElement, {
-          center: new naver.maps.LatLng(...center),
-          zoom,
-        });
-        onMapLoad(map); // 지도가 준비되지 않았다면 직접 초기화 호출
-      }
+      // 네이버 지도 스크립트 추가
+      const script = document.createElement('script');
+      script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_CLIENT_ID}`;
+      script.async = true;
+      document.body.appendChild(script);
+
+      script.onload = () => {
+        // 스크립트가 로드된 후 `naver` 객체를 안전하게 사용
+        if (typeof naver !== 'undefined') {
+          const mapElement = document.getElementById('naverMap');
+          if (mapElement && !mapInstance.current) {
+            const map = new naver.maps.Map(mapElement, {
+              center: new naver.maps.LatLng(...center),
+              zoom,
+            });
+            console.log(map);
+            onMapLoad(map); // 지도가 준비되지 않았다면 직접 초기화 호출
+          }
+        } else {
+          console.error('Naver Maps API 로드 실패');
+        }
+      };
     }
   }, [isMapReady, center, zoom, onMapLoad]);
   // `photoSpots`가 업데이트될 때 마커 갱신
