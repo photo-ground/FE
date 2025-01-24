@@ -6,3 +6,5 @@ export default async function PrevReservationPage() {
 
   return <PrevReservationScreen data={data?.reservationInfoDTOList || []} />;
 }
+
+export const runtime = 'edge';
