@@ -74,8 +74,6 @@ export interface SliderData {
   spotName: string;
   photographerName: string;
   postId: number;
-  hasNext: boolean;
-  // onClicked: ()=> void();
 }
 interface SliderProps {
   sliderData: SliderData[];
@@ -88,13 +86,12 @@ export default function Slider({ sliderData, currPostIdIndex }: SliderProps) {
 
   const handleSmallButton = (postId: number) => {
     router.push(`/post/${postId}`);
-    // router.push('/editinfo', { query: name }); // 데이터 전달
   };
   const handleNext = () => {
     if (currentSlide !== null) {
       if (currentSlide < sliderData.length - 1) {
         setCurrentSlide(currentSlide + 1);
-      } else if (sliderData[currentSlide].hasNext) {
+      } else {
         // API 호출
         console.log('Fetching more data...');
       }
@@ -116,10 +113,7 @@ export default function Slider({ sliderData, currPostIdIndex }: SliderProps) {
       </LeftButton>
       <RightButton
         onClick={handleNext}
-        disabled={
-          !sliderData[currentSlide].hasNext &&
-          currentSlide === sliderData.length - 1
-        }
+        disabled={currentSlide === sliderData.length - 1}
       >
         <ArrowForwardIosIcon />
       </RightButton>
