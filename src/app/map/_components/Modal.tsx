@@ -1,6 +1,8 @@
 'use client';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
+
 import styled from 'styled-components';
 
 import { IconButton } from '@mui/material';
@@ -36,7 +38,7 @@ const CloseHeader = styled.div`
   margin-right: auto;
 `;
 const ContentWrapper = styled.div`
-  flex: 1; /* 남은 공간을 채움 */
+  // flex: 1; /* 남은 공간을 채움 */
   display: flex;
   align-items: center; /* 세로 기준으로 가운데 정렬 */
   justify-content: center; /* 가로 기준으로 가운데 정렬 */
@@ -60,7 +62,7 @@ export default function Modal({ sliderData, setModalState }: ModalProps) {
     clearCurrPostIdIndex();
   };
 
-  return (
+  return ReactDOM.createPortal(
     <>
       <Overlay onClick={() => window.history.back()} />
       <ModalContainer>
@@ -76,6 +78,7 @@ export default function Modal({ sliderData, setModalState }: ModalProps) {
           />
         </ContentWrapper>
       </ModalContainer>
-    </>
+    </>,
+    document.getElementById('modal-root')!,
   );
 }

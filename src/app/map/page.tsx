@@ -147,7 +147,6 @@ export default function MapPage() {
     }
     // 기존 마커를 다시 렌더링
     if (photoSpots) {
-      console.log('hihihi');
       markersRef.current.forEach((marker) => marker.setMap(null));
       markersRef.current = [];
 
@@ -168,12 +167,7 @@ export default function MapPage() {
   return (
     <Container>
       {/* 네이버 맵 컴포넌트 */}
-      <MapComponent
-        mapId="naverMap"
-        center={[37.5511, 126.9407]}
-        zoom={17}
-        onLoad={onMapLoad}
-      />
+      <MapComponent mapId="naverMap" onLoad={onMapLoad} />
       {/* 칩 버튼 */}
       <ChipContainer>
         {schoolArr.map((element) => (
