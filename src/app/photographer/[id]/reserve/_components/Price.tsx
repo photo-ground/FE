@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
 import formatPrice from '@/lib/formatPrice';
-import { PhotographerReserve } from '../getPhotographerData';
+import { PhotographerReserve } from '../_libs/getPhotographerData';
 
 const Container = styled.div`
   display: flex;
