@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 import Card from '@/components/Card';
 import Back from '@/components/TNB/Back';
 import Text from '@/components/atoms/Text';
-import { useQuery } from '@tanstack/react-query';
-import { PhotoSpotProps } from '@/types/photoSpot';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import Modal from '../../../_components/Modal';
 import useSpotStore from '../../../_store';
 import { getSelectedSpotInfo } from '../../../_services/getPhotoSpot';
@@ -35,34 +35,43 @@ export default function Main({ univ, spotId }: MainProps) {
   const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
   const [spotPostImages, setSpotPostImages] = useState<SliderData[]>([]);
 
-  const { data: photoSpotData } = useQuery<PhotoSpotProps>({
+  const { ref, inView } = useInView();
+
+  const { data: photoSpotData, fetchNextPage } = useInfiniteQuery({
     queryKey: ['photoSpotData', spotId],
     queryFn: () => getSelectedSpotInfo(Number(spotId)),
-    enabled: !!spotId,
+    initialPageParam: null,
+    getNextPageParam: (lastPage) => {
+      if (!lastPage.imageInfo.hasNext) {
+        return null;
+      }
+      return lastPage.imageInfo.spotPostImageList.at(-1)?.imageId;
+    },
   });
 
   useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
+
+  useEffect(() => {
     if (photoSpotData) {
-      const sliderData = photoSpotData.imageInfo.spotPostImageList.map(
-        (imageData, index) => ({
+      const sliderData = photoSpotData.pages.flatMap((page) =>
+        page.imageInfo.spotPostImageList.map((imageData) => ({
           imageUrl: imageData.imageUrl,
           univ,
-          spotName: photoSpotData.spotName,
+          spotName: page.spotName,
           photographerName: imageData.photographerName,
           postId: imageData.postId,
-          hasNext:
-            photoSpotData.imageInfo.hasNext &&
-            index === photoSpotData.imageInfo.spotPostImageList.length - 1,
-        }),
+        })),
       );
       setSpotPostImages(sliderData);
     }
   }, [photoSpotData, univ]);
 
   const handleCardModal = (postId: number) => {
-    const index = photoSpotData?.imageInfo.spotPostImageList.findIndex(
-      (item) => item.postId === postId,
-    );
+    const index = spotPostImages.findIndex((item) => item.postId === postId);
     if (index !== undefined && index >= 0) {
       setCurrPostIdIndex(index);
       setModalState(true);
@@ -73,24 +82,27 @@ export default function Main({ univ, spotId }: MainProps) {
     <>
       <Back text={univ} />
       <HeaderContainer>
-        <Text variant="title2_sb">{photoSpotData?.spotName}</Text>
+        <Text variant="title2_sb">{photoSpotData?.pages.at(0)?.spotName}</Text>
         <Text variant="body2_rg" className="text-pre">
-          {photoSpotData?.content}
+          {photoSpotData?.pages.at(0)?.content}
         </Text>
       </HeaderContainer>
       <CardContainerY>
-        {photoSpotData?.imageInfo.spotPostImageList.map((spot) => (
-          <Card
-            key={spot.postId}
-            size="small"
-            src={spot.imageUrl}
-            onClick={() => handleCardModal(spot.postId)}
-          />
-        ))}
+        {photoSpotData?.pages.flatMap((page) =>
+          page.imageInfo.spotPostImageList.map((spot) => (
+            <Card
+              key={spot.postId}
+              size="small"
+              src={spot.imageUrl}
+              onClick={() => handleCardModal(spot.postId)}
+            />
+          )),
+        )}
       </CardContainerY>
       {modalState && currPostIdIndex !== null && photoSpotData && (
         <Modal setModalState={setModalState} sliderData={spotPostImages} />
       )}
+      <div ref={ref} />
     </>
   );
 }
