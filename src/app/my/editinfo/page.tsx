@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import Router from 'next/router';
 import { AccountSection, DivideLine } from '@/app/signup/styles';
 import CTAButton from '@/components/atoms/CTAButton';
 import Text from '@/components/atoms/Text';
@@ -34,14 +35,15 @@ const UserSection = styled.div`
 const Container = styled.div`
   min-height: 100vh;
 `;
-const LeaveButton = styled.div`
+const DropOutButton = styled.div`
   color: ${({ theme }) => theme.colors.gray[300]};
   display: flex;
 
   padding: 12px 1.25rem;
 `;
 export default function EditProfile() {
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [confirmModal, setConfirmModal] = useState<boolean>(false); //
+  const [dropOutCheckModal, setDropOutCheckModal] = useState<boolean>(false);
   const [userData, setUserData] = useState<UpdateUserInfoProps>({
     name: '',
     phone: '',
@@ -49,11 +51,13 @@ export default function EditProfile() {
     gender: '',
   });
 
+  // 회원정보보
   const { data: userInfo } = useQuery<UserInfoProps>({
     queryKey: ['userInfo'],
     queryFn: getUserInfo,
   });
 
+  // 회원정보 데이터 세팅팅
   useEffect(() => {
     if (userInfo) {
       setUserData({
@@ -65,35 +69,37 @@ export default function EditProfile() {
     }
   }, [userInfo]);
 
+  // 회원 탈퇴 함수수
   const deleteUserMutation = useMutation({
     mutationFn: deleteUser,
     onSuccess: (data) => {
       console.log(data);
-      setModalOpen(true);
+      Router.push('/splash'); // 탈퇴성공 시 스플레시화면으로 이동
     },
   });
 
+  // 회원 정보 업데이트 함수수
   const updateUserMutation = useMutation({
     mutationKey: ['updateUserInfo'],
     mutationFn: updateUserInfo,
     onSuccess: (data) => {
       console.log(data);
-      setModalOpen(true);
+      setConfirmModal(true);
     },
   });
 
+  // 회원 정보 업데이트 핸들러러
   const handleUpdateConfirm = () => {
     console.log(userData);
     updateUserMutation.mutate(userData);
   };
+
+  // 변경한 회원정보 임시 데이터에 반영 핸들러
   const handleUpdateInfo = (key: string, value: string) => {
     setUserData({ ...userData, [key]: value });
     console.log(userData);
   };
 
-  const handleLeaveButton = () => {
-    deleteUserMutation.mutate();
-  };
   return (
     <>
       {userInfo && (
@@ -127,12 +133,12 @@ export default function EditProfile() {
             />
           </UserSection>
           <DivideLine />
-          <LeaveButton onClick={handleLeaveButton}>
+          <DropOutButton onClick={() => setDropOutCheckModal(true)}>
             <Text variant="body2_rg" color="#8C8C8C">
               탈퇴하기
             </Text>
             <RightChevronIcon size="24px" color="#8C8C8C" />
-          </LeaveButton>
+          </DropOutButton>
           <Spacer size="32px" />
 
           <ButtonWrapper onClick={handleUpdateConfirm}>
@@ -141,12 +147,29 @@ export default function EditProfile() {
         </Container>
       )}
       <Spacer size="32px" />
-      {modalOpen && (
+      {/* 회원정보 업데이트 확인 모달 */}
+      {confirmModal && (
         <Modal
           onClose={() => {
-            // router.replace('/my/editinfo');
-            setModalOpen(false);
+            setConfirmModal(false);
           }}
+        />
+      )}
+      {/* 탈퇴하기 이중체크 모달달 */}
+      {dropOutCheckModal && (
+        <Modal
+          onClose={() => {
+            setDropOutCheckModal(false);
+          }}
+          onSecondButton={() => {
+            deleteUserMutation.mutate(); // 회원탈퇴 진행
+            setDropOutCheckModal(false); // 더블체크 모달 닫기
+          }}
+          buttonValue="취소"
+          secondButtonValue="탈퇴하기"
+          modalTitle="정말 탈퇴하시겠습니까?"
+          modalText="탈퇴 시 계정 복구가 불가능해요"
+          isWarning={true}
         />
       )}
     </>

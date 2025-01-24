@@ -1,13 +1,13 @@
 'use client';
 
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import TNB from '@/components/TNB';
 import Text from '@/components/atoms/Text';
-import ReviewItem from '../_component/ReviewItem';
 import { useQuery } from '@tanstack/react-query';
-import { getReviews } from '../_services/getReviews';
 import { ReviewsProps } from '@/types/reviews';
-import { useEffect } from 'react';
+import ReviewItem from '../_component/ReviewItem';
+import { getReviews } from '../_services/getReviews';
 
 const Container = styled.div`
   position: relative;
@@ -34,33 +34,6 @@ export default function Reviews() {
     queryKey: ['userReview'],
     queryFn: getReviews,
   });
-  const data = {
-    count: 2,
-    averageScore: 4.5,
-    reviews: [
-      {
-        reviewId: 4,
-        reservationId: 9,
-        photographerName: '뚱이',
-        photographerProfileUrl: '/images/ewha.jpg',
-        content:
-          '작가님 보정 너무 마음에 들었습니다. 좋은 추억 만들어주셔서 감사합니다',
-        score: 5,
-        createdAt: '2025-01-06T03:04:50',
-      },
-      {
-        reviewId: 1,
-        reservationId: 6,
-        photographerName: '뚱이',
-        photographerProfileUrl: '/images/ewha.jpg',
-
-        content:
-          '작가님 보정 너무 마음에 들었습니다. 좋은 추억 만들어주셔서 감사합니다',
-        score: 4,
-        createdAt: '2025-01-06T02:58:16',
-      },
-    ],
-  };
 
   useEffect(() => {
     console.log(reviewData);

@@ -1,4 +1,5 @@
 import CheckIcon from '@/assets/modal/CheckIcon';
+import WarningIcon from '@/assets/modal/WarningIcon';
 import LargeButton from '@/components/atoms/LargeButton';
 import Text from '@/components/atoms/Text';
 import styled from 'styled-components';
@@ -45,27 +46,58 @@ const ModalText = styled(Text)`
   margin-bottom: 1.5rem;
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  width: inherit;
+  padding: 0 24px;
+`;
 interface ModalProps {
   onClose: () => void;
+  onSecondButton?: () => void;
   modalTitle?: string;
   modalText?: string;
   buttonValue?: string;
+  secondButtonValue?: string;
+  isWarning?: boolean;
 }
 
 export default function Modal({
   onClose,
+  onSecondButton,
   modalTitle = '내 정보 수정 완료!',
   modalText = '변경해주신 회원정보를 반영했어요',
   buttonValue = '확인',
+  secondButtonValue,
+  isWarning = false,
 }: ModalProps) {
   return (
     <>
       <Backdrop />
       <ModalContainer>
-        <CheckIcon />
+        {isWarning ? <WarningIcon /> : <CheckIcon />}
         <ModalTitle variant="body1_md">{modalTitle}</ModalTitle>
         <ModalText variant="caption1_rg">{modalText}</ModalText>
-        <LargeButton text={buttonValue} variant="secondary" onClick={onClose} />
+        {!secondButtonValue ? (
+          <LargeButton
+            text={buttonValue}
+            variant="secondary"
+            onClick={onClose}
+          />
+        ) : (
+          <ButtonWrapper>
+            <LargeButton
+              text={buttonValue}
+              // variant="secondary"
+              onClick={onClose}
+            />
+            <LargeButton
+              text={secondButtonValue}
+              variant="secondary"
+              onClick={onSecondButton}
+            />
+          </ButtonWrapper>
+        )}
       </ModalContainer>
     </>
   );
