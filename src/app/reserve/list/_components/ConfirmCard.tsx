@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { useRouter } from 'next/navigation';
 
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import PhotoIcon from '@/assets/modal/PhotoIcon';
@@ -13,6 +14,7 @@ import { COLORS } from '@/styles/theme';
 
 import Tag from './Tag';
 import { Reservation } from '../type';
+import completeSnap from '../_libs/completeSnap';
 
 const Wrapper = styled.div`
   display: flex;
@@ -63,6 +65,7 @@ const Message = styled(Text)`
 
 export default function ConfirmCard({ data }: { data: Reservation }) {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   const onOpen = () => {
     setIsOpen(true);
@@ -102,7 +105,13 @@ export default function ConfirmCard({ data }: { data: Reservation }) {
         <Modal
           icon={<PhotoIcon />}
           onCancel={onClose}
-          onConfirm={onClose}
+          onConfirm={() =>
+            completeSnap(data.reservationId).then((response) => {
+              if (response) {
+                router.push('/reserve/prev');
+              }
+            })
+          }
           title="사진 보정본까지 모두 받았나요?"
           content="소중한 추억을 만들었길 바라요"
           confirmText="네"
