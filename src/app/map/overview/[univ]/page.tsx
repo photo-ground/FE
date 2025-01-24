@@ -44,6 +44,9 @@ export default function Overview() {
   });
 
   useEffect(() => {
+    console.log('hihi');
+  });
+  useEffect(() => {
     if (inView) {
       fetchNextPage();
     }

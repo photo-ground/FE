@@ -24,7 +24,7 @@ export async function getPostByUniv(
   // url.search = createSearchParams({ univ, cursor });
 
   const params = new URLSearchParams();
-
+  console.log(univ);
   if (univ) {
     params.append('univ', univ);
   }
