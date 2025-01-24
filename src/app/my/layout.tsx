@@ -51,3 +51,5 @@ export default function ProtectedLayout({
 
   return <div>{children}</div>;
 }
+
+export const runtime = 'edge';
