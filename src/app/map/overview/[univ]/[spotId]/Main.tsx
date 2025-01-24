@@ -9,7 +9,6 @@ import Modal from '../../../_components/Modal';
 import useSpotStore from '../../../_store';
 import { getSelectedSpotInfo } from '../../../_services/getPhotoSpot';
 import { SliderData } from '../../../_components/Slider';
-import { CardContainerY } from '../../../style';
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -28,7 +27,24 @@ interface MainProps {
   univ: string;
   spotId: number;
 }
+const CardContainerY = styled.div`
+  display: grid;
 
+  height: calc(100% - 64px - 56px);
+  overflow: auto;
+  grid-template-columns: 1fr 1fr 1fr; /* 3열 */
+  padding: 1rem 1.25rem;
+
+  gap: 10px;
+  margin: 0 auto;
+  // height: 100%; /* 부모 컨테이너의 전체 높이 차지 */
+  // overflow-y: auto; /* 세로 스크롤 활성화 */
+  // overflow-x: hidden; /* 가로 스크롤 숨김 */
+  img {
+    width: 133px;
+    height: auto;
+  }
+`;
 export default function Main({ univ, spotId }: MainProps) {
   const [modalState, setModalState] = useState(false);
   const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
@@ -98,11 +114,11 @@ export default function Main({ univ, spotId }: MainProps) {
             />
           )),
         )}
+        <div ref={ref} />
       </CardContainerY>
       {modalState && currPostIdIndex !== null && photoSpotData && (
         <Modal setModalState={setModalState} sliderData={spotPostImages} />
       )}
-      <div ref={ref} />
     </>
   );
 }
