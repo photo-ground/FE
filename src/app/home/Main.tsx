@@ -7,6 +7,7 @@ import Banner from '@/components/Banner';
 import Spacer from '@/components/Spacer';
 import TNB from '@/components/TNB';
 import Text from '@/components/atoms/Text';
+import ToSearchPage from '@/components/ToSearchPage';
 
 import styled from 'styled-components';
 
@@ -14,7 +15,6 @@ import RightChevronIcon from '@/assets/RightChevronIcon';
 
 import { UNIV_LIST } from '@/types/univOption';
 import useUnivStore from '@/store/useUnivStore';
-import SearchEngine from './_components/SearchEngine';
 import Filter from './_components/Filter';
 
 import PostByUniv from './_components/PostByUniv';
@@ -76,7 +76,7 @@ export default function Main() {
       <TNB.Main />
 
       {/* 검색 엔진 */}
-      <SearchEngine />
+      <ToSearchPage />
 
       {/* ============================================ */}
 

@@ -1,16 +1,11 @@
 'use client';
 
+import Link from 'next/link';
 import styled from 'styled-components';
 import SearchIcon from '@/assets/SearchIcon';
 
-// --------------------------------------------------
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-
-  padding: 1rem 1.25rem 1.5rem;
+const Wrapper = styled(Link)`
+  text-decoration: none;
 `;
 
 const InputContainer = styled.div`
@@ -19,6 +14,7 @@ const InputContainer = styled.div`
 
   padding: 0.688rem 1.25rem;
 
+  //이거머임?
   background: linear-gradient(
     90deg,
     rgba(140, 140, 140, 0.2) 0%,
@@ -40,13 +36,13 @@ const Input = styled.input`
   color: ${({ theme }) => theme.colors.white};
 `;
 
-export default function SearchArea() {
+export default function ToSearchPage() {
   return (
-    <Container>
+    <Wrapper href="/search">
       <InputContainer>
         <Input placeholder="작가 검색하기" />
         <SearchIcon size="1.5rem" />
       </InputContainer>
-    </Container>
+    </Wrapper>
   );
 }
