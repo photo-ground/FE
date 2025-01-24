@@ -66,7 +66,7 @@ export default function PhotographerDetailScreen({
       ...pages[pages.length - 1].profilePostResponseDTOList,
     ]);
 
-    setHasNext(postData?.pages[0].hasNext);
+    setHasNext(postData?.pages[pages.length - 1].hasNext);
   }, [postData]);
 
   useEffect(() => {

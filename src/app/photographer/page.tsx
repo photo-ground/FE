@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useInView } from 'react-intersection-observer';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 import TNB from '@/components/TNB';
 import { UnivValue } from '@/types/univOption';
@@ -9,7 +11,9 @@ import { GenderValue } from '@/types/genderOption';
 
 import SearchArea from './_components/SearchArea';
 import PhotographerList from './_components/PhotographerList';
-import getPhotographerList from './_libs/getPhotographerList';
+import getPhotographerList, {
+  PhotographerSummary,
+} from './_libs/getPhotographerList';
 
 const Container = styled.div`
   position: relative;
@@ -23,7 +27,10 @@ const Background = styled.img`
 `;
 
 export default function PhotographerPage() {
-  const [photographerList, setPhotographerList] = useState([]);
+  const [photographerList, setPhotographerList] = useState<
+    PhotographerSummary[]
+  >([]);
+  const [hasNext, setHasNext] = useState(true);
   const [filter, setFilter] = useState<{
     univ: UnivValue | null;
     gender: GenderValue | null;
@@ -37,11 +44,44 @@ export default function PhotographerPage() {
     setFilter({ ...filter, gender: newValue });
   };
 
+  const { ref, inView } = useInView();
+  const { data: postData, fetchNextPage } = useInfiniteQuery({
+    queryKey: ['photographerList'],
+    queryFn: ({ pageParam }) =>
+      getPhotographerList({ ...filter, cursor: pageParam }),
+    initialPageParam: null,
+    getNextPageParam: () => {
+      if (!photographerList || photographerList.length === 0) {
+        return null;
+      }
+
+      if (hasNext) {
+        return photographerList[photographerList.length - 1].photographerId;
+      }
+
+      return null;
+    },
+  });
+
   useEffect(() => {
-    getPhotographerList({ ...filter }).then((response) => {
-      setPhotographerList(response?.photographerList);
-    });
-  }, [filter]);
+    const pages = postData?.pages;
+    if (!pages || !pages?.length) return;
+
+    setPhotographerList((prev) => [
+      ...prev,
+      ...pages[pages.length - 1].photographerList,
+    ]);
+
+    console.log(postData?.pages);
+
+    setHasNext(postData?.pages[pages.length - 1].hasNext);
+  }, [postData]);
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
 
   return (
     <Container>
@@ -56,6 +96,7 @@ export default function PhotographerPage() {
       />
 
       <PhotographerList photographerList={photographerList} />
+      <div ref={ref} />
     </Container>
   );
 }
