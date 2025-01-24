@@ -10,9 +10,9 @@ const getHeaders = (token: string) => ({
 });
 
 // my : 고객 정보 조회
-export async function getUserInfo() {
+export async function getReviews() {
   // 요청할 주소
-  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/customer`;
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/review`;
 
   try {
     // 1. Access Token 가져오기
@@ -136,7 +136,7 @@ export async function updateUserPassword({ password }: { password: string }) {
   }
 }
 
-// my : 고객 회원 탈퇴
+// my : 고객 회원 탈퇴퇴
 export async function deleteUser() {
   // 요청할 주소
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/customer/delete`;
@@ -144,8 +144,6 @@ export async function deleteUser() {
   try {
     // 1. Access Token 가져오기
     const accessToken = localStorage.getItem('accessToken');
-
-    console.log(accessToken);
 
     // 2. 첫 번째 요청 시도
     const response = await axios.patch(url, {
