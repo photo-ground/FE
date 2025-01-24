@@ -22,6 +22,7 @@ const CardWrapper = styled.div`
   display: flex-block;
   flex-direction: column;
   cursor: pointer;
+  width: 100%;
 `;
 
 const CardTitle = styled(Text)`

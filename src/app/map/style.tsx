@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   position: relative;
   width: 100%;
-  // background-color: blue;
+  background-color: blue;
   height: calc(100vh - 76px);
   // overflow: hidden;
   -ms-overflow-style: none;
@@ -15,6 +15,10 @@ export const Container = styled.div`
 export const CardContainerY = styled.div`
   display: grid;
 
+  background-color: red;
+  height: 500px;
+  height: calc(100% - 112px);
+  overflow: auto;
   grid-template-columns: 1fr 1fr 1fr; /* 3열 */
   padding: 1rem 1.25rem;
 
@@ -23,6 +27,10 @@ export const CardContainerY = styled.div`
   // height: 100%; /* 부모 컨테이너의 전체 높이 차지 */
   // overflow-y: auto; /* 세로 스크롤 활성화 */
   // overflow-x: hidden; /* 가로 스크롤 숨김 */
+  img {
+    width: 133px;
+    height: auto;
+  }
 `;
 
 export const MapContainer = styled.div`
