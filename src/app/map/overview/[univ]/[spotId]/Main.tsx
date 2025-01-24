@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { v4 as uuidv4 } from 'uuid';
+
 import styled from 'styled-components';
 import Card from '@/components/Card';
 import Back from '@/components/TNB/Back';
@@ -37,9 +40,6 @@ const CardContainerY = styled.div`
 
   gap: 10px;
   margin: 0 auto;
-  // height: 100%; /* 부모 컨테이너의 전체 높이 차지 */
-  // overflow-y: auto; /* 세로 스크롤 활성화 */
-  // overflow-x: hidden; /* 가로 스크롤 숨김 */
   img {
     width: 133px;
     height: auto;
@@ -58,15 +58,13 @@ export default function Main({ univ, spotId }: MainProps) {
     queryFn: () => getSelectedSpotInfo(Number(spotId)),
     initialPageParam: null,
     getNextPageParam: (lastPage) => {
-      if (!lastPage.imageInfo.hasNext) {
-        return null;
-      }
       return lastPage.imageInfo.spotPostImageList.at(-1)?.imageId;
     },
   });
 
   useEffect(() => {
     if (inView) {
+      console.log(photoSpotData);
       fetchNextPage();
     }
   }, [fetchNextPage, inView]);
@@ -107,7 +105,7 @@ export default function Main({ univ, spotId }: MainProps) {
         {photoSpotData?.pages.flatMap((page) =>
           page.imageInfo.spotPostImageList.map((spot) => (
             <Card
-              key={spot.postId}
+              key={`${spot.postId}_${uuidv4()}`}
               size="small"
               src={spot.imageUrl}
               onClick={() => handleCardModal(spot.postId)}

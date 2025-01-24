@@ -1,4 +1,7 @@
 import { Box, Divider, IconButton } from '@mui/material';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { v4 as uuidv4 } from 'uuid';
+
 import styled from 'styled-components';
 import Card from '@/components/Card';
 import CloseIcon from '@/assets/CloseIcon';
@@ -151,7 +154,7 @@ export default function DrawerContent({
       <CardContainer>
         {photoSpotData.imageInfo.spotPostImageList.slice(0, 6).map((spot) => (
           <CardWrapper
-            key={spot.postId}
+            key={`${spot.postId}_${uuidv4()}`}
             size="small"
             src={spot.imageUrl}
             onClick={() => handleCardModal(spot.postId)}
