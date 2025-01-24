@@ -78,7 +78,7 @@ export default function EditProfile() {
     },
   });
 
-  // 회원 정보 업데이트 함수수
+  // 회원 정보 업데이트 함수
   const updateUserMutation = useMutation({
     mutationKey: ['updateUserInfo'],
     mutationFn: updateUserInfo,
