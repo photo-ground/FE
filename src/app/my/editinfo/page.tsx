@@ -169,7 +169,7 @@ export default function EditProfile() {
           secondButtonValue="탈퇴하기"
           modalTitle="정말 탈퇴하시겠습니까?"
           modalText="탈퇴 시 계정 복구가 불가능해요"
-          isWarning={true}
+          isWarning
         />
       )}
     </>
