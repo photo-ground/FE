@@ -47,7 +47,7 @@ export default function PhotographerReserveScreen({
   const [data, setData] = useState<ReserveData>({
     univName: null,
     reserveNum: 1,
-    date: new Date(2025, 1, 13),
+    date: null,
     requirement: '',
     startTime: null,
     price,
