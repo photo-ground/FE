@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import TNB from '@/components/TNB';
 import Text from '@/components/atoms/Text';
 import ReviewItem from '../_component/ReviewItem';
+import { useQuery } from '@tanstack/react-query';
+import { getReviews } from '../_services/getReviews';
+import { ReviewsProps } from '@/types/reviews';
+import { useEffect } from 'react';
 
 const Container = styled.div`
   position: relative;
@@ -26,6 +30,10 @@ const ReviewItemContainer = styled.div`
 `;
 
 export default function Reviews() {
+  const { data: reviewData } = useQuery<ReviewsProps>({
+    queryKey: ['userReview'],
+    queryFn: getReviews,
+  });
   const data = {
     count: 2,
     averageScore: 4.5,
@@ -54,33 +62,43 @@ export default function Reviews() {
     ],
   };
 
+  useEffect(() => {
+    console.log(reviewData);
+  });
+
   return (
     <Container>
       {/* 상단 헤더 */}
       <TNB.Back text="내가 쓴 리뷰" />
 
       {/* 리뷰 통계 */}
-      <StatsWrapper>
-        <Text variant="caption1_md" color="#a6a6a6">
-          리뷰 {data.count}개
-        </Text>
-        <Text variant="caption1_md" color="#a6a6a6">
-          최신순
-        </Text>
-      </StatsWrapper>
+      {reviewData && (
+        <StatsWrapper>
+          <Text variant="caption1_md" color="#a6a6a6">
+            리뷰 {reviewData.count}개
+          </Text>
+          <Text variant="caption1_md" color="#a6a6a6">
+            최신순
+          </Text>
+        </StatsWrapper>
+      )}
 
       <ReviewItemContainer>
         {/* 리뷰 목록 */}
-        {data.reviews.map((review) => (
-          <ReviewItem
-            key={review.reviewId}
-            photographerName={review.photographerName}
-            photographerProfileUrl={review.photographerProfileUrl}
-            createdAt={new Date(review.createdAt).toLocaleDateString('ko-KR')}
-            score={review.score}
-            content={review.content}
-          />
-        ))}
+        {reviewData && reviewData.reviews.length !== 0 ? (
+          reviewData.reviews.map((review) => (
+            <ReviewItem
+              key={review.reviewId}
+              photographerName={review.photographerName}
+              photographerProfileUrl={review.photographerProfile}
+              createdAt={new Date(review.createdAt).toLocaleDateString('ko-KR')}
+              score={review.score}
+              content={review.content}
+            />
+          ))
+        ) : (
+          <div>리뷰가 없어용</div>
+        )}
       </ReviewItemContainer>
     </Container>
   );
