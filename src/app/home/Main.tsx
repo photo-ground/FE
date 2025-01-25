@@ -53,6 +53,10 @@ const IconTextLink = styled(Link)`
   text-decoration: none;
   color: red;
 `;
+const SearchWrapper = styled.div`
+  margin: 24px 20px;
+  // margin-bottom: 24px;
+`;
 
 // TODO : 만약 로그인한 회원이하면 회원정보에서부터 학교 정보를 가져와야 함.
 
@@ -93,7 +97,7 @@ export default function Main() {
   }
 
   // 만약 인증이 되지 않았고, 둘러볼 학교를 선택하지 않았다면
-  if (!isAuthenticated && !univ) {
+  if (!isAuthenticated || !univ) {
     return (
       <Modal
         onClose={() => router.replace('/onboarding')}
@@ -113,7 +117,9 @@ export default function Main() {
       <TNB.Main />
 
       {/* 검색 엔진 */}
-      <ToSearchPage />
+      <SearchWrapper>
+        <ToSearchPage />
+      </SearchWrapper>
 
       {/* ============================================ */}
 
