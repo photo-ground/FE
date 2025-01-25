@@ -13,6 +13,7 @@ const CardContainerY = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   margin: 0 20px;
+  width: inherit;
 `;
 const CardWrapper = styled(Link)`
   text-decoration: none;
