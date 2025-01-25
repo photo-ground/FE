@@ -7,6 +7,7 @@
 
 // components/NaverMap.js
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { PhotoSpotListProps, PhotoSpotProps } from '@/types/photoSpot';
 import { useTheme } from 'styled-components';
@@ -30,10 +31,13 @@ import {
 import DrawerContent from './_components/DrawerContent';
 import { NaverMap } from './_types/NaverMap';
 import useMapStore from './_store/mapStore';
+import Modal from '../my/_component/Modal';
 
 // naver.maps.*은 네이버 지도 API 스크립트가 로드된 후에만 사용할 수 있다.
 export default function MapPage() {
   const theme = useTheme();
+  const router = useRouter();
+  const [univSettingModal, setUnivSettingModal] = useState<boolean>(false);
 
   // 서랍 내용 관리
   const drawerContainerRef = useRef<HTMLDivElement>(null);
@@ -47,8 +51,12 @@ export default function MapPage() {
   const [isMapReady, setIsMapReady] = useState<boolean>(false); // 지도 준비 상태
 
   // zustand상태관리
-  const { center, zoom, setCenter, setMarkers } = useMapStore();
+  const { center, zoom, setMarkers } = useMapStore();
+  const setCenter = useCallback((mapCenter: [number, number]) => {
+    useMapStore.getState().setCenter(mapCenter); // Zustand의 상태를 안정화
+  }, []);
   const { univ, setUniv } = useUnivStore();
+
   const [schoolArr] = useState<School[]>(schoolList);
   // useState<PhotoSpotProps | null>(null);
 
@@ -58,6 +66,18 @@ export default function MapPage() {
     queryFn: () => getPhotoSpotByUniv(univ),
   });
 
+  useEffect(() => {
+    if (!univ) {
+      setUnivSettingModal(true);
+    } else {
+      const school = schoolList.find(
+        (element: School) => element.name === univ,
+      );
+      if (school) {
+        setCenter([school.lat, school.lng]);
+      }
+    }
+  }, [setUnivSettingModal, univ, setCenter]);
   // 드로어 열기/닫기 및 마커 정보 설정
   const toggleDrawer = async (
     isOpen: boolean,
@@ -179,6 +199,14 @@ export default function MapPage() {
 
   return (
     <Container>
+      {univSettingModal && (
+        <Modal
+          onClose={() => router.replace('/onboarding')}
+          buttonValue="학교 선택하기"
+          modalTitle="잠깐!"
+          modalText="학교 선택이 안되어있어요!"
+        />
+      )}
       {/* 네이버 맵 컴포넌트 */}
       <MapComponent mapId="naverMap" onLoad={onMapLoad} />
       {/* 칩 버튼 */}

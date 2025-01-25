@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import Banner from '@/components/Banner';
 import Spacer from '@/components/Spacer';
@@ -15,10 +16,15 @@ import RightChevronIcon from '@/assets/RightChevronIcon';
 
 import { UNIV_LIST } from '@/types/univOption';
 import useUnivStore from '@/store/useUnivStore';
+import checkAuth from '@/lib/checkAuth';
+import { useQuery } from '@tanstack/react-query';
+import { UserInfoProps } from '@/types/user';
 import Filter from './_components/Filter';
 
 import PostByUniv from './_components/PostByUniv';
 import RecommendedPhotographer from './_components/RecommendedPhotographer';
+import Modal from '../my/_component/Modal';
+import { getUserInfo } from '../my/_services/getUserInfo';
 
 const Container = styled.div`
   position: relative;
@@ -54,18 +60,52 @@ const IconTextLink = styled(Link)`
 // }
 
 export default function Main() {
-  const { univ, isLoggedIn, setUniv } = useUnivStore();
+  const router = useRouter();
+  const { univ, setUniv } = useUnivStore();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const { refetch: fetchUserInfo } = useQuery<UserInfoProps>({
+    queryKey: ['user'],
+    queryFn: getUserInfo,
+    enabled: false, // 인증된 상태에서만 호출
+  });
 
   // On initial load, set the university if not logged in
   useEffect(() => {
-    if (!isLoggedIn) {
-      const univFromParams = univ;
-      if (univFromParams) {
-        setUniv(univFromParams);
+    async function authenticate() {
+      // console.log
+      const authResult = await checkAuth(); // 분리된 함수 호출
+      if (authResult) {
+        // 인증된 상태에서 사용자 정보 가져오기
+        setIsAuthenticated(authResult);
+        const user = await fetchUserInfo();
+        if (user?.data?.univ) {
+          setUniv(user.data.univ); // Zustand의 학교 정보 업데이트
+        }
       }
-    }
-  }, [isLoggedIn, setUniv, univ]);
 
+      setIsLoading(false);
+    }
+
+    authenticate();
+  }, [fetchUserInfo, setUniv]);
+
+  // Show loading state
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  // 만약 인증이 되지 않았고, 둘러볼 학교를 선택하지 않았다면
+  if (!isAuthenticated && !univ) {
+    return (
+      <Modal
+        onClose={() => router.replace('/onboarding')}
+        buttonValue="학교 선택하기"
+        modalTitle="잠깐!"
+        modalText="비회원은 둘러볼 학교를 선택해야해요!"
+      />
+    );
+  }
   const onChangeUniv = (selectedUniv: { value: string }) => {
     setUniv(selectedUniv.value); // Update Zustand state
   };
