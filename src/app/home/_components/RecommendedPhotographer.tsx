@@ -13,6 +13,9 @@ const CardContainerX = styled.div`
   gap: 1rem;
   margin: 0 auto 0 20px;
   height: 114px;
+  div {
+    max-width: 80px;
+  }
 `;
 const CardTitle = styled.div`
   // background-color: red;
