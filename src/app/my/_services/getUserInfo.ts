@@ -165,10 +165,6 @@ export async function deleteUser() {
     if (response.status === 200) {
       const logoutResponse = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/logout`,
-        {},
-        {
-          headers: getHeaders(accessToken || ''),
-        },
       );
       return logoutResponse;
     }
