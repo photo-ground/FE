@@ -55,9 +55,6 @@ const IconTextLink = styled(Link)`
 `;
 
 // TODO : 만약 로그인한 회원이하면 회원정보에서부터 학교 정보를 가져와야 함.
-// function GetUnivFromOnboarding(): string {
-//   return univ;
-// }
 
 export default function Main() {
   const router = useRouter();

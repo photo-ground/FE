@@ -19,7 +19,7 @@ export interface CardProps {
 }
 
 const CardWrapper = styled.div`
-  display: flex-block;
+  display: flex;
   flex-direction: column;
   cursor: pointer;
   width: 100%;

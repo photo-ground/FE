@@ -7,12 +7,15 @@ import { getActivePhotographer } from '../_services/getActivePhotographer';
 
 const CardContainerX = styled.div`
   display: flex;
-  overflow-y: scroll;
+  justify-content: start;
+  // background-color: yellow;
+  // overflow-y: scroll;
   gap: 1rem;
   margin: 0 auto 0 20px;
   height: 114px;
 `;
 const CardTitle = styled.div`
+  // background-color: red;
   margin-top: 0.75rem;
   color: ${({ theme }) => theme.colors.gray[200]};
   text-align: center;

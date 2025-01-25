@@ -74,6 +74,7 @@ export default function MapPage() {
         (element: School) => element.name === univ,
       );
       if (school) {
+        console.log(school);
         setCenter([school.lat, school.lng]);
       }
     }
