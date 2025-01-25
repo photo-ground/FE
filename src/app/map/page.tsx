@@ -136,43 +136,60 @@ export default function MapPage() {
   const onMapLoad = useCallback(
     (map: NaverMap) => {
       mapInstance.current = map;
+      console.log(univ);
 
       // Zustand에 저장된 상태 복원
-      map.setCenter(new naver.maps.LatLng(...center));
-      map.setZoom(zoom);
+      const school = schoolList.find(
+        (element: School) => element.name === univ,
+      );
+      if (school) {
+        map.setCenter(new naver.maps.LatLng(...[school.lat, school.lng]));
+        map.setZoom(zoom);
+      }
 
       setIsMapReady(true); // 지도 준비 상태 업데이트
     },
-    [center, zoom, setIsMapReady], // 의존성 배열에 필요한 값만 추가
+    [zoom, setIsMapReady, univ], // 의존성 배열에 필요한 값만 추가
   );
 
   // 지도 상태 확인 및 초기화
-  useEffect(() => {
-    if (!isMapReady) {
-      // 네이버 지도 스크립트 추가
-      const script = document.createElement('script');
-      script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_CLIENT_ID}`;
-      script.async = true;
-      document.body.appendChild(script);
+  const initialMap = useCallback(
+    (mapCent: [number, number]) => {
+      if (!isMapReady) {
+        console.log(center);
+        // 네이버 지도 스크립트 추가
+        const script = document.createElement('script');
+        script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_CLIENT_ID}`;
+        script.async = true;
+        document.body.appendChild(script);
 
-      script.onload = () => {
-        // 스크립트가 로드된 후 `naver` 객체를 안전하게 사용
-        if (typeof naver !== 'undefined') {
-          const mapElement = document.getElementById('naverMap');
-          if (mapElement && !mapInstance.current) {
-            const map = new naver.maps.Map(mapElement, {
-              center: new naver.maps.LatLng(...center),
-              zoom,
-            });
-            console.log(map);
-            onMapLoad(map); // 지도가 준비되지 않았다면 직접 초기화 호출
+        script.onload = () => {
+          // 스크립트가 로드된 후 `naver` 객체를 안전하게 사용
+          if (typeof naver !== 'undefined') {
+            const mapElement = document.getElementById('naverMap');
+            console.log(mapCent);
+
+            if (mapElement && !mapInstance.current) {
+              const map = new naver.maps.Map(mapElement, {
+                center: new naver.maps.LatLng(...mapCent),
+                zoom,
+              });
+              console.log(map);
+              onMapLoad(map); // 지도가 준비되지 않았다면 직접 초기화 호출
+            }
+          } else {
+            console.error('Naver Maps API 로드 실패');
           }
-        } else {
-          console.error('Naver Maps API 로드 실패');
-        }
-      };
-    }
-  }, [isMapReady, center, zoom, onMapLoad]);
+        };
+      }
+    },
+    [isMapReady, center, zoom, onMapLoad],
+  );
+
+  useEffect(() => {
+    console.log('center : ', center);
+    initialMap(center);
+  }, [center, initialMap]);
   // `photoSpots`가 업데이트될 때 마커 갱신
   useEffect(() => {
     if (!isMapReady || !mapInstance.current) {
