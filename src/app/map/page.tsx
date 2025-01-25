@@ -137,13 +137,18 @@ export default function MapPage() {
     (map: NaverMap) => {
       mapInstance.current = map;
 
-      // Zustand에 저장된 상태 복원
-      map.setCenter(new naver.maps.LatLng(...center));
-      map.setZoom(zoom);
+      const school = schoolList.find(
+        (element: School) => element.name === univ,
+      );
+      if (school) {
+        // Zustand에 저장된 상태 복원
+        map.setCenter(new naver.maps.LatLng(...[school.lat, school.lng]));
+        map.setZoom(zoom);
 
-      setIsMapReady(true); // 지도 준비 상태 업데이트
+        setIsMapReady(true); // 지도 준비 상태 업데이트
+      }
     },
-    [center, zoom, setIsMapReady], // 의존성 배열에 필요한 값만 추가
+    [zoom, setIsMapReady, univ], // 의존성 배열에 필요한 값만 추가
   );
 
   // 지도 상태 확인 및 초기화
