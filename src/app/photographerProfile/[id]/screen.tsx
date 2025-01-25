@@ -6,15 +6,15 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
 import CTAButton from '@/components/atoms/CTAButton';
 import BREAK_POINT from '@/styles/constants';
-import PhotographerProfile from './_components/PhotographerProfile';
-import Price from './_components/Price';
-import Message from './_components/Message';
-import Review from './_components/Review';
-import Feed from './_components/Feed';
-import { PhotographerDetail } from '../photographer/[id]/_libs/getPhotographerData';
+import PhotographerProfile from '../_components/PhotographerProfile';
+import Price from '../_components/Price';
+import Message from '../_components/Message';
+import Review from '../_components/Review';
+import Feed from '../_components/Feed';
+import { PhotographerDetail } from '../../photographer/[id]/_libs/getPhotographerData';
 import getPhotographerPosts, {
   PostSummary,
-} from '../photographer/[id]/_libs/getPhotographerPosts';
+} from '../../photographer/[id]/_libs/getPhotographerPosts';
 
 const Container = styled.div`
   padding-bottom: 6.125rem;
