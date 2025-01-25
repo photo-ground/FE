@@ -29,7 +29,11 @@ export default function PhotographerPage() {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
 
-  const { data: userInfo, isError } = useQuery<UserInfoProps>({
+  const {
+    data: userInfo,
+    isError,
+    isSuccess,
+  } = useQuery<UserInfoProps>({
     queryKey: ['userInfo'],
     queryFn: getUserInfo,
   });
@@ -38,7 +42,10 @@ export default function PhotographerPage() {
     if (isError) {
       router.push('/signin');
     }
-  }, [isError, router]);
+    if (isSuccess && userInfo.role === 'ROLE_PHOTOGRAPHER') {
+      router.push(`/photographerProfile/${userInfo.id}`);
+    }
+  }, [isError, router, isSuccess, userInfo]);
 
   // TODO : 수정로직 구현
   const handleEdit = () => {
@@ -57,9 +64,10 @@ export default function PhotographerPage() {
         />
       )}
 
-      {userInfo && (
+      {userInfo?.role === 'ROLE_CUSTOMER' && (
         <>
           <TNB.Title text="마이페이지" />
+          {userInfo.role}
           <UserInfo userName={userInfo.name} onEdit={handleEdit} />
           <ListItem
             text="팔로우 목록"
