@@ -97,7 +97,7 @@ export default function Main() {
   }
 
   // 만약 인증이 되지 않았고, 둘러볼 학교를 선택하지 않았다면
-  if (!isAuthenticated || !univ) {
+  if (!isAuthenticated && !univ) {
     return (
       <Modal
         onClose={() => router.replace('/onboarding')}
