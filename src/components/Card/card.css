@@ -1,6 +1,7 @@
 /* 버튼 크기 */
 .card.round {
   text-align: center;
+  width: inherit;
   img {
     width: 80px;
     height: 80px;

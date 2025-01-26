@@ -53,11 +53,12 @@ const IconTextLink = styled(Link)`
   text-decoration: none;
   color: red;
 `;
+const SearchWrapper = styled.div`
+  margin: 24px 20px;
+  // margin-bottom: 24px;
+`;
 
 // TODO : 만약 로그인한 회원이하면 회원정보에서부터 학교 정보를 가져와야 함.
-// function GetUnivFromOnboarding(): string {
-//   return univ;
-// }
 
 export default function Main() {
   const router = useRouter();
@@ -116,7 +117,9 @@ export default function Main() {
       <TNB.Main />
 
       {/* 검색 엔진 */}
-      <ToSearchPage />
+      <SearchWrapper>
+        <ToSearchPage />
+      </SearchWrapper>
 
       {/* ============================================ */}
 
