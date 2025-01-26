@@ -121,7 +121,7 @@ export default function PhotographerReserveScreen({
           onClick={() =>
             reserve(photographerId, data).then((response) => {
               if (response) {
-                router.replace('/reserve');
+                router.replace('/reserve/success');
               }
             })
           }
