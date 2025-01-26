@@ -20,6 +20,7 @@ import Dropdown from '@/components/Dropdown/index_2';
 import CTAButton from '@/components/atoms/CTAButton';
 import { PostInfoProps, PostUploadContainerProps } from '@/types/post';
 import { Option } from '@/types/option';
+import { useRouter } from 'next/navigation';
 import UnivRadioGroup from './_component/UnivRadioGroup';
 import ImagePreviewItem from '../../_components/ImagePreviewItem';
 import {
@@ -34,6 +35,7 @@ export default function Main({ photographerId }: { photographerId: number }) {
   const [isComplete, setIsComplete] = useState<boolean>(false);
   const [textareaContent, setTextareaContent] = useState<string>('');
   const [spotData, setSpotData] = useState<Option[]>([]);
+  const router = useRouter();
   // 이미지 리스트 & 포토스팟 선택 리스트 (zustand)
   const {
     images,
@@ -106,6 +108,7 @@ export default function Main({ photographerId }: { photographerId: number }) {
       postNewContent(photographerId, newContent),
     onSuccess: () => {
       console.log('Post created successfully');
+      router.push(`/photographerProfile/${photographerId}`);
     },
     onError: (err) => {
       console.error('Error creating post:', err);
