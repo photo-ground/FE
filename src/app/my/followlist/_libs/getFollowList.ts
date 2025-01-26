@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers';
+import fetchWithAuth from '@/lib/fetchWithAuth';
 
 export interface Follow {
   photographerName: string;
@@ -10,7 +11,7 @@ export default async function getFollowList() {
   try {
     const cookieStore = await cookies();
 
-    const rawResponse = await fetch(
+    const rawResponse = await fetchWithAuth(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/follow`,
       {
         method: 'GET',

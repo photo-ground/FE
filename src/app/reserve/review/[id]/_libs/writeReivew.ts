@@ -1,3 +1,5 @@
+import fetchWithAuth from '@/lib/fetchWithAuth';
+
 export default async function writeReview(
   reservationId: string,
   data: {
@@ -5,9 +7,8 @@ export default async function writeReview(
     score: number;
   },
 ) {
-  console.log(JSON.stringify({ ...data }));
   try {
-    const rawResponse = await fetch(
+    const rawResponse = await fetchWithAuth(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/review/${reservationId}`,
       {
         method: 'POST',
