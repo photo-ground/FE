@@ -1,5 +1,5 @@
 import fetchWithAuth from '@/lib/fetchWithAuth';
-import { ReserveData } from './type';
+import { ReserveData } from '../type';
 
 export default async function reserve(
   photographerId: string,

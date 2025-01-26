@@ -3,7 +3,7 @@
 // TODO : 이 페이지 담는 폴더 이름 [customerId] 로 수정해야함
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import TNB from '@/components/TNB';
 import { UserInfoProps } from '@/types/user';
@@ -29,10 +29,17 @@ export default function PhotographerPage() {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
 
-  const { data: userInfo } = useQuery<UserInfoProps>({
+  const { data: userInfo, isError } = useQuery<UserInfoProps>({
     queryKey: ['userInfo'],
     queryFn: getUserInfo,
   });
+
+  useEffect(() => {
+    if (isError) {
+      router.push('/signin');
+    }
+  }, [isError, router]);
+
   // TODO : 수정로직 구현
   const handleEdit = () => {
     router.push('/my/editinfo');

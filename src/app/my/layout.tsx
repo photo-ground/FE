@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { isUserAuthenticated } from '@/lib/authentication';
+import checkAuth from '@/lib/checkAuth';
 import Modal from './_component/Modal';
 
 export default function ProtectedLayout({
@@ -15,21 +15,13 @@ export default function ProtectedLayout({
   const router = useRouter();
 
   useEffect(() => {
-    async function checkAuth() {
-      try {
-        // Call the server-side function to check authentication
-        const authResult = await isUserAuthenticated();
-
-        setIsAuthenticated(authResult);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Authentication check failed', error);
-        setIsAuthenticated(false);
-        setIsLoading(false);
-      }
+    async function authenticate() {
+      const authResult = await checkAuth(); // 분리된 함수 호출
+      setIsAuthenticated(authResult);
+      setIsLoading(false);
     }
 
-    checkAuth();
+    authenticate();
   }, []);
 
   // Show loading state
@@ -51,3 +43,5 @@ export default function ProtectedLayout({
 
   return <div>{children}</div>;
 }
+
+export const runtime = 'edge';

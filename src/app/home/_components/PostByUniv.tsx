@@ -1,9 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
 import Card from '@/components/Card';
-import { PostProps } from '@/types/post';
 import Link from 'next/link';
+import { useInView } from 'react-intersection-observer';
+import { useEffect } from 'react';
 import { getPostByUniv } from '../_services/getActivePhotographer';
 
 const CardContainerY = styled.div`
@@ -12,38 +13,51 @@ const CardContainerY = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   margin: 0 20px;
+  width: inherit;
 `;
 const CardWrapper = styled(Link)`
   text-decoration: none;
 `;
 
 export default function PostByUniv({ univ }: { univ: string }) {
-  const { isPending, isError, data, error } = useQuery<PostProps>({
-    queryKey: ['postList', 'hasNext', univ],
+  const { ref, inView } = useInView();
+  const { data, fetchNextPage } = useInfiniteQuery({
+    queryKey: ['photographerList', univ],
     queryFn: () => getPostByUniv(univ),
+    initialPageParam: null,
+    getNextPageParam: (lastPage) => {
+      if (!lastPage.hasNext) {
+        return null;
+      }
+      return lastPage.postList.at(-1)?.id;
+    },
   });
 
-  if (isPending) {
-    return <span>Loading...</span>;
-  }
-
-  if (isError) {
-    return <span>Error: {error.message}</span>;
-  }
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
 
   return (
     <CardContainerY>
-      {data?.postList.map((card) => (
-        <CardWrapper key={card.createdAt} href={`/post/${card.photographerId}`}>
-          <Card
-            key={card.id}
-            content={card.firstImageSpot}
-            size="medium"
-            src={card.firstImageUrl}
-            title={card.photographerName}
-          />
-        </CardWrapper>
-      ))}
+      {data?.pages.map((page) =>
+        page.postList.map((card) => (
+          <CardWrapper
+            key={card.createdAt}
+            href={`/post/${card.photographerId}`}
+          >
+            <Card
+              key={card.id}
+              content={card.firstImageSpot}
+              size="medium"
+              src={card.firstImageUrl}
+              title={card.photographerName}
+            />
+          </CardWrapper>
+        )),
+      )}
+      <div ref={ref} />
     </CardContainerY>
   );
 }

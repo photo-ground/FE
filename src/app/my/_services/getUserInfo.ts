@@ -38,6 +38,10 @@ export async function getUserInfo() {
 
       return retryResponse.data;
     }
+    if (error.response?.status === 403) {
+      alert('재로그인이 필요합니다.');
+      throw error;
+    }
 
     // 5. 기타 오류 처리
     console.error('Error uploading content:', error);

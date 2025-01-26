@@ -1,6 +1,7 @@
 /* 버튼 크기 */
 .card.round {
   text-align: center;
+  width: inherit;
   img {
     width: 80px;
     height: 80px;
@@ -13,14 +14,14 @@
   width: 100%; /* 부모 요소 너비에 맞춤 */
   aspect-ratio: 1 / 1; /* 정방형 유지 */
   position: relative;
-  overflow: hidden; /* 자식 요소가 넘치지 않도록 설정 */
+  /* overflow: hidden; 자식 요소가 넘치지 않도록 설정 */
   min-width: 110px; /* 최소 너비 */
 
   img {
+    /* display: block; */
     width: 100%; /* 부모 요소의 너비에 맞춤 */
     height: 100%; /* 부모 요소의 높이에 맞춤 */
     object-fit: cover; /* 정방형 안에 꽉 채움 */
-    aspect-ratio: 1 / 1; /* 정방형 유지 */
   }
 }
 
