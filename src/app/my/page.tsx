@@ -28,24 +28,51 @@ const Background = styled.img`
 export default function PhotographerPage() {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // const { refetch: fetchUserInfo } = useQuery<UserInfoProps>({
+  //   queryKey: ['user'],
+  //   queryFn: getUserInfo,
+  //   enabled: false, // 인증된 상태에서만 호출
+  // });
 
   const {
+    refetch: fetchUserInfo,
     data: userInfo,
     isError,
     isSuccess,
   } = useQuery<UserInfoProps>({
     queryKey: ['userInfo'],
     queryFn: getUserInfo,
+    enabled: false,
+  });
+
+  // On initial load, set the university if not logged in
+  useEffect(() => {
+    async function authenticate() {
+      // 1. 고객이 경우, 데이터 가져오기기
+      if (localStorage.getItem('role') === 'ROLE_CUSTOMER') {
+        // 인증된 상태에서 사용자 정보 가져오기
+        await fetchUserInfo(); // 데이터 가져와
+        // 2. 작가인 경우, 작가 마이페이지로 이동
+      } else if (localStorage.getItem('role') === 'ROLE_PHOTOGRAPHER') {
+        router.push(`/photographerProfile/14`);
+      }
+      setIsLoading(false);
+    }
+    authenticate();
   });
 
   useEffect(() => {
     if (isError) {
       router.push('/signin');
     }
-    if (isSuccess && userInfo.role === 'ROLE_PHOTOGRAPHER') {
-      router.push(`/photographerProfile/${userInfo.id}`);
-    }
   }, [isError, router, isSuccess, userInfo]);
+
+  // Show loading state
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   // TODO : 수정로직 구현
   const handleEdit = () => {
