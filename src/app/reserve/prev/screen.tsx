@@ -46,8 +46,11 @@ export default function PrevReservationScreen({
       <Container>
         {data.map((reservation, index) => (
           <>
-            {/* eslint-disable-next-line */}
-            {index !== 0 && <DivideLine key={index} />}
+            {index !== 0 && (
+              <DivideLine
+                key={reservation.reservationId.toString() + index.toString()}
+              />
+            )}
             <Card key={reservation.reservationId} data={reservation} />
           </>
         ))}

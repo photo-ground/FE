@@ -6,6 +6,7 @@ import CTAButton from '@/components/atoms/CTAButton';
 import Text from '@/components/atoms/Text';
 import LargeStarEmptyIcon from '@/assets/LargeStarEmptyIcon';
 import LargeStarIcon from '@/assets/LargeStarIcon';
+import { Reservation } from '../../list/type';
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -73,7 +74,11 @@ const Textarea = styled.textarea`
   border-radius: 1rem;
 `;
 
-export default function ReviewScreen() {
+export default function ReviewScreen({
+  reservationDetail,
+}: {
+  reservationDetail: Reservation;
+}) {
   return (
     <Wrapper>
       <TNB.Back text="리뷰 작성" />
@@ -82,7 +87,9 @@ export default function ReviewScreen() {
       <Container>
         <TitleArea>
           <FirstLine>
-            <Name variant="title1_sb">이채린 작가님</Name>
+            <Name variant="title1_sb">
+              {reservationDetail.photographerName} 작가님
+            </Name>
             <Text variant="title1_rg">과의</Text>
           </FirstLine>
           <Text variant="title1_rg">스냅 촬영은 즐거우셨나요?</Text>
