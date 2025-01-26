@@ -1,12 +1,16 @@
 'use client';
 
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
+
 import TNB from '@/components/TNB';
 import CTAButton from '@/components/atoms/CTAButton';
 import Text from '@/components/atoms/Text';
 import LargeStarEmptyIcon from '@/assets/LargeStarEmptyIcon';
 import LargeStarIcon from '@/assets/LargeStarIcon';
 import { Reservation } from '../../list/type';
+import writeReview from './_libs/writeReivew';
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -62,6 +66,13 @@ const InputArea = styled.div`
 
 const Stars = styled.div``;
 
+const ScoreButton = styled.button`
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+`;
+
 const Textarea = styled.textarea`
   width: 100%;
   height: 7.5rem;
@@ -72,13 +83,20 @@ const Textarea = styled.textarea`
   border: 1px solid ${({ theme }) => theme.colors.gray[600]};
   outline: none;
   border-radius: 1rem;
+  font-family: 'Pretendard Variable', Pretendard;
 `;
 
 export default function ReviewScreen({
+  reservationId,
   reservationDetail,
 }: {
+  reservationId: string;
   reservationDetail: Reservation;
 }) {
+  const router = useRouter();
+  const [score, setScore] = useState(5);
+  const [content, setContent] = useState('');
+
   return (
     <Wrapper>
       <TNB.Back text="리뷰 작성" />
@@ -97,16 +115,33 @@ export default function ReviewScreen({
 
         <InputArea>
           <Stars>
-            <LargeStarIcon />
-            <LargeStarEmptyIcon />
-            <LargeStarEmptyIcon />
-            <LargeStarEmptyIcon />
-            <LargeStarEmptyIcon />
+            {[1, 2, 3, 4, 5].map((item) => (
+              <ScoreButton
+                key={item}
+                type="button"
+                onClick={() => setScore(item)}
+              >
+                {item <= score ? <LargeStarIcon /> : <LargeStarEmptyIcon />}
+              </ScoreButton>
+            ))}
           </Stars>
-          <Textarea placeholder="상세한 리뷰가 작가님의 성장에 큰 도움이 돼요!" />
+          <Textarea
+            placeholder="상세한 리뷰가 작가님의 성장에 큰 도움이 돼요!"
+            value={content}
+            onChange={(event) => setContent(event.target.value)}
+          />
         </InputArea>
 
-        <CTAButton text="작성 완료" />
+        <CTAButton
+          text="작성 완료"
+          onClick={() => {
+            writeReview(reservationId, { score, content }).then((response) => {
+              if (response) {
+                router.push('/reserve/prev');
+              }
+            });
+          }}
+        />
       </Container>
     </Wrapper>
   );

@@ -11,5 +11,7 @@ export default async function ReviewPage({
   const id = (await params).id!;
   const reservationDetail = await getReservationDetail(id);
 
-  return <ReviewScreen reservationDetail={reservationDetail} />;
+  return (
+    <ReviewScreen reservationId={id} reservationDetail={reservationDetail} />
+  );
 }
