@@ -94,3 +94,5 @@ export default function PhotographerPage() {
     </Container>
   );
 }
+
+export const runtime = 'edge';
