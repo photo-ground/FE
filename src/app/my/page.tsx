@@ -14,6 +14,7 @@ import ListItem from './_component/ListItem';
 
 import { getUserInfo } from './_services/getUserInfo';
 import Modal from './_component/Modal';
+import getPhotographerId from './_services/getPhotographerId';
 
 const Container = styled.div`
   position: relative;
@@ -25,6 +26,10 @@ const Background = styled.img`
   object-fit: cover;
   z-index: -1;
 `;
+interface PhotographerIdProps {
+  photographerId: number;
+}
+
 export default function PhotographerPage() {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
@@ -47,6 +52,13 @@ export default function PhotographerPage() {
     enabled: false,
   });
 
+  const { refetch: fetchPhotographerId, data: photographerId } =
+    useQuery<PhotographerIdProps>({
+      queryKey: ['photographerId'],
+      queryFn: getPhotographerId,
+      enabled: false,
+    });
+
   // On initial load, set the university if not logged in
   useEffect(() => {
     async function authenticate() {
@@ -56,12 +68,18 @@ export default function PhotographerPage() {
         await fetchUserInfo(); // 데이터 가져와
         // 2. 작가인 경우, 작가 마이페이지로 이동
       } else if (localStorage.getItem('role') === 'ROLE_PHOTOGRAPHER') {
-        router.push(`/photographerProfile/14`);
+        await fetchPhotographerId(); // `refetch` 결과 가져오기
       }
       setIsLoading(false);
     }
     authenticate();
   });
+
+  useEffect(() => {
+    if (photographerId?.photographerId) {
+      router.push(`/photographerProfile/${photographerId.photographerId}`);
+    }
+  }, [photographerId, router]);
 
   useEffect(() => {
     if (isError) {
