@@ -13,8 +13,8 @@ import NumberSelector from './_components/NumberSelector';
 import DateTime from './_components/DateTime';
 import Request from './_components/Request';
 import Price from './_components/Price';
-import { PhotographerReserve } from './getPhotographerData';
-import reserve from './reserve';
+import { PhotographerReserve } from './_libs/getPhotographerData';
+import reserve from './_libs/reserve';
 import { ReserveData } from './type';
 
 const ButtonWrapper = styled.div`
@@ -47,7 +47,7 @@ export default function PhotographerReserveScreen({
   const [data, setData] = useState<ReserveData>({
     univName: null,
     reserveNum: 1,
-    date: new Date(2025, 1, 13),
+    date: null,
     requirement: '',
     startTime: null,
     price,
@@ -121,7 +121,7 @@ export default function PhotographerReserveScreen({
           onClick={() =>
             reserve(photographerId, data).then((response) => {
               if (response) {
-                router.replace('/reserve');
+                router.replace('/reserve/success');
               }
             })
           }

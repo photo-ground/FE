@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
 import CalendarSmall from '@/components/CalendarSmall';
 import TimeSelector from './TimeSelector';
-import { PhotographerReserve } from '../../getPhotographerData';
+import { PhotographerReserve } from '../../_libs/getPhotographerData';
 
 const Container = styled.div`
   display: flex;
