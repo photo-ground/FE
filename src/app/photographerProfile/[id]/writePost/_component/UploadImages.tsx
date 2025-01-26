@@ -3,7 +3,7 @@ import Text from '@/components/atoms/Text';
 import useImageStore from '@/store/useImageStore';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import ImagePreviewItem from '../../_components/ImagePreviewItem';
+import ImagePreviewItem from '../../../_components/ImagePreviewItem';
 
 const Title = styled.div`
   display: flex;

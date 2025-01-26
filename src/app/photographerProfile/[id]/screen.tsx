@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
-import CTAButton from '@/components/atoms/CTAButton';
-import BREAK_POINT from '@/styles/constants';
 import PhotographerProfile from '../_components/PhotographerProfile';
 import Price from '../_components/Price';
 import Message from '../_components/Message';
@@ -23,15 +21,6 @@ const Container = styled.div`
 const DivideLine = styled.div`
   width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray[700]};
-`;
-
-const ButtonWrapper = styled.div`
-  position: fixed;
-  bottom: 2rem;
-
-  width: 100%;
-  max-width: ${BREAK_POINT}px;
-  padding: 0 1.25rem;
 `;
 
 export default function PhotographerDetailScreen({
@@ -100,10 +89,6 @@ export default function PhotographerDetailScreen({
 
       <Feed styleList={styleList} postList={postList || []} />
       <div ref={ref} />
-
-      <ButtonWrapper>
-        <CTAButton text="예약하기" />
-      </ButtonWrapper>
     </Container>
   );
 }

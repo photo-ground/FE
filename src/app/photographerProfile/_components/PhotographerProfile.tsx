@@ -101,7 +101,7 @@ export default function PhotographerProfile({
 
   // TODO : 수정로직 구현
   const handleWritePost = () => {
-    router.push('/photographerProfile/writePost');
+    router.push(`/photographerProfile/${photographerId}/writePost`);
   };
   return (
     <ThumbnailWrapper>
