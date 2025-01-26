@@ -1,58 +1,71 @@
+/* eslint-disable dot-notation */
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import DownChevronIcon from '@/assets/DownChevronIcon';
 import Text from '@/components/atoms/Text';
 import { UnivOption } from '@/types/univOption';
+import UpChevronIcon from '@/assets/UpChevronIcon';
 
-const Container = styled.div<{ $isOpen: boolean }>`
+export const Container = styled.div<{ $isOpen: boolean }>`
   display: flex;
-  align-items: center;
+  min-width: 145px;
   justify-content: space-between;
   gap: 0.125rem;
-
-  padding: 0.375rem 1rem;
-  background: ${({ theme }) => theme.colors.gray[900]};
-  border-radius: ${({ $isOpen }) =>
-    $isOpen ? '1.125rem 1.125rem 0 0' : '1.125rem'};
+  padding: 0.5rem 1rem;
+`;
+const FilterTitle = styled(Text)`
+  width: 100%;
+  font-size: ${({ theme }) => theme.typography.caption1_rg};
+  color: ${({ theme }) => theme.colors.gray[300]};
+  border-radius: 1.125rem;
+  text-align: end;
 `;
 
 const FilterText = styled(Text)`
-  color: ${({ theme }) => theme.colors.gray[200]};
+  width: 100%;
+  font-size: ${({ theme }) => theme.typography.caption1_rg};
+  color: ${({ theme }) => theme.colors.gray[300]};
+  border-radius: 1.125rem;
+  text-align: center;
 `;
 
 const Backdrop = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background: transparent;
-  width: 100%;
   height: 100%;
+  border-radius: 1.125rem;
 
   z-index: 20; // 임의로 설정
 `;
 
 const OptionWrapper = styled.div`
+  padding: 4px 0;
   position: absolute;
   display: flex;
+  gap: 0.5rem;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
+  text-align: end;
+  right: 32px;
 
-  background: ${({ theme }) => theme.colors.gray[900]};
-  border-radius: 0 0 1.125rem 1.125rem;
+  background: ${({ theme }) => theme.colors.gray[800]};
+  border-radius: 0.5rem;
 
   z-index: 21; // 임의로 설정
 `;
 const OptionItem = styled.button`
   width: 100%;
-  padding: 0.375rem 1rem;
-  padding-right: calc(1rem + 1.25rem + 0.125rem + 0.1rem);
-  // padding right + icon size + gap + 0.1rem
-
-  background: transparent;
+  padding: 0 0.5rem;
+  border-radius: 1.125rem;
+  background-color: ${({ theme }) => theme.colors.gray[800]};
   border: none;
   outline: none;
-  text-align: start;
+  text-align: end;
   cursor: pointer;
+  :hover {
+    color: ${({ theme }) => theme.colors.white};
+  }
 `;
 
 export default function Filter({
@@ -71,11 +84,8 @@ export default function Filter({
   const selectorRef = useRef<HTMLDivElement | null>(null);
   const optionRef = useRef<HTMLDivElement | null>(null);
 
-  const onOpen = () => {
-    setIsOpen(true);
-  };
-  const onClose = () => {
-    setIsOpen(false);
+  const toggleOpen = () => {
+    setIsOpen(!isOpen);
   };
 
   useEffect(() => {
@@ -96,26 +106,26 @@ export default function Filter({
 
   return (
     <div>
-      <Container ref={selectorRef} onClick={onOpen} $isOpen={isOpen}>
-        <FilterText variant="body2_rg">
+      <Container ref={selectorRef} onClick={toggleOpen} $isOpen={isOpen}>
+        <FilterTitle variant="body2_rg">
           {currentLabel || placeholder}
-        </FilterText>
-        <DownChevronIcon />
+        </FilterTitle>
+        {isOpen ? <UpChevronIcon /> : <DownChevronIcon />}
       </Container>
 
       {isOpen && (
         <>
-          <Backdrop onClick={onClose} />
+          <Backdrop onClick={toggleOpen} />
           <OptionWrapper ref={optionRef}>
             {optionList.map((option) => (
               <OptionItem
                 key={option.value}
                 onClick={() => {
                   onChange(option);
-                  onClose();
+                  toggleOpen();
                 }}
               >
-                <FilterText variant="body2_rg">{option.label}</FilterText>
+                <FilterText variant="caption1_rg">{option.label}</FilterText>
               </OptionItem>
             ))}
           </OptionWrapper>
