@@ -28,7 +28,7 @@ function Card({ data }: { data: Reservation }) {
       <ReserveInfo data={data} />
 
       <Link href={`/reserve/review/${data.reservationId}`}>
-        <LargeButton text="후기 작성" variant="secondary" />
+        <LargeButton text="리뷰 작성하기" variant="secondary" />
       </Link>
     </CardWrapper>
   );
