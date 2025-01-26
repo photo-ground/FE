@@ -19,11 +19,8 @@ import {
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { UpdateUserInfoProps, UserInfoProps } from '@/types/user';
-import {
-  deleteUser,
-  getUserInfo,
-  updateUserInfo,
-} from '../_services/getUserInfo';
+import { getUserInfo, updateUserInfo } from '../_services/getUserInfo';
+import deleteUser from '../_services/deleteUser';
 import Modal from '../_component/Modal';
 /* eslint-disable jsx-a11y/label-has-associated-control */
 const ButtonWrapper = styled.div`
