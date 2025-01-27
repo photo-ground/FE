@@ -1,7 +1,7 @@
 import styled, { DefaultTheme } from 'styled-components';
 import Text from '@/components/atoms/Text';
 
-type Variant = 'primary' | 'secondary' | 'tertiary';
+type Variant = 'primary' | 'secondary' | 'tertiary' | 'cancel';
 
 const getBackgroundColor = ({
   theme,
@@ -20,6 +20,9 @@ const getBackgroundColor = ({
   }
   if ($variant === 'secondary') {
     return theme.colors.white;
+  }
+  if ($variant === 'cancel') {
+    return theme.colors.primary[200];
   }
 
   return theme.colors.gray[900];
@@ -54,6 +57,9 @@ const getTextColor = ({
   }
   if ($variant === 'secondary') {
     return theme.colors.black;
+  }
+  if ($variant === 'cancel') {
+    return theme.colors.gray[200];
   }
 
   return theme.colors.gray[100];

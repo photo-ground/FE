@@ -88,7 +88,7 @@ export default function Modal({
           <ButtonWrapper>
             <LargeButton
               text={buttonValue}
-              // variant="secondary"
+              variant="cancel"
               onClick={onClose}
             />
             <LargeButton
