@@ -8,7 +8,7 @@ import Card from '@/components/Card';
 import Back from '@/components/TNB/Back';
 import Text from '@/components/atoms/Text';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import Modal from '../../../_components/Modal';
+import Modal from '../../../_components/SpotModal';
 import useSpotStore from '../../../_store';
 import { getSelectedSpotInfo } from '../../../_services/getPhotoSpot';
 import { SliderData } from '../../../_components/Slider';

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 import styled from 'styled-components';
 
@@ -112,7 +113,7 @@ interface ModalProps {
 // onClicked: ()=> void();
 
 // photoSpot배열에서 currIndex를 먼저 찾아 보여주고 그 기준으로 좌우왔다갔다
-export default function Modal({ sliderData, setModalState }: ModalProps) {
+export default function SpotModal({ sliderData, setModalState }: ModalProps) {
   const router = useRouter();
   const clearCurrPostIdIndex = useSpotStore(
     (state) => state.clearCurrPostIdIndex,
@@ -162,7 +163,7 @@ export default function Modal({ sliderData, setModalState }: ModalProps) {
               onSlideChange={() => console.log('slide change')}
             >
               {sliderData.map((item) => (
-                <SwiperSlideBox>
+                <SwiperSlideBox key={`${item.postId}_${uuidv4()}`}>
                   <ImageContainer>
                     <Image src={item.imageUrl} alt={item.imageUrl} />
                   </ImageContainer>
