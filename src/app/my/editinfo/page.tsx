@@ -76,7 +76,7 @@ export default function EditProfile() {
   // 회원 탈퇴 함수수
   const deleteUserMutation = useMutation({
     mutationFn: deleteUser,
-    onSuccess: (data) => {
+    onSuccess: () => {
       // console.log(data);
       Router.push('/splash'); // 탈퇴성공 시 스플레시화면으로 이동
     },
@@ -86,7 +86,7 @@ export default function EditProfile() {
   const updateUserMutation = useMutation({
     mutationKey: ['updateUserInfo'],
     mutationFn: updateUserInfo,
-    onSuccess: (data) => {
+    onSuccess: () => {
       // console.log(data);
       setConfirmModal(true);
     },

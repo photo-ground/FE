@@ -39,7 +39,7 @@ export default function UpdatePassword() {
   const updateUserMutation = useMutation({
     mutationKey: ['updateUserInfo'],
     mutationFn: updateUserPassword,
-    onSuccess: (data) => {
+    onSuccess: () => {
       // console.log(data);
       setModalOpen(true);
     },

@@ -111,7 +111,7 @@ export default function Main({ photographerId }: { photographerId: number }) {
       router.push(`/photographerProfile/${photographerId}`);
     },
     onError: (err) => {
-      // console.error('Error creating post:', err);
+      console.error('Error creating post:', err);
     },
   });
 
