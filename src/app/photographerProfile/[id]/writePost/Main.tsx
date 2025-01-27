@@ -17,8 +17,8 @@ export default function WritePostPage({
   photographerId: number;
 }) {
   const router = useRouter();
-  const [isPermitted, setIsPermitted] = useState(true);
-  const [isSameUniv, setIsSameUniv] = useState(true);
+  const [isPermitted, setIsPermitted] = useState(false);
+  const [isSameUniv, setIsSameUniv] = useState(false);
   const [goNext, setGoNext] = useState(false);
 
   const handleGoNext = () => {
