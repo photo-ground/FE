@@ -21,6 +21,7 @@ import { useQuery } from '@tanstack/react-query';
 import { UserInfoProps } from '@/types/user';
 import AlertModal from '@/components/modals/AlertModal';
 import CheckIcon from '@/assets/modal/CheckIcon';
+import LoadingPage from '@/components/LoadingPage';
 import Filter from './_components/Filter';
 
 import PostByUniv from './_components/PostByUniv';
@@ -97,7 +98,7 @@ export default function Main() {
 
   // Show loading state
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingPage />;
   }
 
   // 만약 인증하지 않고 둘러볼 학교도 선택하지 않았다면
