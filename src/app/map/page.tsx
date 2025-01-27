@@ -15,7 +15,6 @@ import useUnivStore from '@/store/useUnivStore';
 import { useQuery } from '@tanstack/react-query';
 import { Drawer } from '@mui/material';
 
-// import { loadNaverMap } from './_util/naverMaps';
 import makeMarker from './_util/makeMarker';
 import Chip from './_components/Chip';
 import { AbsContainer, ChipContainer, Container } from './style';
@@ -31,6 +30,8 @@ import {
 import DrawerContent from './_components/DrawerContent';
 import { NaverMap } from './_types/NaverMap';
 import useMapStore from './_store/mapStore';
+import { SliderData } from './_components/Slider';
+import SpotModal from './_components/SpotModal';
 import Modal from '../my/_component/Modal';
 
 // naver.maps.*은 네이버 지도 API 스크립트가 로드된 후에만 사용할 수 있다.
@@ -44,6 +45,7 @@ export default function MapPage() {
   const [open, setOpen] = useState(false); // Drawer 열림 상태
   const [selectedSpotInfo, setSelectedSpotInfo] =
     useState<PhotoSpotProps | null>(null);
+  const [modalState, setModalState] = useState<boolean>(false);
 
   // 지도 객체 관리
   const mapInstance = useRef<NaverMap | null>(null); // 지도 인스턴스
@@ -66,6 +68,8 @@ export default function MapPage() {
     queryFn: () => getPhotoSpotByUniv(univ),
   });
 
+  const [modalData, setModalData] = useState<SliderData[]>([]);
+
   useEffect(() => {
     if (!univ) {
       setUnivSettingModal(true);
@@ -79,6 +83,7 @@ export default function MapPage() {
       }
     }
   }, [setUnivSettingModal, univ, setCenter]);
+
   // 드로어 열기/닫기 및 마커 정보 설정
   const toggleDrawer = async (
     isOpen: boolean,
@@ -90,6 +95,14 @@ export default function MapPage() {
       try {
         const spotInfo = await getSelectedSpotInfo(markerInfo.spotId);
         setSelectedSpotInfo(spotInfo);
+        const data = spotInfo.imageInfo.spotPostImageList.map((postData) => ({
+          imageUrl: postData.imageUrl,
+          univ,
+          spotName: spotInfo.spotName,
+          photographerName: postData.photographerName,
+          postId: postData.postId,
+        }));
+        setModalData(data);
       } catch (error) {
         console.error('Failed to fetch spot info:', error);
       }
@@ -179,6 +192,7 @@ export default function MapPage() {
       };
     }
   }, [isMapReady, center, zoom, onMapLoad]);
+
   // `photoSpots`가 업데이트될 때 마커 갱신
   useEffect(() => {
     if (!isMapReady || !mapInstance.current) {
@@ -264,17 +278,14 @@ export default function MapPage() {
           <DrawerContent
             photoSpotData={selectedSpotInfo}
             toggleDrawer={() => toggleDrawer(false)}
-            // toggleModal={(index) => toggleModal(index)}
+            toggleModal={(index) => setModalState(index)}
           />
         </Drawer>
       </div>
-      {/*       
-      {modalState && currPostIdIndex !== null && (
-        <Modal
-          setModalState={setModalState}
-          photoSpot={photoSpotDataRef.current} // Safely pass the value
-        />
-      )} */}
+
+      {modalState && (
+        <SpotModal setModalState={setModalState} sliderData={modalData} />
+      )}
     </Container>
   );
 }

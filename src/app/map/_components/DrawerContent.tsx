@@ -12,6 +12,9 @@ import Chip from './Chip';
 
 import { DrawerProps } from '../types';
 import useSpotStore from '../_store';
+import { useEffect, useState } from 'react';
+import { SliderData } from './Slider';
+import SpotModal from './SpotModal';
 
 const CardContainer = styled.div`
   display: grid;
@@ -81,19 +84,32 @@ export default function DrawerContent({
   const clearCurrPostIdIndex = useSpotStore(
     (state) => state.clearCurrPostIdIndex,
   );
+  const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
+  const [modalData, setModalData] = useState<SliderData[]>([]);
 
+  useEffect(() => {
+    if (photoSpotData) {
+      const data = photoSpotData?.imageInfo.spotPostImageList.map(
+        (postData) => ({
+          imageUrl: postData.imageUrl,
+          univ,
+          spotName: photoSpotData.spotName,
+          photographerName: postData.photographerName,
+          postId: postData.postId,
+        }),
+      );
+      setModalData(data);
+    }
+  }, [photoSpotData]);
   const handleDrawerClose = () => {
     toggleDrawer(false);
     clearCurrPostIdIndex();
   };
 
-  const handleCardModal = (postId: number) => {
-    const index = photoSpotData?.imageInfo.spotPostImageList.findIndex(
-      (item) => item.postId === postId,
-    );
-    if (index !== undefined && index >= 0 && toggleModal) {
-      toggleModal(index);
-    }
+  const handleCardModal = (spotIndex: number) => {
+    setCurrPostIdIndex(spotIndex);
+    console.log(spotIndex);
+    toggleModal(true);
   };
 
   if (!photoSpotData) {
@@ -153,14 +169,16 @@ export default function DrawerContent({
         </Text>
       </TextContainer>
       <CardContainer>
-        {photoSpotData.imageInfo.spotPostImageList.slice(0, 6).map((spot) => (
-          <CardWrapper
-            key={`${spot.postId}_${uuidv4()}`}
-            size="small"
-            src={spot.imageUrl}
-            onClick={() => handleCardModal(spot.postId)}
-          />
-        ))}
+        {photoSpotData.imageInfo.spotPostImageList
+          .slice(0, 6)
+          .map((spot, index) => (
+            <CardWrapper
+              key={`${spot.postId}_${uuidv4()}`}
+              size="small"
+              src={spot.imageUrl}
+              onClick={() => handleCardModal(index)}
+            />
+          ))}
       </CardContainer>
       <Link
         href={{
@@ -171,6 +189,12 @@ export default function DrawerContent({
           <Chip size="dynamic" text="더보기" variant="secondary" />
         </ChipContainer>
       </Link>
+      {/* {modalState && currPostIdIndex !== null && (
+        <SpotModal
+          setModalState={setModalState}
+          sliderData={modalData} // Safely pass the value
+        />
+      )} */}
     </Box>
   );
 }
