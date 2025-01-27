@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Lottie from 'react-lottie';
-import LoadingLottie from './LoadingLottie.json';
 import BREAK_POINT from '@/styles/constants';
+import LoadingLottie from './LoadingLottie.json';
 
 const Container = styled.div`
   position: fixed;
