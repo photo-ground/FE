@@ -12,8 +12,8 @@ export default async function signin(
   formData: FormData,
 ): Promise<Response | Error> {
   try {
-    console.log(formData.get('email'));
-    console.log(formData.get('password'));
+    // console.log(formData.get('email'));
+    // console.log(formData.get('password'));
     const rawResponse = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/login`,
       {

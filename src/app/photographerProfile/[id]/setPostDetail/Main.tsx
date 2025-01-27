@@ -107,11 +107,11 @@ export default function Main({ photographerId }: { photographerId: number }) {
     mutationFn: ({ newContent }: { newContent: PostUploadContainerProps }) =>
       postNewContent(photographerId, newContent),
     onSuccess: () => {
-      console.log('Post created successfully');
+      // console.log('Post created successfully');
       router.push(`/photographerProfile/${photographerId}`);
     },
     onError: (err) => {
-      console.error('Error creating post:', err);
+      // console.error('Error creating post:', err);
     },
   });
 
@@ -136,7 +136,7 @@ export default function Main({ photographerId }: { photographerId: number }) {
 
   // 스팟 선택 핸들러
   const handleDropdown = (index: number, spotId: number) => {
-    console.log(spotId);
+    // console.log(spotId);
     selectSpotId(index, spotId); // 선택한 스팟 ID 추가
   };
 

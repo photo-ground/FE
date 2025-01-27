@@ -40,7 +40,7 @@ export default function RecommendedPhotographer() {
     return <span>Error: {error.message}</span>;
   }
   if (data) {
-    console.log(data);
+    // console.log(data);
   }
   return (
     <CardContainerX>

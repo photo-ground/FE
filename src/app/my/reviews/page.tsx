@@ -35,9 +35,9 @@ export default function Reviews() {
     queryFn: getReviews,
   });
 
-  useEffect(() => {
-    console.log(reviewData);
-  });
+  // useEffect(() => {
+  //   console.log(reviewData);
+  // });
 
   return (
     <Container>

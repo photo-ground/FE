@@ -39,7 +39,7 @@ export default function UpdatePassword() {
     mutationKey: ['updateUserInfo'],
     mutationFn: updateUserPassword,
     onSuccess: (data) => {
-      console.log(data);
+      // console.log(data);
       setModalOpen(true);
     },
   });

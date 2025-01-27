@@ -82,7 +82,7 @@ export default function Main() {
         setRole(localStorage.getItem('role')); // 홈페이지내에 고객이라고
         setIsAuthenticated(authResult); // 인증 됨
         const user = await fetchUserInfo(); // 데이터 가져와
-        console.log(user);
+        // console.log(user);
         if (user?.data?.univ) {
           setUniv(user.data.univ); // Zustand의 학교 정보 업데이트
         }

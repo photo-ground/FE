@@ -55,9 +55,9 @@ export default function UnivRadioGroup({
 }: RadioBtnGroupProps) {
   const [selectedValue, setSelectedValue] = useState<UnivOption | null>(null);
 
-  useEffect(() => {
-    console.log(selectedValue);
-  }, [selectedValue]);
+  // useEffect(() => {
+  //   console.log(selectedValue);
+  // }, [selectedValue]);
 
   const handleSelect = (univData: UnivOption) => {
     setSelectedValue(univData);
