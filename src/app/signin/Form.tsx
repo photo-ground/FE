@@ -49,7 +49,7 @@ export default function SignInForm() {
 
       if (response instanceof Response) {
         // JSON 데이터 파싱
-        const data = await response.json();
+        // const data = await response.json();
         // console.log(data.data.role);
         // console.log('Role:', data.role); // role 값 출력
         router.push('/home');

@@ -9,11 +9,12 @@ import TNB from '@/components/TNB';
 import { UserInfoProps } from '@/types/user';
 import { useQuery } from '@tanstack/react-query';
 
+import CheckIcon from '@/assets/CheckIcon';
+import AlertModal from '@/components/modals/AlertModal';
 import UserInfo from './_component/UserInfo';
 import ListItem from './_component/ListItem';
 
 import { getUserInfo } from './_services/getUserInfo';
-import Modal from './_component/Modal';
 import getPhotographerId from './_services/getPhotographerId';
 
 const Container = styled.div`
@@ -101,10 +102,14 @@ export default function PhotographerPage() {
     <Container>
       <Background src="/images/background1.webp" alt="background" />
       {showModal && (
-        <Modal
-          onClose={() => {
+        <AlertModal
+          icon={<CheckIcon />}
+          title="잠깐!"
+          content="로그인 후 시용할 수 있어요!"
+          confirmText="로그인 하기"
+          onConfirm={() => {
             setShowModal(false);
-            router.push('/signin'); // 로그인 페이지로 이동
+            router.replace('/signin');
           }}
         />
       )}

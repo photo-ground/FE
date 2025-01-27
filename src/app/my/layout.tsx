@@ -3,7 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import checkAuth from '@/lib/checkAuth';
-import Modal from './_component/Modal';
+import AlertModal from '@/components/modals/AlertModal';
+import CheckIcon from '@/assets/CheckIcon';
 
 export default function ProtectedLayout({
   children,
@@ -32,11 +33,12 @@ export default function ProtectedLayout({
   // Redirect if not authenticated
   if (!isAuthenticated) {
     return (
-      <Modal
-        onClose={() => router.replace('/signin')}
-        buttonValue="로그인 하기"
-        modalTitle="잠깐!"
-        modalText="로그인 후 시용할 수 있어요!"
+      <AlertModal
+        icon={<CheckIcon />}
+        title="잠깐!"
+        content="로그인 후 시용할 수 있어요!"
+        confirmText="로그인 하기"
+        onConfirm={() => router.replace('/signin')}
       />
     );
   }

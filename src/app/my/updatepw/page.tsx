@@ -9,10 +9,11 @@ import CTAButton from '@/components/atoms/CTAButton';
 import Text from '@/components/atoms/Text';
 import Spacer from '@/components/Spacer';
 import TNB from '@/components/TNB';
+import CheckIcon from '@/assets/CheckIcon';
+import AlertModal from '@/components/modals/AlertModal';
 import { useMutation } from '@tanstack/react-query';
 import { PasswordInput, PasswordForm } from '@/app/my/_component';
 
-import Modal from '../_component/Modal';
 import { updateUserPassword } from '../_services/getUserInfo';
 /* eslint-disable jsx-a11y/label-has-associated-control */
 const ButtonWrapper = styled.div`
@@ -87,8 +88,12 @@ export default function UpdatePassword() {
       <Spacer size="32px" />
 
       {modalOpen && (
-        <Modal
-          onClose={() => {
+        <AlertModal
+          icon={<CheckIcon />}
+          title="내 정보 수정 완료!"
+          content="변경해주신 회원정보를 반영했어요"
+          confirmText="확인"
+          onConfirm={() => {
             setModalOpen(false);
             router.replace('/my/editinfo');
           }}
