@@ -3,6 +3,8 @@ import Text from '@/components/atoms/Text';
 import useImageStore from '@/store/useImageStore';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
+
 import ImagePreviewItem from '../../../_components/ImagePreviewItem';
 
 const Title = styled.div`
@@ -50,7 +52,13 @@ export default function UploadImages() {
       return;
     }
 
-    newFiles.forEach((file) => addImage(file)); // File 객체를 상태에 추가
+    const renamedFiles = newFiles.map((file) => {
+      const extension = file.name.split('.').pop(); // 확장자 추출
+      const newName = `${uuidv4()}.${extension}`; // UUID로 파일명 생성
+      return new File([file], newName, { type: file.type });
+    });
+
+    renamedFiles.forEach((file) => addImage(file)); // File 객체를 상태에 추가
   };
 
   useEffect(() => {
