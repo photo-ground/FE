@@ -256,8 +256,8 @@ export default function MapPage() {
               position: 'absolute',
               bottom: '76px', // 네비게이션 메뉴 높이를 고려하여 위치 조정
               width: 'calc(100%-2rem)',
+              maxWidth: '520px',
               margin: '0 auto',
-              maxWidth: '786px',
             },
           }}
         >

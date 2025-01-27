@@ -59,7 +59,7 @@ const DrawerHandle = styled.div`
   transform: translateX(-50%);
   width: 134px;
   height: 5px;
-  margin-top: 1rem;
+  margin-top: 20px;
   border-radius: 100px;
   background: ${({ theme }) => theme.colors.white};
 `;
@@ -67,7 +67,8 @@ const DrawerHandle = styled.div`
 const ChipContainer = styled.div`
   margin: 0 auto;
   margin-top: 1.5rem;
-  width: inherit;
+  width: 100%;
+  max-width: 150px;
   text-align: center;
 `;
 
@@ -167,7 +168,7 @@ export default function DrawerContent({
         }}
       >
         <ChipContainer>
-          <Chip text="더보기" variant="secondary" />
+          <Chip size="dynamic" text="더보기" variant="secondary" />
         </ChipContainer>
       </Link>
     </Box>
