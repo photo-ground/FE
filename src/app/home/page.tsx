@@ -9,3 +9,5 @@ export default function AuthPageWrapper() {
     </Suspense>
   );
 }
+
+export const runtime = 'edge';

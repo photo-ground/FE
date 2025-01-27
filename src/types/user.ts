@@ -12,4 +12,5 @@ export interface UserInfoProps {
   phone: string;
   gender: string;
   univ: string;
+  role: string;
 }

@@ -20,8 +20,9 @@ import Dropdown from '@/components/Dropdown/index_2';
 import CTAButton from '@/components/atoms/CTAButton';
 import { PostInfoProps, PostUploadContainerProps } from '@/types/post';
 import { Option } from '@/types/option';
+import { useRouter } from 'next/navigation';
 import UnivRadioGroup from './_component/UnivRadioGroup';
-import ImagePreviewItem from '../_components/ImagePreviewItem';
+import ImagePreviewItem from '../../_components/ImagePreviewItem';
 import {
   ButtonBox,
   SelectPhotoSpot,
@@ -30,10 +31,11 @@ import {
   UploadArea,
 } from './style';
 
-export default function PostDetailPage() {
+export default function Main({ photographerId }: { photographerId: number }) {
   const [isComplete, setIsComplete] = useState<boolean>(false);
   const [textareaContent, setTextareaContent] = useState<string>('');
   const [spotData, setSpotData] = useState<Option[]>([]);
+  const router = useRouter();
   // 이미지 리스트 & 포토스팟 선택 리스트 (zustand)
   const {
     images,
@@ -50,12 +52,6 @@ export default function PostDetailPage() {
       setSpotIds(initialSpotIds);
     }
   });
-
-  // 임시 데이터 -> api연결 후 변경
-  // const spotData: UnivOption[] = PhotoSpotByUniv.map((e) => {
-  //   const { spotId, spotName } = e;
-  //   return { value: spotId, label: spotName };
-  // });
 
   // 선택된 대학 상태
   const [selectedUniv, setSelectedUniv] = useState<UnivOption | null>(null);
@@ -108,15 +104,11 @@ export default function PostDetailPage() {
 
   // Mutations
   const createPostMutation = useMutation({
-    mutationFn: ({
-      photographerId,
-      newContent,
-    }: {
-      photographerId: number;
-      newContent: PostUploadContainerProps;
-    }) => postNewContent(photographerId, newContent),
+    mutationFn: ({ newContent }: { newContent: PostUploadContainerProps }) =>
+      postNewContent(photographerId, newContent),
     onSuccess: () => {
       console.log('Post created successfully');
+      router.push(`/photographerProfile/${photographerId}`);
     },
     onError: (err) => {
       console.error('Error creating post:', err);
@@ -165,7 +157,6 @@ export default function PostDetailPage() {
       };
 
       createPostMutation.mutate({
-        photographerId: 5,
         newContent,
       });
     }

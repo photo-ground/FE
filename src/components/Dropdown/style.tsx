@@ -23,8 +23,8 @@ export const FilterWrapper = styled.div<{ $isOpen: boolean; $variant: string }>`
     switch ($variant) {
       case 'filter':
         return css`
-          border-radius: 16px;
-          background: ${theme.colors.gray[900]};
+          border-radius: 16px 16px 0 0;
+          background: transparent;
           ${$isOpen &&
           css`
             border-bottom: 1px solid ${theme.colors.gray[600]};

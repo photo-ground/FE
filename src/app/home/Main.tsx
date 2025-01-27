@@ -65,6 +65,8 @@ export default function Main() {
   const { univ, setUniv } = useUnivStore();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [role, setRole] = useState<string | null>('');
+
   const { refetch: fetchUserInfo } = useQuery<UserInfoProps>({
     queryKey: ['user'],
     queryFn: getUserInfo,
@@ -74,12 +76,13 @@ export default function Main() {
   // On initial load, set the university if not logged in
   useEffect(() => {
     async function authenticate() {
-      // console.log
       const authResult = await checkAuth(); // 분리된 함수 호출
-      if (authResult) {
+      if (authResult && localStorage.getItem('role') === 'ROLE_CUSTOMER') {
         // 인증된 상태에서 사용자 정보 가져오기
-        setIsAuthenticated(authResult);
-        const user = await fetchUserInfo();
+        setRole(localStorage.getItem('role')); // 홈페이지내에 고객이라고
+        setIsAuthenticated(authResult); // 인증 됨
+        const user = await fetchUserInfo(); // 데이터 가져와
+        console.log(user);
         if (user?.data?.univ) {
           setUniv(user.data.univ); // Zustand의 학교 정보 업데이트
         }
@@ -96,8 +99,8 @@ export default function Main() {
     return <div>Loading...</div>;
   }
 
-  // 만약 인증이 되지 않았고, 둘러볼 학교를 선택하지 않았다면
-  if (!isAuthenticated && !univ) {
+  // 만약 인증하지 않고 둘러볼 학교도 선택하지 않았다면
+  if (!isAuthenticated && !univ && role !== 'ROLE_PHOTOGRAPHER') {
     return (
       <Modal
         onClose={() => router.replace('/onboarding')}

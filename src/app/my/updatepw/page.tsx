@@ -20,6 +20,7 @@ const ButtonWrapper = styled.div`
   position: fixed;
   width: 100%;
   bottom: 2rem;
+  max-width: 520px;
 `;
 
 const Container = styled.div`
