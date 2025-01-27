@@ -18,7 +18,7 @@ export default function WritePostPage({
 }) {
   const router = useRouter();
   const [isPermitted, setIsPermitted] = useState(true);
-  const [isSameUniv, setIsSameUniv] = useState(false);
+  const [isSameUniv, setIsSameUniv] = useState(true);
   const [goNext, setGoNext] = useState(false);
 
   const handleGoNext = () => {
