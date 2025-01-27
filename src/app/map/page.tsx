@@ -85,31 +85,34 @@ export default function MapPage() {
   }, [setUnivSettingModal, univ, setCenter]);
 
   // 드로어 열기/닫기 및 마커 정보 설정
-  const toggleDrawer = async (
-    isOpen: boolean,
-    markerInfo?: { title: string; src: string; spotId: number },
-  ) => {
-    setOpen(isOpen);
+  const toggleDrawer = useCallback(
+    async (
+      isOpen: boolean,
+      markerInfo?: { title: string; src: string; spotId: number },
+    ) => {
+      setOpen(isOpen);
 
-    if (isOpen && markerInfo) {
-      try {
-        const spotInfo = await getSelectedSpotInfo(markerInfo.spotId);
-        setSelectedSpotInfo(spotInfo);
-        const data = spotInfo.imageInfo.spotPostImageList.map((postData) => ({
-          imageUrl: postData.imageUrl,
-          univ,
-          spotName: spotInfo.spotName,
-          photographerName: postData.photographerName,
-          postId: postData.postId,
-        }));
-        setModalData(data);
-      } catch (error) {
-        console.error('Failed to fetch spot info:', error);
+      if (isOpen && markerInfo) {
+        try {
+          const spotInfo = await getSelectedSpotInfo(markerInfo.spotId);
+          setSelectedSpotInfo(spotInfo);
+          const data = spotInfo.imageInfo.spotPostImageList.map((postData) => ({
+            imageUrl: postData.imageUrl,
+            univ,
+            spotName: spotInfo.spotName,
+            photographerName: postData.photographerName,
+            postId: postData.postId,
+          }));
+          setModalData(data);
+        } catch (error) {
+          console.error('Failed to fetch spot info:', error);
+        }
+      } else {
+        setSelectedSpotInfo(null);
       }
-    } else {
-      setSelectedSpotInfo(null);
-    }
-  };
+    },
+    [setOpen, setSelectedSpotInfo, setModalData, univ], // Dependencies
+  );
 
   // 특정 학교로 이동 및 마커 로드
   const moveToSchool = (school: School) => {
@@ -215,7 +218,7 @@ export default function MapPage() {
       );
       markersRef.current = newMarkers;
     }
-  }, [photoSpots, isMapReady]);
+  }, [photoSpots, isMapReady, toggleDrawer]);
 
   return (
     <Container>

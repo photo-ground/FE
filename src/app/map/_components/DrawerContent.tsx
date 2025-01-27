@@ -2,6 +2,7 @@ import { Box, Divider, IconButton } from '@mui/material';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { v4 as uuidv4 } from 'uuid';
 
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Card from '@/components/Card';
 import CloseIcon from '@/assets/CloseIcon';
@@ -12,9 +13,7 @@ import Chip from './Chip';
 
 import { DrawerProps } from '../types';
 import useSpotStore from '../_store';
-import { useEffect, useState } from 'react';
 import { SliderData } from './Slider';
-import SpotModal from './SpotModal';
 
 const CardContainer = styled.div`
   display: grid;
@@ -85,7 +84,7 @@ export default function DrawerContent({
     (state) => state.clearCurrPostIdIndex,
   );
   const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
-  const [modalData, setModalData] = useState<SliderData[]>([]);
+  const [, setModalData] = useState<SliderData[]>([]);
 
   useEffect(() => {
     if (photoSpotData) {
@@ -100,7 +99,7 @@ export default function DrawerContent({
       );
       setModalData(data);
     }
-  }, [photoSpotData]);
+  }, [photoSpotData, univ]);
   const handleDrawerClose = () => {
     toggleDrawer(false);
     clearCurrPostIdIndex();
@@ -189,12 +188,6 @@ export default function DrawerContent({
           <Chip size="dynamic" text="더보기" variant="secondary" />
         </ChipContainer>
       </Link>
-      {/* {modalState && currPostIdIndex !== null && (
-        <SpotModal
-          setModalState={setModalState}
-          sliderData={modalData} // Safely pass the value
-        />
-      )} */}
     </Box>
   );
 }
