@@ -41,6 +41,8 @@ export default function UploadImages() {
   // 이미지 : File[] -> base64로 변환
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 
+  const validTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+
   const addImageFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = e.target.files;
     if (!selectedFiles) return;
@@ -50,6 +52,14 @@ export default function UploadImages() {
     if (images.length + newFiles.length > 9) {
       alert('이미지는 최대 9장까지 업로드할 수 있습니다.');
       return;
+    }
+
+    const validFiles = Array.from(selectedFiles).filter((file) =>
+      validTypes.includes(file.type),
+    );
+
+    if (validFiles.length !== selectedFiles.length) {
+      alert('PNG, JPEG, JPG 형식만 지원됩니다.');
     }
 
     const renamedFiles = newFiles.map((file) => {
