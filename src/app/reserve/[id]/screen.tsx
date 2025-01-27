@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import TNB from '@/components/TNB';
 import CTAButton from '@/components/atoms/CTAButton';
-import Modal from '@/components/Modal';
+import ConfirmModal from '@/components/modals/ConfirmModal';
 import WarningIcon from '@/assets/modal/WarningIcon';
 
 import Info from './_components/Info';
@@ -64,7 +64,7 @@ export default function ReserveDetailScreen({
         )}
 
         {isOpen && (
-          <Modal
+          <ConfirmModal
             icon={<WarningIcon />}
             onCancel={onClose}
             onConfirm={() => {
