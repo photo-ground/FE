@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 
 export async function isUserAuthenticated() {
   const token = (await cookies()).get('accessToken');
-  console.log(token);
+  // console.log(token);
   return !!token;
 }
 

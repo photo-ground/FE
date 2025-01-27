@@ -54,7 +54,7 @@ export async function updateUserInfo(userUpdateInfo: UpdateUserInfoProps) {
   // 요청할 주소
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/customer`;
 
-  console.log(userUpdateInfo);
+  // console.log(userUpdateInfo);
   try {
     // 1. Access Token 가져오기
     const accessToken = localStorage.getItem('accessToken');
@@ -149,7 +149,7 @@ export async function deleteUser() {
     // 1. Access Token 가져오기
     const accessToken = localStorage.getItem('accessToken');
 
-    console.log(accessToken);
+    // console.log(accessToken);
 
     // 2. 첫 번째 요청 시도
     const response = await axios.patch(url, {

@@ -1,7 +1,8 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
 import DownChevronIcon from '@/assets/DownChevronIcon';
-import { useState } from 'react';
+import { PhotographerDetail } from '@/app/photographer/[id]/_libs/getPhotographerData';
 
 const Container = styled.div`
   display: flex;
@@ -30,12 +31,12 @@ const OneLine = styled(Text)`
   text-overflow: ellipsis;
 `;
 
-export default function Message() {
+export default function Message({
+  introduction,
+}: {
+  introduction: PhotographerDetail['introduction'];
+}) {
   const [isOpen, setIsOpen] = useState(false);
-
-  const message = `국회는 의장 1인과 부의장 2인을 선출한다. 대통령은 법률에서 구체적으로 범위를 정하여 위임받은 사항과 법률을 집행하기 위하여 필요한 사항에 관하여 대통령령을 발할 수 있다.
-
-국군의 조직과 편성은 법률로 정한다. 민주평화통일자문회의의 조직·직무범위는 법률로 정한다.`;
 
   return (
     <Container>
@@ -50,7 +51,7 @@ export default function Message() {
 
       {isOpen ? (
         <div>
-          {message.split('\n').map((line, index) =>
+          {introduction.split('\n').map((line, index) =>
             line === '' ? (
               // eslint-disable-next-line
               <Content variant="body2_rg" key={index}>
@@ -64,7 +65,7 @@ export default function Message() {
           )}
         </div>
       ) : (
-        <OneLine variant="body2_rg">{message}</OneLine>
+        <OneLine variant="body2_rg">{introduction}</OneLine>
       )}
     </Container>
   );

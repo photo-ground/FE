@@ -8,7 +8,7 @@ export async function getActivePhotographer(): Promise<PhotographerProps> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer/active`,
   );
-  console.log(res.ok);
+  // console.log(res.ok);
   if (!res.ok) {
     const errorResponse = await res.json();
     throw new Error(errorResponse.message || '문제가 발생했습니다.');
@@ -24,7 +24,7 @@ export async function getPostByUniv(
   // url.search = createSearchParams({ univ, cursor });
 
   const params = new URLSearchParams();
-  console.log(univ);
+  // console.log(univ);
   if (univ) {
     params.append('univ', univ);
   }
@@ -34,7 +34,7 @@ export async function getPostByUniv(
   }
   const url = new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`);
   url.search = params.toString();
-  console.log(url);
+  // console.log(url);
   const res = await fetch(url, {
     next: {
       tags: ['postList', 'hasNext', univ],

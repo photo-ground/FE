@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import PostUnivSelectButton from '@/components/atoms/PostUnivSelectButton';
 import { UnivOption } from '@/types/univOption';
@@ -55,9 +55,9 @@ export default function UnivRadioGroup({
 }: RadioBtnGroupProps) {
   const [selectedValue, setSelectedValue] = useState<UnivOption | null>(null);
 
-  useEffect(() => {
-    console.log(selectedValue);
-  }, [selectedValue]);
+  // useEffect(() => {
+  //   console.log(selectedValue);
+  // }, [selectedValue]);
 
   const handleSelect = (univData: UnivOption) => {
     setSelectedValue(univData);

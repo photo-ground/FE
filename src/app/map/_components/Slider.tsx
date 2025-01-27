@@ -93,7 +93,7 @@ export default function Slider({ sliderData, currPostIdIndex }: SliderProps) {
         setCurrentSlide(currentSlide + 1);
       } else {
         // API 호출
-        console.log('Fetching more data...');
+        // console.log('Fetching more data...');
       }
     }
   };

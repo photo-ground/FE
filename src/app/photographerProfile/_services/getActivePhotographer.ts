@@ -64,7 +64,7 @@ export async function postNewContent(
   });
 
   // 요청할 주소
-  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${photographerId}`;
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`;
 
   try {
     // 1. Access Token 가져오기

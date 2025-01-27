@@ -15,6 +15,9 @@ import useUnivStore from '@/store/useUnivStore';
 import { useQuery } from '@tanstack/react-query';
 import { Drawer } from '@mui/material';
 
+import AlertModal from '@/components/modals/AlertModal';
+import CheckIcon from '@/assets/CheckIcon';
+
 import makeMarker from './_util/makeMarker';
 import Chip from './_components/Chip';
 import { AbsContainer, ChipContainer, Container } from './style';
@@ -32,7 +35,6 @@ import { NaverMap } from './_types/NaverMap';
 import useMapStore from './_store/mapStore';
 import { SliderData } from './_components/Slider';
 import SpotModal from './_components/SpotModal';
-import Modal from '../my/_component/Modal';
 
 // naver.maps.*은 네이버 지도 API 스크립트가 로드된 후에만 사용할 수 있다.
 export default function MapPage() {
@@ -78,7 +80,7 @@ export default function MapPage() {
         (element: School) => element.name === univ,
       );
       if (school) {
-        console.log(school);
+        // console.log(school);
         setCenter([school.lat, school.lng]);
       }
     }
@@ -186,7 +188,7 @@ export default function MapPage() {
               center: new naver.maps.LatLng(...center),
               zoom,
             });
-            console.log(map);
+            // console.log(map);
             onMapLoad(map); // 지도가 준비되지 않았다면 직접 초기화 호출
           }
         } else {
@@ -223,11 +225,12 @@ export default function MapPage() {
   return (
     <Container>
       {univSettingModal && (
-        <Modal
-          onClose={() => router.replace('/onboarding')}
-          buttonValue="학교 선택하기"
-          modalTitle="잠깐!"
-          modalText="학교 선택이 안되어있어요!"
+        <AlertModal
+          icon={<CheckIcon />}
+          title="잠깐!"
+          content="학교 선택이 안되어있어요!"
+          confirmText="학교 선택하기"
+          onConfirm={() => router.replace('/onboarding')}
         />
       )}
       {/* 네이버 맵 컴포넌트 */}

@@ -8,7 +8,7 @@ import PhotoIcon from '@/assets/modal/PhotoIcon';
 import Text from '@/components/atoms/Text';
 import ReserveInfo from '@/components/ReserveInfo';
 import LargeButton from '@/components/atoms/LargeButton';
-import Modal from '@/components/Modal';
+import ConfirmModal from '@/components/modals/ConfirmModal';
 import InfoIcon from '@/assets/InfoIcon';
 import { COLORS } from '@/styles/theme';
 
@@ -102,7 +102,7 @@ export default function ConfirmCard({ data }: { data: Reservation }) {
       <LargeButton variant="tertiary" text="최종 스냅 완료" onClick={onOpen} />
 
       {isOpen && (
-        <Modal
+        <ConfirmModal
           icon={<PhotoIcon />}
           onCancel={onClose}
           onConfirm={() =>
