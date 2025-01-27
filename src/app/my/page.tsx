@@ -117,7 +117,7 @@ export default function PhotographerPage() {
       {userInfo?.role === 'ROLE_CUSTOMER' && (
         <>
           <TNB.Title text="마이페이지" />
-          {userInfo.role}
+
           <UserInfo userName={userInfo.name} onEdit={handleEdit} />
           <ListItem
             text="팔로우 목록"
