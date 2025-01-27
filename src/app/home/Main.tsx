@@ -19,11 +19,12 @@ import useUnivStore from '@/store/useUnivStore';
 import checkAuth from '@/lib/checkAuth';
 import { useQuery } from '@tanstack/react-query';
 import { UserInfoProps } from '@/types/user';
+import AlertModal from '@/components/modals/AlertModal';
+import CheckIcon from '@/assets/modal/CheckIcon';
 import Filter from './_components/Filter';
 
 import PostByUniv from './_components/PostByUniv';
 import RecommendedPhotographer from './_components/RecommendedPhotographer';
-import Modal from '../my/_component/Modal';
 import { getUserInfo } from '../my/_services/getUserInfo';
 
 const Container = styled.div`
@@ -102,11 +103,12 @@ export default function Main() {
   // 만약 인증하지 않고 둘러볼 학교도 선택하지 않았다면
   if (!isAuthenticated && !univ && role !== 'ROLE_PHOTOGRAPHER') {
     return (
-      <Modal
-        onClose={() => router.replace('/onboarding')}
-        buttonValue="학교 선택하기"
-        modalTitle="잠깐!"
-        modalText="비회원은 둘러볼 학교를 선택해야해요!"
+      <AlertModal
+        icon={<CheckIcon />}
+        title="잠깐!"
+        content="비회원은 둘러볼 학교를 선택해야해요!"
+        confirmText="학교 선택하기"
+        onConfirm={() => router.replace('/onboarding')}
       />
     );
   }
