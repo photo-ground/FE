@@ -17,8 +17,16 @@ export default function generateCustomMarkerHTML({
         </div>
 
         <!-- 삼각형 -->
-        <div style="position: absolute; z-index:-2;  width: 18px; height: 16px; bottom: -8px; left: 50%; transform: translateX(-50%) rotate(180deg); ">
-          <div style="position: absolute; width: 100%; height: 100%; background-color: #bfbfbf; border-top-right-radius: 6px; transform: rotate(-60deg) skewX(-30deg) scaleY(0.866); box-shadow: 6px -6px 2px 0px rgba(0, 0, 0, 0.05);"></div>
+         <!-- 삼각형 -->
+        <div style="position: absolute; top: 97%; left: 50%; transform: translateX(-50%);">
+           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
+            
+            <!-- 삼각형 -->
+            <path
+              d="M9.78885 11.0193C9.0518 12.3269 6.94819 12.3269 6.21115 11.0193L0 0L16 1.43274e-06L9.78885 11.0193Z"
+              fill="#BFBFBF"
+              filter="url(#shadow)" />
+          </svg>
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ import { getPostByUniv } from '@/app/home/_services/getActivePhotographer';
 import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 import { Container } from '../../style';
-import Modal from '../../_components/Modal';
+import Modal from '../../_components/SpotModal';
 import useSpotStore from '../../_store';
 import { SliderData } from '../../_components/Slider';
 
