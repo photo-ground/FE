@@ -104,8 +104,8 @@ export default function PhotographerPage() {
       {showModal && (
         <AlertModal
           icon={<CheckIcon />}
-          title="잠깐!"
-          content="로그인 후 시용할 수 있어요!"
+          title="로그인 후 이용해주세요!"
+          content="예약 및 작가 탐색을 더 쉽게 할 수 있어요"
           confirmText="로그인 하기"
           onConfirm={() => {
             setShowModal(false);

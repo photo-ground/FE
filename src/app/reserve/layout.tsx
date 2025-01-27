@@ -35,9 +35,9 @@ export default function ProtectedLayout({
     return (
       <AlertModal
         icon={<CheckIcon />}
-        title="잠깐!"
-        content="변경해주신 회원정보를 반영했어요"
-        confirmText="로그인 후 시용할 수 있어요!"
+        title="로그인 후 이용해주세요!"
+        content="예약 및 작가 탐색을 더 쉽게 할 수 있어요"
+        confirmText="로그인"
         onConfirm={() => router.replace('/signin')}
       />
     );
