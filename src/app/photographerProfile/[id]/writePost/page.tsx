@@ -5,6 +5,10 @@ export default async function PhotographerWritePostPage({
 }: {
   params: Promise<{ id: number }>;
 }) {
+  if (!params) {
+    alert('접근할 수 없습니다.');
+    // Router.
+  }
   const id = (await params).id!;
 
   return <Main photographerId={id} />;

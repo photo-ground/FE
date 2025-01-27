@@ -60,23 +60,29 @@ export default function Main({ photographerId }: { photographerId: number }) {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 
   useEffect(() => {
-    // File[]을 base64 URL로 변환
     const generateImageUrls = async () => {
-      const urls = await Promise.all(
-        images.map((file) => {
-          return new Promise<string>((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => {
-              if (reader.result) {
-                resolve(reader.result as string);
-              }
-            };
-            reader.onerror = (error) => reject(error);
-            reader.readAsDataURL(file);
-          });
-        }),
-      );
-      setImageUrls(urls);
+      try {
+        const urls = await Promise.all(
+          images.map(
+            (file) =>
+              new Promise<string>((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                  if (reader.result) {
+                    resolve(reader.result as string);
+                  } else {
+                    reject(new Error('Failed to read file'));
+                  }
+                };
+                reader.onerror = (error) => reject(error);
+                reader.readAsDataURL(file);
+              }),
+          ),
+        );
+        setImageUrls(urls);
+      } catch (error) {
+        console.error('Error generating image URLs:', error);
+      }
     };
 
     if (images.length > 0) {
@@ -107,7 +113,6 @@ export default function Main({ photographerId }: { photographerId: number }) {
     mutationFn: ({ newContent }: { newContent: PostUploadContainerProps }) =>
       postNewContent(photographerId, newContent),
     onSuccess: () => {
-      // console.log('Post created successfully');
       router.push(`/photographerProfile/${photographerId}`);
     },
     onError: (err) => {

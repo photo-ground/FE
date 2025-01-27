@@ -16,8 +16,10 @@ export default function ProtectedLayout({
   const router = useRouter();
 
   useEffect(() => {
+    console.log('mymy');
     async function authenticate() {
       const authResult = await checkAuth(); // 분리된 함수 호출
+      console.log(authResult);
       setIsAuthenticated(authResult);
       setIsLoading(false);
     }
