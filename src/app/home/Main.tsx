@@ -60,8 +60,6 @@ const SearchWrapper = styled.div`
   // margin-bottom: 24px;
 `;
 
-// TODO : 만약 로그인한 회원이하면 회원정보에서부터 학교 정보를 가져와야 함.
-
 export default function Main() {
   const router = useRouter();
   const { univ, setUniv } = useUnivStore();
