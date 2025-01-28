@@ -106,6 +106,7 @@ export default function PhotographerProfile({
   return (
     <ThumbnailWrapper>
       <Thumbnail src={profileUrl} alt="thumbnail" />
+      <BackButton />
 
       <Overlay />
 
