@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import useUserStore from '@/store/useUserStore';
+import getAccessToken from '@/lib/getAccessToken';
 import PhotographerDetailScreen from './screen';
 
 export interface PhotographerDetail {
@@ -16,14 +17,16 @@ export interface PhotographerDetail {
   following: boolean;
 }
 
-async function getPhotographerData(token: string, id: number) {
-  console.log(token);
+async function getPhotographerData(id: number) {
   try {
     const rawResponse = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer/${id}/intro`,
       {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json', Authorization: token },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: getAccessToken(),
+        },
       },
     );
 
@@ -45,16 +48,13 @@ async function getPhotographerData(token: string, id: number) {
 
 export default function PhotographerProfile() {
   const photographerId = useUserStore((state) => state.photographerId);
-  const token = useUserStore((state) => state.token);
   const [data, setData] = useState(null);
 
   useEffect(() => {
     if (photographerId) {
-      getPhotographerData(token!, photographerId).then((response) =>
-        setData(response),
-      );
+      getPhotographerData(photographerId).then((response) => setData(response));
     }
-  }, [token, photographerId]);
+  }, [photographerId]);
 
   if (!photographerId) return null;
 

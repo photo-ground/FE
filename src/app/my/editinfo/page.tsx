@@ -23,7 +23,6 @@ import {
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { UpdateUserInfoProps, UserInfoProps } from '@/types/user';
-import useUserStore from '@/store/useUserStore';
 import {
   deleteUser,
   getUserInfo,
@@ -55,12 +54,11 @@ export default function EditProfile() {
     myUniv: '',
     gender: '',
   });
-  const token = useUserStore((store) => store.token);
 
   // 회원정보보
   const { data: userInfo } = useQuery<UserInfoProps>({
     queryKey: ['userInfo'],
-    queryFn: () => getUserInfo(token),
+    queryFn: getUserInfo,
   });
 
   // 회원정보 데이터 세팅팅

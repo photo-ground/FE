@@ -1,29 +1,21 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import fetchWithAuth from '@/lib/fetchWithAuth';
+import getAccessToken from '@/lib/getAccessToken';
 import refreshAccessToken from '@/lib/refreshToken';
 import { UpdateUserInfoProps } from '@/types/user';
 import axios from 'axios';
 
-// 기본 헤더 구성
-const getHeaders = (token: string) => ({
-  Authorization: `${token}`,
-});
-
 // my : 고객 정보 조회
-export async function getUserInfo(token: string | null) {
+export async function getUserInfo() {
   try {
-    if (!token) {
-      throw Error;
-    }
-
     const rawResponse = await fetchWithAuth(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/customer`,
       {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: token,
+          Authorization: getAccessToken(),
         },
       },
     );
@@ -42,12 +34,12 @@ export async function updateUserInfo(userUpdateInfo: UpdateUserInfoProps) {
 
   // console.log(userUpdateInfo);
   try {
-    // 1. Access Token 가져오기
-    const accessToken = localStorage.getItem('accessToken');
-
     // 2. 첫 번째 요청 시도
     const response = await axios.patch(url, userUpdateInfo, {
-      headers: getHeaders(accessToken || ''),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: getAccessToken(),
+      },
     });
 
     if (response.status === 200) {
@@ -65,7 +57,10 @@ export async function updateUserInfo(userUpdateInfo: UpdateUserInfoProps) {
 
       // 4. 갱신된 토큰으로 재요청
       const retryResponse = await axios.patch(url, userUpdateInfo, {
-        headers: getHeaders(newAccessToken),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: getAccessToken(),
+        },
       });
 
       if (retryResponse.status === 200) {
@@ -87,12 +82,12 @@ export async function updateUserPassword({ password }: { password: string }) {
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/customer/password`;
   const passwordInfo = { password };
   try {
-    // 1. Access Token 가져오기
-    const accessToken = localStorage.getItem('accessToken');
-
     // 2. 첫 번째 요청 시도
     const response = await axios.patch(url, passwordInfo, {
-      headers: getHeaders(accessToken || ''),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: getAccessToken(),
+      },
     });
 
     if (response.status === 200) {
@@ -110,7 +105,10 @@ export async function updateUserPassword({ password }: { password: string }) {
 
       // 4. 갱신된 토큰으로 재요청
       const retryResponse = await axios.patch(url, passwordInfo, {
-        headers: getHeaders(newAccessToken),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: getAccessToken(),
+        },
       });
 
       if (retryResponse.status === 200) {
@@ -132,14 +130,12 @@ export async function deleteUser() {
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/customer/delete`;
 
   try {
-    // 1. Access Token 가져오기
-    const accessToken = localStorage.getItem('accessToken');
-
-    // console.log(accessToken);
-
     // 2. 첫 번째 요청 시도
     const response = await axios.patch(url, {
-      headers: getHeaders(accessToken || ''),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: getAccessToken(),
+      },
     });
 
     if (response.status === 200) {
@@ -157,7 +153,10 @@ export async function deleteUser() {
 
       // 4. 갱신된 토큰으로 재요청
       const retryResponse = await axios.patch(url, {
-        headers: getHeaders(newAccessToken),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: getAccessToken(),
+        },
       });
 
       if (retryResponse.status === 200) {

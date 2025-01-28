@@ -41,7 +41,6 @@ const SignUpText = styled(Text)`
 export default function SignInForm() {
   const setIsLoggedIn = useUserStore((state) => state.setIsLoggedIn);
   const setRole = useUserStore((state) => state.setRole);
-  const setToken = useUserStore((state) => state.setToken);
   const setPhotographerId = useUserStore((state) => state.setPhotographerId);
 
   const router = useRouter();
@@ -56,7 +55,7 @@ export default function SignInForm() {
       if (response.ok) {
         setIsLoggedIn(true);
         setRole(response.data!.role as Role);
-        setToken(response.data!.accessToken as string);
+        document.cookie = `accessToken=${response.data!.accessToken}`;
         if (response.data?.photographerId) {
           setPhotographerId(response.data?.photographerId);
         }
