@@ -30,7 +30,7 @@ export default function PhotographerDetailScreen({
   photographerId: string;
   data: PhotographerDetail;
 }) {
-  const { price, introduction, styleList } = data;
+  const { price, introduction, styleList } = data!;
   const [postList, setPostList] = useState<PostSummary[]>([]);
   const [hasNext, setHasNext] = useState(true);
 
