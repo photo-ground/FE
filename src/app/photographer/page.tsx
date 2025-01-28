@@ -77,7 +77,7 @@ export default function PhotographerPage() {
 
   useEffect(() => {
     refetch();
-  }, [filter]);
+  }, [refetch, filter]);
 
   useEffect(() => {
     if (inView) {

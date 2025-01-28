@@ -40,10 +40,13 @@ export default function ReserveScreen({ data }: { data: ReservationInfo }) {
       <TNB.SubTitle text="예약관리" />
 
       <Container>
-        <CalendarLarge currentDate={new Date()} schedule={data.reserveDates} />
+        <CalendarLarge
+          currentDate={new Date()}
+          schedule={data?.reserveDates || []}
+        />
         <ReserveLinks />
         {/* <Notification /> */}
-        <Upcoming data={data.upcomingSchedule} />
+        <Upcoming data={data?.upcomingSchedule} />
       </Container>
     </Wrapper>
   );
