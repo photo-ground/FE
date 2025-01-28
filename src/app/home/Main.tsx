@@ -27,7 +27,7 @@ import Filter from './_components/Filter';
 
 import PostByUniv from './_components/PostByUniv';
 import RecommendedPhotographer from './_components/RecommendedPhotographer';
-import { getUserInfo } from '../my/_services/getUserInfo';
+import { getUserInfo } from '../my/_libs/getUserInfo';
 
 const Container = styled.div`
   position: relative;
