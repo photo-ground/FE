@@ -67,6 +67,7 @@ export default function Main() {
   const token = useUserStore((state) => state.token);
   const router = useRouter();
   const { univ, setUniv } = useUnivStore();
+  const [selectedUniv, setSelectedUniv] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const { refetch: fetchUserInfo } = useQuery<UserInfoProps>({
@@ -117,8 +118,9 @@ export default function Main() {
       />
     );
   }
-  const onChangeUniv = (selectedUniv: { value: string }) => {
-    setUniv(selectedUniv.value); // Update Zustand state
+  const onChangeUniv = (newUniv: { value: string }) => {
+    setUniv(newUniv.value); // Update Zustand state
+    setSelectedUniv(newUniv.value); // 선택된 값 업데이트
   };
 
   return (
@@ -163,7 +165,7 @@ export default function Main() {
         <Filter
           optionList={UNIV_LIST}
           placeholder="학교 변경"
-          value={univ}
+          value={selectedUniv} // 현재 선택된 값
           onChange={onChangeUniv}
         />
       </TitleContainer>
