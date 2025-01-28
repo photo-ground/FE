@@ -37,8 +37,7 @@ export default function PhotographerDetailScreen({
   const { ref, inView } = useInView();
   const { data: postData, fetchNextPage } = useInfiniteQuery({
     queryKey: ['posts', photographerId],
-    queryFn: ({ pageParam }) =>
-      getPhotographerPosts(parseInt(photographerId, 10), pageParam),
+    queryFn: ({ pageParam }) => getPhotographerPosts(photographerId, pageParam),
     initialPageParam: null,
     getNextPageParam: () => {
       if (!postList || postList.length === 0) {
