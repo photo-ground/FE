@@ -12,7 +12,7 @@ import { PhotoSpotListProps } from '@/types/photoSpot';
 import {
   getUnivSpotList,
   postNewContent,
-} from '@/app/my/_services/getActivePhotographer';
+} from '@/app/my/_libs/getActivePhotographer';
 
 import Spacer from '@/components/Spacer';
 import Divider from '@/components/Divider';

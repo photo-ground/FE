@@ -1,11 +1,10 @@
-/* eslint-disable import/no-extraneous-dependencies */
+'use server';
 
-import getTokenFromLocalStorage from '@/lib/getTokenFromLocalStorage';
-import refreshAccessToken from '@/lib/refreshToken';
 import { PhotographerProps } from '@/types/photographer';
 import { PhotoSpotListProps } from '@/types/photoSpot';
 import { PostUploadContainerProps } from '@/types/post';
-import axios from 'axios';
+import { cookies } from 'next/headers';
+import refreshAccessToken from '@/lib/refreshToken';
 
 export async function getActivePhotographer(): Promise<PhotographerProps> {
   const res = await fetch(
@@ -40,11 +39,8 @@ export async function getUnivSpotList(
   return res.json(); // 성공적인 JSON 데이터 반환
 }
 
-export async function postNewContent(
-  photographerId: number,
-  newContent: PostUploadContainerProps,
-) {
-  // 데이터를 FormData로 전송해야한다.
+export async function postNewContent(newContent: PostUploadContainerProps) {
+  // 데이터를 FormData로 전송해야 한다.
   const formData = new FormData();
 
   // JSON 데이터를 Blob으로 추가
@@ -55,13 +51,12 @@ export async function postNewContent(
 
   // 사진 파일 추가
   newContent.photos.forEach((photo) => {
-    formData.append(`photos`, photo);
+    formData.append('photos', photo);
   });
 
   // 기본 헤더 구성
   const getHeaders = (token: string) => ({
     Authorization: `${token}`,
-    'Content-Type': 'multipart/form-data',
   });
 
   // 요청할 주소
@@ -69,39 +64,50 @@ export async function postNewContent(
 
   try {
     // 1. Access Token 가져오기
-    const accessToken = getTokenFromLocalStorage();
+    const cookieStore = await cookies();
+    const accessToken = cookieStore.get('accessToken')?.value;
 
-    // 2. 첫 번째 요청 시도
-    const response = await axios.post(url, formData, {
-      headers: getHeaders(accessToken || ''),
-    });
-
-    return response.data;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
-    // 3. 401 오류 발생 시 토큰 갱신
-    if (error.response?.status === 401) {
-      console.log('refresh 에러 캐치1');
-      try {
-        const newAccessToken = await refreshAccessToken();
-        localStorage.setItem('accessToken', newAccessToken); // 갱신된 토큰 저장
-        console.log('refresh 에러 캐치2');
-
-        // 4. 갱신된 토큰으로 재요청
-        const retryResponse = await axios.post(url, formData, {
-          headers: getHeaders(newAccessToken),
-        });
-        console.log('refresh 에러 캐치3');
-
-        return retryResponse.data;
-      } catch (err: unknown) {
-        alert('심각한 에러 : 재로그인이 필요합니다.');
-        return err;
-      }
+    console.log(accessToken);
+    if (!accessToken) {
+      throw new Error('Access token이 존재하지 않습니다.');
     }
 
-    // 5. 기타 오류 처리
-    console.error('Error uploading content:', error);
+    // 2. 첫 번째 요청 시도
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: getHeaders(accessToken),
+      body: formData,
+    });
+
+    if (response.ok) {
+      return await response.json(); // 성공적인 요청
+    }
+
+    // 3. 401 오류 발생 시 토큰 갱신 및 재요청
+    if (response.status === 401) {
+      console.warn('401 오류: 토큰 갱신 시도 중...');
+      const newAccessToken = await refreshAccessToken();
+
+      console.log();
+      // 갱신된 토큰으로 재요청
+      const retryResponse = await fetch(url, {
+        method: 'POST',
+        headers: getHeaders(newAccessToken),
+        body: formData,
+      });
+
+      if (retryResponse.ok) {
+        return await retryResponse.json(); // 재요청 성공
+      }
+
+      throw new Error(
+        `재요청 실패: ${retryResponse.status} ${retryResponse.statusText}`,
+      );
+    }
+
+    throw new Error(`요청 실패: ${response.status} ${response.statusText}`);
+  } catch (error) {
+    console.error('요청 오류:', error);
     throw error;
   }
 }

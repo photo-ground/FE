@@ -1,5 +1,5 @@
 import { jwtDecode } from 'jwt-decode';
-import getPhotographerId from '../my/_services/getPhotographerId';
+import getPhotographerId from '../my/_libs/getPhotographerId';
 
 interface DecodedToken {
   user_id?: string; // JWT에 저장된 키에 따라 맞게 수정
