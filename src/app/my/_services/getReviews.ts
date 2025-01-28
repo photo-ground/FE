@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
+import getTokenFromLocalStorage from '@/lib/getTokenFromLocalStorage';
 import refreshAccessToken from '@/lib/refreshToken';
 import { UpdateUserInfoProps } from '@/types/user';
 import axios from 'axios';
@@ -16,7 +17,7 @@ export async function getReviews() {
 
   try {
     // 1. Access Token 가져오기
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = getTokenFromLocalStorage();
 
     // 2. 첫 번째 요청 시도
     const response = await axios.get(url, {
