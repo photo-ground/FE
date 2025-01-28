@@ -111,7 +111,7 @@ export default function Main({ photographerId }: { photographerId: number }) {
   // Mutations
   const createPostMutation = useMutation({
     mutationFn: ({ newContent }: { newContent: PostUploadContainerProps }) =>
-      postNewContent(photographerId, newContent),
+      postNewContent(newContent),
     onSuccess: () => {
       router.push(`/photographerProfile/${photographerId}`);
     },
