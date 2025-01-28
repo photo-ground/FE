@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 import CalendarLarge from '@/components/CalendarLarge';
 import TNB from '@/components/TNB';
-import useUserStore from '@/store/useUserStore';
 import ReserveLinks from './_components/ReserveLinks';
 // import Notification from './_components/Notification';
 import Upcoming from './_components/Upcoming';
