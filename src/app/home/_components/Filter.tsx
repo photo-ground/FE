@@ -11,7 +11,7 @@ export const Container = styled.div<{ $isOpen: boolean }>`
   min-width: 145px;
   justify-content: space-between;
   gap: 0.125rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0;
 `;
 const FilterTitle = styled(Text)`
   width: 100%;
