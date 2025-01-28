@@ -58,7 +58,8 @@ export default function Reviews() {
 
       <ReviewItemContainer>
         {/* 리뷰 목록 */}
-        {reviewData && reviewData.reviews.length !== 0 ? (
+        {reviewData &&
+          reviewData.reviews.length !== 0 &&
           reviewData.reviews.map((review) => (
             <ReviewItem
               key={review.reviewId}
@@ -68,10 +69,7 @@ export default function Reviews() {
               score={review.score}
               content={review.content}
             />
-          ))
-        ) : (
-          <div>리뷰가 없어용</div>
-        )}
+          ))}
       </ReviewItemContainer>
     </Container>
   );
