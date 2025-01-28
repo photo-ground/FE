@@ -29,8 +29,7 @@ export default async function signin(formData: FormData) {
     const { role } = decoded;
 
     if (role === 'ROLE_PHOTOGRAPHER') {
-      const photographerId = (await getPhotographerId(accessToken))
-        .photographerId;
+      const { photographerId } = await getPhotographerId(accessToken);
       return { ok: true, data: { accessToken, role, photographerId } };
     }
 

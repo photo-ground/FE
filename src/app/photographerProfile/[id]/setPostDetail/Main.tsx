@@ -21,15 +21,15 @@ import CTAButton from '@/components/atoms/CTAButton';
 import { PostInfoProps, PostUploadContainerProps } from '@/types/post';
 import { Option } from '@/types/option';
 import { useRouter } from 'next/navigation';
-import UnivRadioGroup from './_component/UnivRadioGroup';
-import ImagePreviewItem from '../../_components/ImagePreviewItem';
+import UnivRadioGroup from '@/app/my/photographerProfile/[id]/setPostDetail/_component/UnivRadioGroup';
+import ImagePreviewItem from '@/app/my/photographerProfile/_components/ImagePreviewItem';
 import {
   ButtonBox,
   SelectPhotoSpot,
   Textarea,
   Title,
   UploadArea,
-} from './style';
+} from '@/app/my/photographerProfile/[id]/setPostDetail/style';
 
 export default function Main({ photographerId }: { photographerId: number }) {
   const [isComplete, setIsComplete] = useState<boolean>(false);
@@ -224,6 +224,8 @@ export default function Main({ photographerId }: { photographerId: number }) {
       <Title variant="title2_sb">글 작성</Title>
 
       <Textarea
+        // eslint-disable-next-line
+        // @ts-ignore
         onChange={(e) => setTextareaContent(e.target.value)}
         placeholder="사진을 소개해주세요!"
       />

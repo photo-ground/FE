@@ -1,6 +1,6 @@
+import { useEffect, useState } from 'react';
 import useUserStore from '@/store/useUserStore';
 import PhotographerDetailScreen from './screen';
-import { useEffect, useState } from 'react';
 
 export interface PhotographerDetail {
   profileUrl: string;
@@ -50,13 +50,13 @@ export default function PhotographerProfile() {
   const token = useUserStore((state) => state.token);
   const [data, setData] = useState(null);
 
-  if (!photographerId) return null;
-
   useEffect(() => {
-    getPhotographerData(token!, photographerId).then((response) =>
+    getPhotographerData(token!, photographerId as string).then((response) =>
       setData(response),
     );
-  }, []);
+  }, [token, photographerId]);
+
+  if (!photographerId) return null;
 
   if (!data) {
     return null;

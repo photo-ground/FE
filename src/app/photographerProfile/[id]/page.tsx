@@ -1,4 +1,4 @@
-import getPhotographerData from '../../../photographer/[id]/_libs/getPhotographerData';
+import getPhotographerData from '@/app/photographer/[id]/_libs/getPhotographerData';
 import PhotographerDetailScreen from './screen';
 
 export default async function PhotographerProfile({
