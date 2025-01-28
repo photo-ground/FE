@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
+import useUserStore, { Role } from '@/store/useUserStore';
 import CTAButton from '@/components/atoms/CTAButton';
 import Text from '@/components/atoms/Text';
 import { convertToViewportHeight } from '@/styles/convertSize';
@@ -38,6 +39,11 @@ const SignUpText = styled(Text)`
 `;
 
 export default function SignInForm() {
+  const setIsLoggedIn = useUserStore((state) => state.setIsLoggedIn);
+  const setRole = useUserStore((state) => state.setRole);
+  const setToken = useUserStore((state) => state.setToken);
+  const setPhotographerId = useUserStore((state) => state.setPhotographerId);
+
   const router = useRouter();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -45,13 +51,15 @@ export default function SignInForm() {
 
     const formData = new FormData(event.currentTarget);
     try {
-      const response: Response | Error = await signin(formData);
+      const response = await signin(formData);
 
-      if (response instanceof Response) {
-        // JSON 데이터 파싱
-        // const data = await response.json();
-        // console.log(data.data.role);
-        // console.log('Role:', data.role); // role 값 출력
+      if (response.ok) {
+        setIsLoggedIn(true);
+        setRole(response.data!.role as Role);
+        setToken(response.data!.accessToken as string);
+        if (response.data?.photographerId) {
+          setPhotographerId(response.data?.photographerId);
+        }
         router.push('/home');
       } else {
         throw new Error('로그인 요청 실패');

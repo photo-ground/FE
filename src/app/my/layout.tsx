@@ -1,39 +1,21 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/navigation';
-import checkAuth from '@/lib/checkAuth';
 import AlertModal from '@/components/modals/AlertModal';
 import CheckIcon from '@/assets/CheckIcon';
+import useUserStore from '@/store/useUserStore';
 
 export default function ProtectedLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const router = useRouter();
 
-  useEffect(() => {
-    console.log('mymy');
-    async function authenticate() {
-      const authResult = await checkAuth(); // 분리된 함수 호출
-      console.log(authResult);
-      setIsAuthenticated(authResult);
-      setIsLoading(false);
-    }
-
-    authenticate();
-  }, []);
-
-  // Show loading state
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   // Redirect if not authenticated
-  if (!isAuthenticated) {
+  if (!isLoggedIn) {
     return (
       <AlertModal
         icon={<CheckIcon />}

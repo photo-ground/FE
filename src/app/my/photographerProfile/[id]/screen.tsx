@@ -4,15 +4,15 @@ import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
-import PhotographerProfile from '@/app/photographer/[id]/_components/PhotographerProfile';
-import Price from '@/app/photographer/[id]/_components/Price';
-import Message from '@/app/photographer/[id]/_components/Message';
-import Review from '@/app/photographer/[id]/_components/Review';
-import Feed from '@/app/photographer/[id]/_components/Feed';
-import { PhotographerDetail } from '@/app/photographer/[id]/_libs/getPhotographerData';
+import PhotographerProfile from '../_components/PhotographerProfile';
+import Price from '../_components/Price';
+import Message from '../_components/Message';
+import Review from '../_components/Review';
+import Feed from '../_components/Feed';
+import { PhotographerDetail } from '../../../photographer/[id]/_libs/getPhotographerData';
 import getPhotographerPosts, {
   PostSummary,
-} from '@/app/photographer/[id]/_libs/getPhotographerPosts';
+} from '../../../photographer/[id]/_libs/getPhotographerPosts';
 
 const Container = styled.div`
   padding-bottom: 6.125rem;
@@ -30,7 +30,7 @@ export default function PhotographerDetailScreen({
   photographerId: string;
   data: PhotographerDetail;
 }) {
-  const { price, introduction, styleList } = data;
+  const { price, introduction, styleList } = data!;
   const [postList, setPostList] = useState<PostSummary[]>([]);
   const [hasNext, setHasNext] = useState(true);
 
