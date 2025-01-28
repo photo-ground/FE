@@ -7,7 +7,7 @@ import Text from '@/components/atoms/Text';
 import { useQuery } from '@tanstack/react-query';
 import { ReviewsProps } from '@/types/reviews';
 import ReviewItem from '../_component/ReviewItem';
-import { getReviews } from '../_services/getReviews';
+import { getReviews } from '../_libs/getReviews';
 
 const Container = styled.div`
   position: relative;

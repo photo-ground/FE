@@ -12,7 +12,7 @@ import useUserStore from '@/store/useUserStore';
 import UserInfo from './_component/UserInfo';
 import ListItem from './_component/ListItem';
 
-import { getUserInfo } from './_services/getUserInfo';
+import { getUserInfo } from './_libs/getUserInfo';
 
 const Container = styled.div`
   position: relative;

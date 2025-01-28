@@ -14,7 +14,7 @@ import AlertModal from '@/components/modals/AlertModal';
 import { useMutation } from '@tanstack/react-query';
 import { PasswordInput, PasswordForm } from '@/app/my/_component';
 
-import { updateUserPassword } from '../_services/getUserInfo';
+import { updateUserPassword } from '../_libs/getUserInfo';
 /* eslint-disable jsx-a11y/label-has-associated-control */
 const ButtonWrapper = styled.div`
   padding: 0 1.25rem;

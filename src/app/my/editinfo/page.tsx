@@ -23,11 +23,7 @@ import {
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { UpdateUserInfoProps, UserInfoProps } from '@/types/user';
-import {
-  deleteUser,
-  getUserInfo,
-  updateUserInfo,
-} from '../_services/getUserInfo';
+import { deleteUser, getUserInfo, updateUserInfo } from '../_libs/getUserInfo';
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
 const ButtonWrapper = styled.div`
