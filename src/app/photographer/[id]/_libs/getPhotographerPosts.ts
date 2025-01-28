@@ -4,7 +4,7 @@ export interface PostSummary {
 }
 
 export default async function getPhotographerPosts(
-  id: string,
+  id: number,
   lastPostId: number | null,
 ) {
   try {

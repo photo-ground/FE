@@ -16,7 +16,7 @@ export interface PhotographerDetail {
   following: boolean;
 }
 
-async function getPhotographerData(token: string, id: string) {
+async function getPhotographerData(token: string, id: number) {
   console.log(token);
   try {
     const rawResponse = await fetch(
@@ -44,16 +44,16 @@ async function getPhotographerData(token: string, id: string) {
 }
 
 export default function PhotographerProfile() {
-  const photographerId = useUserStore(
-    (state) => state.photographerId,
-  )?.toString();
+  const photographerId = useUserStore((state) => state.photographerId);
   const token = useUserStore((state) => state.token);
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    getPhotographerData(token!, photographerId as string).then((response) =>
-      setData(response),
-    );
+    if (photographerId) {
+      getPhotographerData(token!, photographerId).then((response) =>
+        setData(response),
+      );
+    }
   }, [token, photographerId]);
 
   if (!photographerId) return null;

@@ -22,7 +22,7 @@ export default function WritePostPage({
   const [goNext, setGoNext] = useState(false);
 
   const handleGoNext = () => {
-    router.push(`/photographerProfile/${photographerId}/setPostDetail `);
+    router.push(`/my/photographerProfile/${photographerId}/setPostDetail `);
   };
 
   useEffect(() => {

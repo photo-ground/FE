@@ -33,7 +33,7 @@ const LinkText = styled(Text)`
   color: ${({ theme }) => theme.colors.gray[400]};
 `;
 
-export default function Review({ photographerId }: { photographerId: string }) {
+export default function Review({ photographerId }: { photographerId: number }) {
   return (
     <Container>
       <ScoreArea>

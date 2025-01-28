@@ -86,7 +86,7 @@ export default function PhotographerProfile({
   photographerId,
 }: {
   data: PhotographerDetail;
-  photographerId: string;
+  photographerId: number;
 }) {
   const {
     profileUrl,
@@ -101,7 +101,7 @@ export default function PhotographerProfile({
 
   // TODO : 수정로직 구현
   const handleWritePost = () => {
-    router.push(`/photographerProfile/${photographerId}/writePost`);
+    router.push(`/my/photographerProfile/${photographerId}/writePost`);
   };
   return (
     <ThumbnailWrapper>

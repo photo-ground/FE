@@ -27,7 +27,7 @@ export default function PhotographerDetailScreen({
   photographerId,
   data,
 }: {
-  photographerId: string;
+  photographerId: number;
   data: PhotographerDetail;
 }) {
   const { price, introduction, styleList } = data!;

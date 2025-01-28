@@ -113,7 +113,7 @@ export default function Main({ photographerId }: { photographerId: number }) {
     mutationFn: ({ newContent }: { newContent: PostUploadContainerProps }) =>
       postNewContent(photographerId, newContent),
     onSuccess: () => {
-      router.push(`/photographerProfile/${photographerId}`);
+      router.push(`/my/photographerProfile/${photographerId}`);
     },
     onError: (err) => {
       console.error('Error creating post:', err);
@@ -161,6 +161,7 @@ export default function Main({ photographerId }: { photographerId: number }) {
         photos: images,
       };
 
+      console.log(newContent);
       createPostMutation.mutate({
         newContent,
       });
