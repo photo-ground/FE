@@ -20,6 +20,7 @@ const Container = styled.button`
   border: none;
   outline: none;
   border-radius: 100%;
+  cursor: pointer;
 `;
 
 export default function BackButton() {

@@ -8,6 +8,7 @@ import genderMap from '@/lib/genderMap';
 import { PhotographerDetail } from '../_libs/getPhotographerData';
 import follow from '../_libs/follow';
 import unfollow from '../_libs/unfollow';
+import BackButton from './BackButton';
 
 const ThumbnailWrapper = styled.div`
   position: relative;
@@ -102,6 +103,8 @@ export default function PhotographerProfile({
   return (
     <ThumbnailWrapper>
       <Thumbnail src={profileUrl} alt="thumbnail" />
+
+      <BackButton />
 
       <Overlay />
 
