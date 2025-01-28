@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { jwtDecode } from 'jwt-decode';
 
 interface DecodedToken {
@@ -8,12 +7,8 @@ interface DecodedToken {
   exp?: number; // 토큰 만료 시간
 }
 
-export default async function signin(
-  formData: FormData,
-): Promise<Response | Error> {
+export default async function signin(formData: FormData) {
   try {
-    // console.log(formData.get('email'));
-    // console.log(formData.get('password'));
     const rawResponse = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/login`,
       {
@@ -28,21 +23,18 @@ export default async function signin(
     );
 
     const accessToken = rawResponse.headers.get('Authorization')!;
-    localStorage.setItem('accessToken', accessToken);
     document.cookie = `accessToken=${accessToken}; Path=/;`;
-    // console.log(accessToken.split(' ')[1]);
     const decoded: DecodedToken = jwtDecode(accessToken.split(' ')[1]);
-    // console.log(decoded); // 디코드된 전체 정보 출력
-    localStorage.setItem('role', decoded.role as string);
+    const role = decoded.role;
 
     if (!rawResponse.ok) {
       const response = await rawResponse.json();
       throw new Error(response);
     }
-    return rawResponse;
+    return { ok: true, data: { accessToken, role } };
   } catch (error: unknown) {
     console.error(error);
     console.error((error as Error).message || '문제가 발생했습니다.');
-    return error as Error;
+    return { ok: false };
   }
 }
