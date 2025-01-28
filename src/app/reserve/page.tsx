@@ -1,10 +1,15 @@
+'use client';
+
+import useUserStore from '@/store/useUserStore';
 import ReserveScreen from './screen';
-import getReservationInfo from './_libs/getReservationInfo';
+import TemporaryScreen from './test';
 
-export default async function ReservePage() {
-  const data = await getReservationInfo();
+export default function ReservePage() {
+  const role = useUserStore((state) => state.role);
 
-  return <ReserveScreen data={data} />;
+  if (role === 'ROLE_CUSTOMER') return <ReserveScreen />;
+
+  return <TemporaryScreen />;
 }
 
 export const runtime = 'edge';

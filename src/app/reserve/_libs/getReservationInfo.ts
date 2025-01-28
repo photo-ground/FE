@@ -1,9 +1,7 @@
 import fetchWithAuth from '@/lib/fetchWithAuth';
-import { cookies } from 'next/headers';
+import getAccessToken from '@/lib/getAccessToken';
 
 export default async function getReservationInfo() {
-  const cookieStore = await cookies();
-
   try {
     const rawResponse = await fetchWithAuth(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/reservation/info`,
@@ -11,7 +9,7 @@ export default async function getReservationInfo() {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: cookieStore.get('accessToken')!.value,
+          Authorization: getAccessToken(),
         },
       },
     );

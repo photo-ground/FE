@@ -1,11 +1,14 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
 import CalendarLarge from '@/components/CalendarLarge';
 import TNB from '@/components/TNB';
 import ReserveLinks from './_components/ReserveLinks';
 // import Notification from './_components/Notification';
 import Upcoming from './_components/Upcoming';
+import getReservationInfo from './_libs/getReservationInfo';
 import { ReservationInfo } from './type';
 
 const Wrapper = styled.div`
@@ -33,7 +36,14 @@ const Background = styled.img`
   overflow: hidden;
 `;
 
-export default function ReserveScreen({ data }: { data: ReservationInfo }) {
+export default function ReserveScreen() {
+  const [reservationData, setReservationData] =
+    useState<ReservationInfo | null>(null);
+
+  useEffect(() => {
+    getReservationInfo().then((response) => setReservationData(response));
+  }, []);
+
   return (
     <Wrapper>
       <Background src="/images/background2.webp" alt="background" />
@@ -42,11 +52,13 @@ export default function ReserveScreen({ data }: { data: ReservationInfo }) {
       <Container>
         <CalendarLarge
           currentDate={new Date()}
-          schedule={data?.reserveDates || []}
+          schedule={reservationData?.reserveDates || []}
         />
         <ReserveLinks />
         {/* <Notification /> */}
-        <Upcoming data={data?.upcomingSchedule} />
+        {reservationData?.upcomingSchedule && (
+          <Upcoming data={reservationData.upcomingSchedule} />
+        )}
       </Container>
     </Wrapper>
   );
