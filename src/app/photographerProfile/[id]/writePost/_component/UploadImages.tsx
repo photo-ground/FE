@@ -3,7 +3,9 @@ import Text from '@/components/atoms/Text';
 import useImageStore from '@/store/useImageStore';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import ImagePreviewItem from '../../_components/ImagePreviewItem';
+import { v4 as uuidv4 } from 'uuid';
+
+import ImagePreviewItem from '../../../_components/ImagePreviewItem';
 
 const Title = styled.div`
   display: flex;
@@ -39,6 +41,8 @@ export default function UploadImages() {
   // 이미지 : File[] -> base64로 변환
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 
+  const validTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+
   const addImageFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = e.target.files;
     if (!selectedFiles) return;
@@ -50,7 +54,21 @@ export default function UploadImages() {
       return;
     }
 
-    newFiles.forEach((file) => addImage(file)); // File 객체를 상태에 추가
+    const validFiles = Array.from(selectedFiles).filter((file) =>
+      validTypes.includes(file.type),
+    );
+
+    if (validFiles.length !== selectedFiles.length) {
+      alert('PNG, JPEG, JPG 형식만 지원됩니다.');
+    }
+
+    const renamedFiles = newFiles.map((file) => {
+      const extension = file.name.split('.').pop(); // 확장자 추출
+      const newName = `${uuidv4()}.${extension}`; // UUID로 파일명 생성
+      return new File([file], newName, { type: file.type });
+    });
+
+    renamedFiles.forEach((file) => addImage(file)); // File 객체를 상태에 추가
   };
 
   useEffect(() => {

@@ -1,3 +1,5 @@
+import fetchWithAuth from '@/lib/fetchWithAuth';
+
 export interface ReviewData {
   count: number;
   averageScore: number;
@@ -13,7 +15,7 @@ export interface ReviewData {
 }
 export default async function getReviewData(id: string) {
   try {
-    const rawResponse = await fetch(
+    const rawResponse = await fetchWithAuth(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer/${id}/review`,
       {
         method: 'GET',

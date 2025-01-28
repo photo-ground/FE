@@ -20,8 +20,9 @@ import Dropdown from '@/components/Dropdown/index_2';
 import CTAButton from '@/components/atoms/CTAButton';
 import { PostInfoProps, PostUploadContainerProps } from '@/types/post';
 import { Option } from '@/types/option';
+import { useRouter } from 'next/navigation';
 import UnivRadioGroup from './_component/UnivRadioGroup';
-import ImagePreviewItem from '../_components/ImagePreviewItem';
+import ImagePreviewItem from '../../_components/ImagePreviewItem';
 import {
   ButtonBox,
   SelectPhotoSpot,
@@ -30,10 +31,11 @@ import {
   UploadArea,
 } from './style';
 
-export default function PostDetailPage() {
+export default function Main({ photographerId }: { photographerId: number }) {
   const [isComplete, setIsComplete] = useState<boolean>(false);
   const [textareaContent, setTextareaContent] = useState<string>('');
   const [spotData, setSpotData] = useState<Option[]>([]);
+  const router = useRouter();
   // 이미지 리스트 & 포토스팟 선택 리스트 (zustand)
   const {
     images,
@@ -51,12 +53,6 @@ export default function PostDetailPage() {
     }
   });
 
-  // 임시 데이터 -> api연결 후 변경
-  // const spotData: UnivOption[] = PhotoSpotByUniv.map((e) => {
-  //   const { spotId, spotName } = e;
-  //   return { value: spotId, label: spotName };
-  // });
-
   // 선택된 대학 상태
   const [selectedUniv, setSelectedUniv] = useState<UnivOption | null>(null);
 
@@ -64,23 +60,29 @@ export default function PostDetailPage() {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 
   useEffect(() => {
-    // File[]을 base64 URL로 변환
     const generateImageUrls = async () => {
-      const urls = await Promise.all(
-        images.map((file) => {
-          return new Promise<string>((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => {
-              if (reader.result) {
-                resolve(reader.result as string);
-              }
-            };
-            reader.onerror = (error) => reject(error);
-            reader.readAsDataURL(file);
-          });
-        }),
-      );
-      setImageUrls(urls);
+      try {
+        const urls = await Promise.all(
+          images.map(
+            (file) =>
+              new Promise<string>((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                  if (reader.result) {
+                    resolve(reader.result as string);
+                  } else {
+                    reject(new Error('Failed to read file'));
+                  }
+                };
+                reader.onerror = (error) => reject(error);
+                reader.readAsDataURL(file);
+              }),
+          ),
+        );
+        setImageUrls(urls);
+      } catch (error) {
+        console.error('Error generating image URLs:', error);
+      }
     };
 
     if (images.length > 0) {
@@ -108,15 +110,10 @@ export default function PostDetailPage() {
 
   // Mutations
   const createPostMutation = useMutation({
-    mutationFn: ({
-      photographerId,
-      newContent,
-    }: {
-      photographerId: number;
-      newContent: PostUploadContainerProps;
-    }) => postNewContent(photographerId, newContent),
+    mutationFn: ({ newContent }: { newContent: PostUploadContainerProps }) =>
+      postNewContent(photographerId, newContent),
     onSuccess: () => {
-      console.log('Post created successfully');
+      router.push(`/photographerProfile/${photographerId}`);
     },
     onError: (err) => {
       console.error('Error creating post:', err);
@@ -144,7 +141,7 @@ export default function PostDetailPage() {
 
   // 스팟 선택 핸들러
   const handleDropdown = (index: number, spotId: number) => {
-    console.log(spotId);
+    // console.log(spotId);
     selectSpotId(index, spotId); // 선택한 스팟 ID 추가
   };
 
@@ -165,7 +162,6 @@ export default function PostDetailPage() {
       };
 
       createPostMutation.mutate({
-        photographerId: 5,
         newContent,
       });
     }

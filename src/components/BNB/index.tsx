@@ -8,7 +8,6 @@ import BNBMapIcon from '@/assets/bnb/BNB_MapIcon';
 import BNBHomeIcon from '@/assets/bnb/BNB_HomeIcon';
 import BNBCalendarIcon from '@/assets/bnb/BNB_CalendarIcon';
 import BNBProfileIcon from '@/assets/bnb/BNBProfileIcon';
-import useUnivStore from '@/store/useUnivStore';
 import { Container, Tab, TabText } from './styles';
 
 // 고객 뷰일 경우
@@ -22,30 +21,25 @@ const MENU_LIST = [
 
 export default function BottomNavigationBar() {
   const pathname = usePathname();
-  const { univ } = useUnivStore(); // Get current university state from Zustand
 
-  // Dynamic home link with univ query parameter
-  const menuListWithDynamicHome = MENU_LIST.map((menu) =>
-    menu.route === '/home'
-      ? { ...menu, route: `/home?univ=${encodeURIComponent(univ)}` }
-      : menu,
-  );
+  const mainPath = pathname.split('?')[0];
+
+  console.log(mainPath);
 
   if (
-    pathname !== '/photographer' &&
-    pathname !== '/map' &&
-    pathname !== '/home' &&
-    pathname !== '/reserve' &&
-    pathname !== '/my'
+    mainPath !== '/photographer' &&
+    mainPath !== '/map' &&
+    mainPath !== '/home' &&
+    mainPath !== '/reserve' &&
+    mainPath !== '/my'
   ) {
     return null;
   }
 
   return (
     <Container>
-      {menuListWithDynamicHome.map((menu) => {
-        // /home?univ={univ} 대응코드로 수정
-        const isSelected = pathname.startsWith(menu.route.split('?')[0]);
+      {MENU_LIST.map((menu) => {
+        const isSelected = mainPath === menu.route;
 
         return (
           <Tab key={menu.route} href={menu.route}>

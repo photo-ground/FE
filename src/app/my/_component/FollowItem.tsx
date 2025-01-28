@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 import follow from '@/app/photographer/[id]/_libs/follow';
@@ -16,9 +17,10 @@ const UserCardWrapper = styled.div`
   border-radius: 0.5rem;
 `;
 
-const PhotographerInfo = styled.div`
+const PhotographerInfo = styled(Link)`
   display: flex;
   align-items: center;
+  text-decoration: none;
 `;
 
 const Avatar = styled.img`
@@ -44,7 +46,7 @@ export default function FollowItem({
 
   return (
     <UserCardWrapper>
-      <PhotographerInfo>
+      <PhotographerInfo href={`/photographer/${photographerId}`}>
         <Avatar src={profileUrl} alt={photographerName} />
         <PhotographerName variant="body1_md">
           {photographerName} 작가

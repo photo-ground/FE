@@ -1,6 +1,9 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Script from 'next/script';
+import useUnivStore from '@/store/useUnivStore';
 import { NaverMap } from '../_types/NaverMap';
+import { School } from '../types';
+import schoolList from '../_data/schoolList';
 
 type MapOptions = {
   mapId: string; // 필수
@@ -11,15 +14,24 @@ type MapOptions = {
 
 function MapComponent({
   mapId,
-  center = [37.5665, 126.978], // 기본 중심 좌표
+  center = [37.5511, 126.9407],
   zoom = 10, // 기본 줌 레벨
   onLoad,
 }: MapOptions) {
   const mapRef = useRef<NaverMap | null>(null);
+  const [mapCenter, setMapCenter] = useState<[number, number]>(center);
+  const { univ } = useUnivStore();
+
+  useEffect(() => {
+    const school = schoolList.find((element: School) => element.name === univ);
+    if (school) {
+      setMapCenter([school.lat, school.lng]);
+    }
+  }, [setMapCenter, univ]);
 
   const initializeMap = () => {
     const mapOptions = {
-      center: new naver.maps.LatLng(...center),
+      center: new naver.maps.LatLng(...mapCenter),
       zoom,
     };
     const mapElement = document.getElementById(mapId);

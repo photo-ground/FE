@@ -45,10 +45,20 @@ export default function SignInForm() {
 
     const formData = new FormData(event.currentTarget);
     try {
-      await signin(formData);
-      router.push('/home');
-    } catch {
+      const response: Response | Error = await signin(formData);
+
+      if (response instanceof Response) {
+        // JSON 데이터 파싱
+        // const data = await response.json();
+        // console.log(data.data.role);
+        // console.log('Role:', data.role); // role 값 출력
+        router.push('/home');
+      } else {
+        throw new Error('로그인 요청 실패');
+      }
+    } catch (error) {
       alert('로그인 정보를 다시 확인해주세요');
+      console.error(error);
     }
   };
 

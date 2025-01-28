@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import Banner from '@/components/Banner';
 import Spacer from '@/components/Spacer';
@@ -15,10 +16,17 @@ import RightChevronIcon from '@/assets/RightChevronIcon';
 
 import { UNIV_LIST } from '@/types/univOption';
 import useUnivStore from '@/store/useUnivStore';
+import checkAuth from '@/lib/checkAuth';
+import { useQuery } from '@tanstack/react-query';
+import { UserInfoProps } from '@/types/user';
+import AlertModal from '@/components/modals/AlertModal';
+import CheckIcon from '@/assets/modal/CheckIcon';
+import LoadingPage from '@/components/LoadingPage';
 import Filter from './_components/Filter';
 
 import PostByUniv from './_components/PostByUniv';
 import RecommendedPhotographer from './_components/RecommendedPhotographer';
+import { getUserInfo } from '../my/_services/getUserInfo';
 
 const Container = styled.div`
   position: relative;
@@ -47,25 +55,62 @@ const IconTextLink = styled(Link)`
   text-decoration: none;
   color: red;
 `;
-
-// TODO : 만약 로그인한 회원이하면 회원정보에서부터 학교 정보를 가져와야 함.
-// function GetUnivFromOnboarding(): string {
-//   return univ;
-// }
+const SearchWrapper = styled.div`
+  margin: 24px 20px;
+  // margin-bottom: 24px;
+`;
 
 export default function Main() {
-  const { univ, isLoggedIn, setUniv } = useUnivStore();
+  const router = useRouter();
+  const { univ, setUniv } = useUnivStore();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [role, setRole] = useState<string | null>('');
+
+  const { refetch: fetchUserInfo } = useQuery<UserInfoProps>({
+    queryKey: ['user'],
+    queryFn: getUserInfo,
+    enabled: false, // 인증된 상태에서만 호출
+  });
 
   // On initial load, set the university if not logged in
   useEffect(() => {
-    if (!isLoggedIn) {
-      const univFromParams = univ;
-      if (univFromParams) {
-        setUniv(univFromParams);
+    async function authenticate() {
+      const authResult = await checkAuth(); // 분리된 함수 호출
+      if (authResult && localStorage.getItem('role') === 'ROLE_CUSTOMER') {
+        // 인증된 상태에서 사용자 정보 가져오기
+        setRole(localStorage.getItem('role')); // 홈페이지내에 고객이라고
+        setIsAuthenticated(authResult); // 인증 됨
+        const user = await fetchUserInfo(); // 데이터 가져와
+        // console.log(user);
+        if (user?.data?.univ) {
+          setUniv(user.data.univ); // Zustand의 학교 정보 업데이트
+        }
       }
-    }
-  }, [isLoggedIn, setUniv, univ]);
 
+      setIsLoading(false);
+    }
+
+    authenticate();
+  }, [fetchUserInfo, setUniv]);
+
+  // Show loading state
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
+  // 만약 인증하지 않고 둘러볼 학교도 선택하지 않았다면
+  if (!isAuthenticated && !univ && role !== 'ROLE_PHOTOGRAPHER') {
+    return (
+      <AlertModal
+        icon={<CheckIcon />}
+        title="잠깐!"
+        content="비회원은 둘러볼 학교를 선택해야해요!"
+        confirmText="학교 선택하기"
+        onConfirm={() => router.replace('/onboarding')}
+      />
+    );
+  }
   const onChangeUniv = (selectedUniv: { value: string }) => {
     setUniv(selectedUniv.value); // Update Zustand state
   };
@@ -76,7 +121,9 @@ export default function Main() {
       <TNB.Main />
 
       {/* 검색 엔진 */}
-      <ToSearchPage />
+      <SearchWrapper>
+        <ToSearchPage />
+      </SearchWrapper>
 
       {/* ============================================ */}
 

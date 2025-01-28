@@ -11,14 +11,18 @@ import Checkbox from './_component/CheckBoxInput';
 const ButtonBox = styled.div`
   margin: 0 20px;
 `;
-export default function WritePostPage() {
+export default function WritePostPage({
+  photographerId,
+}: {
+  photographerId: number;
+}) {
   const router = useRouter();
-  const [isPermitted, setIsPermitted] = useState(true);
+  const [isPermitted, setIsPermitted] = useState(false);
   const [isSameUniv, setIsSameUniv] = useState(false);
   const [goNext, setGoNext] = useState(false);
 
   const handleGoNext = () => {
-    router.push('/photographerProfile/setPostDetail ');
+    router.push(`/photographerProfile/${photographerId}/setPostDetail `);
   };
 
   useEffect(() => {

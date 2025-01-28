@@ -67,13 +67,7 @@ export default function PhotographerPage() {
     const pages = postData?.pages;
     if (!pages || !pages?.length) return;
 
-    setPhotographerList((prev) => [
-      ...prev,
-      ...pages[pages.length - 1].photographerList,
-    ]);
-
-    console.log(postData?.pages);
-
+    setPhotographerList(pages.flatMap((page) => page.photographerList));
     setHasNext(postData?.pages[pages.length - 1].hasNext);
   }, [postData]);
 
@@ -100,3 +94,5 @@ export default function PhotographerPage() {
     </Container>
   );
 }
+
+export const runtime = 'edge';

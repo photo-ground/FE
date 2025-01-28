@@ -9,11 +9,13 @@ import TNB from '@/components/TNB';
 import { UserInfoProps } from '@/types/user';
 import { useQuery } from '@tanstack/react-query';
 
+import CheckIcon from '@/assets/CheckIcon';
+import AlertModal from '@/components/modals/AlertModal';
 import UserInfo from './_component/UserInfo';
 import ListItem from './_component/ListItem';
 
 import { getUserInfo } from './_services/getUserInfo';
-import Modal from './_component/Modal';
+import getPhotographerId from './_services/getPhotographerId';
 
 const Container = styled.div`
   position: relative;
@@ -25,20 +27,71 @@ const Background = styled.img`
   object-fit: cover;
   z-index: -1;
 `;
+interface PhotographerIdProps {
+  photographerId: number;
+}
+
 export default function PhotographerPage() {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { data: userInfo, isError } = useQuery<UserInfoProps>({
+  // const { refetch: fetchUserInfo } = useQuery<UserInfoProps>({
+  //   queryKey: ['user'],
+  //   queryFn: getUserInfo,
+  //   enabled: false, // 인증된 상태에서만 호출
+  // });
+
+  const {
+    refetch: fetchUserInfo,
+    data: userInfo,
+    isError,
+    isSuccess,
+  } = useQuery<UserInfoProps>({
     queryKey: ['userInfo'],
     queryFn: getUserInfo,
+    enabled: false,
   });
+
+  const { refetch: fetchPhotographerId, data: photographerId } =
+    useQuery<PhotographerIdProps>({
+      queryKey: ['photographerId'],
+      queryFn: getPhotographerId,
+      enabled: false,
+    });
+
+  // On initial load, set the university if not logged in
+  useEffect(() => {
+    async function authenticate() {
+      // 1. 고객이 경우, 데이터 가져오기기
+      if (localStorage.getItem('role') === 'ROLE_CUSTOMER') {
+        // 인증된 상태에서 사용자 정보 가져오기
+        await fetchUserInfo(); // 데이터 가져와
+        // 2. 작가인 경우, 작가 마이페이지로 이동
+      } else if (localStorage.getItem('role') === 'ROLE_PHOTOGRAPHER') {
+        await fetchPhotographerId(); // `refetch` 결과 가져오기
+      }
+      setIsLoading(false);
+    }
+    authenticate();
+  });
+
+  useEffect(() => {
+    if (photographerId?.photographerId) {
+      router.push(`/photographerProfile/${photographerId.photographerId}`);
+    }
+  }, [photographerId, router]);
 
   useEffect(() => {
     if (isError) {
       router.push('/signin');
     }
-  }, [isError, router]);
+  }, [isError, router, isSuccess, userInfo]);
+
+  // Show loading state
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   // TODO : 수정로직 구현
   const handleEdit = () => {
@@ -49,17 +102,22 @@ export default function PhotographerPage() {
     <Container>
       <Background src="/images/background1.webp" alt="background" />
       {showModal && (
-        <Modal
-          onClose={() => {
+        <AlertModal
+          icon={<CheckIcon />}
+          title="로그인 후 이용해주세요!"
+          content="예약 및 작가 탐색을 더 쉽게 할 수 있어요"
+          confirmText="로그인 하기"
+          onConfirm={() => {
             setShowModal(false);
-            router.push('/signin'); // 로그인 페이지로 이동
+            router.replace('/signin');
           }}
         />
       )}
 
-      {userInfo && (
+      {userInfo?.role === 'ROLE_CUSTOMER' && (
         <>
           <TNB.Title text="마이페이지" />
+
           <UserInfo userName={userInfo.name} onEdit={handleEdit} />
           <ListItem
             text="팔로우 목록"

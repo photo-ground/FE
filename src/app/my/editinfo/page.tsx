@@ -8,6 +8,10 @@ import CTAButton from '@/components/atoms/CTAButton';
 import Text from '@/components/atoms/Text';
 import Spacer from '@/components/Spacer';
 import TNB from '@/components/TNB';
+import AlertModal from '@/components/modals/AlertModal';
+import ConfirmModal from '@/components/modals/ConfirmModal';
+import WarningIcon from '@/assets/modal/WarningIcon';
+import CheckIcon from '@/assets/modal/CheckIcon';
 import {
   EmailInput,
   GenderInput,
@@ -19,9 +23,13 @@ import {
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { UpdateUserInfoProps, UserInfoProps } from '@/types/user';
-import { getUserInfo, updateUserInfo } from '../_services/getUserInfo';
-import deleteUser from '../_services/deleteUser';
-import Modal from '../_component/Modal';
+
+import {
+  deleteUser,
+  getUserInfo,
+  updateUserInfo,
+} from '../_services/getUserInfo';
+
 /* eslint-disable jsx-a11y/label-has-associated-control */
 const ButtonWrapper = styled.div`
   padding: 0 1.25rem;
@@ -69,8 +77,8 @@ export default function EditProfile() {
   // 회원 탈퇴 함수수
   const deleteUserMutation = useMutation({
     mutationFn: deleteUser,
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
+      // console.log(data);
       Router.push('/splash'); // 탈퇴성공 시 스플레시화면으로 이동
     },
   });
@@ -79,22 +87,22 @@ export default function EditProfile() {
   const updateUserMutation = useMutation({
     mutationKey: ['updateUserInfo'],
     mutationFn: updateUserInfo,
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
+      // console.log(data);
       setConfirmModal(true);
     },
   });
 
   // 회원 정보 업데이트 핸들러러
   const handleUpdateConfirm = () => {
-    console.log(userData);
+    // console.log(userData);
     updateUserMutation.mutate(userData);
   };
 
   // 변경한 회원정보 임시 데이터에 반영 핸들러
   const handleUpdateInfo = (key: string, value: string) => {
     setUserData({ ...userData, [key]: value });
-    console.log(userData);
+    // console.log(userData);
   };
 
   return (
@@ -146,27 +154,31 @@ export default function EditProfile() {
       <Spacer size="32px" />
       {/* 회원정보 업데이트 확인 모달 */}
       {confirmModal && (
-        <Modal
-          onClose={() => {
+        <AlertModal
+          icon={<CheckIcon />}
+          title="내 정보 수정 완료!"
+          content="변경해주신 회원정보를 반영했어요"
+          confirmText="확인"
+          onConfirm={() => {
             setConfirmModal(false);
           }}
         />
       )}
       {/* 탈퇴하기 이중체크 모달달 */}
       {dropOutCheckModal && (
-        <Modal
-          onClose={() => {
+        <ConfirmModal
+          icon={<WarningIcon />}
+          title="정말 탈퇴하시겠습니까?"
+          content="탈퇴 시 계정 복구가 불가능해요"
+          confirmText="탈퇴하기"
+          cancelText="취소"
+          onConfirm={() => {
             setDropOutCheckModal(false);
           }}
-          onSecondButton={() => {
+          onCancel={() => {
             deleteUserMutation.mutate(); // 회원탈퇴 진행
             setDropOutCheckModal(false); // 더블체크 모달 닫기
           }}
-          buttonValue="취소"
-          secondButtonValue="탈퇴하기"
-          modalTitle="정말 탈퇴하시겠습니까?"
-          modalText="탈퇴 시 계정 복구가 불가능해요"
-          isWarning
         />
       )}
     </>

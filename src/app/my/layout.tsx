@@ -2,8 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { isUserAuthenticated } from '@/lib/authentication';
-import Modal from './_component/Modal';
+import checkAuth from '@/lib/checkAuth';
+import AlertModal from '@/components/modals/AlertModal';
+import CheckIcon from '@/assets/CheckIcon';
 
 export default function ProtectedLayout({
   children,
@@ -15,21 +16,15 @@ export default function ProtectedLayout({
   const router = useRouter();
 
   useEffect(() => {
-    async function checkAuth() {
-      try {
-        // Call the server-side function to check authentication
-        const authResult = await isUserAuthenticated();
-
-        setIsAuthenticated(authResult);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Authentication check failed', error);
-        setIsAuthenticated(false);
-        setIsLoading(false);
-      }
+    console.log('mymy');
+    async function authenticate() {
+      const authResult = await checkAuth(); // 분리된 함수 호출
+      console.log(authResult);
+      setIsAuthenticated(authResult);
+      setIsLoading(false);
     }
 
-    checkAuth();
+    authenticate();
   }, []);
 
   // Show loading state
@@ -40,11 +35,12 @@ export default function ProtectedLayout({
   // Redirect if not authenticated
   if (!isAuthenticated) {
     return (
-      <Modal
-        onClose={() => router.replace('/signin')}
-        buttonValue="로그인 하기"
-        modalTitle="잠깐!"
-        modalText="로그인 후 시용할 수 있어요!"
+      <AlertModal
+        icon={<CheckIcon />}
+        title="로그인 후 이용해주세요!"
+        content="예약 및 작가 탐색을 더 쉽게 할 수 있어요"
+        confirmText="로그인"
+        onConfirm={() => router.replace('/signin')}
       />
     );
   }

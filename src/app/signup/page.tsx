@@ -5,6 +5,9 @@ import { useRouter } from 'next/navigation';
 import CTAButton from '@/components/atoms/CTAButton';
 import Text from '@/components/atoms/Text';
 import TNB from '@/components/TNB';
+import AlertModal from '@/components/modals/AlertModal';
+import CheckIcon from '@/assets/modal/CheckIcon';
+
 import {
   EmailInput,
   GenderInput,
@@ -21,7 +24,6 @@ import {
   UserSection,
 } from './styles';
 import signup from './signup';
-import Modal from './_components/Modal';
 
 function checkDataValid(data: SignUpData) {
   return (
@@ -134,8 +136,11 @@ export default function SignUpPage() {
       </div>
 
       {isCompleted && (
-        <Modal
-          onClose={() => {
+        <AlertModal
+          icon={<CheckIcon />}
+          title="회원가입 완료!"
+          content="다양한 스냅 촬영 콘텐츠를 둘러보세요"
+          onConfirm={() => {
             router.replace('/signin');
           }}
         />

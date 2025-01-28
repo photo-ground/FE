@@ -28,7 +28,7 @@ function Card({ data }: { data: Reservation }) {
       <ReserveInfo data={data} />
 
       <Link href={`/reserve/review/${data.reservationId}`}>
-        <LargeButton text="후기 작성" variant="secondary" />
+        <LargeButton text="리뷰 작성하기" variant="secondary" />
       </Link>
     </CardWrapper>
   );
@@ -46,8 +46,11 @@ export default function PrevReservationScreen({
       <Container>
         {data.map((reservation, index) => (
           <>
-            {/* eslint-disable-next-line */}
-            {index !== 0 && <DivideLine key={index} />}
+            {index !== 0 && (
+              <DivideLine
+                key={reservation.reservationId.toString() + index.toString()}
+              />
+            )}
             <Card key={reservation.reservationId} data={reservation} />
           </>
         ))}

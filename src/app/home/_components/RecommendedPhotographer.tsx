@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import styled from 'styled-components';
+import { useRouter } from 'next/navigation';
 import Card from '@/components/Card';
 import { useQuery } from '@tanstack/react-query';
 import { PhotographerProps } from '@/types/photographer';
@@ -7,12 +8,18 @@ import { getActivePhotographer } from '../_services/getActivePhotographer';
 
 const CardContainerX = styled.div`
   display: flex;
-  overflow-y: scroll;
+  justify-content: start;
+  // background-color: yellow;
+  // overflow-y: scroll;
   gap: 1rem;
   margin: 0 auto 0 20px;
   height: 114px;
+  div {
+    max-width: 80px;
+  }
 `;
 const CardTitle = styled.div`
+  // background-color: red;
   margin-top: 0.75rem;
   color: ${({ theme }) => theme.colors.gray[200]};
   text-align: center;
@@ -20,6 +27,7 @@ const CardTitle = styled.div`
 `;
 
 export default function RecommendedPhotographer() {
+  const router = useRouter();
   const { isPending, isError, data, error } = useQuery<PhotographerProps>({
     queryKey: ['photographerList', 'hasNext'],
     queryFn: getActivePhotographer,
@@ -33,13 +41,15 @@ export default function RecommendedPhotographer() {
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
-  if (data) {
-    console.log(data);
-  }
+
+  const handlePhotographerCard = (photographerId: number) => {
+    router.push(`/photographer/${photographerId}`);
+  };
   return (
     <CardContainerX>
       {data?.photographerList.map((card) => (
         <Card
+          onClick={() => handlePhotographerCard(card.photographerId)}
           key={card.photographerId}
           size="round"
           src={card.profileUrl}
