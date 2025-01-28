@@ -27,6 +27,7 @@ import Filter from './_components/Filter';
 import PostByUniv from './_components/PostByUniv';
 import RecommendedPhotographer from './_components/RecommendedPhotographer';
 import { getUserInfo } from '../my/_services/getUserInfo';
+import useUserStore from '@/store/useUserStore';
 
 const Container = styled.div`
   position: relative;
@@ -61,11 +62,12 @@ const SearchWrapper = styled.div`
 `;
 
 export default function Main() {
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
+  const role = useUserStore((state) => state.role);
   const router = useRouter();
   const { univ, setUniv } = useUnivStore();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [role, setRole] = useState<string | null>('');
 
   const { refetch: fetchUserInfo } = useQuery<UserInfoProps>({
     queryKey: ['user'],
@@ -77,9 +79,8 @@ export default function Main() {
   useEffect(() => {
     async function authenticate() {
       const authResult = await checkAuth(); // 분리된 함수 호출
-      if (authResult && localStorage.getItem('role') === 'ROLE_CUSTOMER') {
+      if (authResult && role === 'ROLE_CUSTOMER') {
         // 인증된 상태에서 사용자 정보 가져오기
-        setRole(localStorage.getItem('role')); // 홈페이지내에 고객이라고
         setIsAuthenticated(authResult); // 인증 됨
         const user = await fetchUserInfo(); // 데이터 가져와
         // console.log(user);
@@ -89,6 +90,11 @@ export default function Main() {
       }
 
       setIsLoading(false);
+    }
+
+    if (isLoggedIn) {
+      setIsLoading(false);
+      return;
     }
 
     authenticate();
