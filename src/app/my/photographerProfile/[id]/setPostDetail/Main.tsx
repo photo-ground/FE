@@ -12,7 +12,7 @@ import { PhotoSpotListProps } from '@/types/photoSpot';
 import {
   getUnivSpotList,
   postNewContent,
-} from '@/app/my/photographerProfile/_services/getActivePhotographer';
+} from '@/app/my/_services/getActivePhotographer';
 
 import Spacer from '@/components/Spacer';
 import Divider from '@/components/Divider';
@@ -22,7 +22,7 @@ import { PostInfoProps, PostUploadContainerProps } from '@/types/post';
 import { Option } from '@/types/option';
 import { useRouter } from 'next/navigation';
 import UnivRadioGroup from './_component/UnivRadioGroup';
-import ImagePreviewItem from '../../_components/ImagePreviewItem';
+import ImagePreviewItem from '../../../_component/ImagePreviewItem';
 import {
   ButtonBox,
   SelectPhotoSpot,
