@@ -152,15 +152,24 @@ export async function deleteUser() {
     // console.log(accessToken);
 
     // 2. 첫 번째 요청 시도
-    const response = await axios.patch(url, {
-      headers: getHeaders(accessToken || ''),
-    });
+    const response = await axios.patch(
+      url,
+      {},
+      {
+        headers: getHeaders(accessToken || ''),
+      },
+    );
+
+    console.log(response);
 
     if (response.status === 200) {
-      return response;
+      const logoutResponse = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/logout`,
+      );
+      return logoutResponse;
     }
 
-    return '회원정보 수정에 실패했습니다.';
+    return '회원 탈퇴에 실패했습니다.';
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {

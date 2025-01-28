@@ -23,6 +23,7 @@ import {
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { UpdateUserInfoProps, UserInfoProps } from '@/types/user';
+
 import {
   deleteUser,
   getUserInfo,
@@ -82,7 +83,7 @@ export default function EditProfile() {
     },
   });
 
-  // 회원 정보 업데이트 함수수
+  // 회원 정보 업데이트 함수
   const updateUserMutation = useMutation({
     mutationKey: ['updateUserInfo'],
     mutationFn: updateUserInfo,
