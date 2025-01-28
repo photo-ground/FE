@@ -63,6 +63,8 @@ const SearchWrapper = styled.div`
 export default function Main() {
   const router = useRouter();
   const { univ, setUniv } = useUnivStore();
+  const [selectedUniv, setSelectedUniv] = useState<string | null>(null);
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [role, setRole] = useState<string | null>('');
@@ -111,8 +113,9 @@ export default function Main() {
       />
     );
   }
-  const onChangeUniv = (selectedUniv: { value: string }) => {
-    setUniv(selectedUniv.value); // Update Zustand state
+  const onChangeUniv = (newUniv: { value: string }) => {
+    setUniv(newUniv.value); // Update Zustand state
+    setSelectedUniv(newUniv.value); // 선택된 값 업데이트
   };
 
   return (
@@ -157,7 +160,7 @@ export default function Main() {
         <Filter
           optionList={UNIV_LIST}
           placeholder="학교 변경"
-          value={univ}
+          value={selectedUniv} // 현재 선택된 값
           onChange={onChangeUniv}
         />
       </TitleContainer>
