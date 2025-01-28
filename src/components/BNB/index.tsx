@@ -22,15 +22,16 @@ const MENU_LIST = [
 export default function BottomNavigationBar() {
   const pathname = usePathname();
 
-  const mainPath = `/${pathname.split('/')[1].split('?')[0]}`;
+  const mainPath = pathname.split('?')[0];
+
+  console.log(mainPath);
 
   if (
     mainPath !== '/photographer' &&
     mainPath !== '/map' &&
     mainPath !== '/home' &&
     mainPath !== '/reserve' &&
-    mainPath !== '/my' &&
-    mainPath !== '/photographerProfile'
+    mainPath !== '/my'
   ) {
     return null;
   }
@@ -38,9 +39,7 @@ export default function BottomNavigationBar() {
   return (
     <Container>
       {MENU_LIST.map((menu) => {
-        const isSelected =
-          mainPath === menu.route ||
-          (mainPath === '/photographerProfile' && menu.route === '/my');
+        const isSelected = mainPath === menu.route;
 
         return (
           <Tab key={menu.route} href={menu.route}>
