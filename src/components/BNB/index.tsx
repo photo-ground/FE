@@ -23,7 +23,7 @@ export default function BottomNavigationBar() {
   const pathname = usePathname();
 
   console.log('!!', pathname[0]);
-  const mainPath = '/' + pathname.split('/')[1].split('?')[0];
+  const mainPath = `/${pathname.split('/')[1].split('?')[0]}`;
 
   if (
     mainPath !== '/photographer' &&
