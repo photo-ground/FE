@@ -21,7 +21,7 @@ import CTAButton from '@/components/atoms/CTAButton';
 import { PostInfoProps, PostUploadContainerProps } from '@/types/post';
 import { Option } from '@/types/option';
 import { useRouter } from 'next/navigation';
-import UnivRadioGroup from '@/app/my/photographerProfile/[id]/setPostDetail/_component/UnivRadioGroup';
+import UnivRadioGroup from '@/app/my/setPostDetail/_component/UnivRadioGroup';
 import ImagePreviewItem from '@/app/my/_component/ImagePreviewItem';
 import {
   ButtonBox,
@@ -29,7 +29,7 @@ import {
   Textarea,
   Title,
   UploadArea,
-} from '@/app/my/photographerProfile/[id]/setPostDetail/style';
+} from '@/app/my/setPostDetail/style';
 
 export default function Main({ photographerId }: { photographerId: number }) {
   const [isComplete, setIsComplete] = useState<boolean>(false);

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import useUserStore from '@/store/useUserStore';
 import getAccessToken from '@/lib/getAccessToken';
-import PhotographerDetailScreen from './screen';
+import PhotographerDetailScreen from './PhotographerDetailScreen';
 
 export interface PhotographerDetail {
   profileUrl: string;

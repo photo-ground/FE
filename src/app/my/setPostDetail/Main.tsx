@@ -22,7 +22,7 @@ import { PostInfoProps, PostUploadContainerProps } from '@/types/post';
 import { Option } from '@/types/option';
 import { useRouter } from 'next/navigation';
 import UnivRadioGroup from './_component/UnivRadioGroup';
-import ImagePreviewItem from '../../../_component/ImagePreviewItem';
+import ImagePreviewItem from '../_component/ImagePreviewItem';
 import {
   ButtonBox,
   SelectPhotoSpot,
@@ -31,7 +31,7 @@ import {
   UploadArea,
 } from './style';
 
-export default function Main({ photographerId }: { photographerId: number }) {
+export default function Main() {
   const [isComplete, setIsComplete] = useState<boolean>(false);
   const [textareaContent, setTextareaContent] = useState<string>('');
   const [spotData, setSpotData] = useState<Option[]>([]);
@@ -111,9 +111,10 @@ export default function Main({ photographerId }: { photographerId: number }) {
   // Mutations
   const createPostMutation = useMutation({
     mutationFn: ({ newContent }: { newContent: PostUploadContainerProps }) =>
-      postNewContent(photographerId, newContent),
+      postNewContent(newContent),
     onSuccess: () => {
-      router.push(`/my/photographerProfile/${photographerId}`);
+      console.log(createPostMutation.data);
+      router.push(`/my`);
     },
     onError: (err) => {
       console.error('Error creating post:', err);

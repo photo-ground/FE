@@ -2,7 +2,7 @@
 
 import useUserStore from '@/store/useUserStore';
 import UserPage from './UserPage';
-import PhotographerProfile from './photographerProfile/[id]';
+import PhotographerProfile from './PhotographerPage';
 
 export default function PhotographerPage() {
   const role = useUserStore((state) => state.role);
