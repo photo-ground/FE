@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 import Lottie from 'react-lottie';
 import BREAK_POINT from '@/styles/constants';
