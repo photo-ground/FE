@@ -7,17 +7,14 @@ const getHeaders = (token: string) => ({
 });
 
 // my : 고객 정보 조회
-export default async function getPhotographerId() {
+export default async function getPhotographerId(token: string) {
   // 요청할 주소
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer/myId`;
 
   try {
-    // 1. Access Token 가져오기
-    const accessToken = localStorage.getItem('accessToken');
-
     // 2. 첫 번째 요청 시도
     const response = await axios.get(url, {
-      headers: getHeaders(accessToken || ''),
+      headers: { Authorization: token },
     });
 
     return response.data;
@@ -36,7 +33,7 @@ export default async function getPhotographerId() {
       return retryResponse.data;
     }
     if (error.response?.status === 403) {
-      alert('재로그인이 필요합니다.');
+      // alert('재로그인이 필요합니다.');
       throw error;
     }
 

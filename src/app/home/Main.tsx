@@ -14,6 +14,7 @@ import styled from 'styled-components';
 
 import RightChevronIcon from '@/assets/RightChevronIcon';
 
+import useUserStore from '@/store/useUserStore';
 import { UNIV_LIST } from '@/types/univOption';
 import useUnivStore from '@/store/useUnivStore';
 import checkAuth from '@/lib/checkAuth';
@@ -61,17 +62,17 @@ const SearchWrapper = styled.div`
 `;
 
 export default function Main() {
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
+  const role = useUserStore((state) => state.role);
+  const token = useUserStore((state) => state.token);
   const router = useRouter();
   const { univ, setUniv } = useUnivStore();
   const [selectedUniv, setSelectedUniv] = useState<string | null>(null);
-
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [role, setRole] = useState<string | null>('');
 
   const { refetch: fetchUserInfo } = useQuery<UserInfoProps>({
     queryKey: ['user'],
-    queryFn: getUserInfo,
+    queryFn: () => getUserInfo(token),
     enabled: false, // 인증된 상태에서만 호출
   });
 
@@ -79,22 +80,26 @@ export default function Main() {
   useEffect(() => {
     async function authenticate() {
       const authResult = await checkAuth(); // 분리된 함수 호출
-      if (authResult && localStorage.getItem('role') === 'ROLE_CUSTOMER') {
+      if (authResult && role === 'ROLE_CUSTOMER') {
         // 인증된 상태에서 사용자 정보 가져오기
-        setRole(localStorage.getItem('role')); // 홈페이지내에 고객이라고
-        setIsAuthenticated(authResult); // 인증 됨
-        const user = await fetchUserInfo(); // 데이터 가져와
-        // console.log(user);
-        if (user?.data?.univ) {
-          setUniv(user.data.univ); // Zustand의 학교 정보 업데이트
-        }
+        // setIsAuthenticated(authResult); // 인증 됨
+        // const user = await fetchUserInfo(); // 데이터 가져와
+        // // console.log(user);
+        // if (user?.data?.univ) {
+        //   setUniv(user.data.univ); // Zustand의 학교 정보 업데이트
+        // }
       }
 
       setIsLoading(false);
     }
 
+    if (isLoggedIn) {
+      setIsLoading(false);
+      return;
+    }
+
     authenticate();
-  }, [fetchUserInfo, setUniv]);
+  }, [isLoggedIn, role, fetchUserInfo, setUniv]);
 
   // Show loading state
   if (isLoading) {
@@ -102,7 +107,7 @@ export default function Main() {
   }
 
   // 만약 인증하지 않고 둘러볼 학교도 선택하지 않았다면
-  if (!isAuthenticated && !univ && role !== 'ROLE_PHOTOGRAPHER') {
+  if (!isLoggedIn && !univ && role !== 'ROLE_PHOTOGRAPHER') {
     return (
       <AlertModal
         icon={<CheckIcon />}

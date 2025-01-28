@@ -5,7 +5,6 @@ import { create } from 'zustand';
 // State types
 interface States {
   isLoggedIn: boolean; // 로그인 여부
-
   univ: string; // 현재 학교 정보
 }
 
