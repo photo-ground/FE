@@ -56,11 +56,7 @@ export default function PhotographerDetailScreen({
     const pages = postData?.pages;
     if (!pages || !pages?.length) return;
 
-    setPostList((prev) => [
-      ...prev,
-      ...pages[pages.length - 1].profilePostResponseDTOList,
-    ]);
-
+    setPostList(pages.flatMap((page) => page.profilePostResponseDTOList));
     setHasNext(postData?.pages[pages.length - 1].hasNext);
   }, [postData]);
 
