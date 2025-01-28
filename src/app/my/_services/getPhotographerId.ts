@@ -36,7 +36,7 @@ export default async function getPhotographerId() {
       return retryResponse.data;
     }
     if (error.response?.status === 403) {
-      alert('재로그인이 필요합니다.');
+      // alert('재로그인이 필요합니다.');
       throw error;
     }
 

@@ -42,6 +42,7 @@ export default function SignInForm() {
   const setIsLoggedIn = useUserStore((state) => state.setIsLoggedIn);
   const setRole = useUserStore((state) => state.setRole);
   const setToken = useUserStore((state) => state.setToken);
+  const setPhotographerId = useUserStore((state) => state.setPhotographerId);
 
   const router = useRouter();
 
@@ -56,6 +57,9 @@ export default function SignInForm() {
         setIsLoggedIn(true);
         setRole(response.data!.role as Role);
         setToken(response.data!.accessToken as string);
+        if (response.data?.photographerId) {
+          setPhotographerId(response.data?.photographerId);
+        }
         router.push('/home');
       } else {
         throw new Error('로그인 요청 실패');

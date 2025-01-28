@@ -1,4 +1,5 @@
 import { jwtDecode } from 'jwt-decode';
+import getPhotographerId from '../my/_services/getPhotographerId';
 
 interface DecodedToken {
   user_id?: string; // JWT에 저장된 키에 따라 맞게 수정
@@ -25,12 +26,13 @@ export default async function signin(formData: FormData) {
     const accessToken = rawResponse.headers.get('Authorization')!;
     document.cookie = `accessToken=${accessToken}; Path=/;`;
     const decoded: DecodedToken = jwtDecode(accessToken.split(' ')[1]);
-    const role = decoded.role;
+    const { role } = decoded;
 
-    if (!rawResponse.ok) {
-      const response = await rawResponse.json();
-      throw new Error(response);
+    if (role === 'ROLE_PHOTOGRAPHER') {
+      const photographerId = await getPhotographerId();
+      return { ok: true, data: { accessToken, role, photographerId } };
     }
+
     return { ok: true, data: { accessToken, role } };
   } catch (error: unknown) {
     console.error(error);

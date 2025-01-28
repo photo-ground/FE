@@ -10,6 +10,7 @@ interface States {
   univ: UnivValue;
   role: Role;
   token: string | null;
+  photographerId: number | null;
 }
 
 interface Actions {
@@ -17,6 +18,7 @@ interface Actions {
   setUniv: (newUniv: UnivValue) => void;
   setRole: (newRole: Role) => void;
   setToken: (newToken: string) => void;
+  setPhotographerId: (newId: number) => void;
 }
 
 const useUserStore = create(
@@ -26,11 +28,14 @@ const useUserStore = create(
       univ: '서강대학교', // 기본값은 서강대학교
       role: 'ROLE_CUSTOMER', // 기본값은 고객
       token: null,
+      photographerId: null,
 
       setIsLoggedIn: (state) => set(() => ({ isLoggedIn: state })),
       setUniv: (newUniv) => set(() => ({ univ: newUniv })),
       setRole: (newRole) => set(() => ({ role: newRole })),
       setToken: (newToken: string) => set(() => ({ token: newToken })),
+      setPhotographerId: (newId: number) =>
+        set(() => ({ photographerId: newId })),
     }),
     {
       name: 'photo-ground-user', // 로컬스토리지 키 이름
