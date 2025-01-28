@@ -12,7 +12,7 @@ export default async function refreshAccessToken() {
   }
 
   const data = await response.json();
-  localStorage.setItem('accessToken', data.accessToken);
+  document.cookie = `accessToken=${data.accessToken}; Path=/;`;
 
   return data.accessToken;
 }

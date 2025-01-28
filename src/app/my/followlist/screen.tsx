@@ -22,7 +22,9 @@ export default function FollowScreen({ data }: { data: Follow[] }) {
       <TNB.Back text="팔로우 목록" />
 
       <FollowList>
-        <Text variant="caption1_md">{data?.length || 0}개의 팔로잉</Text>
+        <Text variant="caption1_md" color="#a6a6a6">
+          {data?.length || 0}개의 팔로잉
+        </Text>
 
         {data?.map((user) => (
           <FollowItem

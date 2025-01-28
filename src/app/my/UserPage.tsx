@@ -27,12 +27,11 @@ const Background = styled.img`
 
 export default function UserPage() {
   const role = useUserStore((state) => state.role);
-  const token = useUserStore((state) => state.token);
   const router = useRouter();
 
   const { data: userInfo } = useQuery<UserInfoProps>({
     queryKey: ['userInfo'],
-    queryFn: () => getUserInfo(token),
+    queryFn: getUserInfo,
   });
 
   const handleEdit = () => {

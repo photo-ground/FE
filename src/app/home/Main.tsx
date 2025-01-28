@@ -64,7 +64,6 @@ const SearchWrapper = styled.div`
 export default function Main() {
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const role = useUserStore((state) => state.role);
-  const token = useUserStore((state) => state.token);
   const router = useRouter();
   const { univ, setUniv } = useUnivStore();
   const [selectedUniv, setSelectedUniv] = useState<string | null>(null);
@@ -72,7 +71,7 @@ export default function Main() {
 
   const { refetch: fetchUserInfo } = useQuery<UserInfoProps>({
     queryKey: ['user'],
-    queryFn: () => getUserInfo(token),
+    queryFn: () => getUserInfo(),
     enabled: false, // 인증된 상태에서만 호출
   });
 

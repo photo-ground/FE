@@ -45,7 +45,11 @@ export default function PhotographerPage() {
   };
 
   const { ref, inView } = useInView();
-  const { data: postData, fetchNextPage } = useInfiniteQuery({
+  const {
+    data: postData,
+    fetchNextPage,
+    refetch,
+  } = useInfiniteQuery({
     queryKey: ['photographerList'],
     queryFn: ({ pageParam }) =>
       getPhotographerList({ ...filter, cursor: pageParam }),
@@ -70,6 +74,10 @@ export default function PhotographerPage() {
     setPhotographerList(pages.flatMap((page) => page.photographerList));
     setHasNext(postData?.pages[pages.length - 1].hasNext);
   }, [postData]);
+
+  useEffect(() => {
+    refetch();
+  }, [refetch, filter]);
 
   useEffect(() => {
     if (inView) {

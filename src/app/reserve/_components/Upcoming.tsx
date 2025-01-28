@@ -103,7 +103,6 @@ export default function Upcoming({
           <TaskIcon />
           <Text variant="title3">다가오는 일정</Text>
         </TitleTextWrapper>
-
         <DateText variant="caption1_rg">{formatDate(data.date)}</DateText>
       </TitleArea>
 

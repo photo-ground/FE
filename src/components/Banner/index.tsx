@@ -12,11 +12,11 @@ export interface BannerProps {
 
 const BannerWrapper = styled.div`
   @media (max-width: 402px) {
-    background-image: url('/images/banner~402.jpg');
+    background-image: url('/images/banner~402.svg');
     min-height: 120px;
   }
   @media (min-width: 403px) {
-    background-image: url('/images/banner403~520.jpg');
+    background-image: url('/images/banner403~520.svg');
     min-height: 140px;
   }
   display: flex;

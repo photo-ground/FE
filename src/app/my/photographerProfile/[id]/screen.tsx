@@ -27,7 +27,7 @@ export default function PhotographerDetailScreen({
   photographerId,
   data,
 }: {
-  photographerId: string;
+  photographerId: number;
   data: PhotographerDetail;
 }) {
   const { price, introduction, styleList } = data!;
@@ -37,7 +37,8 @@ export default function PhotographerDetailScreen({
   const { ref, inView } = useInView();
   const { data: postData, fetchNextPage } = useInfiniteQuery({
     queryKey: ['posts', photographerId],
-    queryFn: ({ pageParam }) => getPhotographerPosts(photographerId, pageParam),
+    queryFn: ({ pageParam }) =>
+      getPhotographerPosts(photographerId.toString(), pageParam),
     initialPageParam: null,
     getNextPageParam: () => {
       if (!postList || postList.length === 0) {

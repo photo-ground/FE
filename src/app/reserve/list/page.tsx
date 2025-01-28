@@ -5,7 +5,7 @@ export default async function ReservationListPage() {
   const reservationList = await getReservations();
   return (
     <ReservationListScreen
-      reservationList={reservationList.reservationInfoDTOList}
+      reservationList={reservationList?.reservationInfoDTOList || []}
     />
   );
 }
