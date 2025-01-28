@@ -103,51 +103,43 @@ export default function Upcoming({
           <TaskIcon />
           <Text variant="title3">다가오는 일정</Text>
         </TitleTextWrapper>
-        {data && (
-          <DateText variant="caption1_rg">{formatDate(data.date)}</DateText>
-        )}
+        <DateText variant="caption1_rg">{formatDate(data.date)}</DateText>
       </TitleArea>
 
       <DivideLine />
 
-      {data && (
-        <Content>
-          <InfoArea>
-            <InfoLine>
-              <PhotographerIcon />
-              <InfoText variant="body1_rg">
-                {data.photographerName} 작가
-              </InfoText>
-            </InfoLine>
-            <InfoLine>
-              <LocationIcon />
-              <InfoText variant="body1_rg">{data.university}</InfoText>
-            </InfoLine>
-            <InfoLine>
-              <TimeIcon />
-              <InfoText variant="body1_rg">
-                {formatTime(data.startTime)}
-              </InfoText>
-            </InfoLine>
-          </InfoArea>
-          <ButtonArea>
-            <Link href={`/reserve/${data.reservationId}`}>
-              <RightChevronIcon size="20px" />
+      <Content>
+        <InfoArea>
+          <InfoLine>
+            <PhotographerIcon />
+            <InfoText variant="body1_rg">{data.photographerName} 작가</InfoText>
+          </InfoLine>
+          <InfoLine>
+            <LocationIcon />
+            <InfoText variant="body1_rg">{data.university}</InfoText>
+          </InfoLine>
+          <InfoLine>
+            <TimeIcon />
+            <InfoText variant="body1_rg">{formatTime(data.startTime)}</InfoText>
+          </InfoLine>
+        </InfoArea>
+        <ButtonArea>
+          <Link href={`/reserve/${data.reservationId}`}>
+            <RightChevronIcon size="20px" />
+          </Link>
+          {data.chatUrl ? (
+            <Link href={data.chatUrl}>
+              <SmallButton.Tertiary text="채팅방" />
             </Link>
-            {data.chatUrl ? (
-              <Link href={data.chatUrl}>
-                <SmallButton.Tertiary text="채팅방" />
-              </Link>
-            ) : (
-              <Chip
-                icon={PeopleIcon}
-                text={`${data.reserveNum}인`}
-                type="brand"
-              />
-            )}
-          </ButtonArea>
-        </Content>
-      )}
+          ) : (
+            <Chip
+              icon={PeopleIcon}
+              text={`${data.reserveNum}인`}
+              type="brand"
+            />
+          )}
+        </ButtonArea>
+      </Content>
     </Container>
   );
 }
