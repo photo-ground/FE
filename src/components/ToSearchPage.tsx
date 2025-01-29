@@ -11,8 +11,7 @@ const Wrapper = styled(Link)`
 const InputContainer = styled.div`
   display: flex;
   gap: 0.5rem; // 아이콘과 입력창 사이 간격을 임의로 설정
-
-  padding: 0.688rem 1.25rem;
+  padding: 9px 1.25rem;
 
   //이거머임?
   background: linear-gradient(

@@ -1,7 +1,7 @@
 'use client';
 
 import CTAButton from '@/components/atoms/CTAButton';
-import Text from '@/components/atoms/Text';
+import Logo from '@/assets/Logo';
 import goOnboarding from './_actions/goOnboarding';
 import goSignIn from './_actions/goSignIn';
 import { ButtonArea, Container } from './styles';
@@ -9,8 +9,7 @@ import { ButtonArea, Container } from './styles';
 export default function SplashPage() {
   return (
     <Container>
-      <Text variant="header1">Photo Ground</Text>
-
+      <Logo />
       <ButtonArea>
         {/* cookie 설정으로 인해 Link 대신 이벤트 핸들러를 사용합니다 */}
         <CTAButton text="둘러보기" variant="tertiary" onClick={goOnboarding} />
