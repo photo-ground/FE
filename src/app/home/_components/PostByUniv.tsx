@@ -43,10 +43,7 @@ export default function PostByUniv({ univ }: { univ: string }) {
     <CardContainerY>
       {data?.pages.map((page) =>
         page.postList.map((card) => (
-          <CardWrapper
-            key={card.createdAt}
-            href={`/post/${card.photographerId}`}
-          >
+          <CardWrapper key={card.createdAt} href={`/post/${card.id}`}>
             <Card
               key={card.id}
               content={card.firstImageSpot}
