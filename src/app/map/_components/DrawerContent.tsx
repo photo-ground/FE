@@ -1,4 +1,4 @@
-import { Box, Divider, IconButton } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { v4 as uuidv4 } from 'uuid';
 
