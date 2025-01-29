@@ -8,6 +8,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import CTAButton from '@/components/atoms/CTAButton';
 import FloatingButton from '@/components/FloatingButton';
+import useUserStore from '@/store/useUserStore';
 
 import PhotographerProfile from './_components/PhotographerProfile';
 import Price from './_components/Price';
@@ -18,7 +19,6 @@ import { PhotographerDetail } from './_libs/getPhotographerData';
 import getPhotographerPosts, {
   PostSummary,
 } from './_libs/getPhotographerPosts';
-import useUserStore from '@/store/useUserStore';
 
 const Container = styled.div`
   padding-bottom: 6.125rem;
