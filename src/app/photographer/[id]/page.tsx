@@ -9,6 +9,10 @@ export default async function PhotographerDetailPage({
   const id = (await params).id!;
   const photographerData = await getPhotographerData(id);
 
+  if (!photographerData) {
+    return null;
+  }
+
   return (
     <PhotographerDetailScreen photographerId={id} data={photographerData} />
   );

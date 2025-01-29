@@ -18,6 +18,7 @@ import { PhotographerDetail } from './_libs/getPhotographerData';
 import getPhotographerPosts, {
   PostSummary,
 } from './_libs/getPhotographerPosts';
+import useUserStore from '@/store/useUserStore';
 
 const Container = styled.div`
   padding-bottom: 6.125rem;
@@ -38,6 +39,7 @@ export default function PhotographerDetailScreen({
   const { price, introduction, styleList } = data;
   const [postList, setPostList] = useState<PostSummary[]>([]);
   const [hasNext, setHasNext] = useState(true);
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
 
   const { ref, inView } = useInView();
   const { data: postData, fetchNextPage } = useInfiniteQuery({
@@ -94,7 +96,7 @@ export default function PhotographerDetailScreen({
 
       <FloatingButton>
         <Link href={`/photographer/${photographerId}/reserve`}>
-          <CTAButton text="예약하기" />
+          <CTAButton text="예약하기" disabled={!isLoggedIn} />
         </Link>
       </FloatingButton>
     </Container>
