@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers';
+import fetchWithAuth from '@/lib/fetchWithAuth';
 
 export interface PhotographerDetail {
   profileUrl: string;
@@ -23,7 +24,7 @@ export default async function getPhotographerData(id: string) {
       headers.Authorization = cookieStore.get('accessToken')!.value;
     }
 
-    const rawResponse = await fetch(
+    const rawResponse = await fetchWithAuth(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer/${id}/intro`,
       {
         method: 'GET',

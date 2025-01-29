@@ -45,8 +45,8 @@ export default function Overview() {
 
   const { data: postByUnivData, fetchNextPage } = useInfiniteQuery({
     queryKey: ['univPhotoSpotData', univ],
-    queryFn: () => getPostByUniv(univ),
-    initialPageParam: null,
+    queryFn: ({ pageParam }) => getPostByUniv(univ, pageParam),
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       if (!lastPage.hasNext) {
         return null;

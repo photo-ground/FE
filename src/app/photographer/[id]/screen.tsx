@@ -8,6 +8,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import CTAButton from '@/components/atoms/CTAButton';
 import FloatingButton from '@/components/FloatingButton';
+import useUserStore from '@/store/useUserStore';
 
 import PhotographerProfile from './_components/PhotographerProfile';
 import Price from './_components/Price';
@@ -38,6 +39,7 @@ export default function PhotographerDetailScreen({
   const { price, introduction, styleList } = data;
   const [postList, setPostList] = useState<PostSummary[]>([]);
   const [hasNext, setHasNext] = useState(true);
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
 
   const { ref, inView } = useInView();
   const { data: postData, fetchNextPage } = useInfiniteQuery({
@@ -94,7 +96,7 @@ export default function PhotographerDetailScreen({
 
       <FloatingButton>
         <Link href={`/photographer/${photographerId}/reserve`}>
-          <CTAButton text="예약하기" />
+          <CTAButton text="예약하기" disabled={!isLoggedIn} />
         </Link>
       </FloatingButton>
     </Container>

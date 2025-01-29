@@ -1,4 +1,4 @@
-import { Box, Divider, IconButton } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { v4 as uuidv4 } from 'uuid';
 
@@ -18,7 +18,7 @@ import { SliderData } from './Slider';
 const CardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  gap: 10px;
 `;
 
 const TextContainer = styled.div`
@@ -74,6 +74,11 @@ const ChipContainer = styled.div`
   text-align: center;
 `;
 
+const CloseIconButton = styled.div`
+  margin-top: 1rem;
+  // background-color: red;
+`;
+
 export default function DrawerContent({
   photoSpotData,
   toggleDrawer,
@@ -123,9 +128,9 @@ export default function DrawerContent({
         onClick={() => toggleDrawer(false)}
       >
         <StickyHeader>
-          <IconButton onClick={handleDrawerClose}>
+          <CloseIconButton onClick={handleDrawerClose}>
             <CloseIcon />
-          </IconButton>
+          </CloseIconButton>
           <DrawerHandle />
         </StickyHeader>
 
@@ -145,7 +150,7 @@ export default function DrawerContent({
     <Box
       sx={{
         width: 'inherit',
-        padding: '1rem',
+        padding: '20px',
         paddingTop: '0',
         boxSizing: 'border-box',
       }}
@@ -153,9 +158,9 @@ export default function DrawerContent({
       onClick={() => toggleDrawer(false)}
     >
       <StickyHeader>
-        <IconButton onClick={handleDrawerClose}>
+        <CloseIconButton onClick={handleDrawerClose}>
           <CloseIcon />
-        </IconButton>
+        </CloseIconButton>
         <DrawerHandle />
       </StickyHeader>
 

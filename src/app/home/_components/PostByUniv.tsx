@@ -23,13 +23,13 @@ export default function PostByUniv({ univ }: { univ: string }) {
   const { ref, inView } = useInView();
   const { data, fetchNextPage } = useInfiniteQuery({
     queryKey: ['photographerList', univ],
-    queryFn: () => getPostByUniv(univ),
-    initialPageParam: null,
+    queryFn: ({ pageParam }) => getPostByUniv(univ, pageParam),
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       if (!lastPage.hasNext) {
         return null;
       }
-      return lastPage.postList.at(-1)?.id;
+      return lastPage.postList.at(-1)?.id ?? null;
     },
   });
 
@@ -43,10 +43,7 @@ export default function PostByUniv({ univ }: { univ: string }) {
     <CardContainerY>
       {data?.pages.map((page) =>
         page.postList.map((card) => (
-          <CardWrapper
-            key={card.createdAt}
-            href={`/post/${card.photographerId}`}
-          >
+          <CardWrapper key={card.createdAt} href={`/post/${card.id}`}>
             <Card
               key={card.id}
               content={card.firstImageSpot}
