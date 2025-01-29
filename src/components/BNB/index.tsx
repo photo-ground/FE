@@ -24,8 +24,6 @@ export default function BottomNavigationBar() {
 
   const mainPath = pathname.split('?')[0];
 
-  console.log(mainPath);
-
   if (
     mainPath !== '/photographer' &&
     mainPath !== '/map' &&
