@@ -60,7 +60,9 @@ const SubText = styled(Text)`
 
 const UnivWrapper = styled.div`
   display: flex;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+
+  gap: 0 0.5rem;
   align-items: center;
 `;
 
