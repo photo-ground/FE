@@ -23,13 +23,13 @@ export default function PostByUniv({ univ }: { univ: string }) {
   const { ref, inView } = useInView();
   const { data, fetchNextPage } = useInfiniteQuery({
     queryKey: ['photographerList', univ],
-    queryFn: () => getPostByUniv(univ),
-    initialPageParam: null,
+    queryFn: ({ pageParam }) => getPostByUniv(univ, pageParam),
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       if (!lastPage.hasNext) {
         return null;
       }
-      return lastPage.postList.at(-1)?.id;
+      return lastPage.postList.at(-1)?.id ?? null;
     },
   });
 

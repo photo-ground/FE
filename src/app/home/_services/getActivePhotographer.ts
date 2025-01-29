@@ -19,17 +19,16 @@ export async function getActivePhotographer(): Promise<PhotographerProps> {
 
 export async function getPostByUniv(
   univ: string,
-  cursor?: number,
+  cursor?: number | null,
 ): Promise<PostProps> {
-  // url.search = createSearchParams({ univ, cursor });
-
   const params = new URLSearchParams();
-  // console.log(univ);
   if (univ) {
     params.append('univ', univ);
   }
 
   if (cursor) {
+    console.log(univ, cursor);
+
     params.append('cursor', cursor.toString());
   }
   const url = new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`);
