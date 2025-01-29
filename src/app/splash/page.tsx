@@ -1,10 +1,10 @@
 'use client';
 
 import CTAButton from '@/components/atoms/CTAButton';
+import Logo from '@/assets/Logo';
 import goOnboarding from './_actions/goOnboarding';
 import goSignIn from './_actions/goSignIn';
 import { ButtonArea, Container } from './styles';
-import Logo from '@/assets/Logo';
 
 export default function SplashPage() {
   return (
