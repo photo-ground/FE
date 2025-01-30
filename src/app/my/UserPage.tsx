@@ -41,8 +41,8 @@ export default function UserPage() {
   const handleKakaoChat = () => {
     const kakaoWebLink = 'https://open.kakao.com/o/sSt4vndh';
 
-    // 1. 모바일 환경에서 먼저 웹 링크를 오픈 (카카오톡 내부에서 자동 실행됨)
-    window.location.href = kakaoWebLink;
+    // 새 탭에서 링크 열기
+    window.open(kakaoWebLink, '_blank');
   };
   return (
     <Container>
