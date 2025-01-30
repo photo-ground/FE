@@ -18,8 +18,7 @@ const HeaderContainer = styled.div`
   flex-direction: column;
   text-align: center;
   gap: 10px;
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
+  margin: 1.5rem 20px 2rem 20px;
   .text-pre {
     white-space: pre-line;
     color: ${({ theme }) => theme.colors.gray[200]};
