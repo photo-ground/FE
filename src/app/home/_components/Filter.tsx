@@ -47,7 +47,7 @@ const OptionWrapper = styled.div`
   flex-direction: column;
   align-items: flex-end;
   text-align: end;
-  right: 32px;
+  right: 20px;
 
   background: ${({ theme }) => theme.colors.gray[800]};
   border-radius: 0.5rem;
