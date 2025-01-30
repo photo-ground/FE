@@ -1,4 +1,5 @@
 import fetchWithAuth from '@/lib/fetchWithAuth';
+import getAccessToken from '@/lib/getAccessToken';
 
 export default async function completeSnap(reservationId: number) {
   try {
@@ -8,7 +9,7 @@ export default async function completeSnap(reservationId: number) {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: localStorage.getItem('accessToken')!,
+          Authorization: getAccessToken(),
         },
       },
     );
