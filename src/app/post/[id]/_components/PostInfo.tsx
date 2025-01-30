@@ -41,15 +41,22 @@ const ContentText = styled(Text)`
   color: ${({ theme }) => theme.colors.gray[200]};
 `;
 
+function formatDate(date: string) {
+  const dates = date.split('T')[0].split('-');
+  return `${dates[0].slice(2, 4)}.${dates[1]}.${dates[2]}`;
+}
+
 export default function PostInfo({
   photographerId,
   photographerName,
   profileUrl,
+  createdAt,
   content,
 }: {
   photographerId: PostDetail['photographerId'];
   photographerName: PostDetail['photographerName'];
   profileUrl: PostDetail['profileUrl'];
+  createdAt: PostDetail['createdAt'];
   content: PostDetail['content'];
 }) {
   return (
@@ -58,7 +65,7 @@ export default function PostInfo({
         <Profile src={profileUrl} alt={photographerName} />
         <PhotographerInfo>
           <Text variant="title2_sb">{photographerName} 작가</Text>
-          <DateText variant="caption1_rg">{photographerName}</DateText>
+          <DateText variant="caption1_rg">{formatDate(createdAt)}</DateText>
         </PhotographerInfo>
       </PhotographerInfoArea>
 

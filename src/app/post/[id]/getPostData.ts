@@ -5,6 +5,7 @@ export interface PostDetail {
   profileUrl: string;
   content: string;
   univName: string;
+  createdAt: string;
   imageList: {
     imageUrl: string;
     spotName: string;
