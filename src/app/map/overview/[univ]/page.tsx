@@ -22,7 +22,6 @@ import { SliderData } from '../../_components/Slider';
 const CardContainerY = styled.div`
   display: grid;
 
-  height: 100%;
   overflow: auto;
   grid-template-columns: 1fr 1fr 1fr; /* 3열 */
   padding: 1rem 1.25rem;

@@ -32,8 +32,7 @@ interface MainProps {
 const CardContainerY = styled.div`
   display: grid;
 
-  height: calc(100% - 64px - 56px);
-  overflow: auto;
+  overflow: scroll;
   grid-template-columns: 1fr 1fr 1fr; /* 3열 */
   padding: 1rem 1.25rem;
 
