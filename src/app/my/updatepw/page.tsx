@@ -9,7 +9,7 @@ import CTAButton from '@/components/atoms/CTAButton';
 import Text from '@/components/atoms/Text';
 import Spacer from '@/components/Spacer';
 import TNB from '@/components/TNB';
-import CheckIcon from '@/assets/CheckIcon';
+import CheckIcon from '@/assets/modal/CheckIcon';
 import AlertModal from '@/components/modals/AlertModal';
 import { useMutation } from '@tanstack/react-query';
 import { PasswordInput, PasswordForm } from '@/app/my/_component';

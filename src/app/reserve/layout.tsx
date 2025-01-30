@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import checkAuth from '@/lib/checkAuth';
 import AlertModal from '@/components/modals/AlertModal';
-import CheckIcon from '@/assets/CheckIcon';
+import CheckIcon from '@/assets/modal/CheckIcon';
 
 export default function ProtectedLayout({
   children,
