@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
 import theme from '@/styles/theme';
@@ -8,11 +9,24 @@ import BNBMapIcon from '@/assets/bnb/BNB_MapIcon';
 import BNBHomeIcon from '@/assets/bnb/BNB_HomeIcon';
 import BNBCalendarIcon from '@/assets/bnb/BNB_CalendarIcon';
 import BNBProfileIcon from '@/assets/bnb/BNBProfileIcon';
+import CheckIcon from '@/assets/modal/CheckIcon';
+import useUserStore from '@/store/useUserStore';
 import { Container, Tab, TabText } from './styles';
+import AlertModal from '../modals/AlertModal';
 
 export default function BottomNavigationBar() {
   const router = useRouter();
   const pathname = usePathname().split('?')[0];
+  const [isOpen, setIsOpen] = useState(false);
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
+
+  const onOpen = () => {
+    setIsOpen(true);
+  };
+
+  const onClose = () => {
+    setIsOpen(false);
+  };
 
   const MENU_LIST = [
     {
@@ -44,7 +58,11 @@ export default function BottomNavigationBar() {
       route: '/reserve',
       icon: BNBCalendarIcon,
       onClick: () => {
-        router.push('/reserve');
+        if (!isLoggedIn) {
+          onOpen();
+        } else {
+          router.push('/reserve');
+        }
       },
     },
     {
@@ -52,7 +70,11 @@ export default function BottomNavigationBar() {
       route: '/my',
       icon: BNBProfileIcon,
       onClick: () => {
-        router.push('/my');
+        if (!isLoggedIn) {
+          onOpen();
+        } else {
+          router.push('/my');
+        }
       },
     },
   ];
@@ -68,23 +90,37 @@ export default function BottomNavigationBar() {
   }
 
   return (
-    <Container>
-      {MENU_LIST.map((menu) => {
-        const isSelected = pathname === menu.route;
+    <>
+      <Container>
+        {MENU_LIST.map((menu) => {
+          const isSelected = pathname === menu.route;
 
-        return (
-          <Tab key={menu.route} onClick={menu.onClick}>
-            <menu.icon
-              color={
-                isSelected ? theme.colors.primary[100] : theme.colors.gray[300]
-              }
-            />
-            <TabText variant="caption3" $isSelected={isSelected}>
-              {menu.title}
-            </TabText>
-          </Tab>
-        );
-      })}
-    </Container>
+          return (
+            <Tab key={menu.route} onClick={menu.onClick}>
+              <menu.icon
+                color={
+                  isSelected
+                    ? theme.colors.primary[100]
+                    : theme.colors.gray[300]
+                }
+              />
+              <TabText variant="caption3" $isSelected={isSelected}>
+                {menu.title}
+              </TabText>
+            </Tab>
+          );
+        })}
+      </Container>
+      {isOpen && (
+        <AlertModal
+          icon={<CheckIcon />}
+          title="로그인 후 이용해주세요!"
+          content="예약 및 작가 탐색을 더 쉽게 할 수 있어요"
+          confirmText="로그인"
+          onConfirm={() => router.replace('/signin')}
+          onCancel={onClose}
+        />
+      )}
+    </>
   );
 }
