@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import styled from 'styled-components';
 import BREAK_POINT from '@/styles/constants';
 import Text from '../atoms/Text';
@@ -7,7 +6,8 @@ export const Container = styled.nav`
   position: fixed;
   bottom: 0;
 
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   align-items: center;
   justify-content: space-around;
 
@@ -17,15 +17,20 @@ export const Container = styled.nav`
   background: #0e0e0ecc;
   border-top: 1px solid ${({ theme }) => theme.colors.gray[800]};
   backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
 `;
 
-export const Tab = styled(Link)`
+export const Tab = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.25rem;
 
-  text-decoration: none;
+  background: transparent;
+  border: none;
+  outline: none;
+
+  cursor: pointer;
 `;
 
 export const TabText = styled(Text)<{ $isSelected: boolean }>`
