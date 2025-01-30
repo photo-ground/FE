@@ -38,6 +38,12 @@ export default function UserPage() {
     router.push('/my/editinfo');
   };
 
+  const handleKakaoChat = () => {
+    const kakaoWebLink = 'https://open.kakao.com/o/sSt4vndh';
+
+    // 1. 모바일 환경에서 먼저 웹 링크를 오픈 (카카오톡 내부에서 자동 실행됨)
+    window.location.href = kakaoWebLink;
+  };
   return (
     <Container>
       <Background src="/images/background1.webp" alt="background" />
@@ -55,7 +61,7 @@ export default function UserPage() {
             text="내가 쓴 리뷰"
             onClick={() => router.push('/my/reviews')}
           />
-          <ListItem text="고객센터" />
+          <ListItem text="고객센터" onClick={() => handleKakaoChat()} />
         </>
       )}
     </Container>
