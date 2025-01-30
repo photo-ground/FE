@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import AlertModal from '@/components/modals/AlertModal';
-import CheckIcon from '@/assets/CheckIcon';
+import CheckIcon from '@/assets/modal/CheckIcon';
 import useUserStore from '@/store/useUserStore';
 
 export default function ProtectedLayout({
