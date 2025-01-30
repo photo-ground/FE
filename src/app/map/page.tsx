@@ -16,7 +16,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Drawer } from '@mui/material';
 
 import AlertModal from '@/components/modals/AlertModal';
-import CheckIcon from '@/assets/CheckIcon';
+import CheckIcon from '@/assets/modal/CheckIcon';
 
 import makeMarker from './_util/makeMarker';
 import Chip from './_components/Chip';

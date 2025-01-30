@@ -1,8 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
-import Card from '@/components/Card';
 import { useQuery } from '@tanstack/react-query';
+
+import Card from '@/components/Card';
+import Text from '@/components/atoms/Text';
 import { PhotographerProps } from '@/types/photographer';
 import { getActivePhotographer } from '../_services/getActivePhotographer';
 
@@ -18,12 +20,14 @@ const CardContainerX = styled.div`
     max-width: 80px;
   }
 `;
-const CardTitle = styled.div`
-  // background-color: red;
+const CardTitle = styled(Text)`
   margin-top: 0.75rem;
   color: ${({ theme }) => theme.colors.gray[200]};
   text-align: center;
-  text: ${({ theme }) => theme.typography.body3};
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export default function RecommendedPhotographer() {
@@ -53,7 +57,9 @@ export default function RecommendedPhotographer() {
           key={card.photographerId}
           size="round"
           src={card.profileUrl}
-          etc={<CardTitle>{card.photographerName}</CardTitle>}
+          etc={
+            <CardTitle variant="body2_rg">{card.photographerName}</CardTitle>
+          }
         />
       ))}
     </CardContainerX>

@@ -1,4 +1,5 @@
 import fetchWithAuth from '@/lib/fetchWithAuth';
+import getAccessToken from '@/lib/getAccessToken';
 
 export default async function writeReview(
   reservationId: string,
@@ -14,7 +15,7 @@ export default async function writeReview(
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: localStorage.getItem('accessToken')!,
+          Authorization: getAccessToken(),
         },
         body: JSON.stringify({ ...data }),
       },

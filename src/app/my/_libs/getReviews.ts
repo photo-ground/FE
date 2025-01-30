@@ -1,9 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
+import axios from 'axios';
+import getAccessToken from '@/lib/getAccessToken';
 import getTokenFromLocalStorage from '@/lib/getTokenFromLocalStorage';
 import refreshAccessToken from '@/lib/refreshToken';
 import { UpdateUserInfoProps } from '@/types/user';
-import axios from 'axios';
 
 // 기본 헤더 구성
 const getHeaders = (token: string) => ({
@@ -54,7 +55,7 @@ export async function updateUserInfo(userUpdateInfo: UpdateUserInfoProps) {
   // console.log(userUpdateInfo);
   try {
     // 1. Access Token 가져오기
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = getAccessToken();
 
     // 2. 첫 번째 요청 시도
     const response = await axios.patch(url, userUpdateInfo, {
@@ -99,7 +100,7 @@ export async function updateUserPassword({ password }: { password: string }) {
   const passwordInfo = { password };
   try {
     // 1. Access Token 가져오기
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = getAccessToken();
 
     // 2. 첫 번째 요청 시도
     const response = await axios.patch(url, passwordInfo, {
@@ -144,7 +145,7 @@ export async function deleteUser() {
 
   try {
     // 1. Access Token 가져오기
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = getAccessToken();
 
     // 2. 첫 번째 요청 시도
     const response = await axios.patch(url, {
