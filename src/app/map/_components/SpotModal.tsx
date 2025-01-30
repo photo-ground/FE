@@ -28,7 +28,6 @@ import { SliderData } from './Slider';
 import useSpotStore from '../_store';
 
 const ImageContainer = styled.div`
-  position: relative;
   width: 100%;
   max-width: 286px;
   aspect-ratio: 3 / 4;
@@ -50,21 +49,18 @@ const Image = styled.img`
 `;
 
 const ModalContainer = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: 0;
+  left: 50;
   width: 100%;
   height: 100%;
+  max-width: 540px;
   background-color: ${({ theme }) => theme.colors.black};
   z-index: 1000;
   padding: 1rem;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
 `;
 
 const Overlay = styled.div`
-  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -74,11 +70,6 @@ const Overlay = styled.div`
 
 const CloseHeader = styled.div`
   margin-right: auto;
-`;
-const ContentWrapper = styled.div`
-  display: flex;
-  align-items: center; /* 세로 기준으로 가운데 정렬 */
-  justify-content: center; /* 가로 기준으로 가운데 정렬 */
 `;
 
 const Info = styled.div`
@@ -91,19 +82,18 @@ const SwiperSlideBox = styled(SwiperSlide)`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 500px;
   margin: 0;
   button {
     width: fit-content;
     margin: 0 auto;
   }
 `;
-
-const ContentArea = styled.div`
+const ContentWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  justify-items: center;
-  height: 100%;
+  height: 90%;
+  align-items: center; /* 세로 기준으로 가운데 정렬 */
+  justify-content: center; /* 가로 기준으로 가운데 정렬 */
 `;
 
 interface ModalProps {
@@ -132,6 +122,7 @@ export default function SpotModal({ sliderData, setModalState }: ModalProps) {
 
   return ReactDOM.createPortal(
     <>
+      {/* <Backdrop /> */}
       <Overlay onClick={() => window.history.back()} />
       <ModalContainer>
         <CloseHeader>
@@ -139,58 +130,56 @@ export default function SpotModal({ sliderData, setModalState }: ModalProps) {
             <CloseIcon />
           </IconButton>
         </CloseHeader>
-        <ContentArea>
-          <ContentWrapper>
-            {/* 커스텀 내비게이션 버튼 */}
-            <div className="custom-prev">
-              <IconButton>
-                <LeftChevronIcon /> {/* 원하는 아이콘 컴포넌트 */}
-              </IconButton>
-            </div>
+        <ContentWrapper>
+          {/* 커스텀 내비게이션 버튼 */}
+          <div className="custom-prev">
+            <IconButton>
+              <LeftChevronIcon /> {/* 원하는 아이콘 컴포넌트 */}
+            </IconButton>
+          </div>
 
-            <Swiper
-              // install Swiper modules
-              modules={[Navigation, Scrollbar, A11y]}
-              spaceBetween={50}
-              slidesPerView={1}
-              navigation={{
-                nextEl: '.custom-next',
-                prevEl: '.custom-prev',
-              }}
-              initialSlide={currPostIdIndex as number}
-              scrollbar={{ draggable: true }}
-              onSwiper={(swiper) => console.log(swiper)}
-              onSlideChange={() => console.log('slide change')}
-            >
-              {sliderData.map((item) => (
-                <SwiperSlideBox key={`${item.postId}_${uuidv4()}`}>
-                  <ImageContainer>
-                    <Image src={item.imageUrl} alt={item.imageUrl} />
-                  </ImageContainer>
-                  <Info>
-                    <Text variant="header2">{item.photographerName}</Text>
-                    <Text variant="body3" color="#a6a6a6">
-                      {item.univ} | {item.spotName}
-                    </Text>
-                  </Info>
-                  <SmallButton.Tertiary
-                    onClick={() => handleSmallButton(item.postId)}
-                    text="게시물 보기"
-                  />
-                </SwiperSlideBox>
-              ))}
-            </Swiper>
-            <div className="custom-next">
-              <IconButton>
-                <RightChevronIcon /> {/* 원하는 아이콘 컴포넌트 */}
-              </IconButton>
-            </div>
-            {/* <Slider
+          <Swiper
+            // install Swiper modules
+            modules={[Navigation, Scrollbar, A11y]}
+            spaceBetween={50}
+            slidesPerView={1}
+            navigation={{
+              nextEl: '.custom-next',
+              prevEl: '.custom-prev',
+            }}
+            initialSlide={currPostIdIndex as number}
+            scrollbar={{ draggable: true }}
+            onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log('slide change')}
+          >
+            {sliderData.map((item) => (
+              <SwiperSlideBox key={`${item.postId}_${uuidv4()}`}>
+                <ImageContainer>
+                  <Image src={item.imageUrl} alt={item.imageUrl} />
+                </ImageContainer>
+                <Info>
+                  <Text variant="header2">{item.photographerName}</Text>
+                  <Text variant="body3" color="#a6a6a6">
+                    {item.univ} | {item.spotName}
+                  </Text>
+                </Info>
+                <SmallButton.Tertiary
+                  onClick={() => handleSmallButton(item.postId)}
+                  text="게시물 보기"
+                />
+              </SwiperSlideBox>
+            ))}
+          </Swiper>
+          <div className="custom-next">
+            <IconButton>
+              <RightChevronIcon /> {/* 원하는 아이콘 컴포넌트 */}
+            </IconButton>
+          </div>
+          {/* <Slider
             sliderData={sliderData}
             currPostIdIndex={currPostIdIndex ?? 0} // Default to 0 if null
             /> */}
-          </ContentWrapper>
-        </ContentArea>
+        </ContentWrapper>
       </ModalContainer>
     </>,
     document.getElementById('modal-root')!,

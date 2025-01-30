@@ -24,17 +24,23 @@ export async function getPhotoSpotByUniv(
 
 export async function getSelectedSpotInfo(
   photoSpotId: number,
-  lastImageId?: number, // Optional parameter
+  cursor?: number, // Optional parameter
 ): Promise<PhotoSpotProps> {
+  const params = new URLSearchParams();
+
+  console.log(photoSpotId, cursor);
   // Base URL
   const url = new URL(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/spot/${photoSpotId}`,
   );
 
   // Append cursor query parameter only if lastImageId is provided
-  if (lastImageId !== undefined) {
-    url.searchParams.append('cursor', String(lastImageId));
+  if (cursor) {
+    console.log(photoSpotId, cursor);
+    params.append('cursor', cursor.toString());
   }
+
+  url.search = params.toString();
 
   const res = await fetch(url.toString(), {
     next: {

@@ -18,8 +18,7 @@ const HeaderContainer = styled.div`
   flex-direction: column;
   text-align: center;
   gap: 10px;
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
+  margin: 1.5rem 20px 2rem 20px;
   .text-pre {
     white-space: pre-line;
     color: ${({ theme }) => theme.colors.gray[200]};
@@ -33,8 +32,7 @@ interface MainProps {
 const CardContainerY = styled.div`
   display: grid;
 
-  height: calc(100% - 64px - 56px);
-  overflow: auto;
+  overflow: scroll;
   grid-template-columns: 1fr 1fr 1fr; /* 3열 */
   padding: 1rem 1.25rem;
 
@@ -55,9 +53,12 @@ export default function Main({ univ, spotId }: MainProps) {
 
   const { data: photoSpotData, fetchNextPage } = useInfiniteQuery({
     queryKey: ['photoSpotData', spotId],
-    queryFn: () => getSelectedSpotInfo(Number(spotId)),
-    initialPageParam: null,
+    queryFn: ({ pageParam }) => getSelectedSpotInfo(spotId, pageParam),
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => {
+      if (!lastPage.imageInfo.hasNext) {
+        return null;
+      }
       return lastPage.imageInfo.spotPostImageList.at(-1)?.imageId;
     },
   });
