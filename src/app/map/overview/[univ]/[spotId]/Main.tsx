@@ -55,9 +55,12 @@ export default function Main({ univ, spotId }: MainProps) {
 
   const { data: photoSpotData, fetchNextPage } = useInfiniteQuery({
     queryKey: ['photoSpotData', spotId],
-    queryFn: () => getSelectedSpotInfo(Number(spotId)),
-    initialPageParam: null,
+    queryFn: ({ pageParam }) => getSelectedSpotInfo(spotId, pageParam),
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => {
+      if (!lastPage.imageInfo.hasNext) {
+        return null;
+      }
       return lastPage.imageInfo.spotPostImageList.at(-1)?.imageId;
     },
   });
