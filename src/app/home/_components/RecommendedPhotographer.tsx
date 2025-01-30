@@ -16,6 +16,7 @@ const CardContainerX = styled.div`
   gap: 1rem;
   margin: 0 auto 0 20px;
   height: 114px;
+  overflow: scroll;
   div {
     max-width: 80px;
   }
