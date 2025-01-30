@@ -57,7 +57,9 @@ export default function RecommendedPhotographer() {
           key={card.photographerId}
           size="round"
           src={card.profileUrl}
-          etc={<CardTitle variant="body3">{card.photographerName}</CardTitle>}
+          etc={
+            <CardTitle variant="body2_rg">{card.photographerName}</CardTitle>
+          }
         />
       ))}
     </CardContainerX>

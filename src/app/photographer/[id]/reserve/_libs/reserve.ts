@@ -1,4 +1,5 @@
 import fetchWithAuth from '@/lib/fetchWithAuth';
+import getAccessToken from '@/lib/getAccessToken';
 import { ReserveData } from '../type';
 
 export default async function reserve(
@@ -12,7 +13,7 @@ export default async function reserve(
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: localStorage.getItem('accessToken')!,
+          Authorization: getAccessToken(),
         },
         body: JSON.stringify({
           ...data,

@@ -1,4 +1,5 @@
 import fetchWithAuth from '@/lib/fetchWithAuth';
+import getAccessToken from '@/lib/getAccessToken';
 
 export default async function unfollow(photographerId: string) {
   try {
@@ -8,7 +9,7 @@ export default async function unfollow(photographerId: string) {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: localStorage.getItem('accessToken')!,
+          Authorization: getAccessToken(),
         },
       },
     );
