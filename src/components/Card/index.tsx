@@ -32,6 +32,7 @@ const CardTitle = styled(Text)`
 const CardImage = styled.img`
   object-fit: cover;
   border-radius: 0.125rem;
+  flex-shrink: 0;
 `;
 
 const CardContent = styled(Text)`
