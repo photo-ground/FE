@@ -31,6 +31,7 @@ export default function PostScreen({ postData }: { postData: PostDetail }) {
     content,
     univName,
     imageList,
+    createdAt,
   } = postData;
 
   const onChangePage = (newPage: number) => {
@@ -52,6 +53,7 @@ export default function PostScreen({ postData }: { postData: PostDetail }) {
         photographerId={photographerId}
         photographerName={photographerName}
         profileUrl={profileUrl}
+        createdAt={createdAt}
         content={content}
       />
 

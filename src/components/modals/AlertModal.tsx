@@ -16,16 +16,18 @@ export default function AlertModal({
   content,
   confirmText = '확인',
   onConfirm,
+  onCancel = () => {},
 }: {
   title: string;
   content: string;
   confirmText?: string;
   icon: ReactNode;
   onConfirm: () => void;
+  onCancel?: () => void;
 }) {
   return (
     <>
-      <Backdrop />
+      <Backdrop onClick={onCancel} />
       <ModalContainer>
         {icon}
         <ModalTitle variant="body1_md">{title}</ModalTitle>
