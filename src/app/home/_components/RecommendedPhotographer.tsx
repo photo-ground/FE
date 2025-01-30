@@ -10,15 +10,14 @@ import { getActivePhotographer } from '../_services/getActivePhotographer';
 
 const CardContainerX = styled.div`
   display: flex;
-  justify-content: start;
-  // background-color: yellow;
-  // overflow-y: scroll;
   gap: 1rem;
-  margin: 0 auto 0 20px;
-  height: 114px;
+
+  padding: 0 1.25rem;
   div {
     max-width: 80px;
   }
+
+  overflow-x: auto;
 `;
 const CardTitle = styled(Text)`
   margin-top: 0.75rem;
