@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import checkAuth from '@/lib/checkAuth';
 import AlertModal from '@/components/modals/AlertModal';
 import CheckIcon from '@/assets/modal/CheckIcon';
+import LoadingPage from '@/components/LoadingPage';
 
 export default function ProtectedLayout({
   children,
@@ -27,7 +28,7 @@ export default function ProtectedLayout({
 
   // Show loading state
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingPage />;
   }
 
   // Redirect if not authenticated
