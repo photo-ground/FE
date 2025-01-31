@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import TNB from '@/components/TNB';
 import CTAButton from '@/components/atoms/CTAButton';
 import FloatingButton from '@/components/FloatingButton';
+import useUserStore from '@/store/useUserStore';
 import { PostDetail } from './getPostData';
 import PostInfo from './_components/PostInfo';
 import Photo from './_components/Photo';
@@ -23,6 +24,7 @@ const ButtonWrapper = styled.div`
 `;
 
 export default function PostScreen({ postData }: { postData: PostDetail }) {
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const [currentPage, setCurrentPage] = useState(0);
   const {
     photographerId,
@@ -60,11 +62,15 @@ export default function PostScreen({ postData }: { postData: PostDetail }) {
       <FloatingButton>
         <ButtonWrapper>
           <Link href={`/photographer/${photographerId}`}>
-            <CTAButton text="작가 프로필 보기" variant="tertiary" />
+            <CTAButton text="작가 프로필 보기" variant="tertiary" />{' '}
           </Link>
-          <Link href={`/photographer/${photographerId}/reserve`}>
-            <CTAButton text="예약하기" />
-          </Link>
+          {isLoggedIn ? (
+            <Link href={`/photographer/${photographerId}/reserve`}>
+              <CTAButton text="예약하기" />
+            </Link>
+          ) : (
+            <CTAButton text="예약하기" disabled />
+          )}
         </ButtonWrapper>
       </FloatingButton>
     </Container>
