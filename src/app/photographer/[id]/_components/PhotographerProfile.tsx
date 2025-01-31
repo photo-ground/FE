@@ -5,6 +5,8 @@ import Chip from '@/components/atoms/Chip';
 import SmallButton from '@/components/atoms/SmallButton';
 import Text from '@/components/atoms/Text';
 import genderMap from '@/lib/genderMap';
+import useUserStore from '@/store/useUserStore';
+
 import { PhotographerDetail } from '../_libs/getPhotographerData';
 import follow from '../_libs/follow';
 import unfollow from '../_libs/unfollow';
@@ -101,6 +103,7 @@ export default function PhotographerProfile({
     following,
   } = data;
   const [isFollowing, setIsFollowing] = useState(following);
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
 
   return (
     <ThumbnailWrapper>
@@ -117,29 +120,30 @@ export default function PhotographerProfile({
           <ButtonArea>
             <Chip icon={PeopleIcon} text={followerNum.toString()} />
 
-            {isFollowing ? (
-              <SmallButton.Tertiary
-                text="팔로잉"
-                onClick={() => {
-                  unfollow(photographerId).then((response) => {
-                    if (response) {
-                      setIsFollowing(false);
-                    }
-                  });
-                }}
-              />
-            ) : (
-              <SmallButton.Primary
-                text="팔로우"
-                onClick={() => {
-                  follow(photographerId).then((response) => {
-                    if (response) {
-                      setIsFollowing(true);
-                    }
-                  });
-                }}
-              />
-            )}
+            {isLoggedIn &&
+              (isFollowing ? (
+                <SmallButton.Tertiary
+                  text="팔로잉"
+                  onClick={() => {
+                    unfollow(photographerId).then((response) => {
+                      if (response) {
+                        setIsFollowing(false);
+                      }
+                    });
+                  }}
+                />
+              ) : (
+                <SmallButton.Primary
+                  text="팔로우"
+                  onClick={() => {
+                    follow(photographerId).then((response) => {
+                      if (response) {
+                        setIsFollowing(true);
+                      }
+                    });
+                  }}
+                />
+              ))}
           </ButtonArea>
         </Header>
 
