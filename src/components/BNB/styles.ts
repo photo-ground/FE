@@ -18,6 +18,8 @@ export const Container = styled.nav`
   border-top: 1px solid ${({ theme }) => theme.colors.gray[800]};
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
+
+  z-index: 10;
 `;
 
 export const Tab = styled.button`
