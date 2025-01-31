@@ -33,7 +33,7 @@ export default function Price({
         <Text variant="title2_sb">{formatPrice(price)}₩</Text>
       </Header>
 
-      <Message variant="caption1_rg">* 1:1 50분 야와촬영 기준</Message>
+      <Message variant="caption1_rg">* 1:1 50분 야외촬영 기준</Message>
     </Container>
   );
 }
