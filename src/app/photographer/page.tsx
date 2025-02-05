@@ -82,7 +82,7 @@ export default function PhotographerPage() {
 
   return (
     <Container>
-      <Background />
+      <Background type={2} />
 
       <TNB.Title text="사진작가" />
 
