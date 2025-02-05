@@ -42,10 +42,10 @@ const theme = {
   colors: {
     primary: {
       800: COLORS.PRIMARY[800],
-      100: COLORS.PRIMARY[500],
-      80: COLORS.PRIMARY[400],
-      70: COLORS.PRIMARY[300],
-      60: COLORS.PRIMARY[200],
+      500: COLORS.PRIMARY[500],
+      400: COLORS.PRIMARY[400],
+      300: COLORS.PRIMARY[300],
+      200: COLORS.PRIMARY[200],
     },
 
     secondary: {

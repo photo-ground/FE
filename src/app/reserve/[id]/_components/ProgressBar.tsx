@@ -34,7 +34,7 @@ const Line = styled.div<{ $inProgress: boolean }>`
   height: ${LINE_HEIGHT};
   border-left: ${LINE_WIDTH} solid
     ${({ theme, $inProgress }) =>
-      $inProgress ? theme.colors.primary[100] : theme.colors.gray[500]};
+      $inProgress ? theme.colors.primary[500] : theme.colors.gray[500]};
 `;
 
 const TextColumn = styled.div`
@@ -77,12 +77,12 @@ const FinishedDot = styled.div`
 
   width: ${LARGE_DOT_SIZE};
   height: ${LARGE_DOT_SIZE};
-  background: ${({ theme }) => theme.colors.primary[100]};
+  background: ${({ theme }) => theme.colors.primary[500]};
   border-radius: 100%;
 `;
 
 const PrevDot = styled(Dot)`
-  background: ${({ theme }) => theme.colors.primary[100]};
+  background: ${({ theme }) => theme.colors.primary[500]};
 `;
 
 const StateText = styled(Text)<{ $inProgress?: boolean }>`

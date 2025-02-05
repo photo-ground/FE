@@ -38,5 +38,5 @@ export const Tab = styled.button`
 
 export const TabText = styled(Text)<{ $isSelected: boolean }>`
   color: ${({ theme, $isSelected }) =>
-    $isSelected ? theme.colors.primary[100] : theme.colors.gray[300]};
+    $isSelected ? theme.colors.primary[500] : theme.colors.gray[300]};
 `;

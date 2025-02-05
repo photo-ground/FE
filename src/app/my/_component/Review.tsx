@@ -19,7 +19,7 @@ const ScoreArea = styled.div`
 `;
 
 const ScoreText = styled(Text)`
-  color: ${({ theme }) => theme.colors.primary[100]};
+  color: ${({ theme }) => theme.colors.primary[500]};
 `;
 
 const DetailLink = styled(Link)`

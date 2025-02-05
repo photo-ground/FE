@@ -7,7 +7,7 @@ const Button = styled.button<{ active: ActiveState }>`
   width: inherit;
   padding: 8px;
   background: ${({ theme, active }) =>
-    active === 'active' ? theme.colors.primary[100] : 'transparent'};
+    active === 'active' ? theme.colors.primary[500] : 'transparent'};
   color: ${({ theme, active }) =>
     active === 'active' ? theme.colors.white : theme.colors.gray[200]};
   border: ${({ theme, active }) =>

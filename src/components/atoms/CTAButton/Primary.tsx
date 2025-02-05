@@ -5,7 +5,7 @@ import ButtonContainer from './styles';
 
 const Button = styled(ButtonContainer)<{ disabled: boolean }>`
   background: ${({ theme, disabled }) =>
-    disabled ? theme.colors.gray[500] : theme.colors.primary[100]};
+    disabled ? theme.colors.gray[500] : theme.colors.primary[500]};
 
   &:active {
     background: ${({ theme, disabled }) =>
@@ -21,7 +21,7 @@ const ButtonText = styled(Text)<{ disabled: boolean }>`
 
   &:active {
     color: ${({ theme, disabled }) =>
-      disabled ? theme.colors.gray[200] : theme.colors.primary[100]};
+      disabled ? theme.colors.gray[200] : theme.colors.primary[500]};
   }
 `;
 

@@ -35,7 +35,7 @@ const getBorderColor = ({
   $isSelected: boolean;
 }) => {
   if (disabled) return theme.colors.gray[600];
-  if ($isSelected) return theme.colors.primary[100];
+  if ($isSelected) return theme.colors.primary[500];
   return theme.colors.white;
 };
 
@@ -44,7 +44,7 @@ const BlockContainer = styled.button<{
   $isSelected: boolean;
 }>`
   background: ${({ theme, $isSelected }) =>
-    $isSelected ? theme.colors.primary[100] : 'transparent'};
+    $isSelected ? theme.colors.primary[500] : 'transparent'};
   padding: 0.625rem 0;
 
   border: 1px solid

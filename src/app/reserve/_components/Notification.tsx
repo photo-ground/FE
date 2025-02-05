@@ -52,7 +52,7 @@ const CardTitleTextWrapper = styled.div`
 const Dot = styled.div`
   width: 0.5rem;
   height: 0.5rem;
-  background: ${({ theme }) => theme.colors.primary[100]};
+  background: ${({ theme }) => theme.colors.primary[500]};
   border-radius: 100%;
 `;
 

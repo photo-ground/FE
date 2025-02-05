@@ -28,10 +28,10 @@ const Checkbox = styled.div<{ $isChecked: boolean }>`
   height: 1.25rem;
 
   background: ${({ theme, $isChecked }) =>
-    $isChecked ? theme.colors.primary[100] : 'transparent'};
+    $isChecked ? theme.colors.primary[500] : 'transparent'};
   border: 1px solid
     ${({ theme, $isChecked }) =>
-      $isChecked ? theme.colors.primary[100] : theme.colors.white};
+      $isChecked ? theme.colors.primary[500] : theme.colors.white};
   border-radius: 0.25rem;
 `;
 
