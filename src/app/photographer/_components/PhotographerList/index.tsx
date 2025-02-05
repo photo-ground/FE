@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, memo } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+
 import Card from '@/components/Card';
 import genderMap from '@/lib/genderMap';
 import { PhotographerSummary } from '../../_libs/getPhotographerList';
@@ -19,30 +20,35 @@ const CardWrapper = styled(Link)`
   text-decoration: none;
 `;
 
-export default function PhotographerList({
+function PhotographerList({
   photographerList,
 }: {
   photographerList: PhotographerSummary[];
 }) {
-  function masonryLayout() {
-    document.querySelectorAll('#masonry-card').forEach((element) => {
-      const card = element as HTMLElement;
-      const content = card.querySelector('#masonry-card div') as HTMLElement;
-      if (content) {
-        card.style.gridRowEnd = `span ${Math.ceil(content.scrollHeight / 16 + 10 / 16)}`;
-      }
-    });
-  }
-
   useEffect(() => {
+    function masonryLayout() {
+      document.querySelectorAll('.masonry-card').forEach((element) => {
+        const card = element as HTMLElement;
+        const content = card.querySelector('#masonry-card div') as HTMLElement;
+        if (content) {
+          card.style.gridRowEnd = `span ${Math.ceil(content.scrollHeight / 16 + 10 / 16)}`;
+        }
+      });
+    }
+
     masonryLayout();
+
     window.addEventListener('resize', masonryLayout);
-  }, []);
+
+    return () => {
+      window.removeEventListener('resize', masonryLayout);
+    };
+  }, [photographerList]);
 
   return (
     <Container className="masonry-container">
       {photographerList?.map((photographer: PhotographerSummary) => (
-        <div id="masonry-card" key={photographer.photographerId}>
+        <div className="masonry-card" key={photographer.photographerId}>
           <CardWrapper href={`/photographer/${photographer.photographerId}`}>
             <Card
               size="dynamic"
@@ -56,3 +62,5 @@ export default function PhotographerList({
     </Container>
   );
 }
+
+export default memo(PhotographerList); // Wrap with React.memo

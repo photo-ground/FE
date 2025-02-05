@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { v4 as uuidv4 } from 'uuid';
 
 import styled from 'styled-components';
 import Card from '@/components/Card';
@@ -105,7 +103,7 @@ export default function Main({ univ, spotId }: MainProps) {
         {photoSpotData?.pages.flatMap((page) =>
           page.imageInfo.spotPostImageList.map((spot) => (
             <Card
-              key={`${spot.postId}_${uuidv4()}`}
+              key={spot.imageUrl}
               size="small"
               src={spot.imageUrl}
               onClick={() => handleCardModal(spot.postId)}

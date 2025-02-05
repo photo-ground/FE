@@ -1,20 +1,48 @@
-# Photo Ground FE 레포
+# 📸 포토그라운드
 
-## 시작하기
+## 🔗 배포 링크
 
-### 로컬에서 Dev Server 실행
+[www.photo-ground.com](https://www.photo-ground.com)
 
-1. [GitHub](https://github.com/photo-ground/FE)에서 코드를 clone합니다.
-2. `npm i` 명령어로 필요한 패키지를 설치합니다.
-    - 현재 Next.js v15와 일부 ESlint 플러그인 사이에 호환성 문제가 발생합니다.
-    - ~~이 문제를 피하기 위해서 `npm i --legacy-peer-deps` 명령어를 사용해주세요.~~
-    - 24.10.27. 추가: `.npmrc` 파일 설정을 추가해 `npm i` 명령어로도 설치 가능합니다.
-    - 이후 호환성 문제가 해결된다면 이 내용을 삭제해주세요.
-3. `npm run dev` 명령어로 서버를 실행합니다.
-4. 브라우저에서 [http://localhost:3000](http://localhost:3000/)로 이동해 페이지를 확인합니다.
+<br/>
 
-### 코드 수정하기 (로컬에서 Dev Server 실행에 이어서)
+## ✏️ 서비스 소개
 
-5. 코드를 작성한 후, `npm run lint`와 `npm run prettier` 명령어를 실행해 코드 스타일에 어긋난 부분이 있는지 확인하고, 규칙에 맞게 수정합니다.
-    - `npm run lint:fix` 명령어를 실행하면 자동으로 수정 가능한 부분이 고쳐집니다.
-    - VSCode에서 ESLint와 Prettier 확장을 설치하고, 추가 설정을 통해 저장 시 자동으로 포맷팅이 가능하도록 할 수 있습니다.
+> “아마추어 사진작가”와 “행복한 대학생”을 연결해주는 **스냅 촬영 전문 통합 관리 서비스**
+
+<br/>
+
+## ✨ 주요 기능
+
+### ⚙️ 교내 포토스팟 맵 제공
+
+> 포토스팟 탭에서 페이지에서 학교 별 포토스팟을 확인할 수 있습니다.
+
+### ⚙️ 사진 작가 프로필 및 포트폴리오 제공
+
+> 사진작가 탭에서 작가들의 정보와 작품을 확인할 수 있습니다.
+
+### ⚙️ 진행 단계별 실시간 소통
+
+> 로그인 후 예약 탭에서 작가와의 예약을 실시간으로 확인할 수 있습니다.
+
+<br/>
+
+## 🙋 구성원
+
+- 📷 기획 조은호
+- 📷 기획 이채원
+- 📷 디자인 이채린
+- 📷 디자인 김수연
+- 📷 FE 강다혜 / [GitHub →](https://github.com/psst54)
+- 📷 FE 이희원 / [GitHub →](https://github.com/hiwon-lee)
+- 📷 BE 남승현 / [GitHub →](https://github.com/sh0311)
+- 📷 BE 문서영 / [GitHub →](https://github.com/seona-moon)
+
+<br/>
+
+## 🛠️ 기술 스택
+
+- core: `Next.js 15`
+- 스타일링: `styled-components`
+- 상태관리: `Tanstack Query` `Zustand`

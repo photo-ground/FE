@@ -2,13 +2,9 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { v4 as uuidv4 } from 'uuid';
-
+import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
-
 import { IconButton } from '@mui/material';
-import CloseIcon from '@/assets/CloseIcon';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Scrollbar, A11y } from 'swiper/modules';
 
@@ -17,14 +13,13 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
-import Text from '@/components/atoms/Text';
-import SmallButton from '@/components/atoms/SmallButton';
-import { useRouter } from 'next/navigation';
+import CloseIcon from '@/assets/CloseIcon';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import LeftChevronIcon from '@/assets/LeftChevronIcon';
+import Text from '@/components/atoms/Text';
+import SmallButton from '@/components/atoms/SmallButton';
 
 import { SliderData } from './Slider';
-
 import useSpotStore from '../_store';
 
 const ImageContainer = styled.div`
@@ -149,11 +144,9 @@ export default function SpotModal({ sliderData, setModalState }: ModalProps) {
             }}
             initialSlide={currPostIdIndex as number}
             scrollbar={{ draggable: true }}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log('slide change')}
           >
             {sliderData.map((item) => (
-              <SwiperSlideBox key={`${item.postId}_${uuidv4()}`}>
+              <SwiperSlideBox key={item.imageUrl}>
                 <ImageContainer>
                   <Image src={item.imageUrl} alt={item.imageUrl} />
                 </ImageContainer>
