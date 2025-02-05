@@ -96,7 +96,7 @@ export default function PhotographerDetailScreen({
 
       <FloatingButton>
         <Link href={`/photographer/${photographerId}/reserve`}>
-          <CTAButton text="예약하기" disabled={!isLoggedIn} />
+          <CTAButton.Primary text="예약하기" disabled={!isLoggedIn} />
         </Link>
       </FloatingButton>
     </Container>

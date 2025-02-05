@@ -127,7 +127,7 @@ export default function SignUpPage() {
         </UserSection>
 
         <ButtonWrapper>
-          <CTAButton
+          <CTAButton.Primary
             text="가입하기"
             onClick={onSignUp}
             disabled={!checkDataValid(signUpData)}

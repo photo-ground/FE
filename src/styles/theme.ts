@@ -41,6 +41,7 @@ export const COLORS = {
 const theme = {
   colors: {
     primary: {
+      800: COLORS.PRIMARY[800],
       100: COLORS.PRIMARY[500],
       80: COLORS.PRIMARY[400],
       70: COLORS.PRIMARY[300],

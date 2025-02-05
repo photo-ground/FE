@@ -77,7 +77,7 @@ export default function UpdatePassword() {
         <Spacer size="32px" />
 
         <ButtonWrapper>
-          <CTAButton
+          <CTAButton.Primary
             disabled={buttonDisabled}
             text="확인"
             onClick={updateInfo}

@@ -62,7 +62,7 @@ export default function ApplyCompletePage() {
       </ProgressWrapper>
 
       <ButtonWrapper href="/reserve/list">
-        <CTAButton text="확인" />
+        <CTAButton.Primary text="확인" />
       </ButtonWrapper>
     </Wrapper>
   );

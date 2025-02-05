@@ -232,10 +232,9 @@ export default function Main({ photographerId }: { photographerId: number }) {
 
       <Spacer size="80px" />
       <ButtonBox>
-        <CTAButton
+        <CTAButton.Primary
           type="submit"
           text="완료하기"
-          variant="primary"
           disabled={!isComplete}
           onClick={handleFormSubmit}
         />

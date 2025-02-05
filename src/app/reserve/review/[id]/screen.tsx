@@ -132,7 +132,7 @@ export default function ReviewScreen({
           />
         </InputArea>
 
-        <CTAButton
+        <CTAButton.Primary
           text="작성 완료"
           onClick={() => {
             writeReview(reservationId, { score, content }).then((response) => {
