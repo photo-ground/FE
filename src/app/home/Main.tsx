@@ -23,6 +23,7 @@ import Text from '@/components/atoms/Text';
 import ToSearchPage from '@/components/ToSearchPage';
 import AlertModal from '@/components/modals/AlertModal';
 import LoadingPage from '@/components/LoadingPage';
+import { COLORS } from '@/styles/theme';
 
 import Filter from './_components/Filter';
 import PostByUniv from './_components/PostByUniv';
@@ -58,8 +59,7 @@ const IconTextLink = styled(Link)`
   color: red;
 `;
 const SearchWrapper = styled.div`
-  margin: 24px 20px;
-  // margin-bottom: 24px;
+  margin: 0 1.25rem;
 `;
 
 export default function Main() {
@@ -128,10 +128,15 @@ export default function Main() {
       <Background src="/images/background1.webp" alt="background" />
       <TNB.Main />
 
+      <Spacer size="1.5rem" />
+
       {/* 검색 엔진 */}
+
       <SearchWrapper>
         <ToSearchPage />
       </SearchWrapper>
+
+      <Spacer size="1.5rem" />
 
       {/* ============================================ */}
 
@@ -139,18 +144,18 @@ export default function Main() {
       <TitleContainer>
         <Text variant="title1_sb">추천 작가</Text>
         <IconTextLink href="/photographer">
-          <Text variant="caption1_rg" color="#8C8C8C">
+          <Text variant="caption1_rg" color={COLORS.GRAY[300]}>
             더보기
           </Text>
-          <RightChevronIcon size="20px" color="#8C8C8C" />
+          <RightChevronIcon size="20px" color={COLORS.GRAY[300]} />
         </IconTextLink>
       </TitleContainer>
 
       <RecommendedPhotographer />
 
-      {/* ============================================ */}
-
       <Spacer size="3rem" />
+
+      {/* ============================================ */}
 
       {/* 배너 */}
       <Banner />
@@ -174,7 +179,7 @@ export default function Main() {
 
       {/* ============================================ */}
 
-      <Spacer size="108px" />
+      <Spacer size="5rem" />
     </Container>
   );
 }
