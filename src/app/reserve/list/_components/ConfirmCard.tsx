@@ -99,7 +99,7 @@ export default function ConfirmCard({ data }: { data: Reservation }) {
         </Message>
       </MessageArea>
 
-      <LargeButton variant="tertiary" text="최종 스냅 완료" onClick={onOpen} />
+      <LargeButton.Tertiary text="최종 스냅 완료" onClick={onOpen} />
 
       {isOpen && (
         <ConfirmModal

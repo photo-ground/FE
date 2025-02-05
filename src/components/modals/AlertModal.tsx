@@ -34,11 +34,7 @@ export default function AlertModal({
         <ModalText variant="caption1_rg">{content}</ModalText>
 
         <ButtonArea>
-          <LargeButton
-            text={confirmText}
-            variant="secondary"
-            onClick={onConfirm}
-          />
+          <LargeButton.Secondary text={confirmText} onClick={onConfirm} />
         </ButtonArea>
       </ModalContainer>
     </>
