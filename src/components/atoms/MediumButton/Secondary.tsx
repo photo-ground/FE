@@ -5,24 +5,19 @@ import ButtonContainer from './styles';
 
 const Button = styled(ButtonContainer)<{ disabled: boolean }>`
   background: ${({ theme, disabled }) =>
-    disabled ? theme.colors.gray[500] : theme.colors.white};
+    disabled ? theme.colors.gray[500] : theme.colors.gray[900]};
 
   &:active {
     background: ${({ theme, disabled }) =>
-      disabled ? theme.colors.gray[500] : theme.colors.gray[300]};
+      disabled ? theme.colors.gray[500] : theme.colors.black};
     border-color: ${({ theme, disabled }) =>
-      disabled ? 'transparent' : theme.colors.orange[100]};
+      disabled ? 'transparent' : theme.colors.gray[500]};
   }
 `;
 
 const ButtonText = styled(Text)<{ disabled: boolean }>`
   color: ${({ theme, disabled }) =>
-    disabled ? theme.colors.gray[200] : theme.colors.black};
-
-  &:active {
-    color: ${({ theme, disabled }) =>
-      disabled ? theme.colors.gray[200] : theme.colors.gray[100]};
-  }
+    disabled ? theme.colors.gray[200] : theme.colors.white};
 `;
 
 export default function Secondary({

@@ -17,10 +17,10 @@ import { Drawer } from '@mui/material';
 
 import AlertModal from '@/components/modals/AlertModal';
 import MediumButton from '@/components/atoms/MediumButton';
+import SmallButton from '@/components/atoms/SmallButton';
 import CheckIcon from '@/assets/modal/CheckIcon';
 
 import makeMarker from './_util/makeMarker';
-import Chip from './_components/Chip';
 import { AbsContainer, ChipContainer, Container } from './style';
 import MapComponent from './_components/Map';
 
@@ -239,11 +239,10 @@ export default function MapPage() {
       {/* 칩 버튼 */}
       <ChipContainer>
         {schoolArr.map((element) => (
-          <Chip
-            active={univ !== null && univ !== element.name}
-            key={element.name}
+          <SmallButton.Secondary
             text={element.name}
-            variant="secondary"
+            key={element.name}
+            //  active={univ !== null && univ !== element.name}
             onClick={() => moveToSchool(element)}
           />
         ))}

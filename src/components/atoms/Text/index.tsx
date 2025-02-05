@@ -24,6 +24,8 @@ const Text = styled.p<{ variant: Variant; color?: string }>`
   font-weight: ${({ theme, variant }) => theme.typography[variant].fontWeight};
   line-height: ${({ theme, variant }) => theme.typography[variant].lineHeight};
   color: ${({ theme, color }) => color || theme.colors.white};
+  break-word: keep-all;
+  white-space: nowrap;
 `;
 
 export default Text;
