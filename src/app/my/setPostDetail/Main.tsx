@@ -222,10 +222,9 @@ export default function Main() {
 
       <Spacer size="80px" />
       <ButtonBox>
-        <CTAButton
+        <CTAButton.Primary
           type="submit"
           text="완료하기"
-          variant="primary"
           disabled={!isComplete}
           onClick={handleFormSubmit}
         />

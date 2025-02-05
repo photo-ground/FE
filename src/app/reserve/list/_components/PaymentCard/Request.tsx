@@ -76,9 +76,8 @@ export default function Request({ reservationId }: { reservationId: number }) {
         />
       )}
 
-      <LargeButton
+      <LargeButton.Secondary
         text="입금 확인 요청하기"
-        variant="secondary"
         disabled={!(isChecked || (!isChecked && !!name))}
         onClick={() => {
           pay(reservationId).then((response) => {

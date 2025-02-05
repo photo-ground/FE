@@ -45,9 +45,8 @@ export default function WritePostPage() {
       />
 
       <ButtonBox>
-        <CTAButton
+        <CTAButton.Primary
           text="다음으로"
-          variant="primary"
           disabled={goNext}
           onClick={handleGoNext}
         />

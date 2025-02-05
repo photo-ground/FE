@@ -16,10 +16,11 @@ export const Container = styled.nav`
   padding: 1rem 1.25rem;
   background: #0e0e0ecc;
   border-top: 1px solid ${({ theme }) => theme.colors.gray[800]};
+
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
 
-  z-index: 10;
+  z-index: 20;
 `;
 
 export const Tab = styled.button`

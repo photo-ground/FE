@@ -79,7 +79,7 @@ export default function SignInForm() {
         </StyledLink>
       </Wrapper>
 
-      <CTAButton text="로그인" type="submit" />
+      <CTAButton.Primary text="로그인" type="submit" />
     </Form>
   );
 }

@@ -62,14 +62,14 @@ export default function PostScreen({ postData }: { postData: PostDetail }) {
       <FloatingButton>
         <ButtonWrapper>
           <Link href={`/photographer/${photographerId}`}>
-            <CTAButton text="작가 프로필 보기" variant="tertiary" />{' '}
+            <CTAButton.Tertiary text="작가 프로필 보기" />
           </Link>
           {isLoggedIn ? (
             <Link href={`/photographer/${photographerId}/reserve`}>
-              <CTAButton text="예약하기" />
+              <CTAButton.Primary text="예약하기" />
             </Link>
           ) : (
-            <CTAButton text="예약하기" disabled />
+            <CTAButton.Primary text="예약하기" disabled />
           )}
         </ButtonWrapper>
       </FloatingButton>

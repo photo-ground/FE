@@ -1,29 +1,30 @@
 'use client';
 
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-undef */
-
 // TODO : 페이지 접근할 때, 사용자의 학교 가져와야 함 -> 상단 chip에 적용
 
 // components/NaverMap.js
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { PhotoSpotListProps, PhotoSpotProps } from '@/types/photoSpot';
-import { useTheme } from 'styled-components';
-import useUnivStore from '@/store/useUnivStore';
 import { useQuery } from '@tanstack/react-query';
+import { useTheme } from 'styled-components';
 import { Drawer } from '@mui/material';
 
-import AlertModal from '@/components/modals/AlertModal';
-import CheckIcon from '@/assets/modal/CheckIcon';
+import { PhotoSpotListProps, PhotoSpotProps } from '@/types/photoSpot';
 
-import makeMarker from './_util/makeMarker';
-import Chip from './_components/Chip';
-import { AbsContainer, ChipContainer, Container } from './style';
-import MapComponent from './_components/Map';
+import useUnivStore from '@/store/useUnivStore';
+
+import AlertModal from '@/components/modals/AlertModal';
+import MediumButton from '@/components/atoms/MediumButton';
+import SmallButton from '@/components/atoms/SmallButton';
+import CheckIcon from '@/assets/modal/CheckIcon';
+import BREAK_POINT from '@/styles/constants';
 
 import { School } from './types';
+
+import makeMarker from './_util/makeMarker';
+import { BottomButtonWrapper, ChipContainer, Container } from './style';
+import MapComponent from './_components/Map';
 
 import schoolList from './_data/schoolList'; // 더미 데이터
 import {
@@ -233,29 +234,29 @@ export default function MapPage() {
           onConfirm={() => router.replace('/onboarding')}
         />
       )}
+
       {/* 네이버 맵 컴포넌트 */}
       <MapComponent mapId="naverMap" onLoad={onMapLoad} />
+
       {/* 칩 버튼 */}
       <ChipContainer>
         {schoolArr.map((element) => (
-          <Chip
-            active={univ !== null && univ !== element.name}
-            key={element.name}
+          <SmallButton.Secondary
             text={element.name}
-            variant="secondary"
+            key={element.name}
+            //  active={univ !== null && univ !== element.name}
             onClick={() => moveToSchool(element)}
           />
         ))}
       </ChipContainer>
-      <AbsContainer>
-        <Link
-          href={{
-            pathname: `/map/overview/${univ}`,
-          }}
-        >
-          <Chip size="dynamic" text="스냅 전체보기" variant="primary" />
+
+      {/* 스냅 전체보기 버튼 */}
+      <BottomButtonWrapper>
+        <Link href={`/map/overview/${univ}`}>
+          <MediumButton.Primary text="스냅 전체보기" />
         </Link>
-      </AbsContainer>
+      </BottomButtonWrapper>
+
       <div
         ref={drawerContainerRef}
         style={{ position: 'relative', zIndex: 10 }}
@@ -272,11 +273,8 @@ export default function MapPage() {
             style: {
               borderRadius: '1rem 1rem 0 0',
               backgroundColor: theme.colors.black,
-              top: '32%',
-              position: 'absolute',
               bottom: '76px', // 네비게이션 메뉴 높이를 고려하여 위치 조정
-              width: 'calc(100%-2rem)',
-              maxWidth: '520px',
+              maxWidth: BREAK_POINT,
               margin: '0 auto',
             },
           }}

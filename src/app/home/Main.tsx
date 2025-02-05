@@ -3,31 +3,33 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import styled from 'styled-components';
+import { useQuery } from '@tanstack/react-query';
 
-import Banner from '@/components/Banner';
+import { UserInfoProps } from '@/types/user';
+import { UNIV_LIST } from '@/types/univOption';
+
+import checkAuth from '@/lib/checkAuth';
+
+import useUserStore from '@/store/useUserStore';
+import useUnivStore from '@/store/useUnivStore';
+
+import RightChevronIcon from '@/assets/RightChevronIcon';
+import CheckIcon from '@/assets/modal/CheckIcon';
+
 import Spacer from '@/components/Spacer';
 import TNB from '@/components/TNB';
 import Text from '@/components/atoms/Text';
 import ToSearchPage from '@/components/ToSearchPage';
-
-import styled from 'styled-components';
-
-import RightChevronIcon from '@/assets/RightChevronIcon';
-
-import useUserStore from '@/store/useUserStore';
-import { UNIV_LIST } from '@/types/univOption';
-import useUnivStore from '@/store/useUnivStore';
-import checkAuth from '@/lib/checkAuth';
-import { useQuery } from '@tanstack/react-query';
-import { UserInfoProps } from '@/types/user';
 import AlertModal from '@/components/modals/AlertModal';
-import CheckIcon from '@/assets/modal/CheckIcon';
 import LoadingPage from '@/components/LoadingPage';
-import Filter from './_components/Filter';
+import { COLORS } from '@/styles/theme';
 
-import PostByUniv from './_components/PostByUniv';
+import Filter from './_components/Filter';
+import PostGrid from './_components/PostGrid';
 import RecommendedPhotographer from './_components/RecommendedPhotographer';
 import { getUserInfo } from '../my/_libs/getUserInfo';
+import Banner from './_components/Banner';
 
 const Container = styled.div`
   position: relative;
@@ -57,8 +59,7 @@ const IconTextLink = styled(Link)`
   color: red;
 `;
 const SearchWrapper = styled.div`
-  margin: 24px 20px;
-  // margin-bottom: 24px;
+  margin: 0 1.25rem;
 `;
 
 export default function Main() {
@@ -66,7 +67,7 @@ export default function Main() {
   const role = useUserStore((state) => state.role);
   const router = useRouter();
   const { univ, setUniv } = useUnivStore();
-  const [selectedUniv, setSelectedUniv] = useState<string | null>(null);
+  const [, setSelectedUniv] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const { refetch: fetchUserInfo } = useQuery<UserInfoProps>({
@@ -127,10 +128,15 @@ export default function Main() {
       <Background src="/images/background1.webp" alt="background" />
       <TNB.Main />
 
+      <Spacer size="1.5rem" />
+
       {/* 검색 엔진 */}
+
       <SearchWrapper>
         <ToSearchPage />
       </SearchWrapper>
+
+      <Spacer size="1.5rem" />
 
       {/* ============================================ */}
 
@@ -138,18 +144,18 @@ export default function Main() {
       <TitleContainer>
         <Text variant="title1_sb">추천 작가</Text>
         <IconTextLink href="/photographer">
-          <Text variant="caption1_rg" color="#8C8C8C">
+          <Text variant="caption1_rg" color={COLORS.GRAY[300]}>
             더보기
           </Text>
-          <RightChevronIcon size="20px" color="#8C8C8C" />
+          <RightChevronIcon size="20px" color={COLORS.GRAY[300]} />
         </IconTextLink>
       </TitleContainer>
 
       <RecommendedPhotographer />
 
-      {/* ============================================ */}
-
       <Spacer size="3rem" />
+
+      {/* ============================================ */}
 
       {/* 배너 */}
       <Banner />
@@ -164,16 +170,16 @@ export default function Main() {
         <Filter
           optionList={UNIV_LIST}
           placeholder="학교 변경"
-          value={selectedUniv} // 현재 선택된 값
+          value={univ} // 현재 선택된 값
           onChange={onChangeUniv}
         />
       </TitleContainer>
 
-      {univ && <PostByUniv univ={univ} />}
+      {univ && <PostGrid univ={univ} />}
 
       {/* ============================================ */}
 
-      <Spacer size="108px" />
+      <Spacer size="6rem" />
     </Container>
   );
 }

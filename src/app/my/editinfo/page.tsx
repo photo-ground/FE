@@ -142,7 +142,7 @@ export default function EditProfile() {
           <Spacer size="32px" />
 
           <ButtonWrapper onClick={handleUpdateConfirm}>
-            <CTAButton text="수정완료" />
+            <CTAButton.Primary text="수정완료" />
           </ButtonWrapper>
         </Container>
       )}

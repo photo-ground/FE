@@ -60,7 +60,7 @@ export default function ReserveDetailScreen({
         <State state={data.status} />
 
         {data.status === '예약대기' && (
-          <CTAButton variant="tertiary" text="예약 취소하기" onClick={onOpen} />
+          <CTAButton.Tertiary text="예약 취소하기" onClick={onOpen} />
         )}
 
         {isOpen && (

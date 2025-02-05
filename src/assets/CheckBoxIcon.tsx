@@ -1,5 +1,7 @@
+import { COLORS } from '@/styles/theme';
+
 export default function CheckBoxIcon({
-  color = '#F5F5F5',
+  color = COLORS.WHITE,
 }: {
   color?: string;
 }) {

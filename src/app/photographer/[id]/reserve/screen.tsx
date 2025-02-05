@@ -114,8 +114,8 @@ export default function PhotographerReserveScreen({
       <DivideLine />
 
       <ButtonWrapper>
-        <CTAButton text="취소" variant="tertiary" />
-        <CTAButton
+        <CTAButton.Tertiary text="취소" />
+        <CTAButton.Primary
           text="신청하기"
           disabled={isDisabled(data)}
           onClick={() =>

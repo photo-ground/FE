@@ -1,15 +1,15 @@
-import { Box, Divider } from '@mui/material';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { v4 as uuidv4 } from 'uuid';
-
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import Card from '@/components/Card';
-import CloseIcon from '@/assets/CloseIcon';
-import Text from '@/components/atoms/Text';
 import Link from 'next/link';
+import { v4 as uuidv4 } from 'uuid';
+import styled from 'styled-components';
+import { Box, Divider } from '@mui/material';
+
 import useUnivStore from '@/store/useUnivStore';
-import Chip from './Chip';
+
+import CloseIcon from '@/assets/CloseIcon';
+import Card from '@/components/Card';
+import Text from '@/components/atoms/Text';
+import MediumButton from '@/components/atoms/MediumButton';
 
 import { DrawerProps } from '../types';
 import useSpotStore from '../_store';
@@ -190,7 +190,7 @@ export default function DrawerContent({
         }}
       >
         <ChipContainer>
-          <Chip size="dynamic" text="더보기" variant="secondary" />
+          <MediumButton.Secondary text="더보기" />
         </ChipContainer>
       </Link>
     </Box>

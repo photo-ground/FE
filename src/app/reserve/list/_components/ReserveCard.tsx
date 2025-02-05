@@ -78,7 +78,7 @@ export default function ReserveCard({ data }: { data: Reservation }) {
       </Container>
 
       {data.status === '예약대기' && (
-        <LargeButton variant="tertiary" text="예약 취소하기" />
+        <LargeButton.Tertiary text="예약 취소하기" />
       )}
     </Wrapper>
   );

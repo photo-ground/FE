@@ -41,6 +41,7 @@ export const COLORS = {
 const theme = {
   colors: {
     primary: {
+      800: COLORS.PRIMARY[800],
       100: COLORS.PRIMARY[500],
       80: COLORS.PRIMARY[400],
       70: COLORS.PRIMARY[300],
@@ -84,8 +85,7 @@ const theme = {
     },
 
     background: {
-      // [todo] 디자인 시스템에 없는데 사용되고 있어서 문의해봐야함
-      primary: '#0e0e0e',
+      primary: COLORS.BLACK,
     },
   },
 

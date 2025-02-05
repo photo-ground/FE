@@ -1,4 +1,10 @@
-export default function InfoIcon({ color = '#737373' }: { color?: string }) {
+import { COLORS } from '@/styles/theme';
+
+export default function InfoIcon({
+  color = COLORS.GRAY[400],
+}: {
+  color?: string;
+}) {
   return (
     <svg
       width="18"
