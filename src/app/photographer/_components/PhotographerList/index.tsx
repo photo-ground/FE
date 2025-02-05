@@ -35,9 +35,12 @@ export default function PhotographerList({
   }
 
   useEffect(() => {
-    masonryLayout();
     window.addEventListener('resize', masonryLayout);
   }, []);
+
+  useEffect(() => {
+    masonryLayout();
+  }, [photographerList]);
 
   return (
     <Container className="masonry-container">
