@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { Box, Divider } from '@mui/material';
 
+import { Z_INDEX } from '@/constants';
 import useUnivStore from '@/store/useUnivStore';
 
 import CloseIcon from '@/assets/CloseIcon';
@@ -49,7 +50,7 @@ const StickyHeader = styled.div`
   position: sticky;
   background-color: ${({ theme }) => theme.colors.black};
   top: 0;
-  z-index: 10;
+  z-index: ${Z_INDEX.MAP_DRAWER};
   display: flex;
   justify-content: space-between;
 `;

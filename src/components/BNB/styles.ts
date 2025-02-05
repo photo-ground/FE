@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+
+import { Z_INDEX } from '@/constants';
 import BREAK_POINT from '@/styles/constants';
 import Text from '../atoms/Text';
 
@@ -20,7 +22,7 @@ export const Container = styled.nav`
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
 
-  z-index: 20;
+  z-index: ${Z_INDEX.BNB};
 `;
 
 export const Tab = styled.button`

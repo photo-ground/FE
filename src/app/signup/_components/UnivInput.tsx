@@ -1,5 +1,7 @@
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
+
+import { Z_INDEX } from '@/constants';
 import DownChevronIcon from '@/assets/DownChevronIcon';
 import Text from '@/components/atoms/Text';
 import { SignUpData } from '../type';
@@ -36,7 +38,7 @@ const Backdrop = styled.div`
   width: 100%;
   height: 100%;
 
-  z-index: 20; // 임의로 설정
+  z-index: ${Z_INDEX.DROPDOWN_BACKDROP};
 `;
 
 const OptionWrapper = styled.div`
@@ -51,7 +53,7 @@ const OptionWrapper = styled.div`
   border-top: none;
   border-radius: 0 0 0.5rem 0.5rem;
 
-  z-index: 21; // 임의로 설정
+  z-index: ${Z_INDEX.DROPDOWN};
 `;
 
 const OptionItem = styled.button`

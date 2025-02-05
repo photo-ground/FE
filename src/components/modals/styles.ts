@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
 import Text from '@/components/atoms/Text';
-
-const BACKDROP_Z_INDEX = 100;
-const MODAL_Z_INDEX = BACKDROP_Z_INDEX + 1;
+import { Z_INDEX } from '@/constants';
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -15,7 +13,7 @@ export const Backdrop = styled.div`
   width: 100dvw;
   height: 100dvh;
 
-  z-index: ${BACKDROP_Z_INDEX};
+  z-index: ${Z_INDEX.MODAL_BACKDROP};
 `;
 
 export const ModalContainer = styled.div`
@@ -33,7 +31,7 @@ export const ModalContainer = styled.div`
   padding: 1.5rem;
   border-radius: 1.25rem;
 
-  z-index: ${MODAL_Z_INDEX};
+  z-index: ${Z_INDEX.MODAL};
 `;
 
 export const ModalTitle = styled(Text)`
