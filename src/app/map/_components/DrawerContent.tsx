@@ -85,10 +85,7 @@ export default function DrawerContent({
   toggleModal,
 }: DrawerProps) {
   const { univ } = useUnivStore();
-  const clearCurrPostIdIndex = useSpotStore(
-    (state) => state.clearCurrPostIdIndex,
-  );
-  const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
+  const { clearCurrPostIdIndex, setCurrPostIdIndex } = useSpotStore();
   const [, setModalData] = useState<SliderData[]>([]);
 
   useEffect(() => {
