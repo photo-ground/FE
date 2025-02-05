@@ -8,6 +8,10 @@ const SecondaryButton = styled(Button)`
   cursor: pointer;
 `;
 
+const ButtonText = styled(Text)`
+  white-space: nowrap;
+`;
+
 export default function Secondary({
   text,
   onClick = () => {},
@@ -17,7 +21,7 @@ export default function Secondary({
 }) {
   return (
     <SecondaryButton onClick={onClick}>
-      <Text variant="body1_rg">{text}</Text>
+      <ButtonText variant="body1_rg">{text}</ButtonText>
     </SecondaryButton>
   );
 }
