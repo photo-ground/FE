@@ -1,6 +1,8 @@
-import Text from '@/components/atoms/Text';
-import TNB from '@/components/TNB';
 import styled from 'styled-components';
+
+import Text from '@/components/atoms/Text';
+import Background from '@/components/Background';
+import TNB from '@/components/TNB';
 
 const Container = styled.div`
   position: relative;
@@ -8,14 +10,6 @@ const Container = styled.div`
   flex-direction: column;
 
   height: 100dvh;
-`;
-
-const Background = styled.img`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
 `;
 
 const TextArea = styled.div`
@@ -36,7 +30,7 @@ const BottomText = styled(Text)`
 export default function TemporaryScreen() {
   return (
     <Container>
-      <Background src="/images/background3.webp" alt="background" />
+      <Background type={3} />
       <TNB.Back text="예약관리" />
 
       <TextArea>
