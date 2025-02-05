@@ -26,7 +26,7 @@ import LoadingPage from '@/components/LoadingPage';
 import { COLORS } from '@/styles/theme';
 
 import Filter from './_components/Filter';
-import PostByUniv from './_components/PostByUniv';
+import PostGrid from './_components/PostGrid';
 import RecommendedPhotographer from './_components/RecommendedPhotographer';
 import { getUserInfo } from '../my/_libs/getUserInfo';
 import Banner from './_components/Banner';
@@ -67,7 +67,7 @@ export default function Main() {
   const role = useUserStore((state) => state.role);
   const router = useRouter();
   const { univ, setUniv } = useUnivStore();
-  const [selectedUniv, setSelectedUniv] = useState<string | null>(null);
+  const [, setSelectedUniv] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const { refetch: fetchUserInfo } = useQuery<UserInfoProps>({
@@ -170,16 +170,16 @@ export default function Main() {
         <Filter
           optionList={UNIV_LIST}
           placeholder="학교 변경"
-          value={selectedUniv} // 현재 선택된 값
+          value={univ} // 현재 선택된 값
           onChange={onChangeUniv}
         />
       </TitleContainer>
 
-      {univ && <PostByUniv univ={univ} />}
+      {univ && <PostGrid univ={univ} />}
 
       {/* ============================================ */}
 
-      <Spacer size="5rem" />
+      <Spacer size="6rem" />
     </Container>
   );
 }
