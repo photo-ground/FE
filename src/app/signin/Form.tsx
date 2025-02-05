@@ -42,6 +42,7 @@ export default function SignInForm() {
   const setIsLoggedIn = useUserStore((state) => state.setIsLoggedIn);
   const setRole = useUserStore((state) => state.setRole);
   const setPhotographerId = useUserStore((state) => state.setPhotographerId);
+  const setUniv = useUserStore((state) => state.setUniv);
 
   const router = useRouter();
 
@@ -56,9 +57,15 @@ export default function SignInForm() {
         setIsLoggedIn(true);
         setRole(response.data!.role as Role);
         document.cookie = `accessToken=${response.data!.accessToken}`;
+
+        if (response.data?.univ) {
+          setUniv(response.data?.univ);
+        }
+
         if (response.data?.photographerId) {
           setPhotographerId(response.data?.photographerId);
         }
+
         router.push('/home');
       } else {
         throw new Error('로그인 요청 실패');

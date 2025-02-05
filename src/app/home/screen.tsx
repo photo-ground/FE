@@ -1,19 +1,14 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
-import { useQuery } from '@tanstack/react-query';
 
-import { UserInfoProps } from '@/types/user';
 import { UNIV_LIST } from '@/types/univOption';
 import { COLOR } from '@/constants';
 
-import checkAuth from '@/lib/checkAuth';
-
 import useUserStore from '@/store/useUserStore';
-import useUnivStore from '@/store/useUnivStore';
 
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import CheckIcon from '@/assets/modal/CheckIcon';
@@ -23,13 +18,11 @@ import TNB from '@/components/TNB';
 import Text from '@/components/atoms/Text';
 import ToSearchPage from '@/components/ToSearchPage';
 import AlertModal from '@/components/modals/AlertModal';
-import LoadingPage from '@/components/LoadingPage';
 import Background from '@/components/Background';
 
 import Filter from './_components/Filter';
 import PostGrid from './_components/PostGrid';
 import RecommendedPhotographer from './_components/RecommendedPhotographer';
-import { getUserInfo } from '../my/_libs/getUserInfo';
 import Banner from './_components/Banner';
 
 const Container = styled.div`
@@ -57,48 +50,15 @@ const SearchWrapper = styled.div`
   margin: 0 1.25rem;
 `;
 
-export default function Main() {
+export default function HomeScreen() {
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const role = useUserStore((state) => state.role);
+  const { univ, setUniv } = useUserStore();
+
   const router = useRouter();
-  const { univ, setUniv } = useUnivStore();
   const [, setSelectedUniv] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
-  const { refetch: fetchUserInfo } = useQuery<UserInfoProps>({
-    queryKey: ['user'],
-    queryFn: () => getUserInfo(),
-    enabled: false, // 인증된 상태에서만 호출
-  });
-
-  // On initial load, set the university if not logged in
-  useEffect(() => {
-    async function authenticate() {
-      const authResult = await checkAuth(); // 분리된 함수 호출
-      if (authResult && role === 'ROLE_CUSTOMER') {
-        // 인증된 상태에서 사용자 정보 가져오기
-        // setIsAuthenticated(authResult); // 인증 됨
-        // const user = await fetchUserInfo(); // 데이터 가져와
-        // if (user?.data?.univ) {
-        //   setUniv(user.data.univ); // Zustand의 학교 정보 업데이트
-        // }
-      }
-
-      setIsLoading(false);
-    }
-
-    if (isLoggedIn) {
-      setIsLoading(false);
-      return;
-    }
-
-    authenticate();
-  }, [isLoggedIn, role, fetchUserInfo, setUniv]);
-
-  // Show loading state
-  if (isLoading) {
-    return <LoadingPage />;
-  }
+  console.log(univ);
 
   // 만약 인증하지 않고 둘러볼 학교도 선택하지 않았다면
   if (!isLoggedIn && !univ && role !== 'ROLE_PHOTOGRAPHER') {
@@ -108,13 +68,13 @@ export default function Main() {
         title="잠깐!"
         content="비회원은 둘러볼 학교를 선택해야해요!"
         confirmText="학교 선택하기"
-        onConfirm={() => router.replace('/onboarding')}
+        onConfirm={() => router.push('/onboarding')}
       />
     );
   }
   const onChangeUniv = (newUniv: { value: string }) => {
-    setUniv(newUniv.value); // Update Zustand state
-    setSelectedUniv(newUniv.value); // 선택된 값 업데이트
+    setUniv(newUniv.value);
+    setSelectedUniv(newUniv.value);
   };
 
   return (
