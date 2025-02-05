@@ -39,7 +39,7 @@ const PrevButton = styled(Button)`
 `;
 
 const CurrentButton = styled(Button)`
-  background: ${({ theme }) => theme.colors.primary[100]};
+  background: ${({ theme }) => theme.colors.primary[500]};
 `;
 
 export default function ReserveLinks() {

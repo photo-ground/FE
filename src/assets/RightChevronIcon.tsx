@@ -1,8 +1,8 @@
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 
 export default function RightChevronIcon({
   size = '28px',
-  color = COLORS.WHITE,
+  color = COLOR.WHITE,
 }: {
   size?: string;
   color?: string;

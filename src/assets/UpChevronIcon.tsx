@@ -1,7 +1,7 @@
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 
 export default function UpChevronIcon({
-  color = COLORS.GRAY[300],
+  color = COLOR.GRAY[300],
 }: {
   color?: string;
 }) {

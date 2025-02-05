@@ -1,10 +1,6 @@
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 
-export default function CloseIcon({
-  color = COLORS.WHITE,
-}: {
-  color?: string;
-}) {
+export default function CloseIcon({ color = COLOR.WHITE }: { color?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -103,7 +103,7 @@ export default function BottomNavigationBar() {
               <menu.icon
                 color={
                   isSelected
-                    ? theme.colors.primary[100]
+                    ? theme.colors.primary[500]
                     : theme.colors.gray[300]
                 }
               />

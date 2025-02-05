@@ -47,7 +47,7 @@ const TitleArea = styled.div`
 `;
 
 const Name = styled(Text)`
-  color: ${({ theme }) => theme.colors.primary[100]};
+  color: ${({ theme }) => theme.colors.primary[500]};
 `;
 
 const FirstLine = styled.div`

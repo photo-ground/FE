@@ -1,6 +1,6 @@
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 
-export default function PlusIcon({ color = COLORS.WHITE }: { color?: string }) {
+export default function PlusIcon({ color = COLOR.WHITE }: { color?: string }) {
   return (
     <svg
       width="16"

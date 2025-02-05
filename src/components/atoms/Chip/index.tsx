@@ -37,7 +37,7 @@ const TertiaryText = styled(Text)`
 `;
 
 const BrandText = styled(Text)`
-  color: ${({ theme }) => theme.colors.primary[100]};
+  color: ${({ theme }) => theme.colors.primary[500]};
 `;
 
 export default function Chip({

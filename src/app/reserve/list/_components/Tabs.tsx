@@ -29,7 +29,7 @@ const Item = styled(Link)<{ $isCurrentTab: boolean }>`
 
   border-bottom: 2px solid
     ${({ theme, $isCurrentTab }) =>
-      $isCurrentTab ? theme.colors.primary[100] : 'none'};
+      $isCurrentTab ? theme.colors.primary[500] : 'none'};
 `;
 
 const DeactivatedText = styled(Text)`

@@ -24,7 +24,7 @@ const InputContainer = styled.div`
   align-items: center;
 
   padding: 0.5rem 0.75rem;
-  background: ${({ theme }) => theme.colors.primary[100]};
+  background: ${({ theme }) => theme.colors.primary[500]};
   border-radius: 0.5rem;
 `;
 

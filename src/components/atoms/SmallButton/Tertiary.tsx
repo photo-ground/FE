@@ -4,12 +4,12 @@ import Button from './styles';
 
 const TertiaryButton = styled(Button)`
   background: transparent;
-  border: 1px solid ${({ theme }) => theme.colors.primary[100]};
+  border: 1px solid ${({ theme }) => theme.colors.primary[500]};
   cursor: pointer;
 `;
 
 const ButtonText = styled(Text)`
-  color: ${({ theme }) => theme.colors.primary[100]};
+  color: ${({ theme }) => theme.colors.primary[500]};
 `;
 
 export default function Tertiary({

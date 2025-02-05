@@ -1,14 +1,16 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
+import CancelIcon from '@/assets/CancelIcon';
 import SearchIcon from '@/assets/SearchIcon';
 import Text from '@/components/atoms/Text';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import CancelIcon from '@/assets/CancelIcon';
+import Background from '@/components/Background';
 import useDebounce from '@/lib/useDebounce';
+
 import getSearchResult from './_libs/getSearchResult';
 import { PhotographerSummary } from '../photographer/_libs/getPhotographerList';
 
@@ -20,13 +22,6 @@ const Wrapper = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
-`;
-
-const Background = styled.img`
-  position: absolute;
-  width: 100%;
-  object-fit: cover;
-  z-index: -1;
 `;
 
 const Container = styled.div`
@@ -135,7 +130,7 @@ export default function SearchScreen() {
 
   return (
     <Wrapper>
-      <Background src="/images/background1.webp" alt="background" />
+      <Background />
 
       <Container>
         <SearchArea>

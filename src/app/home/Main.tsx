@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { UserInfoProps } from '@/types/user';
 import { UNIV_LIST } from '@/types/univOption';
+import { COLOR } from '@/constants';
 
 import checkAuth from '@/lib/checkAuth';
 
@@ -23,7 +24,7 @@ import Text from '@/components/atoms/Text';
 import ToSearchPage from '@/components/ToSearchPage';
 import AlertModal from '@/components/modals/AlertModal';
 import LoadingPage from '@/components/LoadingPage';
-import { COLORS } from '@/styles/theme';
+import Background from '@/components/Background';
 
 import Filter from './_components/Filter';
 import PostGrid from './_components/PostGrid';
@@ -38,12 +39,6 @@ const Container = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
-`;
-const Background = styled.img`
-  position: absolute;
-  width: 100%;
-  object-fit: cover;
-  z-index: -1;
 `;
 
 const TitleContainer = styled.div`
@@ -125,7 +120,7 @@ export default function Main() {
 
   return (
     <Container>
-      <Background src="/images/background1.webp" alt="background" />
+      <Background type={1} />
       <TNB.Main />
 
       <Spacer size="1.5rem" />
@@ -144,10 +139,10 @@ export default function Main() {
       <TitleContainer>
         <Text variant="title1_sb">추천 작가</Text>
         <IconTextLink href="/photographer">
-          <Text variant="caption1_rg" color={COLORS.GRAY[300]}>
+          <Text variant="caption1_rg" color={COLOR.GRAY[300]}>
             더보기
           </Text>
-          <RightChevronIcon size="20px" color={COLORS.GRAY[300]} />
+          <RightChevronIcon size="20px" color={COLOR.GRAY[300]} />
         </IconTextLink>
       </TitleContainer>
 

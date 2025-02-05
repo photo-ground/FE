@@ -1,5 +1,5 @@
 import Text from '@/components/atoms/Text';
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 import styled from 'styled-components';
 
 type TagType = 'general' | 'error' | 'success';
@@ -7,22 +7,22 @@ type TagType = 'general' | 'error' | 'success';
 function getBorderColor(type: TagType) {
   switch (type) {
     case 'error':
-      return COLORS.NEGATIVE[500];
+      return COLOR.NEGATIVE[500];
     case 'success':
-      return COLORS.POSITIVE[500];
+      return COLOR.POSITIVE[500];
     default:
-      return COLORS.GRAY[200];
+      return COLOR.GRAY[200];
   }
 }
 
 function getBackgroundColor(type: TagType) {
   switch (type) {
     case 'error':
-      return COLORS.NEGATIVE[800];
+      return COLOR.NEGATIVE[800];
     case 'success':
-      return COLORS.POSITIVE[800];
+      return COLOR.POSITIVE[800];
     default:
-      return COLORS.GRAY[800];
+      return COLOR.GRAY[800];
   }
 }
 

@@ -1,7 +1,7 @@
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 
 export default function InfoIcon({
-  color = COLORS.GRAY[400],
+  color = COLOR.GRAY[400],
 }: {
   color?: string;
 }) {

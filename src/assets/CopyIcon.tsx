@@ -1,8 +1,8 @@
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 
 export default function CopyIcon({
   color1 = '#D9D9D9',
-  color2 = COLORS.PRIMARY[500],
+  color2 = COLOR.PRIMARY[500],
 }: {
   color1?: string;
   color2?: string;

@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
+import { COLOR } from '@/constants';
 import Text from '@/components/atoms/Text';
 import LargeButton from '@/components/atoms/LargeButton';
 import CheckBoxIcon from '@/assets/CheckBoxIcon';
-import { COLORS } from '@/styles/theme';
 import pay from '../../_libs/pay';
 
 const Container = styled.div`
@@ -28,10 +28,10 @@ const Checkbox = styled.div<{ $isChecked: boolean }>`
   height: 1.25rem;
 
   background: ${({ theme, $isChecked }) =>
-    $isChecked ? theme.colors.primary[100] : 'transparent'};
+    $isChecked ? theme.colors.primary[500] : 'transparent'};
   border: 1px solid
     ${({ theme, $isChecked }) =>
-      $isChecked ? theme.colors.primary[100] : theme.colors.white};
+      $isChecked ? theme.colors.primary[500] : theme.colors.white};
   border-radius: 0.25rem;
 `;
 
@@ -63,7 +63,7 @@ export default function Request({ reservationId }: { reservationId: number }) {
         }}
       >
         <Checkbox $isChecked={isChecked}>
-          <CheckBoxIcon color={isChecked ? COLORS.WHITE : 'transparent'} />
+          <CheckBoxIcon color={isChecked ? COLOR.WHITE : 'transparent'} />
         </Checkbox>
         <Text variant="body3">사용자 이름과 입금자명이 일치합니다.</Text>
       </CheckArea>

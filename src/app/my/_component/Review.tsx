@@ -1,9 +1,10 @@
+import Link from 'next/link';
+import styled from 'styled-components';
+
+import { COLOR } from '@/constants';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import SmallStarIcon from '@/assets/SmallStarIcon';
 import Text from '@/components/atoms/Text';
-import { COLORS } from '@/styles/theme';
-import Link from 'next/link';
-import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
@@ -19,7 +20,7 @@ const ScoreArea = styled.div`
 `;
 
 const ScoreText = styled(Text)`
-  color: ${({ theme }) => theme.colors.primary[100]};
+  color: ${({ theme }) => theme.colors.primary[500]};
 `;
 
 const DetailLink = styled(Link)`
@@ -49,7 +50,7 @@ export default function Review({ photographerId }: { photographerId: number }) {
 
       <DetailLink href={`/photographer/${photographerId}/review`}>
         <LinkText variant="caption1_rg">리뷰 보기</LinkText>
-        <RightChevronIcon size="20px" color={COLORS.GRAY[400]} />
+        <RightChevronIcon size="20px" color={COLOR.GRAY[400]} />
       </DetailLink>
     </Container>
   );

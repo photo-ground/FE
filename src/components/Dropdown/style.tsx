@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Z_INDEX } from '@/constants';
 import Text from '../atoms/Text';
 
 export const Container = styled.div`
@@ -78,7 +79,7 @@ export const Backdrop = styled.div`
 
   background: transparent;
 
-  z-index: 20;
+  z-index: ${Z_INDEX.DROPDOWN_BACKDROP};
 `;
 
 export const OptionWrapper = styled.div<{ $variant: string }>`
@@ -90,7 +91,7 @@ export const OptionWrapper = styled.div<{ $variant: string }>`
 
   width: 100%;
 
-  z-index: 21;
+  z-index: ${Z_INDEX.DROPDOWN};
 
   ${({ $variant, theme }) => {
     switch ($variant) {

@@ -1,7 +1,7 @@
+import { COLOR } from '@/constants';
 import InfoIcon from '@/assets/InfoIcon';
 import WarningIcon from '@/assets/WarningIcon';
 import Text from '@/components/atoms/Text';
-import { COLORS } from '@/styles/theme';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -53,7 +53,7 @@ export default function Error() {
       </Container>
 
       <AlertArea>
-        <InfoIcon color={COLORS.NEGATIVE[500]} />
+        <InfoIcon color={COLOR.NEGATIVE[500]} />
         <AlertMessage variant="caption1_rg">
           잘못 입금된 금액은 영업일 7일 이내에 환불됩니다
         </AlertMessage>

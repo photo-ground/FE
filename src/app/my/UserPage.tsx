@@ -1,14 +1,14 @@
 'use client';
 
-// TODO : 이 페이지 담는 폴더 이름 [customerId] 로 수정해야함
-import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
-
-import TNB from '@/components/TNB';
-import { UserInfoProps } from '@/types/user';
+import styled from 'styled-components';
 import { useQuery } from '@tanstack/react-query';
+
+import { UserInfoProps } from '@/types/user';
 import useUserStore from '@/store/useUserStore';
 
+import TNB from '@/components/TNB';
+import Background from '@/components/Background';
 import UserInfo from './_component/UserInfo';
 import ListItem from './_component/ListItem';
 
@@ -17,12 +17,6 @@ import { getUserInfo } from './_libs/getUserInfo';
 const Container = styled.div`
   position: relative;
   height: 100dvh;
-`;
-const Background = styled.img`
-  position: absolute;
-  width: 100%;
-  object-fit: cover;
-  z-index: -1;
 `;
 
 export default function UserPage() {
@@ -46,7 +40,7 @@ export default function UserPage() {
   };
   return (
     <Container>
-      <Background src="/images/background1.webp" alt="background" />
+      <Background type={1} />
 
       {role === 'ROLE_CUSTOMER' && (
         <>
