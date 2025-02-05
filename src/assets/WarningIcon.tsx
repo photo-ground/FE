@@ -1,7 +1,7 @@
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 
 export default function WarningIcon({
-  color = COLORS.NEGATIVE[500],
+  color = COLOR.NEGATIVE[500],
 }: {
   color?: string;
 }) {

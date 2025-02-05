@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 
+import { COLOR } from '@/constants';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import PhotoIcon from '@/assets/modal/PhotoIcon';
 import Text from '@/components/atoms/Text';
@@ -10,7 +11,6 @@ import ReserveInfo from '@/components/ReserveInfo';
 import LargeButton from '@/components/atoms/LargeButton';
 import ConfirmModal from '@/components/modals/ConfirmModal';
 import InfoIcon from '@/assets/InfoIcon';
-import { COLORS } from '@/styles/theme';
 
 import Tag from './Tag';
 import { Reservation } from '../type';
@@ -93,7 +93,7 @@ export default function ConfirmCard({ data }: { data: Reservation }) {
       </Container>
 
       <MessageArea>
-        <InfoIcon color={COLORS.GRAY[200]} />
+        <InfoIcon color={COLOR.GRAY[200]} />
         <Message variant="body2_rg">
           최종 촬영이 완료되었다면, 하단 버튼을 눌러주세요.
         </Message>

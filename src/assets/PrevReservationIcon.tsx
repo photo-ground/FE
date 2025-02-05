@@ -1,7 +1,7 @@
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 
 export default function PrevReservationIcon({
-  color = COLORS.WHITE,
+  color = COLOR.WHITE,
 }: {
   color?: string;
 }) {

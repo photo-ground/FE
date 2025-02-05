@@ -2,18 +2,18 @@ import styled, { keyframes } from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { COLOR } from '@/constants';
 import Text from '@/components/atoms/Text';
-import { COLORS } from '@/styles/theme';
 
 const pulsing = keyframes`
   0% {
-    background: ${COLORS.GRAY[500]};
+    background: ${COLOR.GRAY[500]};
   }
   50% {
-    background: ${COLORS.GRAY[700]};
+    background: ${COLOR.GRAY[700]};
   }
   100% {
-    background: ${COLORS.GRAY[500]};
+    background: ${COLOR.GRAY[500]};
   }
 `;
 

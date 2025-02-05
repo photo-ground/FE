@@ -1,7 +1,7 @@
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 
 export default function DownChevronIcon({
-  color = COLORS.GRAY[200],
+  color = COLOR.GRAY[200],
 }: {
   color?: string;
 }) {

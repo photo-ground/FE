@@ -1,8 +1,8 @@
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 
 export default function CheckBoxOnIcon({
-  color1 = COLORS.PRIMARY[500],
-  color2 = COLORS.WHITE,
+  color1 = COLOR.PRIMARY[500],
+  color2 = COLOR.WHITE,
 }: {
   color1?: string;
   color2?: string;

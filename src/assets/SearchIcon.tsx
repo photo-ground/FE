@@ -1,8 +1,8 @@
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 
 export default function SearchIcon({
   size,
-  color = COLORS.GRAY[400],
+  color = COLOR.GRAY[400],
 }: {
   size: string;
   color?: string;

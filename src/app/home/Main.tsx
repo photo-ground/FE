@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { UserInfoProps } from '@/types/user';
 import { UNIV_LIST } from '@/types/univOption';
+import { Z_INDEX, COLOR } from '@/constants';
 
 import checkAuth from '@/lib/checkAuth';
 
@@ -23,7 +24,6 @@ import Text from '@/components/atoms/Text';
 import ToSearchPage from '@/components/ToSearchPage';
 import AlertModal from '@/components/modals/AlertModal';
 import LoadingPage from '@/components/LoadingPage';
-import { COLORS } from '@/styles/theme';
 
 import Filter from './_components/Filter';
 import PostGrid from './_components/PostGrid';
@@ -43,7 +43,7 @@ const Background = styled.img`
   position: absolute;
   width: 100%;
   object-fit: cover;
-  z-index: -1;
+  z-index: ${Z_INDEX.BACKGROUND_IMAGE};
 `;
 
 const TitleContainer = styled.div`
@@ -144,10 +144,10 @@ export default function Main() {
       <TitleContainer>
         <Text variant="title1_sb">추천 작가</Text>
         <IconTextLink href="/photographer">
-          <Text variant="caption1_rg" color={COLORS.GRAY[300]}>
+          <Text variant="caption1_rg" color={COLOR.GRAY[300]}>
             더보기
           </Text>
-          <RightChevronIcon size="20px" color={COLORS.GRAY[300]} />
+          <RightChevronIcon size="20px" color={COLOR.GRAY[300]} />
         </IconTextLink>
       </TitleContainer>
 

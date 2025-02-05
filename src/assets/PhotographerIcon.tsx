@@ -1,7 +1,7 @@
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 
 export default function PhotographerIcon({
-  color = COLORS.GRAY[100],
+  color = COLOR.GRAY[100],
 }: {
   color?: string;
 }) {

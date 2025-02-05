@@ -1,7 +1,7 @@
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 
 export default function LargeStarEmptyIcon({
-  color = COLORS.ORANGE[500],
+  color = COLOR.ORANGE[500],
 }: {
   color?: string;
 }) {

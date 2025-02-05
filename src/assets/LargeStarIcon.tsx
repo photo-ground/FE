@@ -1,7 +1,7 @@
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 
 export default function LargeStarIcon({
-  color = COLORS.PRIMARY[500],
+  color = COLOR.PRIMARY[500],
 }: {
   color?: string;
 }) {

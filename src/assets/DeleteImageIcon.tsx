@@ -1,7 +1,7 @@
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 
 export default function DeleteImageIcon({
-  color = COLORS.BLACK,
+  color = COLOR.BLACK,
 }: {
   color?: string;
 }) {

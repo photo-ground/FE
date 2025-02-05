@@ -1,10 +1,6 @@
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 
-export default function CheckIcon({
-  color = COLORS.WHITE,
-}: {
-  color?: string;
-}) {
+export default function CheckIcon({ color = COLOR.WHITE }: { color?: string }) {
   return (
     <svg
       width="17"

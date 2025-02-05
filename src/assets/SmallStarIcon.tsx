@@ -1,8 +1,8 @@
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 
 export default function SmallStarIcon({
   size = '20',
-  color = COLORS.PRIMARY[500],
+  color = COLOR.PRIMARY[500],
 }: {
   size?: string;
   color?: string;

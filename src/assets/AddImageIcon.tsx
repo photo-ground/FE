@@ -1,7 +1,7 @@
-import { COLORS } from '@/styles/theme';
+import { COLOR } from '@/constants';
 
 export default function AddImageIcon({
-  color = COLORS.GRAY[600],
+  color = COLOR.GRAY[600],
 }: {
   color?: string;
 }) {

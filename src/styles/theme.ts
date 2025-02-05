@@ -1,91 +1,53 @@
-export const COLORS = {
-  PRIMARY: {
-    '800': '#3E180B',
-    '500': '#FF4000',
-    '400': '#FF612B',
-    '300': '#FF855C',
-    '200': '#FFA67D',
-  },
-  SECONDARY: {
-    SURFACE: '#007C29',
-    ALPHA: '#007C2947',
-  },
-  ORANGE: {
-    '500': '#FF4F15',
-    '400': '#FF7B3D',
-    '300': '#FFA87D',
-  },
-  GRAY: {
-    '900': '#212121',
-    '800': '#262626',
-    '700': '#333333',
-    '600': '#404040',
-    '500': '#595959',
-    '400': '#737373',
-    '300': '#8C8C8C',
-    '200': '#A6A6A6',
-    '100': '#BFBFBF',
-  },
-  BLACK: '#0E0E0E',
-  WHITE: '#F5F5F5',
-  POSITIVE: {
-    '800': '#102D1C',
-    '500': '#18A852',
-  },
-  NEGATIVE: {
-    '800': '#3A1516',
-    '500': '#E93134',
-  },
-};
+import { COLOR } from '@/constants';
 
 const theme = {
   colors: {
     primary: {
-      800: COLORS.PRIMARY[800],
-      500: COLORS.PRIMARY[500],
-      400: COLORS.PRIMARY[400],
-      300: COLORS.PRIMARY[300],
-      200: COLORS.PRIMARY[200],
+      800: COLOR.PRIMARY[800],
+      500: COLOR.PRIMARY[500],
+      400: COLOR.PRIMARY[400],
+      300: COLOR.PRIMARY[300],
+      200: COLOR.PRIMARY[200],
     },
 
     secondary: {
-      surface: COLORS.SECONDARY.SURFACE,
-      alpha: COLORS.SECONDARY.ALPHA,
+      surface: COLOR.SECONDARY.SURFACE,
+      alpha: COLOR.SECONDARY.ALPHA,
     },
 
-    black: COLORS.BLACK,
-    white: COLORS.WHITE,
+    black: COLOR.BLACK,
+    white: COLOR.WHITE,
 
     orange: {
-      500: COLORS.ORANGE[500],
-      400: COLORS.ORANGE[400],
-      300: COLORS.ORANGE[300],
+      500: COLOR.ORANGE[500],
+      400: COLOR.ORANGE[400],
+      300: COLOR.ORANGE[300],
     },
 
     gray: {
-      900: COLORS.GRAY[900],
-      800: COLORS.GRAY[800],
-      700: COLORS.GRAY[700],
-      600: COLORS.GRAY[600],
-      500: COLORS.GRAY[500],
-      400: COLORS.GRAY[400],
-      300: COLORS.GRAY[300],
-      200: COLORS.GRAY[200],
-      100: COLORS.GRAY[100],
+      900: COLOR.GRAY[900],
+      800: COLOR.GRAY[800],
+      700: COLOR.GRAY[700],
+      600: COLOR.GRAY[600],
+      500: COLOR.GRAY[500],
+      400: COLOR.GRAY[400],
+      300: COLOR.GRAY[300],
+      200: COLOR.GRAY[200],
+      100: COLOR.GRAY[100],
     },
 
     positive: {
-      800: COLORS.POSITIVE[800],
-      500: COLORS.POSITIVE[500],
+      800: COLOR.POSITIVE[800],
+      500: COLOR.POSITIVE[500],
     },
 
     negative: {
-      800: COLORS.NEGATIVE[800],
-      500: COLORS.NEGATIVE[500],
+      800: COLOR.NEGATIVE[800],
+      500: COLOR.NEGATIVE[500],
     },
 
     background: {
-      primary: COLORS.BLACK,
+      primary: COLOR.BLACK,
     },
   },
 
