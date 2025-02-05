@@ -81,7 +81,6 @@ export default function MapPage() {
         (element: School) => element.name === univ,
       );
       if (school) {
-        // console.log(school);
         setCenter([school.lat, school.lng]);
       }
     }
@@ -189,7 +188,6 @@ export default function MapPage() {
               center: new naver.maps.LatLng(...center),
               zoom,
             });
-            // console.log(map);
             onMapLoad(map); // 지도가 준비되지 않았다면 직접 초기화 호출
           }
         } else {

@@ -1,6 +1,5 @@
 'use client';
 
-// import { useEffect } from 'react';
 import styled from 'styled-components';
 import TNB from '@/components/TNB';
 import Text from '@/components/atoms/Text';
@@ -34,10 +33,6 @@ export default function Reviews() {
     queryKey: ['userReview'],
     queryFn: getReviews,
   });
-
-  // useEffect(() => {
-  //   console.log(reviewData);
-  // });
 
   return (
     <Container>

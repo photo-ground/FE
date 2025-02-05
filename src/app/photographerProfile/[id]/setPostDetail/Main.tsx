@@ -141,7 +141,6 @@ export default function Main({ photographerId }: { photographerId: number }) {
 
   // 스팟 선택 핸들러
   const handleDropdown = (index: number, spotId: number) => {
-    // console.log(spotId);
     selectSpotId(index, spotId); // 선택한 스팟 ID 추가
   };
 

@@ -113,7 +113,6 @@ export default function Main() {
     mutationFn: ({ newContent }: { newContent: PostUploadContainerProps }) =>
       postNewContent(newContent),
     onSuccess: () => {
-      console.log(createPostMutation.data);
       router.push(`/my`);
     },
     onError: (err) => {
@@ -142,7 +141,6 @@ export default function Main() {
 
   // 스팟 선택 핸들러
   const handleDropdown = (index: number, spotId: number) => {
-    // console.log(spotId);
     selectSpotId(index, spotId); // 선택한 스팟 ID 추가
   };
 
@@ -162,7 +160,6 @@ export default function Main() {
         photos: images,
       };
 
-      console.log(newContent);
       createPostMutation.mutate({
         newContent,
       });

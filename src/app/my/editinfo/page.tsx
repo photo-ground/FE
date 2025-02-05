@@ -73,7 +73,6 @@ export default function EditProfile() {
   const deleteUserMutation = useMutation({
     mutationFn: deleteUser,
     onSuccess: () => {
-      // console.log(data);
       Router.push('/splash'); // 탈퇴성공 시 스플레시화면으로 이동
     },
   });
@@ -83,21 +82,18 @@ export default function EditProfile() {
     mutationKey: ['updateUserInfo'],
     mutationFn: updateUserInfo,
     onSuccess: () => {
-      // console.log(data);
       setConfirmModal(true);
     },
   });
 
   // 회원 정보 업데이트 핸들러러
   const handleUpdateConfirm = () => {
-    // console.log(userData);
     updateUserMutation.mutate(userData);
   };
 
   // 변경한 회원정보 임시 데이터에 반영 핸들러
   const handleUpdateInfo = (key: string, value: string) => {
     setUserData({ ...userData, [key]: value });
-    // console.log(userData);
   };
 
   return (

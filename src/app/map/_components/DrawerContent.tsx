@@ -112,7 +112,6 @@ export default function DrawerContent({
 
   const handleCardModal = (spotIndex: number) => {
     setCurrPostIdIndex(spotIndex);
-    console.log(spotIndex);
     toggleModal(true);
   };
 

@@ -91,9 +91,6 @@ export default function Slider({ sliderData, currPostIdIndex }: SliderProps) {
     if (currentSlide !== null) {
       if (currentSlide < sliderData.length - 1) {
         setCurrentSlide(currentSlide + 1);
-      } else {
-        // API 호출
-        // console.log('Fetching more data...');
       }
     }
   };

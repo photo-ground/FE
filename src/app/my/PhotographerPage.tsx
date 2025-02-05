@@ -35,8 +35,6 @@ async function getPhotographerData(id: number) {
       throw new Error(response.message);
     }
 
-    console.log(rawResponse);
-
     const response = await rawResponse.json();
     return response;
   } catch (error: unknown) {

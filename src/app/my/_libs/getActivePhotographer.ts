@@ -67,7 +67,6 @@ export async function postNewContent(newContent: PostUploadContainerProps) {
     const cookieStore = await cookies();
     const accessToken = cookieStore.get('accessToken')?.value;
 
-    console.log(accessToken);
     if (!accessToken) {
       throw new Error('Access token이 존재하지 않습니다.');
     }
@@ -88,7 +87,6 @@ export async function postNewContent(newContent: PostUploadContainerProps) {
       console.warn('401 오류: 토큰 갱신 시도 중...');
       const newAccessToken = await refreshAccessToken();
 
-      console.log();
       // 갱신된 토큰으로 재요청
       const retryResponse = await fetch(url, {
         method: 'POST',
