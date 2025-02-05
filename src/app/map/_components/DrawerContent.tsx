@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 import { Box, Divider } from '@mui/material';
 
@@ -177,7 +176,7 @@ export default function DrawerContent({
           .slice(0, 6)
           .map((spot, index) => (
             <CardWrapper
-              key={`${spot.postId}_${uuidv4()}`}
+              key={spot.imageUrl}
               size="small"
               src={spot.imageUrl}
               onClick={() => handleCardModal(index)}
