@@ -28,7 +28,7 @@ const TagArea = styled.div`
 `;
 
 const TagItem = styled.div`
-  padding: 0.625rem 1rem;
+  padding: 0.375rem 1rem;
   border-radius: 2rem;
   background: ${({ theme }) => theme.colors.gray[900]};
 `;
