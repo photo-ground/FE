@@ -28,6 +28,7 @@ export const CardContainer = styled.div`
 
 export const PhotographerItem = styled(Link)`
   text-decoration: none;
+  max-width: 80px; // next-image와 크기를 맞추기 위해 px을 사용합니다
 `;
 
 export const ProfileImage = styled(Image)`
