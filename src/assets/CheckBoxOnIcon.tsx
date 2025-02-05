@@ -1,9 +1,17 @@
-export default function CheckBoxOnIcon() {
+import { COLORS } from '@/styles/theme';
+
+export default function CheckBoxOnIcon({
+  color1 = COLORS.PRIMARY[500],
+  color2 = COLORS.WHITE,
+}: {
+  color1?: string;
+  color2?: string;
+}) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-      <rect width="20" height="20" fill="#FF4000" rx="4" />
+      <rect width="20" height="20" fill={color1} rx="4" />
       <path
-        stroke="#F5F5F5"
+        stroke={color2}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="1.5"

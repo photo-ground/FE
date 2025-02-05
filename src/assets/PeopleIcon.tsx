@@ -1,4 +1,10 @@
-export default function PeopleIcon({ color = '#ffffff' }: { color?: string }) {
+import { COLORS } from '@/styles/theme';
+
+export default function PeopleIcon({
+  color = COLORS.WHITE,
+}: {
+  color?: string;
+}) {
   return (
     <svg
       width="24"
