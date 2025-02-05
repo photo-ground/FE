@@ -3,14 +3,17 @@
 import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
-import theme from '@/styles/theme';
+import useUserStore from '@/store/useUserStore';
+
 import BNBPhotographerIcon from '@/assets/bnb/BNB_PhotographerIcon';
 import BNBMapIcon from '@/assets/bnb/BNB_MapIcon';
 import BNBHomeIcon from '@/assets/bnb/BNB_HomeIcon';
 import BNBCalendarIcon from '@/assets/bnb/BNB_CalendarIcon';
 import BNBProfileIcon from '@/assets/bnb/BNBProfileIcon';
 import CheckIcon from '@/assets/modal/CheckIcon';
-import useUserStore from '@/store/useUserStore';
+
+import theme from '@/styles/theme';
+
 import { Container, Tab, TabText } from './styles';
 import AlertModal from '../modals/AlertModal';
 
