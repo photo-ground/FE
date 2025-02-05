@@ -44,7 +44,7 @@ const SpotName = styled(Text)`
 export default function PostGrid({ univ }: { univ: string }) {
   const { ref, inView } = useInView();
   const { data, fetchNextPage } = useInfiniteQuery({
-    queryKey: ['photographerList', univ],
+    queryKey: ['mainPost', univ],
     queryFn: ({ pageParam }) => getPostByUniv(univ, pageParam),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
