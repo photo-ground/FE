@@ -12,7 +12,7 @@ import Skeleton from './Skeleton';
 
 export default function RecommendedPhotographer() {
   const { isPending, isError, data } = useQuery<PhotographerProps>({
-    queryKey: ['photographerList', 'hasNext'],
+    queryKey: ['recommendedPhotographer'],
     queryFn: getActivePhotographer,
   });
 
