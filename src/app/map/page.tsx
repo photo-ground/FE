@@ -16,6 +16,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Drawer } from '@mui/material';
 
 import AlertModal from '@/components/modals/AlertModal';
+import MediumButton from '@/components/atoms/MediumButton';
 import CheckIcon from '@/assets/modal/CheckIcon';
 
 import makeMarker from './_util/makeMarker';
@@ -253,7 +254,7 @@ export default function MapPage() {
             pathname: `/map/overview/${univ}`,
           }}
         >
-          <Chip size="dynamic" text="스냅 전체보기" variant="primary" />
+          <MediumButton.Primary text="스냅 전체보기" />
         </Link>
       </AbsContainer>
       <div
