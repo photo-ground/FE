@@ -3,31 +3,32 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import styled from 'styled-components';
+import { useQuery } from '@tanstack/react-query';
 
-import Banner from '@/components/Banner';
+import { UserInfoProps } from '@/types/user';
+import { UNIV_LIST } from '@/types/univOption';
+
+import checkAuth from '@/lib/checkAuth';
+
+import useUserStore from '@/store/useUserStore';
+import useUnivStore from '@/store/useUnivStore';
+
+import RightChevronIcon from '@/assets/RightChevronIcon';
+import CheckIcon from '@/assets/modal/CheckIcon';
+
 import Spacer from '@/components/Spacer';
 import TNB from '@/components/TNB';
 import Text from '@/components/atoms/Text';
 import ToSearchPage from '@/components/ToSearchPage';
-
-import styled from 'styled-components';
-
-import RightChevronIcon from '@/assets/RightChevronIcon';
-
-import useUserStore from '@/store/useUserStore';
-import { UNIV_LIST } from '@/types/univOption';
-import useUnivStore from '@/store/useUnivStore';
-import checkAuth from '@/lib/checkAuth';
-import { useQuery } from '@tanstack/react-query';
-import { UserInfoProps } from '@/types/user';
 import AlertModal from '@/components/modals/AlertModal';
-import CheckIcon from '@/assets/modal/CheckIcon';
 import LoadingPage from '@/components/LoadingPage';
-import Filter from './_components/Filter';
 
+import Filter from './_components/Filter';
 import PostByUniv from './_components/PostByUniv';
 import RecommendedPhotographer from './_components/RecommendedPhotographer';
 import { getUserInfo } from '../my/_libs/getUserInfo';
+import Banner from './_components/Banner';
 
 const Container = styled.div`
   position: relative;
