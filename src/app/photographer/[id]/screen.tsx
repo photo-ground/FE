@@ -39,7 +39,7 @@ export default function PhotographerDetailScreen({
   const { price, introduction, styleList } = data;
   const [postList, setPostList] = useState<PostSummary[]>([]);
   const [hasNext, setHasNext] = useState(true);
-  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
+  const { isLoggedIn } = useUserStore();
 
   const { ref, inView } = useInView();
   const { data: postData, fetchNextPage } = useInfiniteQuery({

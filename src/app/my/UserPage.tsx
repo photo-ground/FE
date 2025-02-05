@@ -20,7 +20,7 @@ const Container = styled.div`
 `;
 
 export default function UserPage() {
-  const role = useUserStore((state) => state.role);
+  const { role } = useUserStore();
   const router = useRouter();
 
   const { data: userInfo } = useQuery<UserInfoProps>({

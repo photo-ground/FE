@@ -45,7 +45,7 @@ async function getPhotographerData(id: number) {
 }
 
 export default function PhotographerProfile() {
-  const photographerId = useUserStore((state) => state.photographerId);
+  const { photographerId } = useUserStore();
   const [data, setData] = useState(null);
 
   useEffect(() => {

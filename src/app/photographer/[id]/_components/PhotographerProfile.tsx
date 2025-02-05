@@ -103,7 +103,7 @@ export default function PhotographerProfile({
     following,
   } = data;
   const [isFollowing, setIsFollowing] = useState(following);
-  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
+  const { isLoggedIn } = useUserStore();
 
   return (
     <ThumbnailWrapper>

@@ -5,7 +5,7 @@ import UserPage from './UserPage';
 import PhotographerProfile from './PhotographerPage';
 
 export default function PhotographerPage() {
-  const role = useUserStore((state) => state.role);
+  const { role } = useUserStore();
 
   if (role === 'ROLE_CUSTOMER') {
     return <UserPage />;

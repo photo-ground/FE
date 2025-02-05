@@ -51,14 +51,9 @@ const SearchWrapper = styled.div`
 `;
 
 export default function HomeScreen() {
-  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
-  const role = useUserStore((state) => state.role);
-  const { univ, setUniv } = useUserStore();
-
+  const { isLoggedIn, role, univ, setUniv } = useUserStore();
   const router = useRouter();
   const [, setSelectedUniv] = useState<string | null>(null);
-
-  console.log(univ);
 
   // 만약 인증하지 않고 둘러볼 학교도 선택하지 않았다면
   if (!isLoggedIn && !univ && role !== 'ROLE_PHOTOGRAPHER') {

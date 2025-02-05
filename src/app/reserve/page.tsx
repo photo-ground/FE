@@ -5,7 +5,7 @@ import ReserveScreen from './screen';
 import TemporaryScreen from './test';
 
 export default function ReservePage() {
-  const role = useUserStore((state) => state.role);
+  const { role } = useUserStore();
 
   if (role === 'ROLE_CUSTOMER') return <ReserveScreen />;
 

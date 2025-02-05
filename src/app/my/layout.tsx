@@ -11,7 +11,7 @@ export default function ProtectedLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
+  const { isLoggedIn } = useUserStore();
   const router = useRouter();
 
   // Redirect if not authenticated

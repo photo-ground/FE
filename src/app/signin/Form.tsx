@@ -39,11 +39,7 @@ const SignUpText = styled(Text)`
 `;
 
 export default function SignInForm() {
-  const setIsLoggedIn = useUserStore((state) => state.setIsLoggedIn);
-  const setRole = useUserStore((state) => state.setRole);
-  const setPhotographerId = useUserStore((state) => state.setPhotographerId);
-  const setUniv = useUserStore((state) => state.setUniv);
-
+  const { setIsLoggedIn, setRole, setPhotographerId, setUniv } = useUserStore();
   const router = useRouter();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {

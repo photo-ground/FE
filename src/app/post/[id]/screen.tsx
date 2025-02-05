@@ -24,7 +24,7 @@ const ButtonWrapper = styled.div`
 `;
 
 export default function PostScreen({ postData }: { postData: PostDetail }) {
-  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
+  const { isLoggedIn } = useUserStore();
   const [currentPage, setCurrentPage] = useState(0);
   const {
     photographerId,
