@@ -1,4 +1,4 @@
-import { Gender } from './user';
+import { Gender } from './gender';
 
 export type PhotographerName = string;
 export type PhotographerId = number;

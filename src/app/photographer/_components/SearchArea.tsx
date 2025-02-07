@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 
 import { NullableUniversity, UNIV_LIST } from '@/types/university';
-import { GENDER_LIST, GenderValue } from '@/types/genderOption';
+import { NullableGender, GENDER_LIST } from '@/types/gender';
 import ToSearchPage from '@/components/ToSearchPage';
 import Filter from './Filter';
 
@@ -25,9 +25,9 @@ export default function SearchArea({
   onChangeUniv,
   onChangeGender,
 }: {
-  filter: { univ: NullableUniversity; gender: GenderValue | null };
+  filter: { univ: NullableUniversity; gender: NullableGender };
   onChangeUniv: (newValue: NullableUniversity) => void;
-  onChangeGender: (newValue: GenderValue | null) => void;
+  onChangeGender: (newValue: NullableGender) => void;
 }) {
   return (
     <Container>

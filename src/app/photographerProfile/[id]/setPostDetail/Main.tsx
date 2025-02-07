@@ -8,6 +8,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { UNIV_LIST, UnivOption } from '@/types/university';
 import { PhotoSpot } from '@/types/photoSpot';
+import { PostInfo, PostUploading } from '@/types/post';
 
 import useImageStore from '@/store/useImageStore';
 import TNB from '@/components/TNB';
@@ -20,8 +21,6 @@ import Spacer from '@/components/Spacer';
 import Divider from '@/components/Divider';
 import Dropdown from '@/components/Dropdown';
 import CTAButton from '@/components/atoms/CTAButton';
-import { PostInfo, PostUploading } from '@/types/post';
-import { Option } from '@/types/option';
 import UnivRadioGroup from '@/app/my/setPostDetail/_component/UnivRadioGroup';
 import ImagePreviewItem from '@/app/my/_component/ImagePreviewItem';
 import {
@@ -31,6 +30,11 @@ import {
   Title,
   UploadArea,
 } from '@/app/my/setPostDetail/style';
+
+interface Option {
+  value: string | number;
+  label: string;
+}
 
 export default function Main({ photographerId }: { photographerId: number }) {
   const [isComplete, setIsComplete] = useState<boolean>(false);

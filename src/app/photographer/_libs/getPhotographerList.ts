@@ -1,9 +1,9 @@
-import { GenderValue } from '@/types/genderOption';
+import { NullableGender } from '@/types/gender';
 import { NullableUniversity } from '@/types/university';
 
 interface FilterOption {
   univ: NullableUniversity;
-  gender: GenderValue | null;
+  gender: NullableGender;
   cursor: number | null;
 }
 

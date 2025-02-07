@@ -17,7 +17,6 @@ import Divider from '@/components/Divider';
 import Dropdown from '@/components/Dropdown';
 import CTAButton from '@/components/atoms/CTAButton';
 import { PostInfo, PostUploading } from '@/types/post';
-import { Option } from '@/types/option';
 
 import {
   getUnivSpotList,
@@ -33,6 +32,11 @@ import {
   Title,
   UploadArea,
 } from './style';
+
+interface Option {
+  value: string | number;
+  label: string;
+}
 
 export default function Main() {
   const [isComplete, setIsComplete] = useState<boolean>(false);
