@@ -1,12 +1,12 @@
 'use server';
 
-import { PhotographerProps } from '@/types/photographer';
+import { PhotographerList } from '@/types/photographer';
 import { PhotoSpotListProps } from '@/types/photoSpot';
 import { PostUploadContainerProps } from '@/types/post';
 import { cookies } from 'next/headers';
 import refreshAccessToken from '@/lib/refreshToken';
 
-export async function getActivePhotographer(): Promise<PhotographerProps> {
+export async function getActivePhotographer(): Promise<PhotographerList> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer/active`,
   );

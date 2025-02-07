@@ -18,7 +18,7 @@ export const TitleContainer = styled.div`
   margin-top: 0;
 `;
 
-export const IconTextLink = styled(Link)`
+export const More = styled(Link)`
   display: flex;
   text-decoration: none;
 `;

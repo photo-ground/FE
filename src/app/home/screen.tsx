@@ -20,12 +20,7 @@ import {
   RecommendedPhotographer,
   PostGrid,
 } from './_components';
-import {
-  Container,
-  IconTextLink,
-  SearchWrapper,
-  TitleContainer,
-} from './styles';
+import { Container, More, SearchWrapper, TitleContainer } from './styles';
 
 export default function HomeScreen() {
   const { isLoggedIn, role, univ } = useUserStore();
@@ -66,12 +61,12 @@ export default function HomeScreen() {
       {/* ==================== 추천 작가 리스트 ==================== */}
       <TitleContainer>
         <Text variant="title1_sb">추천 작가</Text>
-        <IconTextLink href="/photographer">
+        <More href="/photographer">
           <Text variant="caption1_rg" color={COLOR.GRAY[300]}>
             더보기
           </Text>
           <RightChevronIcon size="20px" color={COLOR.GRAY[300]} />
-        </IconTextLink>
+        </More>
       </TitleContainer>
 
       <RecommendedPhotographer />

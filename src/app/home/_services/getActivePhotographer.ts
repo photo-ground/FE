@@ -1,7 +1,7 @@
-import { PhotographerProps } from '@/types/photographer';
+import { PhotographerList } from '@/types/photographer';
 import { PostProps } from '@/types/post';
 
-export async function getActivePhotographer(): Promise<PhotographerProps> {
+export async function getActivePhotographer(): Promise<PhotographerList> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer/active`,
   );
