@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 import { useQuery } from '@tanstack/react-query';
 
-import { UserInfoProps } from '@/types/user';
+import { ROLE, User } from '@/types/user';
 import useUserStore from '@/store/useUserStore';
 
 import TNB from '@/components/TNB';
@@ -23,7 +23,7 @@ export default function UserPage() {
   const { role } = useUserStore();
   const router = useRouter();
 
-  const { data: userInfo } = useQuery<UserInfoProps>({
+  const { data: userInfo } = useQuery<User>({
     queryKey: ['userInfo'],
     queryFn: getUserInfo,
   });
@@ -42,7 +42,7 @@ export default function UserPage() {
     <Container>
       <Background type={1} />
 
-      {role === 'ROLE_CUSTOMER' && (
+      {role === ROLE.CUSTOMER && (
         <>
           <TNB.Title text="마이페이지" />
 

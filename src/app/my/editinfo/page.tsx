@@ -22,7 +22,7 @@ import {
 } from '@/app/my/_component';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { UpdateUserInfoProps, UserInfoProps } from '@/types/user';
+import { UpdateUserInfoProps, User } from '@/types/user';
 import { deleteUser, getUserInfo, updateUserInfo } from '../_libs/getUserInfo';
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -52,7 +52,7 @@ export default function EditProfile() {
   });
 
   // 회원정보보
-  const { data: userInfo } = useQuery<UserInfoProps>({
+  const { data: userInfo } = useQuery<User>({
     queryKey: ['userInfo'],
     queryFn: getUserInfo,
   });

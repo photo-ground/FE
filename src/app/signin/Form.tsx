@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
-import useUserStore, { Role } from '@/store/useUserStore';
+import { Role } from '@/types/user';
+import useUserStore from '@/store/useUserStore';
 import CTAButton from '@/components/atoms/CTAButton';
 import Text from '@/components/atoms/Text';
 import { convertToViewportHeight } from '@/styles/convertSize';
