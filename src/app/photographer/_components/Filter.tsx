@@ -5,11 +5,6 @@ import { Z_INDEX } from '@/constants';
 import DownChevronIcon from '@/assets/DownChevronIcon';
 import Text from '@/components/atoms/Text';
 
-export interface Option {
-  value: string;
-  label: string;
-}
-
 const Container = styled.div<{ $isOpen: boolean }>`
   display: flex;
   align-items: center;
@@ -63,15 +58,18 @@ const OptionItem = styled.button`
   cursor: pointer;
 `;
 
-export default function Filter({
+export default function Filter<T>({
   value,
   onChange,
   optionList,
   placeholder,
 }: {
-  value: string | null;
-  onChange: (newValue: string) => void;
-  optionList: Option[];
+  value: T | null;
+  onChange: (newValue: T | null) => void;
+  optionList: {
+    value: T;
+    label: string;
+  }[];
   placeholder: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -117,7 +115,7 @@ export default function Filter({
           <OptionWrapper ref={optionRef}>
             {optionList.map((option) => (
               <OptionItem
-                key={option.value}
+                key={String(option.value)}
                 onClick={() => {
                   onChange(option.value);
                   onClose();

@@ -6,3 +6,4 @@ export const UNIVERSITY = {
 } as const;
 
 export type University = (typeof UNIVERSITY)[keyof typeof UNIVERSITY];
+export type NullableUniversity = University | null;

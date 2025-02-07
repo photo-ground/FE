@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import DownChevronIcon from '@/assets/DownChevronIcon';
-import { Option } from '../type';
 import {
   Backdrop,
   Container,
@@ -10,25 +9,26 @@ import {
   OptionWrapper,
 } from './styles';
 
-export default function Primary({
+export interface Option<T = string> {
+  value: T;
+  label: string;
+}
+
+export default function Primary<T>({
   value,
   onChange,
   optionList,
   placeholder,
 }: {
-  value: string | null;
-  onChange: (newValue: string) => void;
-  optionList: Option[];
+  value: T | null;
+  onChange: (newValue: T) => void;
+  optionList: Option<T>[];
   placeholder: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const onOpen = () => {
-    setIsOpen(true);
-  };
-  const onClose = () => {
-    setIsOpen(false);
-  };
+  const onOpen = () => setIsOpen(true);
+  const onClose = () => setIsOpen(false);
 
   const currentLabel = optionList.find(
     (option) => option.value === value,
@@ -49,7 +49,7 @@ export default function Primary({
           <OptionWrapper>
             {optionList.map((option) => (
               <OptionItem
-                key={option.value}
+                key={String(option.value)}
                 onClick={() => {
                   onChange(option.value);
                   onClose();

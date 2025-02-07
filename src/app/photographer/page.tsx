@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
+import { NullableUniversity } from '@/types/university';
 import { UnivValue } from '@/types/univOption';
 import { GenderValue } from '@/types/genderOption';
 
@@ -31,11 +32,11 @@ export default function PhotographerPage() {
     gender: GenderValue | null;
   }>({ univ: null, gender: null });
 
-  const onChangeUniv = (newValue: UnivValue) => {
+  const onChangeUniv = (newValue: NullableUniversity) => {
     setFilter({ ...filter, univ: newValue });
   };
 
-  const onChangeGender = (newValue: GenderValue) => {
+  const onChangeGender = (newValue: GenderValue | null) => {
     setFilter({ ...filter, gender: newValue });
   };
 

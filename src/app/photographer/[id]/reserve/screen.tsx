@@ -4,9 +4,11 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 
+import { NullableUniversity } from '@/types/university';
 import TNB from '@/components/TNB';
 import CTAButton from '@/components/atoms/CTAButton';
 import { DivideLine } from '@/app/signup/styles';
+
 import Info from './_components/Info';
 import Place from './_components/Place';
 import NumberSelector from './_components/NumberSelector';
@@ -53,7 +55,7 @@ export default function PhotographerReserveScreen({
     price,
   });
 
-  const onChangeUniv = (newValue: string) => {
+  const onChangeUniv = (newValue: NullableUniversity) => {
     setData({ ...data, univName: newValue });
   };
 

@@ -1,5 +1,9 @@
+import { University } from './university';
+
+// todo: 파일 합치기
+
 export interface UnivOption {
-  value: string;
+  value: University;
   label: string;
   univId: number;
 }

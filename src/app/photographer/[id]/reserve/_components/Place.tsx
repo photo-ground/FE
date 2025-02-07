@@ -1,9 +1,12 @@
 'use client';
 
+import styled from 'styled-components';
+
+import { University } from '@/types/university';
+import { UNIV_LIST } from '@/types/univOption';
+
 import Text from '@/components/atoms/Text';
 import DropDown from '@/components/Dropdown';
-import { UNIV_LIST } from '@/types/univOption';
-import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
@@ -17,14 +20,14 @@ export default function Place({
   value,
   onChange,
 }: {
-  value: string | null;
-  onChange: (newValue: string) => void;
+  value: University | null;
+  onChange: (newValue: University) => void;
 }) {
   return (
     <Container>
       <Text variant="title2_sb">촬영 장소</Text>
 
-      <DropDown.Primary
+      <DropDown.Primary<University>
         value={value}
         onChange={onChange}
         optionList={UNIV_LIST}

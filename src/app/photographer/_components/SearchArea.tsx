@@ -2,7 +2,8 @@
 
 import styled from 'styled-components';
 
-import { UNIV_LIST, UnivValue } from '@/types/univOption';
+import { NullableUniversity } from '@/types/university';
+import { UNIV_LIST } from '@/types/univOption';
 import { GENDER_LIST, GenderValue } from '@/types/genderOption';
 import ToSearchPage from '@/components/ToSearchPage';
 import Filter from './Filter';
@@ -25,9 +26,9 @@ export default function SearchArea({
   onChangeUniv,
   onChangeGender,
 }: {
-  filter: { univ: UnivValue | null; gender: GenderValue | null };
-  onChangeUniv: (newValue: UnivValue) => void;
-  onChangeGender: (newValue: GenderValue) => void;
+  filter: { univ: NullableUniversity; gender: GenderValue | null };
+  onChangeUniv: (newValue: NullableUniversity) => void;
+  onChangeGender: (newValue: GenderValue | null) => void;
 }) {
   return (
     <Container>

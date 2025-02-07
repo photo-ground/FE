@@ -1,5 +1,7 @@
+import { NullableUniversity } from '@/types/university';
+
 export interface ReserveData {
-  univName: string | null;
+  univName: NullableUniversity;
   reserveNum: number;
   date: Date | null;
   startTime: number | null;
