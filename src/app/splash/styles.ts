@@ -1,5 +1,5 @@
-import { convertToViewportHeight } from '@/styles/convertSize';
 import styled from 'styled-components';
+import { convertToViewportHeight } from '@/styles/convertSize';
 
 export const ScreenWithBottomButton = styled.div`
   display: flex;
