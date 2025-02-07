@@ -1,21 +1,9 @@
 import { cookies } from 'next/headers';
+
+import { PhotographerId } from '@/types/photographer';
 import fetchWithAuth from '@/lib/fetchWithAuth';
 
-export interface PhotographerDetail {
-  profileUrl: string;
-  photographerName: string;
-  followerNum: number;
-  gender: 'MALE' | 'FEMALE';
-  age: number;
-  univ: string[];
-  price: number;
-  addPrice: number;
-  introduction: string;
-  styleList: string[];
-  following: boolean;
-}
-
-export default async function getPhotographerData(id: string) {
+export default async function getPhotographerData(id: PhotographerId) {
   try {
     // eslint-disable-next-line
     const headers: any = { 'Content-Type': 'application/json' };

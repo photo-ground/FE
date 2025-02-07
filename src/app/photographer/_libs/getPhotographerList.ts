@@ -1,18 +1,10 @@
-import { GenderValue } from '@/types/genderOption';
-import { UnivValue } from '@/types/univOption';
+import { NullableGender } from '@/types/gender';
+import { NullableUniversity } from '@/types/university';
 
 interface FilterOption {
-  univ: UnivValue | null;
-  gender: GenderValue | null;
+  univ: NullableUniversity;
+  gender: NullableGender;
   cursor: number | null;
-}
-
-export interface PhotographerSummary {
-  photographerName: string;
-  photographerId: number;
-  age: number;
-  gender: 'MALE' | 'FEMALE';
-  profileUrl: string;
 }
 
 const createSearchParams = ({ univ, gender, cursor }: FilterOption) => {

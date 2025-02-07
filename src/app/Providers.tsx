@@ -1,12 +1,10 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 'use client';
 
+import React, { ReactNode, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import React, { useState } from 'react';
 
-export default function Providers({ children }: React.PropsWithChildren) {
+export default function Providers({ children }: { children: ReactNode }) {
   const [queryClient] = useState(
     new QueryClient({
       defaultOptions: {
@@ -20,6 +18,7 @@ export default function Providers({ children }: React.PropsWithChildren) {
       },
     }),
   );
+
   return (
     <QueryClientProvider client={queryClient}>
       {children}

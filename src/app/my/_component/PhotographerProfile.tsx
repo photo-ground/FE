@@ -1,12 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
+
+import { PhotographerDetail } from '@/types/photographer';
 import PeopleIcon from '@/assets/PeopleIcon';
 import Chip from '@/components/atoms/Chip';
 import SmallButton from '@/components/atoms/SmallButton';
 import Text from '@/components/atoms/Text';
 import genderMap from '@/lib/genderMap';
-import { PhotographerDetail } from '@/app/photographer/[id]/_libs/getPhotographerData';
 import BackButton from './BackButton';
 
 const ThumbnailWrapper = styled.div`
@@ -83,20 +83,10 @@ function UnivList({ list }: { list: string[] }) {
 
 export default function PhotographerProfile({
   data,
-  photographerId,
 }: {
   data: PhotographerDetail;
-  photographerId: number;
 }) {
-  const {
-    profileUrl,
-    photographerName,
-    followerNum,
-    gender,
-    age,
-    univ,
-    following,
-  } = data;
+  const { profileUrl, photographerName, followerNum, gender, age, univ } = data;
   const router = useRouter();
 
   // TODO : 수정로직 구현

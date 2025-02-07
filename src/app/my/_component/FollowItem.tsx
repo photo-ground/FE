@@ -57,7 +57,7 @@ export default function FollowItem({
         <SmallButton.Tertiary
           text="팔로잉"
           onClick={() => {
-            unfollow(photographerId.toString());
+            unfollow(photographerId);
             setIsFollowing(false);
           }}
         />
@@ -65,7 +65,7 @@ export default function FollowItem({
         <SmallButton.Primary
           text="팔로우"
           onClick={() => {
-            follow(photographerId.toString());
+            follow(photographerId);
             setIsFollowing(true);
           }}
         />

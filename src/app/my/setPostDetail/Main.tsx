@@ -1,26 +1,28 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/no-array-index-key */
 
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import useImageStore from '@/store/useImageStore';
-import TNB from '@/components/TNB';
-import { UNIV_LIST, UnivOption } from '@/types/univOption';
+
+import { UNIV_LIST, UnivOption } from '@/types/university';
 import { PhotoSpot } from '@/types/photoSpot';
+
+import useImageStore from '@/store/useImageStore';
+
+import TNB from '@/components/TNB';
+import Spacer from '@/components/Spacer';
+import Divider from '@/components/Divider';
+import Dropdown from '@/components/Dropdown';
+import CTAButton from '@/components/atoms/CTAButton';
+import { PostInfo, PostUploading } from '@/types/post';
+
 import {
   getUnivSpotList,
   postNewContent,
 } from '@/app/my/_libs/getActivePhotographer';
 
-import Spacer from '@/components/Spacer';
-import Divider from '@/components/Divider';
-import Dropdown from '@/components/Dropdown/index_2';
-import CTAButton from '@/components/atoms/CTAButton';
-import { PostInfo, PostUploading } from '@/types/post';
-import { Option } from '@/types/option';
-import { useRouter } from 'next/navigation';
 import UnivRadioGroup from './_component/UnivRadioGroup';
 import ImagePreviewItem from '../_component/ImagePreviewItem';
 import {
@@ -30,6 +32,11 @@ import {
   Title,
   UploadArea,
 } from './style';
+
+interface Option {
+  value: string | number;
+  label: string;
+}
 
 export default function Main() {
   const [isComplete, setIsComplete] = useState<boolean>(false);
@@ -192,7 +199,7 @@ export default function Main() {
                 alt={`Upload File[${index}]`}
                 onDelete={() => handleRemoveItem(index)}
               />
-              <Dropdown
+              <Dropdown.Dropdown
                 variant="filter"
                 key={index}
                 options={spotData}

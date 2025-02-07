@@ -6,3 +6,17 @@ export const UNIVERSITY = {
 } as const;
 
 export type University = (typeof UNIVERSITY)[keyof typeof UNIVERSITY];
+export type NullableUniversity = University | null;
+
+export interface UnivOption {
+  value: University;
+  label: string;
+  univId: number;
+}
+
+export const UNIV_LIST: UnivOption[] = [
+  { value: UNIVERSITY.SOGANG, label: UNIVERSITY.SOGANG, univId: 1 },
+  { value: UNIVERSITY.YONSEI, label: UNIVERSITY.YONSEI, univId: 2 },
+  { value: UNIVERSITY.EWHA, label: UNIVERSITY.EWHA, univId: 3 },
+  { value: UNIVERSITY.HONGIK, label: UNIVERSITY.HONGIK, univId: 4 },
+];

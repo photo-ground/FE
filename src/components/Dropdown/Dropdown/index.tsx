@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import DownChevronIcon from '@/assets/DownChevronIcon';
-import { Option } from '@/types/option';
 import {
   Backdrop,
   Container,
@@ -9,6 +8,11 @@ import {
   OptionItem,
   OptionWrapper,
 } from './style';
+
+interface Option {
+  value: string | number;
+  label: string;
+}
 
 interface DropdownProps {
   variant?: 'default' | 'filter' | 'mini';

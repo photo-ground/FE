@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+
+import { UnivOption } from '@/types/university';
 import PostUnivSelectButton from '@/components/atoms/PostUnivSelectButton';
-import { UnivOption } from '@/types/univOption';
 
 const RadioGroup = styled.div`
   display: grid;

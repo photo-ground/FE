@@ -1,12 +1,6 @@
 import { cookies } from 'next/headers';
 import fetchWithAuth from '@/lib/fetchWithAuth';
 
-export interface Follow {
-  photographerName: string;
-  profileUrl: string;
-  photographerId: number;
-}
-
 export default async function getFollowList() {
   try {
     const cookieStore = await cookies();

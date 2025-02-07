@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+
+import { PhotographerDetail } from '@/types/photographer';
 import Text from '@/components/atoms/Text';
 import formatPrice from '@/lib/formatPrice';
-import { PhotographerDetail } from '../_libs/getPhotographerData';
 
 const Container = styled.div`
   display: flex;

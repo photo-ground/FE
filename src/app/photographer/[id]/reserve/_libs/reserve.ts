@@ -1,9 +1,10 @@
+import { PhotographerId } from '@/types/photographer';
 import fetchWithAuth from '@/lib/fetchWithAuth';
 import getAccessToken from '@/lib/getAccessToken';
 import { ReserveData } from '../type';
 
 export default async function reserve(
-  photographerId: string,
+  photographerId: PhotographerId,
   data: ReserveData,
 ) {
   try {

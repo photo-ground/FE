@@ -6,7 +6,7 @@ export default async function PhotographerProfile({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const id = (await params).id!;
+  const id = parseInt((await params).id!, 10);
   const photographerData = await getPhotographerData(id);
 
   return (

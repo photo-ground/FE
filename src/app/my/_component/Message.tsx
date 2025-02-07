@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+
+import { PhotographerDetail } from '@/types/photographer';
 import Text from '@/components/atoms/Text';
 import DownChevronIcon from '@/assets/DownChevronIcon';
-import { PhotographerDetail } from '@/app/photographer/[id]/_libs/getPhotographerData';
 
 const Container = styled.div`
   display: flex;

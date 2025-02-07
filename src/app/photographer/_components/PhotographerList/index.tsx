@@ -2,9 +2,9 @@ import { useEffect, memo } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 
+import { PhotographerSummary } from '@/types/photographer';
 import Card from '@/components/Card';
 import genderMap from '@/lib/genderMap';
-import { PhotographerSummary } from '../../_libs/getPhotographerList';
 
 const Container = styled.div`
   display: grid;

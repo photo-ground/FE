@@ -1,3 +1,5 @@
+import { Gender } from '@/types/gender';
+
 export interface SignUpData {
   email: string;
   password: string;
@@ -9,7 +11,7 @@ export interface SignUpData {
     | '이화여자대학교'
     | '홍익대학교'
     | '선택안함';
-  gender?: 'FEMALE' | 'MALE';
+  gender?: Gender;
 
   isEmailConfirmed: boolean;
   isPasswordValid: boolean;

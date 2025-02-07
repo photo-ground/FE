@@ -1,4 +1,6 @@
 import { cookies } from 'next/headers';
+
+import { PhotographerId } from '@/types/photographer';
 import fetchWithAuth from '@/lib/fetchWithAuth';
 
 export interface PhotographerReserve {
@@ -10,7 +12,7 @@ export interface PhotographerReserve {
   schedule: { weekDay: string; timeSlot: number[] }[];
 }
 
-export default async function getPhotographerData(id: string) {
+export default async function getPhotographerData(id: PhotographerId) {
   const cookieStore = await cookies();
 
   try {

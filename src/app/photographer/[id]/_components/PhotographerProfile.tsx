@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+
+import { PhotographerDetail, PhotographerId } from '@/types/photographer';
 import PeopleIcon from '@/assets/PeopleIcon';
 import Chip from '@/components/atoms/Chip';
 import SmallButton from '@/components/atoms/SmallButton';
@@ -7,7 +9,6 @@ import Text from '@/components/atoms/Text';
 import genderMap from '@/lib/genderMap';
 import useUserStore from '@/store/useUserStore';
 
-import { PhotographerDetail } from '../_libs/getPhotographerData';
 import follow from '../_libs/follow';
 import unfollow from '../_libs/unfollow';
 import BackButton from './BackButton';
@@ -91,7 +92,7 @@ export default function PhotographerProfile({
   photographerId,
 }: {
   data: PhotographerDetail;
-  photographerId: string;
+  photographerId: PhotographerId;
 }) {
   const {
     profileUrl,

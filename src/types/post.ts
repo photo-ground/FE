@@ -16,6 +16,11 @@ export interface PostList {
   hasNext: boolean;
 }
 
+export interface PostSummary {
+  postId: PostId;
+  firstImageUrl: string;
+}
+
 export interface PostInfo {
   univId: number;
   content: string;
