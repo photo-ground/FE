@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+
+import { ReservationStatus } from '@/types/reservation';
 import Text from '@/components/atoms/Text';
-import { ReserveDetail } from '../type';
 import ProgressBar from './ProgressBar';
 
 const Container = styled.div`
@@ -19,7 +20,7 @@ const Box = styled.div`
   border-radius: 0.5rem;
 `;
 
-export default function State({ state }: { state: ReserveDetail['status'] }) {
+export default function State({ state }: { state: ReservationStatus }) {
   return (
     <Container>
       <Text variant="title2_sb">진행 상황</Text>

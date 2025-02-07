@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 
+import { ReservationSummary } from '@/types/reservation';
 import { COLOR } from '@/constants';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import PhotoIcon from '@/assets/modal/PhotoIcon';
@@ -13,7 +14,6 @@ import ConfirmModal from '@/components/modals/ConfirmModal';
 import InfoIcon from '@/assets/InfoIcon';
 
 import Tag from './Tag';
-import { Reservation } from '../type';
 import completeSnap from '../_libs/completeSnap';
 
 const Wrapper = styled.div`
@@ -63,7 +63,7 @@ const Message = styled(Text)`
   color: ${({ theme }) => theme.colors.gray[200]};
 `;
 
-export default function ConfirmCard({ data }: { data: Reservation }) {
+export default function ConfirmCard({ data }: { data: ReservationSummary }) {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 

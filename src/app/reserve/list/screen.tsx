@@ -1,13 +1,13 @@
 'use client';
 
+import { ReservationSummary } from '@/types/reservation';
 import TNB from '@/components/TNB';
 import CardList from './_components/CardList';
-import { Reservation } from './type';
 
 export default function ReservationListScreen({
   reservationList,
 }: {
-  reservationList: Reservation[];
+  reservationList: ReservationSummary[];
 }) {
   return (
     <>

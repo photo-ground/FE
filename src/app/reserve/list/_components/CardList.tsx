@@ -1,12 +1,13 @@
-import RightChevronIcon from '@/assets/RightChevronIcon';
-import Text from '@/components/atoms/Text';
 import Link from 'next/link';
 import styled from 'styled-components';
+
+import { ReservationSummary } from '@/types/reservation';
+import RightChevronIcon from '@/assets/RightChevronIcon';
+import Text from '@/components/atoms/Text';
 import ReserveCard from './ReserveCard';
 import PaymentCard from './PaymentCard';
 import ConfirmCard from './ConfirmCard';
 import CancelCard from './CancelCard';
-import { Reservation } from '../type';
 
 const Container = styled.div`
   padding: 1.5rem 0;
@@ -40,7 +41,7 @@ const DivideLine = styled.hr`
   margin-bottom: 1.5rem;
 `;
 
-function mapCard(reservation: Reservation) {
+function mapCard(reservation: ReservationSummary) {
   switch (reservation.status) {
     case '예약대기':
       return <PaymentCard data={reservation} state="wait" />;
@@ -65,7 +66,7 @@ function mapCard(reservation: Reservation) {
 export default function CardList({
   reservationList,
 }: {
-  reservationList: Reservation[];
+  reservationList: ReservationSummary[];
 }) {
   return (
     <Container>

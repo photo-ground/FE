@@ -1,8 +1,9 @@
+import styled from 'styled-components';
+
 import { COLOR } from '@/constants';
 import InfoIcon from '@/assets/InfoIcon';
 import WarningIcon from '@/assets/WarningIcon';
 import Text from '@/components/atoms/Text';
-import styled from 'styled-components';
 
 const Wrapper = styled.div`
   margin-top: 1rem;
