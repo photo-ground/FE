@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { University } from '@/types/university';
 import { UNIV_LIST } from '@/types/univOption';
 import { COLOR } from '@/constants';
 
@@ -31,7 +30,7 @@ import {
 export default function HomeScreen() {
   const { isLoggedIn, role, univ } = useUserStore();
   const router = useRouter();
-  const [selectedUniv, setSelectedUniv] = useState<University | null>(null);
+  const [selectedUniv, setSelectedUniv] = useState<string | null>(null);
 
   // 만약 인증하지 않고 둘러볼 학교도 선택하지 않았다면
   if (!isLoggedIn && !univ && role !== 'ROLE_PHOTOGRAPHER') {
@@ -46,7 +45,7 @@ export default function HomeScreen() {
     );
   }
 
-  const onChangeUniv = (newUniv: { value: University }) => {
+  const onChangeUniv = (newUniv: { value: string }) => {
     setSelectedUniv(newUniv.value);
   };
 

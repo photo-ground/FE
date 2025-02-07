@@ -70,7 +70,6 @@ export default function Filter({
   placeholder,
 }: {
   value: string | null;
-  // eslint-disable-next-line
   onChange: (newValue: string) => void;
   optionList: Option[];
   placeholder: string;
@@ -82,6 +81,7 @@ export default function Filter({
   const onOpen = () => {
     setIsOpen(true);
   };
+
   const onClose = () => {
     setIsOpen(false);
   };
