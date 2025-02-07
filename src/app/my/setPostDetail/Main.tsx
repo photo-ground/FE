@@ -16,7 +16,7 @@ import {
 
 import Spacer from '@/components/Spacer';
 import Divider from '@/components/Divider';
-import Dropdown from '@/components/Dropdown/index_2';
+import Dropdown from '@/components/Dropdown';
 import CTAButton from '@/components/atoms/CTAButton';
 import { PostInfo, PostUploading } from '@/types/post';
 import { Option } from '@/types/option';
@@ -192,7 +192,7 @@ export default function Main() {
                 alt={`Upload File[${index}]`}
                 onDelete={() => handleRemoveItem(index)}
               />
-              <Dropdown
+              <Dropdown.Dropdown
                 variant="filter"
                 key={index}
                 options={spotData}

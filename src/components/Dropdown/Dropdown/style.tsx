@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Z_INDEX } from '@/constants';
-import Text from '../atoms/Text';
+import Text from '@/components/atoms/Text';
 
 export const Container = styled.div`
   display: flex;
