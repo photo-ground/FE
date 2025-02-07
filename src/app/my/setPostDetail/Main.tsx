@@ -8,7 +8,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import useImageStore from '@/store/useImageStore';
 import TNB from '@/components/TNB';
 import { UNIV_LIST, UnivOption } from '@/types/univOption';
-import { PhotoSpotListProps } from '@/types/photoSpot';
+import { PhotoSpot } from '@/types/photoSpot';
 import {
   getUnivSpotList,
   postNewContent,
@@ -91,7 +91,7 @@ export default function Main() {
   }, [images]);
 
   // Univ 정보를 가져오는 useQuery
-  const { isLoading, isError, data, error } = useQuery<PhotoSpotListProps[]>({
+  const { isLoading, isError, data, error } = useQuery<PhotoSpot[]>({
     queryKey: ['univSpotList', selectedUniv],
     queryFn: () =>
       selectedUniv ? getUnivSpotList(selectedUniv.value) : Promise.resolve([]),
