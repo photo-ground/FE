@@ -3,20 +3,6 @@ import useUserStore from '@/store/useUserStore';
 import getAccessToken from '@/lib/getAccessToken';
 import PhotographerDetailScreen from './PhotographerDetailScreen';
 
-export interface PhotographerDetail {
-  profileUrl: string;
-  photographerName: string;
-  followerNum: number;
-  gender: 'MALE' | 'FEMALE';
-  age: number;
-  univ: string[];
-  price: number;
-  addPrice: number;
-  introduction: string;
-  styleList: string[];
-  following: boolean;
-}
-
 async function getPhotographerData(id: number) {
   try {
     const rawResponse = await fetch(
@@ -54,7 +40,9 @@ export default function PhotographerProfile() {
     }
   }, [photographerId]);
 
-  if (!photographerId) return null;
+  if (!photographerId) {
+    return null;
+  }
 
   if (!data) {
     return null;

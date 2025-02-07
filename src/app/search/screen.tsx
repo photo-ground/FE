@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
+import { PhotographerSummary } from '@/types/photographer';
 import CancelIcon from '@/assets/CancelIcon';
 import SearchIcon from '@/assets/SearchIcon';
 import Text from '@/components/atoms/Text';
@@ -12,7 +13,6 @@ import Background from '@/components/Background';
 import useDebounce from '@/lib/useDebounce';
 
 import getSearchResult from './_libs/getSearchResult';
-import { PhotographerSummary } from '../photographer/_libs/getPhotographerList';
 
 const Wrapper = styled.div`
   position: relative;

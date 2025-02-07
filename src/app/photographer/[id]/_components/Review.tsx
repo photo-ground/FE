@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 
+import { PhotographerId } from '@/types/photographer';
 import { COLOR } from '@/constants';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import SmallStarIcon from '@/assets/SmallStarIcon';
@@ -34,7 +35,11 @@ const LinkText = styled(Text)`
   color: ${({ theme }) => theme.colors.gray[400]};
 `;
 
-export default function Review({ photographerId }: { photographerId: string }) {
+export default function Review({
+  photographerId,
+}: {
+  photographerId: PhotographerId;
+}) {
   return (
     <Container>
       <ScoreArea>

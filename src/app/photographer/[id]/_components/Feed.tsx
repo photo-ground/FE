@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import Text from '@/components/atoms/Text';
 
-import { PhotographerDetail } from '../_libs/getPhotographerData';
-import { PostSummary } from '../_libs/getPhotographerPosts';
+import { PhotographerDetail } from '@/types/photographer';
+import { PostSummary } from '@/types/post';
+import Text from '@/components/atoms/Text';
 
 const Container = styled.div`
   display: flex;

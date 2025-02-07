@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 
+import { PhotographerId } from '@/types/photographer';
 import { NullableUniversity } from '@/types/university';
 import TNB from '@/components/TNB';
 import CTAButton from '@/components/atoms/CTAButton';
@@ -39,7 +40,7 @@ export default function PhotographerReserveScreen({
   photographerId,
   photographerData,
 }: {
-  photographerId: string;
+  photographerId: PhotographerId;
   photographerData: PhotographerReserve;
 }) {
   const router = useRouter();

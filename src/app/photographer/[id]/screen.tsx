@@ -6,6 +6,9 @@ import styled from 'styled-components';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
+import { PostSummary } from '@/types/post';
+import { PhotographerDetail, PhotographerId } from '@/types/photographer';
+
 import CTAButton from '@/components/atoms/CTAButton';
 import FloatingButton from '@/components/FloatingButton';
 import useUserStore from '@/store/useUserStore';
@@ -15,10 +18,7 @@ import Price from './_components/Price';
 import Message from './_components/Message';
 import Review from './_components/Review';
 import Feed from './_components/Feed';
-import { PhotographerDetail } from './_libs/getPhotographerData';
-import getPhotographerPosts, {
-  PostSummary,
-} from './_libs/getPhotographerPosts';
+import getPhotographerPosts from './_libs/getPhotographerPosts';
 
 const Container = styled.div`
   padding-bottom: 6.125rem;
@@ -33,7 +33,7 @@ export default function PhotographerDetailScreen({
   photographerId,
   data,
 }: {
-  photographerId: string;
+  photographerId: PhotographerId;
   data: PhotographerDetail;
 }) {
   const { price, introduction, styleList } = data;

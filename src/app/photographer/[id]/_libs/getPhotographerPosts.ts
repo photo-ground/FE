@@ -1,10 +1,7 @@
-export interface PostSummary {
-  postId: number;
-  firstImageUrl: string;
-}
+import { PhotographerId } from '@/types/photographer';
 
 export default async function getPhotographerPosts(
-  id: string,
+  id: PhotographerId,
   lastPostId: number | null,
 ) {
   try {

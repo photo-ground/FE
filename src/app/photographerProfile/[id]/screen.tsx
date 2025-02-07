@@ -4,15 +4,16 @@ import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
+
+import { PhotographerDetail, PhotographerId } from '@/types/photographer';
+import { PostSummary } from '@/types/post';
+
 import PhotographerProfile from '@/app/photographer/[id]/_components/PhotographerProfile';
 import Price from '@/app/photographer/[id]/_components/Price';
 import Message from '@/app/photographer/[id]/_components/Message';
 import Review from '@/app/photographer/[id]/_components/Review';
 import Feed from '@/app/photographer/[id]/_components/Feed';
-import { PhotographerDetail } from '@/app/photographer/[id]/_libs/getPhotographerData';
-import getPhotographerPosts, {
-  PostSummary,
-} from '@/app/photographer/[id]/_libs/getPhotographerPosts';
+import getPhotographerPosts from '@/app/photographer/[id]/_libs/getPhotographerPosts';
 
 const Container = styled.div`
   padding-bottom: 6.125rem;
@@ -27,7 +28,7 @@ export default function PhotographerDetailScreen({
   photographerId,
   data,
 }: {
-  photographerId: string;
+  photographerId: PhotographerId;
   data: PhotographerDetail;
 }) {
   const { price, introduction, styleList } = data;

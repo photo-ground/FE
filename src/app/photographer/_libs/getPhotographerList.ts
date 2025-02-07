@@ -7,14 +7,6 @@ interface FilterOption {
   cursor: number | null;
 }
 
-export interface PhotographerSummary {
-  photographerName: string;
-  photographerId: number;
-  age: number;
-  gender: 'MALE' | 'FEMALE';
-  profileUrl: string;
-}
-
 const createSearchParams = ({ univ, gender, cursor }: FilterOption) => {
   const params = new URLSearchParams();
 

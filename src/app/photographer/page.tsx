@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
+import { PhotographerSummary } from '@/types/photographer';
 import { NullableUniversity } from '@/types/university';
 import { NullableGender } from '@/types/gender';
 
@@ -12,9 +13,7 @@ import TNB from '@/components/TNB';
 import Background from '@/components/Background';
 import SearchArea from './_components/SearchArea';
 import PhotographerList from './_components/PhotographerList';
-import getPhotographerList, {
-  PhotographerSummary,
-} from './_libs/getPhotographerList';
+import getPhotographerList from './_libs/getPhotographerList';
 
 const Container = styled.div`
   position: relative;

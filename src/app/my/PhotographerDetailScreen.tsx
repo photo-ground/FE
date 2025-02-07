@@ -4,10 +4,11 @@ import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
-import { PhotographerDetail } from '../photographer/[id]/_libs/getPhotographerData';
-import getPhotographerPosts, {
-  PostSummary,
-} from '../photographer/[id]/_libs/getPhotographerPosts';
+
+import { PostSummary } from '@/types/post';
+import { PhotographerDetail, PhotographerId } from '@/types/photographer';
+
+import getPhotographerPosts from '../photographer/[id]/_libs/getPhotographerPosts';
 import PhotographerProfile from './_component/PhotographerProfile';
 import Price from './_component/Price';
 import Message from './_component/Message';
@@ -27,7 +28,7 @@ export default function PhotographerDetailScreen({
   photographerId,
   data,
 }: {
-  photographerId: number;
+  photographerId: PhotographerId;
   data: PhotographerDetail;
 }) {
   const { price, introduction, styleList } = data!;
@@ -37,8 +38,7 @@ export default function PhotographerDetailScreen({
   const { ref, inView } = useInView();
   const { data: postData, fetchNextPage } = useInfiniteQuery({
     queryKey: ['posts', photographerId],
-    queryFn: ({ pageParam }) =>
-      getPhotographerPosts(photographerId.toString(), pageParam),
+    queryFn: ({ pageParam }) => getPhotographerPosts(photographerId, pageParam),
     initialPageParam: null,
     getNextPageParam: () => {
       if (!postList || postList.length === 0) {
@@ -68,7 +68,7 @@ export default function PhotographerDetailScreen({
   }, [fetchNextPage, inView]);
   return (
     <Container>
-      <PhotographerProfile data={data} photographerId={photographerId} />
+      <PhotographerProfile data={data} />
 
       <DivideLine />
 
