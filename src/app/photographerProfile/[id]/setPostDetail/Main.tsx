@@ -1,14 +1,16 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/no-array-index-key */
 
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useMutation, useQuery } from '@tanstack/react-query';
+
+import { UNIV_LIST, UnivOption } from '@/types/university';
+import { PhotoSpot } from '@/types/photoSpot';
+
 import useImageStore from '@/store/useImageStore';
 import TNB from '@/components/TNB';
-import { UNIV_LIST, UnivOption } from '@/types/univOption';
-import { PhotoSpot } from '@/types/photoSpot';
 import {
   getUnivSpotList,
   postNewContent,
@@ -20,7 +22,6 @@ import Dropdown from '@/components/Dropdown';
 import CTAButton from '@/components/atoms/CTAButton';
 import { PostInfo, PostUploading } from '@/types/post';
 import { Option } from '@/types/option';
-import { useRouter } from 'next/navigation';
 import UnivRadioGroup from '@/app/my/setPostDetail/_component/UnivRadioGroup';
 import ImagePreviewItem from '@/app/my/_component/ImagePreviewItem';
 import {

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { ROLE } from '@/types/user';
-import { UNIV_LIST } from '@/types/univOption';
+import { UNIV_LIST } from '@/types/university';
 import { COLOR } from '@/constants';
 
 import useUserStore from '@/store/useUserStore';

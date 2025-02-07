@@ -2,8 +2,7 @@
 
 import styled from 'styled-components';
 
-import { University } from '@/types/university';
-import { UNIV_LIST } from '@/types/univOption';
+import { University, UNIV_LIST } from '@/types/university';
 
 import Text from '@/components/atoms/Text';
 import DropDown from '@/components/Dropdown';

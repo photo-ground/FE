@@ -2,8 +2,7 @@
 
 import styled from 'styled-components';
 
-import { NullableUniversity } from '@/types/university';
-import { UNIV_LIST } from '@/types/univOption';
+import { NullableUniversity, UNIV_LIST } from '@/types/university';
 import { GENDER_LIST, GenderValue } from '@/types/genderOption';
 import ToSearchPage from '@/components/ToSearchPage';
 import Filter from './Filter';

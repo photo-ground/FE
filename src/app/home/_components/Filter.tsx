@@ -1,9 +1,10 @@
 /* eslint-disable dot-notation */
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+
+import { UnivOption } from '@/types/university';
 import DownChevronIcon from '@/assets/DownChevronIcon';
 import Text from '@/components/atoms/Text';
-import { UnivOption } from '@/types/univOption';
 import UpChevronIcon from '@/assets/UpChevronIcon';
 
 export const Container = styled.div<{ $isOpen: boolean }>`
