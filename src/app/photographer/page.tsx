@@ -6,7 +6,6 @@ import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { NullableUniversity } from '@/types/university';
-import { UnivValue } from '@/types/univOption';
 import { GenderValue } from '@/types/genderOption';
 
 import TNB from '@/components/TNB';
@@ -28,7 +27,7 @@ export default function PhotographerPage() {
   >([]);
   const [hasNext, setHasNext] = useState(true);
   const [filter, setFilter] = useState<{
-    univ: UnivValue | null;
+    univ: NullableUniversity;
     gender: GenderValue | null;
   }>({ univ: null, gender: null });
 

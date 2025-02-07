@@ -1,18 +1,18 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { UnivValue } from '@/types/univOption';
 import { Role, ROLE } from '@/types/user';
+import { University } from '@/types/university';
 
 interface States {
   isLoggedIn: boolean;
-  univ: UnivValue;
+  univ: University;
   role: Role;
   photographerId: number | null;
 }
 
 interface Actions {
   setIsLoggedIn: (state: boolean) => void;
-  setUniv: (newUniv: UnivValue) => void;
+  setUniv: (newUniv: University) => void;
   setRole: (newRole: Role) => void;
   setPhotographerId: (newId: number) => void;
 }
