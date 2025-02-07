@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import TNB from '@/components/TNB';
 import Text from '@/components/atoms/Text';
 import { useQuery } from '@tanstack/react-query';
-import { ReviewsProps } from '@/types/reviews';
+import { ReviewList } from '@/types/reviews';
 import ReviewItem from '../_component/ReviewItem';
 import { getReviews } from '../_libs/getReviews';
 
@@ -29,7 +29,7 @@ const ReviewItemContainer = styled.div`
 `;
 
 export default function Reviews() {
-  const { data: reviewData } = useQuery<ReviewsProps>({
+  const { data: reviewData } = useQuery<ReviewList>({
     queryKey: ['userReview'],
     queryFn: getReviews,
   });

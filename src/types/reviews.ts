@@ -1,15 +1,17 @@
-export interface ReviewItemProps {
+import { PhotographerName } from './photographer';
+
+export interface ReviewDetail {
   reviewId: number;
   reservationId: number;
   photographerProfile: string;
-  photographerName: string;
+  photographerName: PhotographerName;
   content: string;
   score: number;
   createdAt: string;
 }
 
-export interface ReviewsProps {
+export interface ReviewList {
   count: number;
   averageScore: number;
-  reviews: ReviewItemProps[];
+  reviews: ReviewDetail[];
 }

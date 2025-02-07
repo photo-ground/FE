@@ -4,7 +4,7 @@ import SmallStarIcon from '@/assets/SmallStarIcon';
 import Text from '@/components/atoms/Text';
 import TNB from '@/components/TNB';
 import styled from 'styled-components';
-import { ReviewData } from './getReviewData';
+import { ReviewList } from '@/types/reviews';
 
 const Container = styled.div`
   margin-bottom: 5rem;
@@ -60,7 +60,7 @@ const ReviewCard = styled.li`
 export default function PhotographerReviewScreen({
   data,
 }: {
-  data: ReviewData;
+  data: ReviewList;
 }) {
   const { averageScore, count, reviews } = data;
 
