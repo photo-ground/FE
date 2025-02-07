@@ -1,6 +1,6 @@
 import HomeScreen from './screen';
 
-export default function AuthPageWrapper() {
+export default function HomePage() {
   return <HomeScreen />;
 }
 

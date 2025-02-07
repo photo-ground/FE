@@ -1,5 +1,7 @@
+import { University } from './university';
+
 export interface UnivOption {
-  value: string;
+  value: University;
   label: string;
   univId: number;
 }
