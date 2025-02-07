@@ -39,3 +39,9 @@ export interface PhotographerDetail {
   following: boolean;
   profileUrl: ProfileUrl;
 }
+
+export interface PhotographerFollowing {
+  photographerId: PhotographerId;
+  photographerName: PhotographerName;
+  profileUrl: ProfileUrl;
+}

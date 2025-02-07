@@ -2,11 +2,11 @@
 
 import styled from 'styled-components';
 
+import { PhotographerFollowing } from '@/types/photographer';
 import TNB from '@/components/TNB';
 import Text from '@/components/atoms/Text';
 
 import FollowItem from '../_component/FollowItem';
-import { Follow } from './_libs/getFollowList';
 
 const FollowList = styled.div`
   display: flex;
@@ -16,7 +16,11 @@ const FollowList = styled.div`
   padding: 1.5rem 1.25rem;
 `;
 
-export default function FollowScreen({ data }: { data: Follow[] }) {
+export default function FollowScreen({
+  data,
+}: {
+  data: PhotographerFollowing[];
+}) {
   return (
     <>
       <TNB.Back text="팔로우 목록" />
