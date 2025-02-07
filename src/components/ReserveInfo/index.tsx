@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+
+import { ReservationSummary } from '@/types/reservation';
 import LocationIcon from '@/assets/LocationIcon';
 import PeopleIcon from '@/assets/PeopleIcon';
 import PhotographerIcon from '@/assets/PhotographerIcon';
-import { Reservation } from '@/app/reserve/list/type';
 import Chip from '@/components/atoms/Chip';
 import Text from '@/components/atoms/Text';
 import SmallButton from '../atoms/SmallButton';
@@ -66,7 +67,7 @@ export default function ReserveInfo({
   data,
   chipType = 'tertiary',
 }: {
-  data: Reservation;
+  data: ReservationSummary;
   chipType?: 'tertiary' | 'brand' | 'link';
 }) {
   return (

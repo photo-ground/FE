@@ -1,43 +1,30 @@
-export interface SpotPostImageProps {
-  imageId: number;
-  imageUrl: string;
-  postId: number;
-  photographerName: string;
-}
+import { PhotographerName } from './photographer';
+import { PostId } from './post';
 
-export interface SpotPostImageMetaProps {
-  spotPostImageProps: SpotPostImageProps[];
-  spotName: string;
-  univ: string;
-}
+export type SpotId = number;
+export type SpotName = string;
 
-export interface PhotoSpotProps {
-  spotId: number;
-  spotName: string;
-  content: string;
-  imageInfo: {
-    spotPostImageList: SpotPostImageProps[];
-    hasNext: boolean;
-  };
-}
-
-export interface PhotoSpotListProps {
-  spotId: number;
-  spotName: string;
+export interface PhotoSpot {
+  spotId: SpotId;
+  spotName: SpotName;
   latitude: number;
   longitude: number;
   spotImageUrl: string;
 }
 
-export interface PostListProps {
-  id: number;
-  photographerId: number;
-  photographerName: string;
-  firstImageUrl: string;
-  firstImageSpot: string;
-  createdAt: string;
+export interface PhotoSpotPost {
+  imageId: number;
+  imageUrl: string;
+  postId: PostId;
+  photographerName: PhotographerName;
 }
-export interface PostByUnivProps {
-  postList: PostListProps[];
-  hasNext: boolean;
+
+export interface PhotoSpotPostList {
+  spotId: SpotId;
+  spotName: SpotName;
+  content: string;
+  imageInfo: {
+    spotPostImageList: PhotoSpotPost[];
+    hasNext: boolean;
+  };
 }

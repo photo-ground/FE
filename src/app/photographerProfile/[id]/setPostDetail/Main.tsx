@@ -8,7 +8,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import useImageStore from '@/store/useImageStore';
 import TNB from '@/components/TNB';
 import { UNIV_LIST, UnivOption } from '@/types/univOption';
-import { PhotoSpotListProps } from '@/types/photoSpot';
+import { PhotoSpot } from '@/types/photoSpot';
 import {
   getUnivSpotList,
   postNewContent,
@@ -18,7 +18,7 @@ import Spacer from '@/components/Spacer';
 import Divider from '@/components/Divider';
 import Dropdown from '@/components/Dropdown/index_2';
 import CTAButton from '@/components/atoms/CTAButton';
-import { PostInfoProps, PostUploadContainerProps } from '@/types/post';
+import { PostInfo, PostUploading } from '@/types/post';
 import { Option } from '@/types/option';
 import { useRouter } from 'next/navigation';
 import UnivRadioGroup from '@/app/my/setPostDetail/_component/UnivRadioGroup';
@@ -91,7 +91,7 @@ export default function Main({ photographerId }: { photographerId: number }) {
   }, [images]);
 
   // Univ 정보를 가져오는 useQuery
-  const { isLoading, isError, data, error } = useQuery<PhotoSpotListProps[]>({
+  const { isLoading, isError, data, error } = useQuery<PhotoSpot[]>({
     queryKey: ['univSpotList', selectedUniv],
     queryFn: () =>
       selectedUniv ? getUnivSpotList(selectedUniv.value) : Promise.resolve([]),
@@ -110,7 +110,7 @@ export default function Main({ photographerId }: { photographerId: number }) {
 
   // Mutations
   const createPostMutation = useMutation({
-    mutationFn: ({ newContent }: { newContent: PostUploadContainerProps }) =>
+    mutationFn: ({ newContent }: { newContent: PostUploading }) =>
       postNewContent(newContent),
     onSuccess: () => {
       router.push(`/photographerProfile/${photographerId}`);
@@ -141,7 +141,6 @@ export default function Main({ photographerId }: { photographerId: number }) {
 
   // 스팟 선택 핸들러
   const handleDropdown = (index: number, spotId: number) => {
-    // console.log(spotId);
     selectSpotId(index, spotId); // 선택한 스팟 ID 추가
   };
 
@@ -150,13 +149,13 @@ export default function Main({ photographerId }: { photographerId: number }) {
     event?.preventDefault();
 
     if (selectedUniv && !spotIds.includes(-1)) {
-      const postInfoData: PostInfoProps = {
+      const postInfoData: PostInfo = {
         univId: selectedUniv.univId,
         content: textareaContent,
         spotIds,
       };
 
-      const newContent: PostUploadContainerProps = {
+      const newContent: PostUploading = {
         postInfo: postInfoData,
         photos: images,
       };

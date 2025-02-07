@@ -1,22 +1,28 @@
-export interface PostListProps {
-  id: number;
-  photographerId: number;
-  photographerName: string;
+import { PhotographerId, PhotographerName } from './photographer';
+
+export type PostId = number;
+
+export interface Post {
+  id: PostId;
+  photographerId: PhotographerId;
+  photographerName: PhotographerName;
   firstImageUrl: string;
   firstImageSpot: string;
   createdAt: string;
 }
-export interface PostProps {
-  postList: PostListProps[];
+
+export interface PostList {
+  postList: Post[];
   hasNext: boolean;
 }
 
-export interface PostInfoProps {
+export interface PostInfo {
   univId: number;
   content: string;
   spotIds: number[];
 }
-export interface PostUploadContainerProps {
-  postInfo: PostInfoProps;
+
+export interface PostUploading {
+  postInfo: PostInfo;
   photos: File[]; // 업로드할 파일 배열
 }

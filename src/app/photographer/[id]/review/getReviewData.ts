@@ -1,18 +1,5 @@
 import fetchWithAuth from '@/lib/fetchWithAuth';
 
-export interface ReviewData {
-  count: number;
-  averageScore: number;
-  reviews: {
-    reviewId: number;
-    reservationId: number;
-    photographerProfile: string;
-    photographerName: string;
-    content: string;
-    score: number;
-    createdAt: string;
-  }[];
-}
 export default async function getReviewData(id: string) {
   try {
     const rawResponse = await fetchWithAuth(

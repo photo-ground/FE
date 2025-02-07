@@ -1,9 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { UnivValue } from '@/types/univOption';
-
-// todo 옮기기
-export type Role = 'ROLE_CUSTOMER' | 'ROLE_PHOTOGRAPHER';
+import { Role, ROLE } from '@/types/user';
 
 interface States {
   isLoggedIn: boolean;
@@ -24,7 +22,7 @@ const useUserStore = create(
     (set) => ({
       isLoggedIn: false, // 기본값은 비로그인 상태
       univ: '서강대학교', // 기본값은 서강대학교
-      role: 'ROLE_CUSTOMER', // 기본값은 고객
+      role: ROLE.CUSTOMER, // 기본값은 고객
       photographerId: null,
 
       setIsLoggedIn: (state) => set(() => ({ isLoggedIn: state })),

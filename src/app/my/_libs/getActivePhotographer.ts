@@ -1,12 +1,12 @@
 'use server';
 
-import { PhotographerProps } from '@/types/photographer';
-import { PhotoSpotListProps } from '@/types/photoSpot';
-import { PostUploadContainerProps } from '@/types/post';
+import { PhotographerList } from '@/types/photographer';
+import { PhotoSpot } from '@/types/photoSpot';
+import { PostUploading } from '@/types/post';
 import { cookies } from 'next/headers';
 import refreshAccessToken from '@/lib/refreshToken';
 
-export async function getActivePhotographer(): Promise<PhotographerProps> {
+export async function getActivePhotographer(): Promise<PhotographerList> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/photographer/active`,
   );
@@ -19,9 +19,7 @@ export async function getActivePhotographer(): Promise<PhotographerProps> {
   return res.json(); // 성공적인 JSON 데이터 반환
 }
 
-export async function getUnivSpotList(
-  univ: string,
-): Promise<PhotoSpotListProps[]> {
+export async function getUnivSpotList(univ: string): Promise<PhotoSpot[]> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/spot?univ=${univ}
 `,
@@ -39,7 +37,7 @@ export async function getUnivSpotList(
   return res.json(); // 성공적인 JSON 데이터 반환
 }
 
-export async function postNewContent(newContent: PostUploadContainerProps) {
+export async function postNewContent(newContent: PostUploading) {
   // 데이터를 FormData로 전송해야 한다.
   const formData = new FormData();
 
@@ -67,7 +65,6 @@ export async function postNewContent(newContent: PostUploadContainerProps) {
     const cookieStore = await cookies();
     const accessToken = cookieStore.get('accessToken')?.value;
 
-    console.log(accessToken);
     if (!accessToken) {
       throw new Error('Access token이 존재하지 않습니다.');
     }
@@ -88,7 +85,6 @@ export async function postNewContent(newContent: PostUploadContainerProps) {
       console.warn('401 오류: 토큰 갱신 시도 중...');
       const newAccessToken = await refreshAccessToken();
 
-      console.log();
       // 갱신된 토큰으로 재요청
       const retryResponse = await fetch(url, {
         method: 'POST',

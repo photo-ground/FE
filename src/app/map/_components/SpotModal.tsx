@@ -100,11 +100,7 @@ interface ModalProps {
 // photoSpot배열에서 currIndex를 먼저 찾아 보여주고 그 기준으로 좌우왔다갔다
 export default function SpotModal({ sliderData, setModalState }: ModalProps) {
   const router = useRouter();
-  const clearCurrPostIdIndex = useSpotStore(
-    (state) => state.clearCurrPostIdIndex,
-  );
-
-  const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
+  const { clearCurrPostIdIndex, currPostIdIndex } = useSpotStore();
 
   const handleModalClose = () => {
     setModalState(false);

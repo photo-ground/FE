@@ -21,7 +21,7 @@ export default function BottomNavigationBar() {
   const router = useRouter();
   const pathname = usePathname().split('?')[0];
   const [isOpen, setIsOpen] = useState(false);
-  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
+  const { isLoggedIn } = useUserStore();
 
   const onOpen = () => {
     setIsOpen(true);

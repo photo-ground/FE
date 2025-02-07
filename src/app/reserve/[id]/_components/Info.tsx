@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+
+import { ReservationDetail } from '@/types/reservation';
 import PhotographerIcon from '@/assets/PhotographerIcon';
 import LocationIcon from '@/assets/LocationIcon';
 import PeopleIcon from '@/assets/PeopleIcon';
 import Text from '@/components/atoms/Text';
 import Chip from '@/components/atoms/Chip';
-import { ReserveDetail } from '../type';
 
 const Container = styled.div`
   display: flex;
@@ -62,7 +63,7 @@ function formatTime(date: string, time: string) {
   return `${+month}.${+dateNum}(${days[dateObj.getDay()]}) ${period} ${formattedHours}:${minutes}`;
 }
 
-export default function Info({ data }: { data: ReserveDetail }) {
+export default function Info({ data }: { data: ReservationDetail }) {
   const { date, startTime, photographerName, univName, reserveNum } = data;
 
   return (

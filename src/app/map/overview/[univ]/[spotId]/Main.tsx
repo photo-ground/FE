@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-
+import { useInfiniteQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
+
 import Card from '@/components/Card';
 import Back from '@/components/TNB/Back';
 import Text from '@/components/atoms/Text';
-import { useInfiniteQuery } from '@tanstack/react-query';
 import Modal from '../../../_components/SpotModal';
 import useSpotStore from '../../../_store';
 import { getSelectedSpotInfo } from '../../../_services/getPhotoSpot';
@@ -29,22 +29,22 @@ interface MainProps {
 }
 const CardContainerY = styled.div`
   display: grid;
-
-  overflow: scroll;
   grid-template-columns: 1fr 1fr 1fr; /* 3열 */
+  gap: 10px;
+
+  margin: 0 auto;
   padding: 1rem 1.25rem;
 
-  gap: 10px;
-  margin: 0 auto;
   img {
     width: 133px;
     height: auto;
   }
+
+  overflow: auto;
 `;
 export default function Main({ univ, spotId }: MainProps) {
   const [modalState, setModalState] = useState(false);
-  const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
-  const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
+  const { currPostIdIndex, setCurrPostIdIndex } = useSpotStore();
   const [spotPostImages, setSpotPostImages] = useState<SliderData[]>([]);
 
   const { ref, inView } = useInView();

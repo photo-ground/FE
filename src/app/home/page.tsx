@@ -1,7 +1,7 @@
-import Main from './Main';
+import HomeScreen from './screen';
 
-export default function AuthPageWrapper() {
-  return <Main />;
+export default function HomePage() {
+  return <HomeScreen />;
 }
 
 export const runtime = 'edge';

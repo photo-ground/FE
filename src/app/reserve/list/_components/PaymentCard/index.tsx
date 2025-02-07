@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 
+import { ReservationSummary } from '@/types/reservation';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import Text from '@/components/atoms/Text';
 import ReserveInfo from '@/components/ReserveInfo';
@@ -9,7 +10,6 @@ import formatPrice from '@/lib/formatPrice';
 
 import Request from './Request';
 import Tag from '../Tag';
-import { Reservation } from '../../type';
 import Error from './Error';
 
 type PaymentStatus = 'wait' | 'check' | 'error';
@@ -78,7 +78,7 @@ export default function PaymentCard({
   data,
   state = 'wait',
 }: {
-  data: Reservation;
+  data: ReservationSummary;
   state?: PaymentStatus;
 }) {
   return (

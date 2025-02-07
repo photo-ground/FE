@@ -32,7 +32,6 @@ export async function updateUserInfo(userUpdateInfo: UpdateUserInfoProps) {
   // 요청할 주소
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/customer`;
 
-  // console.log(userUpdateInfo);
   try {
     // 2. 첫 번째 요청 시도
     const response = await axios.patch(url, userUpdateInfo, {

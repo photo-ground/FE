@@ -1,14 +1,15 @@
 'use client';
 
-// import Link from 'next/link';
-import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import Card from '@/components/Card';
-import Back from '@/components/TNB/Back';
+import { useParams } from 'next/navigation';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { getPostByUniv } from '@/app/home/_services/getActivePhotographer';
 import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
+
+import { University } from '@/types/university';
+import Card from '@/components/Card';
+import Back from '@/components/TNB/Back';
+import { getPostByUniv } from '@/app/home/_services/getActivePhotographer';
 import { Container } from '../../style';
 import Modal from '../../_components/SpotModal';
 import useSpotStore from '../../_store';
@@ -21,21 +22,20 @@ import { SliderData } from '../../_components/Slider';
 
 const CardContainerY = styled.div`
   display: grid;
-
-  overflow: auto;
   grid-template-columns: 1fr 1fr 1fr; /* 3열 */
+  gap: 0.625rem;
+
+  margin: 0 auto;
   padding: 1rem 1.25rem;
 
-  gap: 10px;
-  margin: 0 auto;
+  overflow: auto;
 `;
 export default function Overview() {
-  const params = useParams<{ univ: string }>();
+  const params = useParams<{ univ: University }>();
   const univ = decodeURIComponent(params.univ || 'Unknown University');
 
   const [modalState, setModalState] = useState<boolean>(false);
-  const currPostIdIndex = useSpotStore((state) => state.currPostIdIndex);
-  const setCurrPostIdIndex = useSpotStore((state) => state.setCurrPostIdIndex);
+  const { currPostIdIndex, setCurrPostIdIndex } = useSpotStore();
 
   const [spotPostImages, setSpotPostImages] = useState<SliderData[]>([]);
 
@@ -84,11 +84,11 @@ export default function Overview() {
 
   return (
     <Container>
-      <Back text={`${univ}`} />
+      <Back text={univ} />
       <CardContainerY>
         {spotPostImages.map((spot, spotDataIndex) => (
           <Card
-            key={`${spot.postId}`}
+            key={spot.postId}
             size="small"
             src={spot.imageUrl}
             onClick={() => handleCardClick(spotDataIndex)}
@@ -104,4 +104,4 @@ export default function Overview() {
   );
 }
 
-export const runtime = 'edge'; // Edge Runtime 사용 선언
+export const runtime = 'edge';

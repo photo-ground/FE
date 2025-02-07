@@ -1,11 +1,12 @@
 'use client';
 
+import Link from 'next/link';
+import styled from 'styled-components';
+
+import { ReservationSummary } from '@/types/reservation';
 import LargeButton from '@/components/atoms/LargeButton';
 import ReserveInfo from '@/components/ReserveInfo';
 import TNB from '@/components/TNB';
-import Link from 'next/link';
-import styled from 'styled-components';
-import { Reservation } from '../list/type';
 
 const Container = styled.ol``;
 
@@ -22,7 +23,7 @@ const DivideLine = styled.hr`
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray[700]};
 `;
 
-function Card({ data }: { data: Reservation }) {
+function Card({ data }: { data: ReservationSummary }) {
   return (
     <CardWrapper>
       <ReserveInfo data={data} />
@@ -37,7 +38,7 @@ function Card({ data }: { data: Reservation }) {
 export default function PrevReservationScreen({
   data,
 }: {
-  data: Reservation[];
+  data: ReservationSummary[];
 }) {
   return (
     <>

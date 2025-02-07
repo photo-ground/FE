@@ -1,10 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-import { PhotoSpotListProps, PhotoSpotProps } from '@/types/photoSpot';
+import { PhotoSpot, PhotoSpotPostList } from '@/types/photoSpot';
 
-export async function getPhotoSpotByUniv(
-  univ: string,
-): Promise<PhotoSpotListProps[]> {
+export async function getPhotoSpotByUniv(univ: string): Promise<PhotoSpot[]> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/spot?univ=${univ}
 `,
@@ -25,10 +23,9 @@ export async function getPhotoSpotByUniv(
 export async function getSelectedSpotInfo(
   photoSpotId: number,
   cursor?: number, // Optional parameter
-): Promise<PhotoSpotProps> {
+): Promise<PhotoSpotPostList> {
   const params = new URLSearchParams();
 
-  console.log(photoSpotId, cursor);
   // Base URL
   const url = new URL(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/spot/${photoSpotId}`,
@@ -36,7 +33,6 @@ export async function getSelectedSpotInfo(
 
   // Append cursor query parameter only if lastImageId is provided
   if (cursor) {
-    console.log(photoSpotId, cursor);
     params.append('cursor', cursor.toString());
   }
 

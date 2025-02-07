@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { PhotographerProps } from '@/types/photographer';
+import { PhotographerList } from '@/types/photographer';
 import { getActivePhotographer } from '../../_services/getActivePhotographer';
 import {
   CardContainer,
@@ -11,7 +11,7 @@ import {
 import Skeleton from './Skeleton';
 
 export default function RecommendedPhotographer() {
-  const { isPending, isError, data } = useQuery<PhotographerProps>({
+  const { isPending, isError, data } = useQuery<PhotographerList>({
     queryKey: ['recommendedPhotographer'],
     queryFn: getActivePhotographer,
   });

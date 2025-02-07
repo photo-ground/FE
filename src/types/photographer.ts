@@ -1,28 +1,18 @@
-export interface PhotographerListProps {
-  photographerName: string;
-  photographerId: number;
-  age: number;
-  gender: string;
-  profileUrl: string;
-}
-export interface PhotographerProps {
-  photographerList: PhotographerListProps[];
-  hasNext: boolean;
-}
+import { Gender } from './user';
 
-export interface PhotographerSearchProps {
-  photographerList: PhotographerListProps[];
-  hasNext: boolean;
-  nextCursor: string;
-}
+export type PhotographerName = string;
+export type PhotographerId = number;
+export type Age = number;
+export type ProfileUrl = string;
 
-export interface PhotographerProfileProps {
-  photographerName: string;
-  age: number;
-  gender: string;
-  followerNum: number;
-  price: number;
-  addPrice: number;
-  // univ: Array<Univ>,
-  profileUrl: string;
+export interface Photographer {
+  photographerName: PhotographerName;
+  photographerId: PhotographerId;
+  age: Age;
+  gender: Gender;
+  profileUrl: ProfileUrl;
+}
+export interface PhotographerList {
+  photographerList: Photographer[];
+  hasNext: boolean;
 }

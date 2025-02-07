@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
+import { ReservationDetail } from '@/types/reservation';
 import TNB from '@/components/TNB';
 import CTAButton from '@/components/atoms/CTAButton';
 import ConfirmModal from '@/components/modals/ConfirmModal';
@@ -11,7 +12,6 @@ import WarningIcon from '@/assets/modal/WarningIcon';
 import Info from './_components/Info';
 import Message from './_components/Message';
 import State from './_components/State';
-import { ReserveDetail } from './type';
 import cancelReservation from './_libs/cancelReservation';
 
 const Container = styled.div`
@@ -35,7 +35,7 @@ export default function ReserveDetailScreen({
   data,
 }: {
   reservationId: string;
-  data: ReserveDetail;
+  data: ReservationDetail;
 }) {
   const [isOpen, setIsOpen] = useState(false);
 

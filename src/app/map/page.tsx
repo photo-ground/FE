@@ -10,7 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useTheme } from 'styled-components';
 import { Drawer } from '@mui/material';
 
-import { PhotoSpotListProps, PhotoSpotProps } from '@/types/photoSpot';
+import { PhotoSpot, PhotoSpotPostList } from '@/types/photoSpot';
 
 import useUnivStore from '@/store/useUnivStore';
 
@@ -47,7 +47,7 @@ export default function MapPage() {
   const drawerContainerRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false); // Drawer 열림 상태
   const [selectedSpotInfo, setSelectedSpotInfo] =
-    useState<PhotoSpotProps | null>(null);
+    useState<PhotoSpotPostList | null>(null);
   const [modalState, setModalState] = useState<boolean>(false);
 
   // 지도 객체 관리
@@ -63,10 +63,10 @@ export default function MapPage() {
   const { univ, setUniv } = useUnivStore();
 
   const [schoolArr] = useState<School[]>(schoolList);
-  // useState<PhotoSpotProps | null>(null);
+  // useState<PhotoSpotPostList | null>(null);
 
   // spot data 가져오기
-  const { data: photoSpots, isSuccess } = useQuery<PhotoSpotListProps[]>({
+  const { data: photoSpots, isSuccess } = useQuery<PhotoSpot[]>({
     queryKey: ['photoSpotList', univ],
     queryFn: () => getPhotoSpotByUniv(univ),
   });
@@ -81,7 +81,6 @@ export default function MapPage() {
         (element: School) => element.name === univ,
       );
       if (school) {
-        // console.log(school);
         setCenter([school.lat, school.lng]);
       }
     }
@@ -189,7 +188,6 @@ export default function MapPage() {
               center: new naver.maps.LatLng(...center),
               zoom,
             });
-            // console.log(map);
             onMapLoad(map); // 지도가 준비되지 않았다면 직접 초기화 호출
           }
         } else {

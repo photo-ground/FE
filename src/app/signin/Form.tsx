@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
-import useUserStore, { Role } from '@/store/useUserStore';
+import { Role } from '@/types/user';
+import useUserStore from '@/store/useUserStore';
 import CTAButton from '@/components/atoms/CTAButton';
 import Text from '@/components/atoms/Text';
 import { convertToViewportHeight } from '@/styles/convertSize';
@@ -39,10 +40,7 @@ const SignUpText = styled(Text)`
 `;
 
 export default function SignInForm() {
-  const setIsLoggedIn = useUserStore((state) => state.setIsLoggedIn);
-  const setRole = useUserStore((state) => state.setRole);
-  const setPhotographerId = useUserStore((state) => state.setPhotographerId);
-
+  const { setIsLoggedIn, setRole, setPhotographerId, setUniv } = useUserStore();
   const router = useRouter();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -56,9 +54,15 @@ export default function SignInForm() {
         setIsLoggedIn(true);
         setRole(response.data!.role as Role);
         document.cookie = `accessToken=${response.data!.accessToken}`;
+
+        if (response.data?.univ) {
+          setUniv(response.data?.univ);
+        }
+
         if (response.data?.photographerId) {
           setPhotographerId(response.data?.photographerId);
         }
+
         router.push('/home');
       } else {
         throw new Error('로그인 요청 실패');

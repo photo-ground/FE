@@ -4,12 +4,12 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
+import { ReservationSummary } from '@/types/reservation';
 import TNB from '@/components/TNB';
 import CTAButton from '@/components/atoms/CTAButton';
 import Text from '@/components/atoms/Text';
 import LargeStarEmptyIcon from '@/assets/LargeStarEmptyIcon';
 import LargeStarIcon from '@/assets/LargeStarIcon';
-import { Reservation } from '../../list/type';
 import writeReview from './_libs/writeReivew';
 
 const Wrapper = styled.div`
@@ -91,7 +91,7 @@ export default function ReviewScreen({
   reservationDetail,
 }: {
   reservationId: string;
-  reservationDetail: Reservation;
+  reservationDetail: ReservationSummary;
 }) {
   const router = useRouter();
   const [score, setScore] = useState(5);

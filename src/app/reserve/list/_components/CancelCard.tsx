@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+
+import { ReservationSummary } from '@/types/reservation';
 import RightChevronIcon from '@/assets/RightChevronIcon';
+import InfoIcon from '@/assets/InfoIcon';
 import Text from '@/components/atoms/Text';
 import ReserveInfo from '@/components/ReserveInfo';
-import InfoIcon from '@/assets/InfoIcon';
 import Tag from './Tag';
-import { Reservation } from '../type';
 
 const Wrapper = styled.div`
   display: flex;
@@ -49,7 +50,7 @@ const DivideLine = styled.hr`
   margin: 1rem 0;
 `;
 
-export default function CancelCard({ data }: { data: Reservation }) {
+export default function CancelCard({ data }: { data: ReservationSummary }) {
   return (
     <Wrapper>
       <Container>

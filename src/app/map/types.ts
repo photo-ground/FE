@@ -1,4 +1,4 @@
-import { PhotoSpotProps } from '@/types/photoSpot';
+import { PhotoSpotPostList } from '@/types/photoSpot';
 
 export type School = {
   name: string;
@@ -7,7 +7,7 @@ export type School = {
 };
 
 export interface DrawerProps {
-  photoSpotData: PhotoSpotProps | null;
+  photoSpotData: PhotoSpotPostList | null;
   toggleDrawer: (isOpen: boolean) => void; // 매개변수를 받도록 타입 변경
   toggleModal: (modalOpen: boolean) => void;
 }
