@@ -1,5 +1,5 @@
 import { PhotographerList } from '@/types/photographer';
-import { PostProps } from '@/types/post';
+import { PostList } from '@/types/post';
 
 export async function getActivePhotographer(): Promise<PhotographerList> {
   const res = await fetch(
@@ -17,7 +17,7 @@ export async function getActivePhotographer(): Promise<PhotographerList> {
 export async function getPostByUniv(
   univ: string,
   cursor?: number | null,
-): Promise<PostProps> {
+): Promise<PostList> {
   const params = new URLSearchParams();
   if (univ) {
     params.append('univ', univ);

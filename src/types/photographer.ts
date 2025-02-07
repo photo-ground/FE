@@ -1,8 +1,8 @@
-type PhotographerName = string;
-type PhotographerId = number;
-type Age = number;
-type Gender = 'FEMALE' | 'MALE';
-type ProfileUrl = string;
+export type PhotographerName = string;
+export type PhotographerId = number;
+export type Age = number;
+export type Gender = 'FEMALE' | 'MALE';
+export type ProfileUrl = string;
 
 export interface Photographer {
   photographerName: PhotographerName;

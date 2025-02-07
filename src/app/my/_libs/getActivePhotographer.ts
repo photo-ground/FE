@@ -2,7 +2,7 @@
 
 import { PhotographerList } from '@/types/photographer';
 import { PhotoSpotListProps } from '@/types/photoSpot';
-import { PostUploadContainerProps } from '@/types/post';
+import { PostUploading } from '@/types/post';
 import { cookies } from 'next/headers';
 import refreshAccessToken from '@/lib/refreshToken';
 
@@ -39,7 +39,7 @@ export async function getUnivSpotList(
   return res.json(); // 성공적인 JSON 데이터 반환
 }
 
-export async function postNewContent(newContent: PostUploadContainerProps) {
+export async function postNewContent(newContent: PostUploading) {
   // 데이터를 FormData로 전송해야 한다.
   const formData = new FormData();
 

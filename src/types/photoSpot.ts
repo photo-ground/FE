@@ -1,7 +1,9 @@
+import { PostId } from './post';
+
 export interface SpotPostImageProps {
   imageId: number;
   imageUrl: string;
-  postId: number;
+  postId: PostId;
   photographerName: string;
 }
 
@@ -27,17 +29,4 @@ export interface PhotoSpotListProps {
   latitude: number;
   longitude: number;
   spotImageUrl: string;
-}
-
-export interface PostListProps {
-  id: number;
-  photographerId: number;
-  photographerName: string;
-  firstImageUrl: string;
-  firstImageSpot: string;
-  createdAt: string;
-}
-export interface PostByUnivProps {
-  postList: PostListProps[];
-  hasNext: boolean;
 }

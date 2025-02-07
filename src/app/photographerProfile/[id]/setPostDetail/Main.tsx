@@ -18,7 +18,7 @@ import Spacer from '@/components/Spacer';
 import Divider from '@/components/Divider';
 import Dropdown from '@/components/Dropdown/index_2';
 import CTAButton from '@/components/atoms/CTAButton';
-import { PostInfoProps, PostUploadContainerProps } from '@/types/post';
+import { PostInfo, PostUploading } from '@/types/post';
 import { Option } from '@/types/option';
 import { useRouter } from 'next/navigation';
 import UnivRadioGroup from '@/app/my/setPostDetail/_component/UnivRadioGroup';
@@ -110,7 +110,7 @@ export default function Main({ photographerId }: { photographerId: number }) {
 
   // Mutations
   const createPostMutation = useMutation({
-    mutationFn: ({ newContent }: { newContent: PostUploadContainerProps }) =>
+    mutationFn: ({ newContent }: { newContent: PostUploading }) =>
       postNewContent(newContent),
     onSuccess: () => {
       router.push(`/photographerProfile/${photographerId}`);
@@ -149,13 +149,13 @@ export default function Main({ photographerId }: { photographerId: number }) {
     event?.preventDefault();
 
     if (selectedUniv && !spotIds.includes(-1)) {
-      const postInfoData: PostInfoProps = {
+      const postInfoData: PostInfo = {
         univId: selectedUniv.univId,
         content: textareaContent,
         spotIds,
       };
 
-      const newContent: PostUploadContainerProps = {
+      const newContent: PostUploading = {
         postInfo: postInfoData,
         photos: images,
       };
