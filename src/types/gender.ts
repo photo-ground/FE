@@ -12,6 +12,6 @@ export interface GenderOption {
 }
 
 export const GENDER_LIST: GenderOption[] = [
-  { value: 'MALE', label: '남성' },
-  { value: 'FEMALE', label: '여성' },
+  { value: GENDER.MALE, label: '남성' },
+  { value: GENDER.FEMALE, label: '여성' },
 ];
