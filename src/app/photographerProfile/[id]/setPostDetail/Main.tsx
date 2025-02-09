@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { UNIV_LIST, UnivOption } from '@/types/university';
+import { POST_UNIV_LIST, UnivOption } from '@/types/university';
 import { PhotoSpot } from '@/types/photoSpot';
 import { PostInfo, PostUploading } from '@/types/post';
 
@@ -176,7 +176,10 @@ export default function Main({ photographerId }: { photographerId: number }) {
       <TNB.Back text="게시글 작성" />
       <Spacer />
       <Title variant="title2_sb">촬영 장소 선택</Title>
-      <UnivRadioGroup options={UNIV_LIST} onChange={handleSelectionChange} />
+      <UnivRadioGroup
+        options={POST_UNIV_LIST}
+        onChange={handleSelectionChange}
+      />
       {/* 로딩 상태 */}
       {isLoading && <span>Loading...</span>}
       {/* 에러 처리 */}
