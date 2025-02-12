@@ -29,7 +29,7 @@ export default function HomeScreen() {
   const [selectedUniv, setSelectedUniv] = useState<string | null>(null);
 
   // 만약 인증하지 않고 둘러볼 학교도 선택하지 않았다면
-  if (!isLoggedIn && !univ && role !== Role.PHOTOGRAPHER) {
+  if (!isLoggedIn && !univ && role !== Role.Photographer) {
     return (
       <AlertModal
         icon={<CheckIcon />}

@@ -22,7 +22,7 @@ const useUserStore = create(
     (set) => ({
       isLoggedIn: false, // 기본값은 비로그인 상태
       univ: University.Sogang, // 기본값은 서강대학교
-      role: Role.CUSTOMER, // 기본값은 고객
+      role: Role.Customer, // 기본값은 고객
       photographerId: null,
 
       setIsLoggedIn: (state) => set(() => ({ isLoggedIn: state })),

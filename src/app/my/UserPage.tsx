@@ -42,7 +42,7 @@ export default function UserPage() {
     <Container>
       <Background type={1} />
 
-      {role === Role.CUSTOMER && (
+      {role === Role.Customer && (
         <>
           <TNB.Title text="마이페이지" />
 

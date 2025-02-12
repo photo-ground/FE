@@ -32,7 +32,7 @@ interface RadioBtnProps {
 
 // RadioBtnGroup 컴포넌트의 props
 interface RadioBtnGroupProps {
-  options: PostUnivOption[];
+  options: readonly PostUnivOption[];
   onChange: (univData: PostUnivOption) => void;
 }
 

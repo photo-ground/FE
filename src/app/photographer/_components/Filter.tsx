@@ -66,7 +66,7 @@ export default function Filter<T>({
 }: {
   value: T | null;
   onChange: (newValue: T | null) => void;
-  optionList: {
+  optionList: readonly {
     value: T;
     label: string;
   }[];
