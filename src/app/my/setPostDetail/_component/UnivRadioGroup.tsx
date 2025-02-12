@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import { UnivOption } from '@/types/university';
+import { PostUnivOption } from '@/types/university';
 import PostUnivSelectButton from '@/components/atoms/PostUnivSelectButton';
 
 const RadioGroup = styled.div`
@@ -18,6 +18,7 @@ const RadioContainer = styled.label`
     display: none; /* 기본 체크박스 숨김 */
   }
 `;
+
 // RadioBtn 컴포넌트의 props
 interface RadioBtnProps {
   label: string;
@@ -31,8 +32,8 @@ interface RadioBtnProps {
 
 // RadioBtnGroup 컴포넌트의 props
 interface RadioBtnGroupProps {
-  options: UnivOption[];
-  onChange: (univData: UnivOption) => void;
+  options: PostUnivOption[];
+  onChange: (univData: PostUnivOption) => void;
 }
 
 function RadioBtn({ label, id, active, onClick }: RadioBtnProps) {
@@ -54,9 +55,11 @@ export default function UnivRadioGroup({
   options,
   onChange,
 }: RadioBtnGroupProps) {
-  const [selectedValue, setSelectedValue] = useState<UnivOption | null>(null);
+  const [selectedValue, setSelectedValue] = useState<PostUnivOption | null>(
+    null,
+  );
 
-  const handleSelect = (univData: UnivOption) => {
+  const handleSelect = (univData: PostUnivOption) => {
     setSelectedValue(univData);
     onChange(univData);
   };

@@ -1,9 +1,8 @@
-export const GENDER = {
-  MALE: 'MALE',
-  FEMALE: 'FEMALE',
-} as const;
+export const enum Gender {
+  Male = 'MALE',
+  Female = 'FEMALE',
+}
 
-export type Gender = (typeof GENDER)[keyof typeof GENDER];
 export type NullableGender = Gender | null;
 
 export interface GenderOption {
@@ -12,6 +11,6 @@ export interface GenderOption {
 }
 
 export const GENDER_LIST: GenderOption[] = [
-  { value: GENDER.MALE, label: '남성' },
-  { value: GENDER.FEMALE, label: '여성' },
+  { value: Gender.Male, label: '남성' },
+  { value: Gender.Female, label: '여성' },
 ];

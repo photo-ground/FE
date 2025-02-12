@@ -1,5 +1,5 @@
 import { jwtDecode } from 'jwt-decode';
-import { ROLE } from '@/types/user';
+import { Role } from '@/types/user';
 import getPhotographerId from '../my/_libs/getPhotographerId';
 
 interface DecodedToken {
@@ -49,7 +49,7 @@ export default async function signin(formData: FormData) {
     const decoded: DecodedToken = jwtDecode(accessToken.split(' ')[1]);
     const { role } = decoded;
 
-    if (role === ROLE.CUSTOMER) {
+    if (role === Role.CUSTOMER) {
       const user = await getUserInfo(accessToken);
       return {
         ok: true,
@@ -57,7 +57,7 @@ export default async function signin(formData: FormData) {
       };
     }
 
-    if (role === ROLE.PHOTOGRAPHER) {
+    if (role === Role.PHOTOGRAPHER) {
       const { photographerId } = await getPhotographerId(accessToken);
       return { ok: true, data: { accessToken, role, photographerId } };
     }

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { Role, ROLE } from '@/types/user';
+import { Role } from '@/types/user';
 import { University } from '@/types/university';
 
 interface States {
@@ -21,8 +21,8 @@ const useUserStore = create(
   persist<States & Actions>(
     (set) => ({
       isLoggedIn: false, // 기본값은 비로그인 상태
-      univ: '서강대학교', // 기본값은 서강대학교
-      role: ROLE.CUSTOMER, // 기본값은 고객
+      univ: University.Sogang, // 기본값은 서강대학교
+      role: Role.CUSTOMER, // 기본값은 고객
       photographerId: null,
 
       setIsLoggedIn: (state) => set(() => ({ isLoggedIn: state })),

@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
 
+import { UNIV_SELECTION_LIST } from '@/types/university';
 import { Z_INDEX } from '@/constants';
 import DownChevronIcon from '@/assets/DownChevronIcon';
 import Text from '@/components/atoms/Text';
@@ -68,14 +69,6 @@ const OptionItem = styled.button`
   cursor: pointer;
 `;
 
-const OPTION_LIST: { label: string; value: string }[] = [
-  { label: '서강대학교', value: '서강대학교' },
-  { label: '연세대학교', value: '연세대학교' },
-  { label: '이화여자대학교', value: '이화여자대학교' },
-  { label: '홍익대학교', value: '홍익대학교' },
-  { label: '선택 안 함', value: '선택안함' },
-];
-
 export default function UnivInput({
   value,
   onChange,
@@ -94,7 +87,7 @@ export default function UnivInput({
     setIsOpen(false);
   };
 
-  const currentLabel = OPTION_LIST.find(
+  const currentLabel = UNIV_SELECTION_LIST.find(
     (option) => option.value === value,
   )?.label;
 
@@ -116,7 +109,7 @@ export default function UnivInput({
         <>
           <Backdrop onClick={onClose} />
           <OptionWrapper ref={optionRef}>
-            {OPTION_LIST.map((option) => (
+            {UNIV_SELECTION_LIST.map((option) => (
               <OptionItem
                 key={option.value}
                 onClick={() => {

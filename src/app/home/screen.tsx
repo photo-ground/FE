@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { ROLE } from '@/types/user';
+import { Role } from '@/types/user';
 import { UNIV_LIST } from '@/types/university';
 import { COLOR } from '@/constants';
 
@@ -29,7 +29,7 @@ export default function HomeScreen() {
   const [selectedUniv, setSelectedUniv] = useState<string | null>(null);
 
   // 만약 인증하지 않고 둘러볼 학교도 선택하지 않았다면
-  if (!isLoggedIn && !univ && role !== ROLE.PHOTOGRAPHER) {
+  if (!isLoggedIn && !univ && role !== Role.PHOTOGRAPHER) {
     return (
       <AlertModal
         icon={<CheckIcon />}
