@@ -1,12 +1,10 @@
 import { Gender } from './gender';
 import { University } from './university';
 
-export const ROLE = {
-  CUSTOMER: 'ROLE_CUSTOMER',
-  PHOTOGRAPHER: 'ROLE_PHOTOGRAPHER',
-} as const;
-
-export type Role = (typeof ROLE)[keyof typeof ROLE];
+export const enum Role {
+  CUSTOMER = 'ROLE_CUSTOMER',
+  PHOTOGRAPHER = 'ROLE_PHOTOGRAPHER',
+}
 
 export interface User {
   id: number;
