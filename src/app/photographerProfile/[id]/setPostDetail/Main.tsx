@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { POST_UNIV_LIST, UnivOption } from '@/types/university';
+import { POST_UNIV_LIST, PostUnivOption } from '@/types/university';
 import { PhotoSpot } from '@/types/photoSpot';
 import { PostInfo, PostUploading } from '@/types/post';
 
@@ -59,7 +59,7 @@ export default function Main({ photographerId }: { photographerId: number }) {
   });
 
   // 선택된 대학 상태
-  const [selectedUniv, setSelectedUniv] = useState<UnivOption | null>(null);
+  const [selectedUniv, setSelectedUniv] = useState<PostUnivOption | null>(null);
 
   // 이미지 : File[] -> base64로 변환
   const [imageUrls, setImageUrls] = useState<string[]>([]);
@@ -134,7 +134,7 @@ export default function Main({ photographerId }: { photographerId: number }) {
   }, [spotIds, selectedUniv]);
 
   // 대학 선택 핸들러
-  const handleSelectionChange = (univData: UnivOption) => {
+  const handleSelectionChange = (univData: PostUnivOption) => {
     setSelectedUniv(univData);
   };
 

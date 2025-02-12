@@ -1,13 +1,9 @@
 'use client';
 
 import styled from 'styled-components';
+import { GENDER_LIST } from '@/types/gender';
 import Text from '@/components/atoms/Text';
 import { SignUpData } from '../type';
-
-const OPTION_LIST: { title: string; value: SignUpData['gender'] }[] = [
-  { title: '남성', value: 'MALE' },
-  { title: '여성', value: 'FEMALE' },
-];
 
 const Container = styled.div`
   display: flex;
@@ -47,7 +43,7 @@ export default function GenderInput({
 }) {
   return (
     <Container>
-      {OPTION_LIST.map((option) => {
+      {GENDER_LIST.map((option) => {
         const isSelected = value === option.value;
         return (
           <Button
@@ -59,7 +55,7 @@ export default function GenderInput({
             }}
           >
             <ButtonText variant="body2_rg" $isSelected={isSelected}>
-              {option.title}
+              {option.label}
             </ButtonText>
           </Button>
         );

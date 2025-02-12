@@ -21,7 +21,7 @@ const useUserStore = create(
   persist<States & Actions>(
     (set) => ({
       isLoggedIn: false, // 기본값은 비로그인 상태
-      univ: '서강대학교', // 기본값은 서강대학교
+      univ: University.Sogang, // 기본값은 서강대학교
       role: Role.CUSTOMER, // 기본값은 고객
       photographerId: null,
 
