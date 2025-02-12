@@ -1,5 +1,5 @@
-import { PhotographerName } from './photographer';
-import { PostId } from './post';
+import { PhotographerName } from '@/types/photographer';
+import { PostId } from '@/types/post';
 
 export type SpotId = number;
 export type SpotName = string;
