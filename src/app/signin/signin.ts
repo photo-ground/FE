@@ -49,7 +49,7 @@ export default async function signin(formData: FormData) {
     const decoded: DecodedToken = jwtDecode(accessToken.split(' ')[1]);
     const { role } = decoded;
 
-    if (role === Role.CUSTOMER) {
+    if (role === Role.Customer) {
       const user = await getUserInfo(accessToken);
       return {
         ok: true,
@@ -57,7 +57,7 @@ export default async function signin(formData: FormData) {
       };
     }
 
-    if (role === Role.PHOTOGRAPHER) {
+    if (role === Role.Photographer) {
       const { photographerId } = await getPhotographerId(accessToken);
       return { ok: true, data: { accessToken, role, photographerId } };
     }

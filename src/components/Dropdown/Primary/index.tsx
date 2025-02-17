@@ -22,7 +22,7 @@ export default function Primary<T>({
 }: {
   value: T | null;
   onChange: (newValue: T) => void;
-  optionList: Option<T>[];
+  optionList: readonly Option<T>[];
   placeholder: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,4 +1,4 @@
-import { PhotographerId, PhotographerName } from './photographer';
+import { PhotographerId, PhotographerName } from '@/types/photographer';
 
 export type PostId = number;
 

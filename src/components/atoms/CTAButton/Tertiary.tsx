@@ -17,7 +17,7 @@ const Button = styled(ButtonContainer)<{ disabled: boolean }>`
 
 const ButtonText = styled(Text)<{ disabled: boolean }>`
   color: ${({ theme, disabled }) =>
-    disabled ? theme.colors.gray[200] : theme.colors.gray[500]};
+    disabled ? theme.colors.gray[200] : theme.colors.gray[100]};
 `;
 
 export default function Tertiary({

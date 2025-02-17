@@ -78,7 +78,7 @@ export default function Filter({
   value: string | null;
   // eslint-disable-next-line
   onChange: (newValue: UnivOption) => void;
-  optionList: UnivOption[];
+  optionList: readonly UnivOption[];
   placeholder: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);

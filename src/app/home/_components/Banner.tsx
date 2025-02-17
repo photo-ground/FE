@@ -8,11 +8,10 @@ const ResponsiveImage = styled.img`
 
 export default function Banner() {
   return (
-    <ResponsiveImage
-      src="/images/bannerSmall.webp"
-      srcSet="/images/bannerSmall.webp 402w, 
-              /images/bannerLarge.webp 520w"
-      alt="Banner"
-    />
+    <picture>
+      <source srcSet="/images/bannerLarge.webp" media="(min-width: 403px)" />
+      <source srcSet="/images/bannerSmall.webp" media="(max-width: 402px)" />
+      <ResponsiveImage src="/images/bannerSmall.webp" alt="Banner" />
+    </picture>
   );
 }

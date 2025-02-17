@@ -10,7 +10,7 @@ export interface GenderOption {
   label: string;
 }
 
-export const GENDER_LIST: GenderOption[] = [
+export const GENDER_LIST: readonly GenderOption[] = [
   { value: Gender.Male, label: '남성' },
   { value: Gender.Female, label: '여성' },
-];
+] as const;

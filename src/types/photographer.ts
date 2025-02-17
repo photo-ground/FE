@@ -1,5 +1,5 @@
-import { Gender } from './gender';
-import { University } from './university';
+import { Gender } from '@/types/gender';
+import { University } from '@/types/university';
 
 export type PhotographerName = string;
 export type PhotographerId = number;

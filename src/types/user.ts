@@ -1,9 +1,9 @@
-import { Gender } from './gender';
-import { University } from './university';
+import { Gender } from '@/types/gender';
+import { University } from '@/types/university';
 
 export const enum Role {
-  CUSTOMER = 'ROLE_CUSTOMER',
-  PHOTOGRAPHER = 'ROLE_PHOTOGRAPHER',
+  Customer = 'ROLE_CUSTOMER',
+  Photographer = 'ROLE_PHOTOGRAPHER',
 }
 
 export interface User {

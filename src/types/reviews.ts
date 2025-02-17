@@ -1,4 +1,4 @@
-import { PhotographerName } from './photographer';
+import { PhotographerName } from '@/types/photographer';
 
 export interface ReviewDetail {
   reviewId: number;

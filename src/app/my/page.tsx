@@ -8,11 +8,11 @@ import PhotographerProfile from './PhotographerPage';
 export default function PhotographerPage() {
   const { role } = useUserStore();
 
-  if (role === Role.CUSTOMER) {
+  if (role === Role.Customer) {
     return <UserPage />;
   }
 
-  if (role === Role.PHOTOGRAPHER) {
+  if (role === Role.Photographer) {
     return <PhotographerProfile />;
   }
 }
