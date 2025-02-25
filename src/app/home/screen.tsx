@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { Role } from '@/types/user';
-import { UNIV_LIST } from '@/types/university';
+import { UNIV_LIST, University } from '@/types/university';
 import { COLOR } from '@/constants';
 
 import useUserStore from '@/store/useUserStore';
@@ -24,10 +24,12 @@ import {
 import { Container, More, SearchWrapper, TitleContainer } from './styles';
 
 export default function HomeScreen() {
-  const { isLoggedIn, role, univ } = useUserStore();
+  const { isLoggedIn, role, univ, setUniv } = useUserStore();
   const router = useRouter();
-  const [selectedUniv, setSelectedUniv] = useState<string | null>(null);
-
+  const [selectedUniv, setSelectedUniv] = useState<University | null>(null);
+  useEffect(() => {
+    console.log(univ);
+  });
   // 만약 인증하지 않고 둘러볼 학교도 선택하지 않았다면
   if (!isLoggedIn && !univ && role !== Role.Photographer) {
     return (
@@ -41,8 +43,9 @@ export default function HomeScreen() {
     );
   }
 
-  const onChangeUniv = (newUniv: { value: string }) => {
+  const onChangeUniv = (newUniv: { value: University }) => {
     setSelectedUniv(newUniv.value);
+    setUniv(newUniv.value);
   };
 
   return (

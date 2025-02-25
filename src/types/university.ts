@@ -12,7 +12,38 @@ export interface UnivOption {
   value: University;
   label: string;
 }
-
+export interface UnivCardData {
+  title: University;
+  subTitle: string;
+  src: string;
+  link: string;
+}
+export const UNIV_ONBOARDING_LIST: UnivCardData[] = [
+  {
+    title: University.Sogang,
+    subTitle: 'Sogang.Univ.',
+    src: '/images/sogang.jpg',
+    link: '/home',
+  },
+  {
+    title: University.Yonsei,
+    subTitle: 'Yonsei.Univ.',
+    src: '/images/yonsei.jpg',
+    link: '/home',
+  },
+  {
+    title: University.Ewha,
+    subTitle: 'Ewha.Univ.',
+    src: '/images/ewha.jpg',
+    link: '/home',
+  },
+  {
+    title: University.Hongik,
+    subTitle: 'Hongik.Univ.',
+    src: '/images/hongik.jpg',
+    link: '/home',
+  },
+];
 export const UNIV_LIST: readonly UnivOption[] = [
   { value: University.Sogang, label: University.Sogang },
   { value: University.Yonsei, label: University.Yonsei },
