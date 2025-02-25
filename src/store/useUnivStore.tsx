@@ -1,5 +1,6 @@
 // Directory: /app/counter/_store/index.ts
 
+import { University } from '@/types/university';
 import { create } from 'zustand';
 
 // State types
@@ -10,7 +11,7 @@ interface States {
 
 // Action types
 interface Actions {
-  setUniv: (newUniv: string) => void; // 상태를 업데이트하는 액션 추가
+  setUniv: (newUniv: University) => void; // 상태를 업데이트하는 액션 추가
   setIsLoggedIn: (status: boolean) => void; // 로그인 상태 업데이트
 }
 
