@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Box, Divider } from '@mui/material';
 
 import { Z_INDEX } from '@/constants';
-import useUnivStore from '@/store/useUnivStore';
+import useUserStore from '@/store/useUserStore';
 
 import CloseIcon from '@/assets/CloseIcon';
 import Card from '@/components/Card';
@@ -84,7 +84,7 @@ export default function DrawerContent({
   toggleDrawer,
   toggleModal,
 }: DrawerProps) {
-  const { univ } = useUnivStore();
+  const { univ } = useUserStore();
   const { clearCurrPostIdIndex, setCurrPostIdIndex } = useSpotStore();
   const [, setModalData] = useState<SliderData[]>([]);
 

@@ -12,13 +12,12 @@ import { Drawer } from '@mui/material';
 
 import { PhotoSpot, PhotoSpotPostList } from '@/types/photoSpot';
 
-import useUnivStore from '@/store/useUnivStore';
-
 import AlertModal from '@/components/modals/AlertModal';
 import MediumButton from '@/components/atoms/MediumButton';
 import SmallButton from '@/components/atoms/SmallButton';
 import CheckIcon from '@/assets/modal/CheckIcon';
 import BREAK_POINT from '@/styles/constants';
+import useUnivStore from '@/store/useUnivStore';
 
 import { School } from './types';
 

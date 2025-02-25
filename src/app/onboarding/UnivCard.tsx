@@ -5,7 +5,7 @@ import { COLOR } from '@/constants';
 import Text from '@/components/atoms/Text';
 import { UnivCardData, University } from '@/types/university';
 import { useRouter } from 'next/navigation';
-import useUnivStore from '@/store/useUnivStore';
+import useUserStore from '@/store/useUserStore';
 
 const Container = styled.div`
   position: relative;
@@ -61,7 +61,7 @@ export default function UnivCard({
   // onClick?: () => void;
 }) {
   const { link, src, title, subTitle } = data;
-  const { setUniv } = useUnivStore();
+  const { setUniv } = useUserStore();
   const router = useRouter();
 
   const handleSelectSchool = (university: University) => {
