@@ -29,14 +29,14 @@ function PhotographerList({
     function masonryLayout() {
       document.querySelectorAll('.masonry-card').forEach((element) => {
         const card = element as HTMLElement;
-        const content = card.querySelector('#masonry-card div') as HTMLElement;
+        const content = card.querySelector('.masonry-card div') as HTMLElement;
         if (content) {
           card.style.gridRowEnd = `span ${Math.ceil(content.scrollHeight / 16 + 10 / 16)}`;
         }
       });
     }
 
-    masonryLayout();
+    requestAnimationFrame(masonryLayout);
 
     window.addEventListener('resize', masonryLayout);
 
@@ -63,4 +63,4 @@ function PhotographerList({
   );
 }
 
-export default memo(PhotographerList); // Wrap with React.memo
+export default memo(PhotographerList);
