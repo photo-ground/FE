@@ -1,7 +1,8 @@
 import { PhotoSpotPostList } from '@/types/photoSpot';
+import { University } from '@/types/university';
 
 export type School = {
-  name: string;
+  name: University;
   lat: number;
   lng: number;
 };

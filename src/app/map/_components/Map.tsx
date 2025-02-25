@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Script from 'next/script';
-import useUnivStore from '@/store/useUnivStore';
+import useUserStore from '@/store/useUserStore';
 import { NaverMap } from '../_types/NaverMap';
 import { School } from '../types';
 import schoolList from '../_data/schoolList';
@@ -20,7 +20,7 @@ function MapComponent({
 }: MapOptions) {
   const mapRef = useRef<NaverMap | null>(null);
   const [mapCenter, setMapCenter] = useState<[number, number]>(center);
-  const { univ } = useUnivStore();
+  const { univ } = useUserStore();
 
   useEffect(() => {
     const school = schoolList.find((element: School) => element.name === univ);
