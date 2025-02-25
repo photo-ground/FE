@@ -17,7 +17,7 @@ import MediumButton from '@/components/atoms/MediumButton';
 import SmallButton from '@/components/atoms/SmallButton';
 import CheckIcon from '@/assets/modal/CheckIcon';
 import BREAK_POINT from '@/styles/constants';
-import useUnivStore from '@/store/useUnivStore';
+import useUserStore from '@/store/useUserStore';
 
 import { School } from './types';
 
@@ -59,7 +59,7 @@ export default function MapPage() {
   const setCenter = useCallback((mapCenter: [number, number]) => {
     useMapStore.getState().setCenter(mapCenter); // Zustand의 상태를 안정화
   }, []);
-  const { univ, setUniv } = useUnivStore();
+  const { univ, setUniv } = useUserStore();
 
   const [schoolArr] = useState<School[]>(schoolList);
   // useState<PhotoSpotPostList | null>(null);
