@@ -49,17 +49,18 @@ export default function MapPage() {
     useState<PhotoSpotPostList | null>(null);
   const [modalState, setModalState] = useState<boolean>(false);
 
-  // 지도 객체 관리
-  const mapInstance = useRef<NaverMap | null>(null); // 지도 인스턴스
-  const markersRef = useRef<naver.maps.Marker[]>([]); // 현재 활성화된 지도
-  const [isMapReady, setIsMapReady] = useState<boolean>(false); // 지도 준비 상태
-
   // zustand상태관리
   const { center, zoom, setMarkers } = useMapStore();
   const setCenter = useCallback((mapCenter: [number, number]) => {
     useMapStore.getState().setCenter(mapCenter); // Zustand의 상태를 안정화
   }, []);
   const { univ, setUniv } = useUserStore();
+
+  // 지도 객체 관리
+  const mapInstance = useRef<NaverMap | null>(null); // 지도 인스턴스
+  const markersRef = useRef<naver.maps.Marker[]>([]); // 현재 활성화된 지도
+  const [isMapReady, setIsMapReady] = useState<boolean>(false); // 지도 준비 상태
+  const [mapSelectedUnivButton, setMapSelectedUnivButton] = useState(univ); // 지도 상단 칩 버튼 활성화
 
   const [schoolArr] = useState<School[]>(schoolList);
   // useState<PhotoSpotPostList | null>(null);
@@ -117,6 +118,9 @@ export default function MapPage() {
 
   // 특정 학교로 이동 및 마커 로드
   const moveToSchool = (school: School) => {
+    // 지도 상단 칩 버튼 변경
+    setMapSelectedUnivButton(school.name);
+    console.log(school.name);
     if (!isMapReady || !mapInstance.current) {
       console.warn('Map instance is not ready yet.');
       return;
@@ -237,14 +241,21 @@ export default function MapPage() {
 
       {/* 칩 버튼 */}
       <ChipContainer>
-        {schoolArr.map((element) => (
-          <SmallButton.Secondary
-            text={element.name}
-            key={element.name}
-            //  active={univ !== null && univ !== element.name}
-            onClick={() => moveToSchool(element)}
-          />
-        ))}
+        {schoolArr.map((element) =>
+          mapSelectedUnivButton === element.name ? (
+            <SmallButton.Tertiary
+              text={element.name}
+              key={element.name}
+              onClick={() => moveToSchool(element)}
+            />
+          ) : (
+            <SmallButton.Secondary
+              text={element.name}
+              key={element.name}
+              onClick={() => moveToSchool(element)}
+            />
+          ),
+        )}
       </ChipContainer>
 
       {/* 스냅 전체보기 버튼 */}

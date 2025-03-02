@@ -21,6 +21,7 @@ export const ChipContainer = styled.div`
   gap: 0.5rem;
 
   width: 100%;
+  height: 52px;
   padding: 0.5rem 1.25rem; // 0.5는 임의값
 
   overflow-x: scroll;
@@ -31,5 +32,7 @@ export const BottomButtonWrapper = styled.div`
   bottom: 1.25rem;
   left: calc(50% - 75px);
   width: 150px;
+  height: 44px;
+
   z-index: ${Z_INDEX.MAP_CHIP};
 `;
