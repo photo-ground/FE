@@ -21,7 +21,7 @@ export default function Secondary({
 }) {
   return (
     <SecondaryButton onClick={onClick}>
-      <ButtonText variant="body1_rg" color="#0e0e0e">
+      <ButtonText variant="title3" color="#0e0e0e">
         {text}
       </ButtonText>
     </SecondaryButton>

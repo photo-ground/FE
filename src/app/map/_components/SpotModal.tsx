@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
@@ -14,8 +14,8 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import CloseIcon from '@/assets/CloseIcon';
-import RightChevronIcon from '@/assets/RightChevronIcon';
-import LeftChevronIcon from '@/assets/LeftChevronIcon';
+import RightChevronLargeIcon from '@/assets/RightChevronLargeIcon';
+import LeftChevronLargeIcon from '@/assets/LeftChevronLargeIcon';
 import Text from '@/components/atoms/Text';
 import SmallButton from '@/components/atoms/SmallButton';
 
@@ -77,7 +77,7 @@ const SwiperSlideBox = styled(SwiperSlide)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 500px;
+  height: 380px;
   margin: 0;
   button {
     width: fit-content;
@@ -86,21 +86,41 @@ const SwiperSlideBox = styled(SwiperSlide)`
 `;
 const ContentWrapper = styled.div`
   display: flex;
-  height: 90%;
+  flex-direction: column;
+  margin: 0 auto;
+  height: 100%;
+  justify-content: center;
+`;
+
+const ImageSwiperArea = styled.div`
+  height: fit-content;
+  display: flex;
   align-items: center; /* 세로 기준으로 가운데 정렬 */
   justify-content: center; /* 가로 기준으로 가운데 정렬 */
+`;
+
+const InfoArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  button {
+    width: fit-content;
+    height: 36px;
+    margin: 0 auto;
+  }
 `;
 
 interface ModalProps {
   sliderData: SliderData[];
   setModalState: React.Dispatch<React.SetStateAction<boolean>>;
 }
-// onClicked: ()=> void();
 
 // photoSpot배열에서 currIndex를 먼저 찾아 보여주고 그 기준으로 좌우왔다갔다
 export default function SpotModal({ sliderData, setModalState }: ModalProps) {
   const router = useRouter();
   const { clearCurrPostIdIndex, currPostIdIndex } = useSpotStore();
+  const [currentSlide, setCurrentSlide] = useState<number | null>(
+    currPostIdIndex,
+  );
 
   const handleModalClose = () => {
     setModalState(false);
@@ -109,6 +129,25 @@ export default function SpotModal({ sliderData, setModalState }: ModalProps) {
 
   const handleSmallButton = (postId: number) => {
     router.push(`/post/${postId}`);
+  };
+
+  const handleNext = () => {
+    console.log(currentSlide);
+    if (currentSlide !== null) {
+      if (currentSlide < sliderData.length - 1) {
+        setCurrentSlide(currentSlide + 1);
+      }
+    }
+  };
+
+  const handlePrev = () => {
+    console.log(currentSlide);
+
+    if (currentSlide !== null) {
+      if (currentSlide > 0) {
+        setCurrentSlide(currentSlide - 1);
+      }
+    }
   };
 
   return ReactDOM.createPortal(
@@ -122,52 +161,59 @@ export default function SpotModal({ sliderData, setModalState }: ModalProps) {
           </IconButton>
         </CloseHeader>
         <ContentWrapper>
-          {/* 커스텀 내비게이션 버튼 */}
-          <div className="custom-prev">
-            <IconButton>
-              <LeftChevronIcon /> {/* 원하는 아이콘 컴포넌트 */}
-            </IconButton>
-          </div>
+          <ImageSwiperArea>
+            {/* 커스텀 내비게이션 버튼 */}
+            <div className="custom-prev">
+              <IconButton onClick={() => handlePrev()}>
+                <LeftChevronLargeIcon /> {/* 원하는 아이콘 컴포넌트 */}
+              </IconButton>
+            </div>
 
-          <Swiper
-            // install Swiper modules
-            modules={[Navigation, Scrollbar, A11y]}
-            spaceBetween={50}
-            slidesPerView={1}
-            navigation={{
-              nextEl: '.custom-next',
-              prevEl: '.custom-prev',
-            }}
-            initialSlide={currPostIdIndex as number}
-            scrollbar={{ draggable: true }}
-          >
-            {sliderData.map((item) => (
-              <SwiperSlideBox key={item.imageUrl}>
-                <ImageContainer>
-                  <Image src={item.imageUrl} alt={item.imageUrl} />
-                </ImageContainer>
-                <Info>
-                  <Text variant="header2">{item.photographerName}</Text>
-                  <Text variant="body3" color="#a6a6a6">
-                    {item.univ} | {item.spotName}
-                  </Text>
-                </Info>
-                <SmallButton.Tertiary
-                  onClick={() => handleSmallButton(item.postId)}
-                  text="게시물 보기"
-                />
-              </SwiperSlideBox>
-            ))}
-          </Swiper>
-          <div className="custom-next">
-            <IconButton>
-              <RightChevronIcon /> {/* 원하는 아이콘 컴포넌트 */}
-            </IconButton>
-          </div>
-          {/* <Slider
-            sliderData={sliderData}
-            currPostIdIndex={currPostIdIndex ?? 0} // Default to 0 if null
-            /> */}
+            <Swiper
+              // install Swiper modules
+              modules={[Navigation, Scrollbar, A11y]}
+              spaceBetween={50}
+              slidesPerView={1}
+              navigation={{
+                nextEl: '.custom-next',
+                prevEl: '.custom-prev',
+              }}
+              initialSlide={currPostIdIndex as number}
+            >
+              {sliderData.map((item) => (
+                <SwiperSlideBox key={item.imageUrl}>
+                  <ImageContainer>
+                    <Image src={item.imageUrl} alt={item.imageUrl} />
+                  </ImageContainer>
+                </SwiperSlideBox>
+              ))}
+            </Swiper>
+            <div className="custom-next">
+              <IconButton onClick={() => handleNext()}>
+                <RightChevronLargeIcon /> {/* 원하는 아이콘 컴포넌트 */}
+              </IconButton>
+            </div>
+          </ImageSwiperArea>
+
+          {currentSlide != null && (
+            <InfoArea>
+              <Info>
+                <Text variant="header2">
+                  {sliderData[currentSlide].photographerName}
+                </Text>
+                <Text variant="body3" color="#a6a6a6">
+                  {sliderData[currentSlide].univ} |{' '}
+                  {sliderData[currentSlide].spotName}
+                </Text>
+              </Info>
+              <SmallButton.Brand
+                onClick={() =>
+                  handleSmallButton(sliderData[currentSlide].postId)
+                }
+                text="게시물 보기"
+              />
+            </InfoArea>
+          )}
         </ContentWrapper>
       </ModalContainer>
     </>,
