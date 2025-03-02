@@ -12,7 +12,7 @@ const ButtonText = styled(Text)`
   color: ${({ theme }) => theme.colors.primary[500]};
 `;
 
-export default function Tertiary({
+export default function Brand({
   text,
   onClick = () => {},
 }: {
