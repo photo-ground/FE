@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Button = styled.button`
-  padding: 0.438rem 1.25rem;
+  padding: 0 1.25rem;
 
   outline: none;
   border: none;

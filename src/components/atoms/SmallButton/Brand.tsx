@@ -2,17 +2,17 @@ import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
 import Button from './styles';
 
-const TertiaryButton = styled(Button)`
-  background: ${({ theme }) => theme.colors.gray[900]};
+const BrandButton = styled(Button)`
+  background: transparent;
+  border: 1px solid ${({ theme }) => theme.colors.primary[500]};
   cursor: pointer;
 `;
 
 const ButtonText = styled(Text)`
-  color: ${({ theme }) => theme.colors.white};
-  white-space: nowrap;
+  color: ${({ theme }) => theme.colors.primary[500]};
 `;
 
-export default function Tertiary({
+export default function Brand({
   text,
   onClick = () => {},
 }: {
@@ -20,8 +20,8 @@ export default function Tertiary({
   onClick?: () => void;
 }) {
   return (
-    <TertiaryButton onClick={onClick}>
+    <BrandButton onClick={onClick}>
       <ButtonText variant="body1_md">{text}</ButtonText>
-    </TertiaryButton>
+    </BrandButton>
   );
 }

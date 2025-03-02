@@ -3,7 +3,7 @@ import Text from '@/components/atoms/Text';
 import Button from './styles';
 
 const SecondaryButton = styled(Button)`
-  background: ${({ theme }) => theme.colors.gray[900]};
+  background: ${({ theme }) => theme.colors.white};
   border: 1px solid transparent;
   cursor: pointer;
 `;
@@ -21,7 +21,9 @@ export default function Secondary({
 }) {
   return (
     <SecondaryButton onClick={onClick}>
-      <ButtonText variant="body1_rg">{text}</ButtonText>
+      <ButtonText variant="title3" color="#0e0e0e">
+        {text}
+      </ButtonText>
     </SecondaryButton>
   );
 }

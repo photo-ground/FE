@@ -21,6 +21,7 @@ export const ChipContainer = styled.div`
   gap: 0.5rem;
 
   width: 100%;
+  height: 54px; // border때문에 픽셀 삐끗나는게 있는거 같아서 2px더한 값으로 둠(수정필요하면 하면 됨)
   padding: 0.5rem 1.25rem; // 0.5는 임의값
 
   overflow-x: scroll;
@@ -31,5 +32,7 @@ export const BottomButtonWrapper = styled.div`
   bottom: 1.25rem;
   left: calc(50% - 75px);
   width: 150px;
+  height: 44px;
+
   z-index: ${Z_INDEX.MAP_CHIP};
 `;
