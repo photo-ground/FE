@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { UNIV_SELECTION_LIST } from '@/types/university';
 import { Z_INDEX } from '@/constants';
 import DownChevronIcon from '@/assets/DownChevronIcon';
+import UpChevronIcon from '@/assets/UpChevronIcon';
 import Text from '@/components/atoms/Text';
 import { SignUpData } from '../type';
 
@@ -22,7 +23,9 @@ const Container = styled.div<{ $isOpen: boolean; $isSelected: boolean }>`
   background: transparent;
   border: 1px solid
     ${({ theme, $isSelected }) =>
-      $isSelected ? theme.colors.gray[200] : theme.colors.gray[400]};
+      $isSelected
+        ? theme.colors.gray[400]
+        : theme.colors.gray[400]}; // 25.03.03 qa반영 : 선택 전 border - gray400
   border-radius: ${({ $isOpen }) => ($isOpen ? '0.5rem 0.5rem 0 0' : '0.5rem')};
 `;
 
@@ -103,7 +106,7 @@ export default function UnivInput({
         <FilterText variant="body1_rg" $isSelected={!!currentLabel}>
           {currentLabel || '학교 선택'}
         </FilterText>
-        <DownChevronIcon />
+        {isOpen ? <UpChevronIcon /> : <DownChevronIcon />}
       </Container>
 
       {isOpen && (
