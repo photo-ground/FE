@@ -33,6 +33,7 @@ export const PhotographerItem = styled(Link)`
 
 export const ProfileImage = styled(Image)`
   border-radius: 100%;
+  object-fit: cover;
 `;
 
 export const ProfileImageSkeleton = styled.div`
