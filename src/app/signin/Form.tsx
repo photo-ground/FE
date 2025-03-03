@@ -33,6 +33,7 @@ const Wrapper = styled.div`
 const StyledLink = styled(Link)`
   width: fit-content;
   text-decoration-color: ${({ theme }) => theme.colors.gray[300]};
+  text-underline-offset: 4px;
 `;
 const SignUpText = styled(Text)`
   color: ${({ theme }) => theme.colors.gray[300]};
