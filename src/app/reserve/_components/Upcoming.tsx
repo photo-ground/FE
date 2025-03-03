@@ -125,7 +125,7 @@ export default function Upcoming({
         </InfoArea>
         <ButtonArea>
           <Link href={`/reserve/${data.reservationId}`}>
-            <RightChevronIcon size="20px" />
+            <RightChevronIcon size="1.25rem" />
           </Link>
           {data.chatUrl ? (
             <Link href={data.chatUrl}>

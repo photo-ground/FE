@@ -21,7 +21,7 @@ const ButtonWrapper = styled.div`
   position: fixed;
   width: 100%;
   bottom: 2rem;
-  max-width: 520px;
+  max-width: 32.5rem;
 `;
 
 const Container = styled.div`
@@ -60,10 +60,10 @@ export default function UpdatePassword() {
         <TNB.Back text="비밀번호 변경" />
         <AccountSection>
           <Text variant="title3">기존 비밀번호</Text>
-          <Spacer size="16px" />
+          <Spacer size="1rem" />
 
           <PasswordInput value="123asd12!" />
-          <Spacer size="48px" />
+          <Spacer size="3rem" />
           <Text variant="title3">새 비밀번호</Text>
 
           <PasswordForm
@@ -73,7 +73,7 @@ export default function UpdatePassword() {
           />
         </AccountSection>
 
-        <Spacer size="32px" />
+        <Spacer size="2rem" />
 
         <ButtonWrapper>
           <CTAButton.Primary
@@ -84,7 +84,7 @@ export default function UpdatePassword() {
         </ButtonWrapper>
       </Container>
 
-      <Spacer size="32px" />
+      <Spacer size="2rem" />
 
       {modalOpen && (
         <AlertModal

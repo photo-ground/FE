@@ -31,8 +31,8 @@ export const BottomButtonWrapper = styled.div`
   position: absolute;
   bottom: 1.25rem;
   left: calc(50% - 75px);
-  width: 150px;
-  height: 44px;
+  width: 9.375rem;
+  height: 2.75rem;
 
   z-index: ${Z_INDEX.MAP_CHIP};
 `;

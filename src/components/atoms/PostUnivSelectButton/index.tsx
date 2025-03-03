@@ -5,14 +5,14 @@ type ActiveState = 'active' | 'inactive';
 
 const Button = styled.button<{ active: ActiveState }>`
   width: inherit;
-  padding: 8px;
+  padding: 0.5rem;
   background: ${({ theme, active }) =>
     active === 'active' ? theme.colors.primary[500] : 'transparent'};
   color: ${({ theme, active }) =>
     active === 'active' ? theme.colors.white : theme.colors.gray[200]};
   border: ${({ theme, active }) =>
     active === 'active' ? 'none' : `1px solid ${theme.colors.gray[200]}`};
-  border-radius: 8px;
+  border-radius: 0.5rem;
   cursor: pointer;
 
   &:hover {

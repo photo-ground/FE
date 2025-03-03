@@ -44,7 +44,7 @@ export default function UserInfo({
         <Text variant="title1_rg">좋은 하루예요!</Text>
       </Greeting>
       <EditButton onClick={onEdit}>
-        내 정보 수정 <RightChevronIcon size="20px" color="#8C8C8C" />
+        내 정보 수정 <RightChevronIcon size="1.25rem" color="#8C8C8C" />
       </EditButton>
     </UserInfoWrapper>
   );

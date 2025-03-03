@@ -9,7 +9,7 @@ import UploadImages from './_component/UploadImages';
 import Checkbox from './_component/CheckBoxInput';
 
 const ButtonBox = styled.div`
-  margin: 0 20px;
+  margin: 0 1.25rem;
 `;
 export default function WritePostPage() {
   const router = useRouter();

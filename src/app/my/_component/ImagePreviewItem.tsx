@@ -11,15 +11,15 @@ const ImagePreviewContainer = styled.div`
 
 const IconContainer = styled.div`
   position: absolute;
-  top: 4px;
-  left: 4px;
+  top: 0.25rem;
+  left: 0.25rem;
   cursor: pointer;
   z-index: 9;
 `;
 
 const PreviewImage = styled(Image)`
   object-fit: cover;
-  border-radius: 2px;
+  border-radius: 0.125rem;
 `;
 
 interface ImagePreviewItemProps {

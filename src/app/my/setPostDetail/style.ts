@@ -2,23 +2,23 @@ import Text from '@/components/atoms/Text';
 import styled from 'styled-components';
 
 export const Title = styled(Text)`
-  margin: 0 20px;
+  margin: 0 1.25rem;
 `;
 export const UploadArea = styled.div`
-  margin: 20px;
+  margin: 1.25rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   width: inherit;
-  gap: 16px 10px;
+  gap: 1rem 0.625rem;
 `;
 export const Textarea = styled.textarea`
   border: 1px solid ${({ theme }) => theme.colors.gray[600]};
-  border-radius: 8px;
+  border-radius: 0.5rem;
   background-color: transparent;
-  padding: 20px;
-  height: 120px;
-  width: calc(100% - 40px);
-  margin: 20px;
+  padding: 1.25rem;
+  height: 7.5rem;
+  width: calc(100% - 2.5rem);
+  margin: 1.25rem;
   font-family:
     'Pretendard Variable',
     Pretendard,
@@ -45,9 +45,9 @@ export const Textarea = styled.textarea`
 export const SelectPhotoSpot = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
 `;
 
 export const ButtonBox = styled.div`
-  margin: 0 20px;
+  margin: 0 1.25rem;
 `;

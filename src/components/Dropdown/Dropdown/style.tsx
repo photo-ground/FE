@@ -11,20 +11,16 @@ export const Container = styled.div`
 
 export const FilterWrapper = styled.div<{ $isOpen: boolean; $variant: string }>`
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
-
   padding: 0.5rem 1rem;
-
   cursor: pointer;
 
   ${({ $variant, $isOpen, theme }) => {
     switch ($variant) {
       case 'filter':
         return css`
-          border-radius: 16px 16px 0 0;
+          border-radius: 1rem 1rem 0 0;
           background: transparent;
           ${$isOpen &&
           css`
@@ -68,29 +64,19 @@ export const FilterText = styled(Text)<{ $variant: string }>`
 
 export const Backdrop = styled.div`
   position: fixed;
-
   top: 0;
-
   left: 0;
-
   width: 100%;
-
   height: 100%;
-
   background: transparent;
-
   z-index: ${Z_INDEX.DROPDOWN_BACKDROP};
 `;
 
 export const OptionWrapper = styled.div<{ $variant: string }>`
   position: absolute;
-
   top: 100%;
-
   left: 0;
-
   width: 100%;
-
   z-index: ${Z_INDEX.DROPDOWN};
 
   ${({ $variant, theme }) => {
@@ -98,29 +84,22 @@ export const OptionWrapper = styled.div<{ $variant: string }>`
       case 'filter':
         return css`
           background: ${theme.colors.gray[900]};
-
           border-top: none;
-
-          border-radius: 0 0 8px 8px;
+          border-radius: 0 0 0.5rem 0.5rem;
         `;
 
       case 'mini':
         return css`
           background: ${theme.colors.gray[300]};
-
           border-top: none;
-
-          border-radius: 8px;
+          border-radius: 0.5rem;
         `;
 
       default:
         return css`
           background: ${theme.colors.background.primary};
-
           border: 1px solid ${theme.colors.gray[200]};
-
           border-top: none;
-
           border-radius: 0 0 0.5rem 0.5rem;
         `;
     }
@@ -129,17 +108,11 @@ export const OptionWrapper = styled.div<{ $variant: string }>`
 
 export const OptionItem = styled.button<{ $variant: string }>`
   width: 100%;
-
-  padding: 6px 16px;
-
+  padding: 0.375rem 1rem;
   background: transparent;
-
   border: none;
-
   text-align: start;
-
   cursor: pointer;
-
   &:hover {
     ${({ $variant, theme }) => {
       switch ($variant) {

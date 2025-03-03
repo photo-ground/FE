@@ -38,7 +38,7 @@ export default function OnboardingPage() {
             <UnivCard key={university.title} data={university} />
           ))}
 
-          <Spacer size="12px" />
+          <Spacer size="0.75rem" />
 
           <Caption variant="caption1_rg" color={COLOR.GRAY[400]}>
             더 많은 장소를 기록할 수 있도록 포그가 달리고 있어요!

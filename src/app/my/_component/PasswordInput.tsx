@@ -10,7 +10,7 @@ export const Input = styled.input`
   font-weight: ${({ theme }) => theme.typography.body2_rg.fontWeight};
   line-height: ${({ theme }) => theme.typography.body2_rg.lineHeight};
   color: ${({ theme }) => theme.colors.gray[400]};
-  width: 50px;
+  width: 3.125rem;
 `;
 
 export const InputContainer = styled.div`
@@ -26,7 +26,7 @@ export const InputContainer = styled.div`
 
 const PasswordContainer = styled.div`
   display: flex;
-  gap: 12px;
+  gap: 0.75rem;
   width: 100%;
 `;
 export default function PasswordInput({ value }: { value: string }) {

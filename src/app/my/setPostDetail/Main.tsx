@@ -227,7 +227,7 @@ export default function Main() {
         placeholder="사진을 소개해주세요!"
       />
 
-      <Spacer size="80px" />
+      <Spacer size="5rem" />
       <ButtonBox>
         <CTAButton.Primary
           type="submit"
@@ -237,7 +237,7 @@ export default function Main() {
         />
       </ButtonBox>
 
-      <Spacer size="60px" />
+      <Spacer size="3.75rem" />
     </div>
   );
 }

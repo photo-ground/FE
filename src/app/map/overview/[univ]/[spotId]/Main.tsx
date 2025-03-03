@@ -15,8 +15,8 @@ const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  gap: 10px;
-  margin: 1.5rem 20px 2rem 20px;
+  gap: 0.625rem;
+  margin: 1.5rem 1.25rem 2rem 1.25rem;
   .text-pre {
     white-space: pre-line;
     color: ${({ theme }) => theme.colors.gray[200]};
@@ -30,13 +30,13 @@ interface MainProps {
 const CardContainerY = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr; /* 3열 */
-  gap: 10px;
+  gap: 0.625rem;
 
   margin: 0 auto;
   padding: 1rem 1.25rem;
 
   img {
-    width: 133px;
+    width: 8.3125rem;
     height: auto;
   }
 

@@ -1,7 +1,7 @@
 import { COLOR } from '@/constants';
 
 export default function RightChevronLargeIcon({
-  size = '28px',
+  size = '1.75rem',
   color = COLOR.WHITE,
 }: {
   size?: string;

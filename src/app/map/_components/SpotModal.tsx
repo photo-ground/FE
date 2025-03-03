@@ -24,7 +24,7 @@ import useSpotStore from '../_store';
 
 const ImageContainer = styled.div`
   width: 100%;
-  max-width: 286px;
+  max-width: 17.875rem;
   aspect-ratio: 3 / 4;
   text-align: center;
   overflow: hidden;
@@ -32,14 +32,14 @@ const ImageContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 86px;
+  margin-top: 5.375rem;
   margin: 0 auto;
 `;
 
 const Image = styled.img`
   width: 100%;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   object-fit: contain;
 `;
 
@@ -49,7 +49,7 @@ const ModalContainer = styled.div`
   left: 50;
   width: 100%;
   height: 100%;
-  max-width: 540px;
+  max-width: 33.75rem;
   background-color: ${({ theme }) => theme.colors.black};
   z-index: 1000;
   padding: 1rem;
@@ -68,8 +68,8 @@ const CloseHeader = styled.div`
 `;
 
 const Info = styled.div`
-  margin-top: 24px;
-  margin-bottom: 16px;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
   text-align: center;
 `;
 
@@ -77,7 +77,7 @@ const SwiperSlideBox = styled(SwiperSlide)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 380px;
+  height: 23.75rem;
   margin: 0;
   button {
     width: fit-content;
@@ -104,7 +104,7 @@ const InfoArea = styled.div`
   flex-direction: column;
   button {
     width: fit-content;
-    height: 36px;
+    height: 2.25rem;
     margin: 0 auto;
   }
 `;

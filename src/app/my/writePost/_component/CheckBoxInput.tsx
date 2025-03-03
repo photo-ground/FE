@@ -12,7 +12,7 @@ interface CheckboxProps {
 const CheckBoxContainer = styled.label`
   display: flex;
   align-items: center;
-  margin: 0 20px;
+  margin: 0 1.25rem;
   padding: 1rem 0;
   justify-content: space-between;
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray[700]};

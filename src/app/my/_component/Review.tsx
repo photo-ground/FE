@@ -50,7 +50,7 @@ export default function Review({ photographerId }: { photographerId: number }) {
 
       <DetailLink href={`/photographer/${photographerId}/review`}>
         <LinkText variant="caption1_rg">리뷰 보기</LinkText>
-        <RightChevronIcon size="20px" color={COLOR.GRAY[400]} />
+        <RightChevronIcon size="1.25rem" color={COLOR.GRAY[400]} />
       </DetailLink>
     </Container>
   );
