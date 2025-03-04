@@ -24,14 +24,18 @@ const Container = styled.div<{ $isOpen: boolean; $isSelected: boolean }>`
   border: 1px solid
     ${({ theme, $isSelected }) =>
       $isSelected
-        ? theme.colors.gray[400]
+        ? theme.colors.gray[200]
         : theme.colors.gray[400]}; // 25.03.03 qa반영 : 선택 전 border - gray400
   border-radius: ${({ $isOpen }) => ($isOpen ? '0.5rem 0.5rem 0 0' : '0.5rem')};
 `;
 
 const FilterText = styled(Text)<{ $isSelected?: boolean }>`
   color: ${({ theme, $isSelected }) =>
-    $isSelected ? theme.colors.white : theme.colors.gray[200]};
+    $isSelected ? theme.colors.white : theme.colors.gray[400]};
+`;
+
+const OptionText = styled(Text)`
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 const Backdrop = styled.div`
@@ -121,7 +125,7 @@ export default function UnivInput({
                   onClose();
                 }}
               >
-                <FilterText variant="body1_rg">{option.label}</FilterText>
+                <OptionText variant="body1_rg">{option.label}</OptionText>
               </OptionItem>
             ))}
           </OptionWrapper>

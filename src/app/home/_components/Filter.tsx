@@ -27,7 +27,7 @@ const FilterText = styled(Text)`
   font-size: ${({ theme }) => theme.typography.caption1_rg};
   color: ${({ theme }) => theme.colors.gray[300]};
   border-radius: 1.125rem;
-  text-align: center;
+  text-align: end;
 `;
 
 const Backdrop = styled.div`
@@ -41,7 +41,7 @@ const Backdrop = styled.div`
 `;
 
 const OptionWrapper = styled.div`
-  padding: 0.25rem 0;
+  padding: 0.5rem 0;
   position: absolute;
   display: flex;
   gap: 0.5rem;
