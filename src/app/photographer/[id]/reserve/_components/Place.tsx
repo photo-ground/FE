@@ -15,6 +15,9 @@ const Container = styled.div`
   padding: 1.5rem 1.25rem;
 `;
 
+const DropDownContainer = styled.div`
+  width: 10.4375rem;
+`;
 export default function Place({
   value,
   onChange,
@@ -26,12 +29,14 @@ export default function Place({
     <Container>
       <Text variant="title2_sb">촬영 장소</Text>
 
-      <DropDown.Primary<University>
-        value={value}
-        onChange={onChange}
-        optionList={UNIV_LIST}
-        placeholder="학교 선택"
-      />
+      <DropDownContainer>
+        <DropDown.Primary<University>
+          value={value}
+          onChange={onChange}
+          optionList={UNIV_LIST}
+          placeholder="학교 선택"
+        />
+      </DropDownContainer>
     </Container>
   );
 }

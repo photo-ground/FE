@@ -25,6 +25,7 @@ const TextArea = styled.div`
   flex-direction: column;
   gap: 0.75rem;
   width: 100%;
+  resize: none;
 `;
 
 const Content = styled.div`

@@ -19,6 +19,10 @@ export const FilterText = styled(Text)`
   color: ${({ theme }) => theme.colors.gray[200]};
 `;
 
+export const OptionText = styled(Text)`
+  color: ${({ theme }) => theme.colors.white};
+`;
+
 export const Backdrop = styled.div`
   position: fixed;
   top: 0;

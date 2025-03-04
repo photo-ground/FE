@@ -6,6 +6,7 @@ import {
   Container,
   FilterText,
   OptionItem,
+  OptionText,
   OptionWrapper,
 } from './styles';
 
@@ -35,7 +36,7 @@ export default function Primary<T>({
   )?.label;
 
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
       <Container onClick={onOpen} $isOpen={isOpen} $isSelected={!!currentLabel}>
         <FilterText variant="body2_rg" $isSelected={!!currentLabel}>
           {currentLabel || placeholder}
@@ -55,7 +56,7 @@ export default function Primary<T>({
                   onClose();
                 }}
               >
-                <FilterText variant="body2_rg">{option.label}</FilterText>
+                <OptionText variant="body2_rg">{option.label}</OptionText>
               </OptionItem>
             ))}
           </OptionWrapper>

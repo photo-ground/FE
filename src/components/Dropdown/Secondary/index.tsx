@@ -6,6 +6,7 @@ import {
   Container,
   FilterText,
   OptionItem,
+  OptionText,
   OptionWrapper,
 } from './styles';
 
@@ -73,7 +74,7 @@ export default function Secondary<T>({
                   onClose();
                 }}
               >
-                <FilterText variant="body2_rg">{option.label}</FilterText>
+                <OptionText variant="body2_rg">{option.label}</OptionText>
               </OptionItem>
             ))}
           </OptionWrapper>

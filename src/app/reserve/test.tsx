@@ -21,6 +21,7 @@ const TextArea = styled.div`
   gap: 30%;
 
   text-align: center;
+  resize: none;
 `;
 
 const BottomText = styled(Text)`
