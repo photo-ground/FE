@@ -1,14 +1,24 @@
 import { PhotographerName, ProfileUrl } from './photographer';
 import { University } from './university';
 
+// export type ReservationStatus =
+//   | '예약취소'
+//   | '예약대기'
+//   | '결제대기'
+//   | '결제확인'
+//   | '결제오류'
+//   | '예약확정'
+//   | '촬영완료';
+
 export type ReservationStatus =
   | '예약취소'
-  | '예약대기'
+  | '결제오류'
+  | '예약신청'
   | '결제대기'
   | '결제확인'
-  | '결제오류'
   | '예약확정'
-  | '촬영완료';
+  | '촬영진행'
+  | '보정본전달및스냅종료';
 
 export interface ReservationSummary {
   reservationId: number;

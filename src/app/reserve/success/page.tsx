@@ -53,12 +53,12 @@ export default function ApplyCompletePage() {
         <CompleteIcon />
         <Title variant="header2">예약 신청 완료!</Title>
         <SubTitle variant="body1_rg">
-          예예 관리 탭에서 진행 상황을 확인할 수 있어요
+          예약 관리 탭에서 진행 상황을 확인할 수 있어요
         </SubTitle>
       </Header>
 
       <ProgressWrapper>
-        <ProgressBar state="예약대기" />
+        <ProgressBar state="예약신청" />
       </ProgressWrapper>
 
       <ButtonWrapper href="/reserve/list">

@@ -12,11 +12,11 @@ const DOT_SIZE = '0.5rem';
 const LARGE_DOT_SIZE = '2rem';
 
 const STEP_LIST: { label: string; value: ReservationStatus[] }[] = [
-  { label: '예약 신청', value: ['예약취소'] },
-  { label: '결제 대기', value: ['예약대기', '결제오류'] },
-  { label: '예약 확정', value: ['결제대기', '결제확인'] },
-  { label: '촬영 진행', value: ['예약확정'] },
-  { label: '보정본 전달 및 스냅 종료', value: ['촬영완료'] },
+  { label: '예약 신청', value: ['예약취소', '예약신청'] },
+  { label: '결제 진행', value: ['결제오류', '결제대기'] },
+  { label: '예약 확정', value: ['예약확정'] },
+  { label: '촬영 진행', value: ['촬영진행', '보정본전달및스냅종료'] },
+  // { label: '보정본 전달 및 스냅 종료', value: ['촬영완료'] },
 ];
 
 const Wrapper = styled.div`
@@ -108,13 +108,13 @@ export default function ProgressBar({ state }: { state: ReservationStatus }) {
               {step.label}
             </StateText>
 
-            {index < currentStep - 1 && <PrevDot />}
-            {index === currentStep - 1 && (
+            {index < currentStep && <PrevDot />}
+            {index === currentStep && (
               <FinishedDot>
                 <CheckIcon />
               </FinishedDot>
             )}
-            {index === currentStep && <Dot $inProgress />}
+            {/* {index === currentStep && <Dot $inProgress />} */}
             {index > currentStep && <Dot />}
           </Item>
         ))}
