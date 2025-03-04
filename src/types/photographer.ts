@@ -35,6 +35,7 @@ export interface PhotographerDetail {
   price: number;
   addPrice: number;
   introduction: string;
+  score: number;
   styleList: string[];
   following: boolean;
   profileUrl: ProfileUrl;
