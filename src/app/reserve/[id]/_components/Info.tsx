@@ -18,6 +18,8 @@ const Profile = styled.img`
   width: 3rem;
   height: 3rem;
   border-radius: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
 `;
 
 const Card = styled.div`
@@ -64,11 +66,19 @@ function formatTime(date: string, time: string) {
 }
 
 export default function Info({ data }: { data: ReservationDetail }) {
-  const { date, startTime, photographerName, univName, reserveNum } = data;
+  const {
+    date,
+    startTime,
+    photographerName,
+    univName,
+    reserveNum,
+    photographerProfileUrl,
+  } = data;
 
   return (
     <Container>
-      <Profile src="/images/yonsei.jpg" />
+      <Profile src={photographerProfileUrl} />
+
       <Card>
         <Text variant="body1_md">{formatTime(date, startTime)}</Text>
 

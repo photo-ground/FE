@@ -73,7 +73,7 @@ export default function ReserveInfo({
 }) {
   return (
     <CardContainer>
-      <Profile src="/images/yonsei.jpg" />
+      <Profile src />
       <TextArea>
         <Text variant="body1_md">{formatTime(data.date, data.startTime)}</Text>
 
