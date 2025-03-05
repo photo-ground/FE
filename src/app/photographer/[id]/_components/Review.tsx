@@ -52,12 +52,12 @@ export default function Review({
       <ScoreArea>
         <div>
           {/* 채워진 별 렌더링 */}
-          {Array.from({ length: filledStars }).map((_, index) => (
-            <SmallStarIcon key={`filled-${index}`} />
+          {Array.from({ length: filledStars }).map(() => (
+            <SmallStarIcon />
           ))}
           {/* 비어있는 별 렌더링 */}
-          {Array.from({ length: emptyStars }).map((_, index) => (
-            <SmallEmptyStarIcon key={`empty-${index}`} />
+          {Array.from({ length: emptyStars }).map(() => (
+            <SmallEmptyStarIcon />
           ))}
         </div>
         <ScoreText variant="body1_md">{floatScore}</ScoreText>

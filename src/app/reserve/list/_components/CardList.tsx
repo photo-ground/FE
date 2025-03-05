@@ -41,9 +41,10 @@ const DivideLine = styled.hr`
   margin-bottom: 1.5rem;
 `;
 
+/* 250305 : '(기존)예약대기' -> '예약신청' (문제 시 수정) */
 function mapCard(reservation: ReservationSummary) {
   switch (reservation.status) {
-    case '예약대기':
+    case '예약신청':
       return <PaymentCard data={reservation} state="wait" />;
 
     case '결제대기':

@@ -1,6 +1,5 @@
-import { COLOR } from '@/constants';
-
-export default function CheckIcon({ color = COLOR.WHITE }: { color?: string }) {
+// 250305 : 체크에서 border동그라미로 디자인 변경..(이름은 그냥 그대로 둠)
+export default function CheckIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
