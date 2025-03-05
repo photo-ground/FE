@@ -36,7 +36,7 @@ export default function ConfirmModal({
         <ModalText variant="caption1_rg">{content}</ModalText>
 
         <ButtonArea>
-          <LargeButton.Secondary text={cancelText} onClick={onCancel} />
+          <LargeButton.Tertiary text={cancelText} onClick={onCancel} />
           <LargeButton.Secondary text={confirmText} onClick={onConfirm} />
         </ButtonArea>
       </ModalContainer>
