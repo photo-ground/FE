@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import styled from 'styled-components';
 
 import Text from '@/components/atoms/Text';
@@ -47,6 +48,10 @@ const ButtonWrapper = styled(Link)`
 `;
 
 export default function ApplyCompletePage() {
+  const searchParams = useSearchParams();
+  const photographerId = searchParams.get('photographerId'); // URL 파라미터에서 가져오기
+  const id = (await params).id!;
+
   return (
     <Wrapper>
       <Header>
@@ -61,7 +66,7 @@ export default function ApplyCompletePage() {
         <ProgressBar state="예약신청" />
       </ProgressWrapper>
 
-      <ButtonWrapper href="/reserve/list">
+      <ButtonWrapper href={`/photographer/${photographerId}`}>
         <CTAButton.Primary text="확인" />
       </ButtonWrapper>
     </Wrapper>

@@ -18,7 +18,7 @@ export type ReservationStatus =
   | '결제확인'
   | '예약확정'
   | '촬영진행'
-  | '보정본전달및스냅종료';
+  | '촬영완료';
 
 export interface ReservationSummary {
   reservationId: number;
