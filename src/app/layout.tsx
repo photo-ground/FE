@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import Head from 'next/head';
 
 import StyledComponentsRegistry from '@/lib/registry';
 import ScreenWrapper from '@components/ScreenWrapper';
@@ -15,12 +14,6 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <Head>
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, viewport-fit=cover"
-          />
-        </Head>
         <Providers>
           <StyledComponentsRegistry>
             <ScreenWrapper>{children}</ScreenWrapper>
