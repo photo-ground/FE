@@ -6,6 +6,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Head from 'next/head';
 import { useQuery } from '@tanstack/react-query';
 import { useTheme } from 'styled-components';
 import { Drawer } from '@mui/material';
@@ -63,7 +64,6 @@ export default function MapPage() {
   const [mapSelectedUnivButton, setMapSelectedUnivButton] = useState(univ); // 지도 상단 칩 버튼 활성화
 
   const [schoolArr] = useState<School[]>(schoolList);
-  // useState<PhotoSpotPostList | null>(null);
 
   // spot data 가져오기
   const { data: photoSpots, isSuccess } = useQuery<PhotoSpot[]>({
@@ -190,6 +190,12 @@ export default function MapPage() {
             const map = new naver.maps.Map(mapElement, {
               center: new naver.maps.LatLng(...center),
               zoom,
+              logoControl: true,
+              logoControlOptions: {
+                position: naver.maps.Position.TOP_LEFT,
+              },
+              scaleControl: false,
+              mapDataControl: false,
             });
             onMapLoad(map); // 지도가 준비되지 않았다면 직접 초기화 호출
           }
@@ -235,6 +241,12 @@ export default function MapPage() {
           onConfirm={() => router.replace('/onboarding')}
         />
       )}
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
+      </Head>
 
       {/* 네이버 맵 컴포넌트 */}
       <MapComponent mapId="naverMap" onLoad={onMapLoad} />
