@@ -50,7 +50,6 @@ const ButtonWrapper = styled(Link)`
 export default function ApplyCompletePage() {
   const searchParams = useSearchParams();
   const photographerId = searchParams.get('photographerId'); // URL 파라미터에서 가져오기
-  const id = (await params).id!;
 
   return (
     <Wrapper>
