@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
+import Head from 'next/head';
 
 import StyledComponentsRegistry from '@/lib/registry';
 import ScreenWrapper from '@components/ScreenWrapper';
 import Providers from './Providers';
-import Head from 'next/head';
 
 export { default as metadata } from './metadata';
 
