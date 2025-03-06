@@ -10,16 +10,16 @@ import ImagePreviewItem from '../../_component/ImagePreviewItem';
 const Title = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 20px;
+  margin: 1.25rem;
   margin-bottom: 0;
 `;
 
 const UploadArea = styled.div`
-  margin: 20px;
+  margin: 1.25rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: inherit;
-  gap: 8px;
+  gap: 0.5rem;
 `;
 
 const AddImage = styled.label`

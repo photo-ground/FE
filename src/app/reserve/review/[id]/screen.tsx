@@ -79,6 +79,7 @@ const Textarea = styled.textarea`
 
   background: none;
   padding: 1.25rem;
+  resize: none;
 
   border: 1px solid ${({ theme }) => theme.colors.gray[600]};
   outline: none;

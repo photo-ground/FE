@@ -24,8 +24,8 @@ const StatsWrapper = styled.div`
 const ReviewItemContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin: 12px 20px;
+  gap: 1rem;
+  margin: 0.75rem 1.25rem;
 `;
 
 export default function Reviews() {

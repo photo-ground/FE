@@ -25,6 +25,7 @@ const TextArea = styled.div`
   flex-direction: column;
   gap: 0.75rem;
   width: 100%;
+  resize: none;
 `;
 
 const Content = styled.div`
@@ -72,7 +73,7 @@ export default function ReserveInfo({
 }) {
   return (
     <CardContainer>
-      <Profile src="/images/yonsei.jpg" />
+      <Profile src={data.profileImage} />
       <TextArea>
         <Text variant="body1_md">{formatTime(data.date, data.startTime)}</Text>
 

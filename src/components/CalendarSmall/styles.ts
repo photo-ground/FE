@@ -55,7 +55,7 @@ export const DateCell = styled.button<{
 
   width: 2.75rem;
   height: 2.75rem;
-  margin: 2px;
+  aspect-ratio: 1/1;
   background: transparent;
 
   border: ${({ theme, $isSelected }) =>

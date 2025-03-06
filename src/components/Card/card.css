@@ -3,9 +3,10 @@
   text-align: center;
   width: inherit;
   img {
-    width: 80px;
-    height: 80px;
-    border-radius: 80px;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 5rem;
+    object-fit: cover;
   }
 }
 
@@ -15,7 +16,7 @@
   aspect-ratio: 1 / 1; /* 정방형 유지 */
   position: relative;
   /* overflow: hidden; 자식 요소가 넘치지 않도록 설정 */
-  min-width: 110px; /* 최소 너비 */
+  min-width: 6.875rem; /* 최소 너비 */
 
   img {
     /* display: block; */
@@ -41,11 +42,12 @@
 
 /* todo : 크기 수정해야함 */
 .card.large {
-  font-size: 16px;
-  padding: 12px 20px;
+  font-size: 1rem; /* 16px -> 1rem */
+  padding: 0.75rem 1.25rem; /* 12px -> 0.75rem, 20px -> 1.25rem */
+
   img {
-    width: 286px;
-    min-height: 382px;
+    width: 17.875rem; /* 286px -> 17.875rem */
+    min-height: 23.875rem; /* 382px -> 23.875rem */
   }
 }
 

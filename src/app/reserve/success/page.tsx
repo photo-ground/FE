@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import styled from 'styled-components';
 
 import Text from '@/components/atoms/Text';
@@ -47,21 +48,24 @@ const ButtonWrapper = styled(Link)`
 `;
 
 export default function ApplyCompletePage() {
+  const searchParams = useSearchParams();
+  const photographerId = searchParams.get('photographerId'); // URL 파라미터에서 가져오기
+
   return (
     <Wrapper>
       <Header>
         <CompleteIcon />
         <Title variant="header2">예약 신청 완료!</Title>
         <SubTitle variant="body1_rg">
-          예예 관리 탭에서 진행 상황을 확인할 수 있어요
+          예약 관리 탭에서 진행 상황을 확인할 수 있어요
         </SubTitle>
       </Header>
 
       <ProgressWrapper>
-        <ProgressBar state="예약대기" />
+        <ProgressBar state="예약신청" />
       </ProgressWrapper>
 
-      <ButtonWrapper href="/reserve/list">
+      <ButtonWrapper href={`/photographer/${photographerId}`}>
         <CTAButton.Primary text="확인" />
       </ButtonWrapper>
     </Wrapper>

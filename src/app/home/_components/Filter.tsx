@@ -9,7 +9,7 @@ import UpChevronIcon from '@/assets/UpChevronIcon';
 
 export const Container = styled.div<{ $isOpen: boolean }>`
   display: flex;
-  min-width: 145px;
+  min-width: 9.0625rem;
   justify-content: space-between;
   gap: 0.125rem;
   padding: 0.5rem 0;
@@ -27,7 +27,7 @@ const FilterText = styled(Text)`
   font-size: ${({ theme }) => theme.typography.caption1_rg};
   color: ${({ theme }) => theme.colors.gray[300]};
   border-radius: 1.125rem;
-  text-align: center;
+  text-align: end;
 `;
 
 const Backdrop = styled.div`
@@ -41,14 +41,14 @@ const Backdrop = styled.div`
 `;
 
 const OptionWrapper = styled.div`
-  padding: 4px 0;
+  padding: 0.5rem 0;
   position: absolute;
   display: flex;
   gap: 0.5rem;
   flex-direction: column;
   align-items: flex-end;
   text-align: end;
-  right: 20px;
+  right: 1.25rem;
 
   background: ${({ theme }) => theme.colors.gray[800]};
   border-radius: 0.5rem;

@@ -30,7 +30,7 @@ const ButtonWrapper = styled.div`
   padding: 0 1.25rem;
 `;
 const UserSection = styled.div`
-  padding: 3rem 20px;
+  padding: 3rem 1.25rem;
 `;
 const Container = styled.div`
   min-height: 100vh;
@@ -39,7 +39,7 @@ const DropOutButton = styled.div`
   color: ${({ theme }) => theme.colors.gray[300]};
   display: flex;
 
-  padding: 12px 1.25rem;
+  padding: 0.75rem 1.25rem;
 `;
 export default function EditProfile() {
   const [confirmModal, setConfirmModal] = useState<boolean>(false); //
@@ -133,16 +133,16 @@ export default function EditProfile() {
             <Text variant="body2_rg" color="#8C8C8C">
               탈퇴하기
             </Text>
-            <RightChevronIcon size="24px" color="#8C8C8C" />
+            <RightChevronIcon size="1.5rem" color="#8C8C8C" />
           </DropOutButton>
-          <Spacer size="32px" />
+          <Spacer size="2rem" />
 
           <ButtonWrapper onClick={handleUpdateConfirm}>
             <CTAButton.Primary text="수정완료" />
           </ButtonWrapper>
         </Container>
       )}
-      <Spacer size="32px" />
+      <Spacer size="2rem" />
       {/* 회원정보 업데이트 확인 모달 */}
       {confirmModal && (
         <AlertModal

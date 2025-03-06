@@ -4,11 +4,13 @@ import { Z_INDEX } from '@/constants';
 export const Container = styled.div`
   position: relative;
   width: 100%;
-  height: calc(100vh - 76px);
+  height: calc(100dvh - 76px); // 와 vh -> dvh하니까 됨..ㅜㅜㅜ
+  // top: 0;
   -ms-overflow-style: none;
   ::-webkit-scrollbar {
     display: none;
   }
+  // height: calc(100dvh - env(safe-area-inset-bottom));
 `;
 
 // 칩 버튼들을 담을 컨테이너 스타일
@@ -31,8 +33,8 @@ export const BottomButtonWrapper = styled.div`
   position: absolute;
   bottom: 1.25rem;
   left: calc(50% - 75px);
-  width: 150px;
-  height: 44px;
+  width: 9.375rem;
+  height: 2.75rem;
 
   z-index: ${Z_INDEX.MAP_CHIP};
 `;

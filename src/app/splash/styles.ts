@@ -16,7 +16,7 @@ export const Container = styled(ScreenWithBottomButton)`
   align-items: center;
   justify-content: space-between;
 
-  padding-top: 40vh;
+  padding-top: 50%;
 `;
 
 export const ButtonArea = styled.div`

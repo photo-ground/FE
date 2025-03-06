@@ -36,7 +36,7 @@ export default function PhotographerDetailScreen({
   photographerId: PhotographerId;
   data: PhotographerDetail;
 }) {
-  const { price, introduction, styleList } = data;
+  const { price, introduction, styleList, score } = data;
   const [postList, setPostList] = useState<PostSummary[]>([]);
   const [hasNext, setHasNext] = useState(true);
   const { isLoggedIn } = useUserStore();
@@ -87,7 +87,7 @@ export default function PhotographerDetailScreen({
 
       <DivideLine />
 
-      <Review photographerId={photographerId} />
+      <Review score={score} photographerId={photographerId} />
 
       <DivideLine />
 

@@ -17,6 +17,7 @@ const Container = styled.div`
 const BottomArea = styled.div`
   display: flex;
   gap: 0.25rem;
+  align-items: center;
 `;
 
 const InfoText = styled(Text)`

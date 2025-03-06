@@ -20,6 +20,10 @@ const TextArea = styled.textarea`
   border: 1px solid ${({ theme }) => theme.colors.gray[600]};
   outline: none;
   font-family: 'Pretendard Variable', Pretendard;
+  font-size: ${({ theme }) => theme.typography.body2_rg.fontSize};
+  font-weight: ${({ theme }) => theme.typography.body2_rg.fontWeight};
+  line-height: ${({ theme }) => theme.typography.body2_rg.lineHeight};
+  resize: none;
 `;
 
 export default function Request({

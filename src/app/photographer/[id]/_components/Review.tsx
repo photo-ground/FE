@@ -6,6 +6,7 @@ import { COLOR } from '@/constants';
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import SmallStarIcon from '@/assets/SmallStarIcon';
 import Text from '@/components/atoms/Text';
+import SmallEmptyStarIcon from '@/assets/SmallEmptyStarIcon';
 
 const Container = styled.div`
   display: flex;
@@ -37,25 +38,34 @@ const LinkText = styled(Text)`
 
 export default function Review({
   photographerId,
+  score,
 }: {
   photographerId: PhotographerId;
+  score: number;
 }) {
+  const floatScore = score.toFixed(1);
+
+  const filledStars = Math.floor(score);
+  const emptyStars = 5 - filledStars;
   return (
     <Container>
       <ScoreArea>
         <div>
-          <SmallStarIcon />
-          <SmallStarIcon />
-          <SmallStarIcon />
-          <SmallStarIcon />
-          <SmallStarIcon />
+          {/* 채워진 별 렌더링 */}
+          {Array.from({ length: filledStars }).map(() => (
+            <SmallStarIcon />
+          ))}
+          {/* 비어있는 별 렌더링 */}
+          {Array.from({ length: emptyStars }).map(() => (
+            <SmallEmptyStarIcon />
+          ))}
         </div>
-        <ScoreText variant="body1_md">5.0</ScoreText>
+        <ScoreText variant="body1_md">{floatScore}</ScoreText>
       </ScoreArea>
 
       <DetailLink href={`/photographer/${photographerId}/review`}>
         <LinkText variant="caption1_rg">리뷰 보기</LinkText>
-        <RightChevronIcon size="20px" color={COLOR.GRAY[400]} />
+        <RightChevronIcon size="1.25rem" color={COLOR.GRAY[400]} />
       </DetailLink>
     </Container>
   );

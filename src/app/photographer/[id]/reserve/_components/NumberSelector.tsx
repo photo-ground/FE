@@ -20,8 +20,9 @@ const Line = styled.div`
 
 const InputContainer = styled.div`
   display: flex;
-  gap: 0.625rem;
+  justify-content: space-between;
   align-items: center;
+  width: 7.25rem;
 
   padding: 0.5rem 0.75rem;
   background: ${({ theme }) => theme.colors.primary[500]};

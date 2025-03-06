@@ -18,14 +18,14 @@ import { SliderData } from './Slider';
 const CardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 0.625rem;
 `;
 
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  gap: 10px;
+  gap: 0.625rem;
   margin-bottom: 3rem;
   .text-pre {
     white-space: pre-line;
@@ -59,10 +59,10 @@ const DrawerHandle = styled.div`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  width: 134px;
-  height: 5px;
-  margin-top: 20px;
-  border-radius: 100px;
+  width: 8.375rem;
+  height: 0.3125rem;
+  margin-top: 1.25rem;
+  border-radius: 6.25rem;
   background: ${({ theme }) => theme.colors.white};
 `;
 
@@ -70,13 +70,12 @@ const ChipContainer = styled.div`
   margin: 0 auto;
   margin-top: 1.5rem;
   width: 100%;
-  max-width: 150px;
+  max-width: 9.375rem;
   text-align: center;
 `;
 
 const CloseIconButton = styled.div`
   margin-top: 1rem;
-  // background-color: red;
 `;
 
 export default function DrawerContent({
@@ -146,7 +145,7 @@ export default function DrawerContent({
     <Box
       sx={{
         width: 'inherit',
-        padding: '20px',
+        padding: '1.25rem',
         paddingTop: '0',
         boxSizing: 'border-box',
       }}

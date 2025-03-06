@@ -11,7 +11,7 @@ export const Container = styled.div<{
   justify-content: space-between;
   gap: 0.125rem;
 
-  width: ${({ $isOpen }) => ($isOpen ? 'calc(10rem + 2px)' : 'fit-content')};
+  width: inherit;
   padding: 0.5rem 1rem;
   background: transparent;
   border: 1px solid
@@ -23,6 +23,10 @@ export const Container = styled.div<{
 export const FilterText = styled(Text)<{ $isSelected?: boolean }>`
   color: ${({ theme, $isSelected }) =>
     $isSelected ? theme.colors.white : theme.colors.gray[200]};
+`;
+
+export const OptionText = styled(Text)`
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 export const Backdrop = styled.div`
@@ -37,13 +41,14 @@ export const Backdrop = styled.div`
 `;
 
 export const OptionWrapper = styled.div`
+  width: 100%;
   position: absolute;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 
   background: ${({ theme }) => theme.colors.background.primary};
-  border: 1px solid ${({ theme }) => theme.colors.gray[200]};
+  border: 1px solid ${({ theme }) => theme.colors.gray[400]};
   border-top: none;
   border-radius: 0 0 0.5rem 0.5rem;
 
@@ -51,7 +56,7 @@ export const OptionWrapper = styled.div`
 `;
 
 export const OptionItem = styled.button`
-  width: 10rem;
+  width: inherit;
   padding: 0.5rem 1rem;
 
   background: transparent;

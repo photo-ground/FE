@@ -8,7 +8,7 @@ import { PostDetail } from '../getPostData';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-const MAX_HEIGHT = '520px';
+const MAX_HEIGHT = '32.5rem';
 
 const Container = styled.div``;
 
@@ -23,7 +23,7 @@ const Image = styled.img`
 const TagArea = styled.div`
   display: flex;
   gap: 0.5rem;
-  margin-top: 24px;
+  margin-top: 1.5rem;
   padding: 0 1.25rem;
 `;
 

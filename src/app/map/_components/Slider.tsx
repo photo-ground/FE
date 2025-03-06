@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 const SliderContainer = styled.div`
   position: relative;
   width: 100%;
-  max-width: 300px;
+  max-width: 18.75rem;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -23,7 +23,7 @@ const SliderContainer = styled.div`
 const ImageContainer = styled.div`
   position: relative;
   width: 100%;
-  max-width: 286px;
+  max-width: 17.875rem;
   aspect-ratio: 3 / 4;
   text-align: center;
   overflow: hidden;
@@ -31,19 +31,19 @@ const ImageContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 86px;
+  margin-top: 5.375rem;
 `;
 
 const Image = styled.img`
   width: 100%;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   object-fit: contain;
 `;
 
 const Info = styled.div`
-  margin-top: 24px;
-  margin-bottom: 16px;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
   text-align: center;
 `;
 
@@ -61,12 +61,12 @@ const NavigationButton = styled(IconButton)`
 
 const LeftButton = styled(NavigationButton)`
   left: -2rem;
-  top: 276px;
+  top: 17.25rem;
 `;
 
 const RightButton = styled(NavigationButton)`
   right: -2rem;
-  top: 276px;
+  top: 17.25rem;
 `;
 export interface SliderData {
   imageUrl: string;

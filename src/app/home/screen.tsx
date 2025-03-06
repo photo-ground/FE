@@ -69,7 +69,7 @@ export default function HomeScreen() {
           <Text variant="caption1_rg" color={COLOR.GRAY[300]}>
             더보기
           </Text>
-          <RightChevronIcon size="20px" color={COLOR.GRAY[300]} />
+          <RightChevronIcon size="1.25rem" color={COLOR.GRAY[300]} />
         </More>
       </TitleContainer>
 

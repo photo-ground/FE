@@ -63,7 +63,6 @@ export default function MapPage() {
   const [mapSelectedUnivButton, setMapSelectedUnivButton] = useState(univ); // 지도 상단 칩 버튼 활성화
 
   const [schoolArr] = useState<School[]>(schoolList);
-  // useState<PhotoSpotPostList | null>(null);
 
   // spot data 가져오기
   const { data: photoSpots, isSuccess } = useQuery<PhotoSpot[]>({
@@ -190,6 +189,12 @@ export default function MapPage() {
             const map = new naver.maps.Map(mapElement, {
               center: new naver.maps.LatLng(...center),
               zoom,
+              logoControl: true,
+              logoControlOptions: {
+                position: naver.maps.Position.TOP_LEFT,
+              },
+              scaleControl: false,
+              mapDataControl: false,
             });
             onMapLoad(map); // 지도가 준비되지 않았다면 직접 초기화 호출
           }

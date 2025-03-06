@@ -31,6 +31,9 @@ function MapComponent({
 
   const initializeMap = () => {
     const mapOptions = {
+      scaleControl: false,
+      logoControl: false,
+      mapDataControl: false,
       center: new naver.maps.LatLng(...mapCenter),
       zoom,
     };
@@ -53,7 +56,7 @@ function MapComponent({
         style={{
           width: '100%',
           height: '100%',
-          position: 'relative',
+          position: 'absolute',
         }}
       />
     </>

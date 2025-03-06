@@ -22,25 +22,25 @@ export const UNIV_ONBOARDING_LIST: UnivCardData[] = [
   {
     title: University.Sogang,
     subTitle: 'Sogang.Univ.',
-    src: '/images/sogang.jpg',
+    src: '/images/sogang.png',
     link: '/home',
   },
   {
     title: University.Yonsei,
     subTitle: 'Yonsei.Univ.',
-    src: '/images/yonsei.jpg',
+    src: '/images/yonsei.png',
     link: '/home',
   },
   {
     title: University.Ewha,
     subTitle: 'Ewha.Univ.',
-    src: '/images/ewha.jpg',
+    src: '/images/ewha.png',
     link: '/home',
   },
   {
     title: University.Hongik,
     subTitle: 'Hongik.Univ.',
-    src: '/images/hongik.jpg',
+    src: '/images/hongik.png',
     link: '/home',
   },
 ];

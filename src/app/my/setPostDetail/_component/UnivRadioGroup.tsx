@@ -7,8 +7,8 @@ import PostUnivSelectButton from '@/components/atoms/PostUnivSelectButton';
 const RadioGroup = styled.div`
   display: grid;
   grid: 1fr 1fr/1fr 1fr;
-  gap: 8px;
-  margin: 16px 20px;
+  gap: 0.5rem;
+  margin: 1rem 1.25rem;
 `;
 
 const RadioContainer = styled.label`
