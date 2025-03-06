@@ -6,7 +6,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import Head from 'next/head';
 import { useQuery } from '@tanstack/react-query';
 import { useTheme } from 'styled-components';
 import { Drawer } from '@mui/material';
@@ -241,12 +240,6 @@ export default function MapPage() {
           onConfirm={() => router.replace('/onboarding')}
         />
       )}
-      <Head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
-      </Head>
 
       {/* 네이버 맵 컴포넌트 */}
       <MapComponent mapId="naverMap" onLoad={onMapLoad} />
