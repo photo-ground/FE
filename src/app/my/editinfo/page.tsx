@@ -26,6 +26,13 @@ import { UpdateUserInfoProps, User } from '@/types/user';
 import { deleteUser, getUserInfo, updateUserInfo } from '../_libs/getUserInfo';
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
+const FixedHeader = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: ${({ theme }) => theme.colors.black};
+`;
 const ButtonWrapper = styled.div`
   padding: 0 1.25rem;
 `;
@@ -100,7 +107,10 @@ export default function EditProfile() {
     <>
       {userInfo && (
         <Container>
-          <TNB.Back text="내 정보 수정" />
+          <FixedHeader>
+            <TNB.Back text="내 정보 수정" />
+          </FixedHeader>
+          <Spacer size="4rem" />
           <AccountSection>
             <Text variant="title3">계정 정보</Text>
             <EmailInput value={userInfo.email} />

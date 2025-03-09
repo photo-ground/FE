@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
-import LeftChevronIcon from '@/assets/LeftChevronIcon';
+import LeftChevronLargeIcon from '@/assets/LeftChevronLargeIcon';
 import { BorderedHeader } from './styles';
 
 const IconWrapper = styled.button`
@@ -26,7 +26,7 @@ export default function Back({ text }: { text: string }) {
   return (
     <BorderedHeader>
       <IconWrapper onClick={goBack}>
-        <LeftChevronIcon />
+        <LeftChevronLargeIcon />
       </IconWrapper>
       <Text variant="header3" as="h1">
         {text}

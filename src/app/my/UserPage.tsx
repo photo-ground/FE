@@ -44,7 +44,7 @@ export default function UserPage() {
 
       {role === Role.Customer && (
         <>
-          <TNB.Title text="마이페이지" />
+          <TNB.SubTitle text="마이페이지" />
 
           <UserInfo userName={userInfo?.name || ''} onEdit={handleEdit} />
           <ListItem

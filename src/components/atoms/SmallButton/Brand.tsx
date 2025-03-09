@@ -6,6 +6,7 @@ const BrandButton = styled(Button)`
   background: transparent;
   border: 1px solid ${({ theme }) => theme.colors.primary[500]};
   cursor: pointer;
+  height: 100%;
 `;
 
 const ButtonText = styled(Text)`

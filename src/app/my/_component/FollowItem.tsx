@@ -33,6 +33,11 @@ const PhotographerName = styled(Text)`
   margin-left: 1rem;
 `;
 
+const ButtonWrapper = styled.div`
+  height: 36px;
+  display: flex;
+`;
+
 export default function FollowItem({
   photographerId,
   profileUrl,
@@ -52,24 +57,25 @@ export default function FollowItem({
           {photographerName} 작가
         </PhotographerName>
       </PhotographerInfo>
-
-      {isFollowing ? (
-        <SmallButton.Tertiary
-          text="팔로잉"
-          onClick={() => {
-            unfollow(photographerId);
-            setIsFollowing(false);
-          }}
-        />
-      ) : (
-        <SmallButton.Primary
-          text="팔로우"
-          onClick={() => {
-            follow(photographerId);
-            setIsFollowing(true);
-          }}
-        />
-      )}
+      <ButtonWrapper>
+        {isFollowing ? (
+          <SmallButton.Brand
+            text="팔로잉"
+            onClick={() => {
+              unfollow(photographerId);
+              setIsFollowing(false);
+            }}
+          />
+        ) : (
+          <SmallButton.Primary
+            text="팔로우"
+            onClick={() => {
+              follow(photographerId);
+              setIsFollowing(true);
+            }}
+          />
+        )}
+      </ButtonWrapper>
     </UserCardWrapper>
   );
 }
