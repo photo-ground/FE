@@ -121,6 +121,7 @@ export default function PhotographerProfile({
           <ButtonArea>
             <Chip icon={PeopleIcon} text={followerNum.toString()} />
 
+            {/* <ButtonWrapper> */}
             {isLoggedIn &&
               (isFollowing ? (
                 <SmallButton.Tertiary
@@ -145,6 +146,7 @@ export default function PhotographerProfile({
                   }}
                 />
               ))}
+            {/* </ButtonWrapper> */}
           </ButtonArea>
         </Header>
 

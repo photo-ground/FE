@@ -21,12 +21,12 @@ const EditButton = styled.button`
   border: none;
   display: flex;
   margin-top: auto;
+  padding: 0;
   color: ${({ theme }) => theme.colors.gray[200]};
-  font-size: ${({ theme }) => theme.typography.body2_rg};
   cursor: pointer;
 
   &:hover {
-    text-decoration: underline;
+    text-decoration: none;
   }
 `;
 
@@ -44,7 +44,10 @@ export default function UserInfo({
         <Text variant="title1_rg">좋은 하루예요!</Text>
       </Greeting>
       <EditButton onClick={onEdit}>
-        내 정보 수정 <RightChevronIcon size="1.25rem" color="#8C8C8C" />
+        <Text variant="body2_rg" color="#a6a6a6">
+          내 정보 수정
+        </Text>
+        <RightChevronIcon size="1.25rem" color="#8C8C8C" />
       </EditButton>
     </UserInfoWrapper>
   );
