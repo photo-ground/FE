@@ -12,7 +12,6 @@ import useUserStore from '@/store/useUserStore';
 import follow from '../_libs/follow';
 import unfollow from '../_libs/unfollow';
 import BackButton from './BackButton';
-import { ButtonWrapper } from '@/app/my/_component/styles';
 
 const ThumbnailWrapper = styled.div`
   position: relative;
