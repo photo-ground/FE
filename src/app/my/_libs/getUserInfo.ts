@@ -1,5 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-
 import fetchWithAuth from '@/lib/fetchWithAuth';
 import getAccessToken from '@/lib/getAccessToken';
 import refreshAccessToken from '@/lib/refreshToken';

@@ -20,6 +20,6 @@ export interface User {
 export interface UpdateUserInfoProps {
   name: string;
   phone: string;
-  myUniv: string;
+  myUniv: University;
   gender: string;
 }

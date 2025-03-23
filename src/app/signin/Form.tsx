@@ -3,13 +3,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
-import { Role } from '@/types/user';
 import useUserStore from '@/store/useUserStore';
 import CTAButton from '@/components/atoms/CTAButton';
 import Text from '@/components/atoms/Text';
 import { convertToViewportHeight } from '@/styles/convertSize';
 import InputList from './InputList';
-import signin from './signin';
+import signin, { SigninResponse } from './signin';
+import handleLoginSuccess from './_util/handleLoginSuccess';
 
 const Form = styled.form`
   display: flex;
@@ -49,22 +49,17 @@ export default function SignInForm() {
 
     const formData = new FormData(event.currentTarget);
     try {
-      const response = await signin(formData);
+      const response: SigninResponse = await signin(formData);
 
       if (response.ok) {
-        setIsLoggedIn(true);
-        setRole(response.data!.role as Role);
-        document.cookie = `accessToken=${response.data!.accessToken}`;
-
-        if (response.data?.univ) {
-          setUniv(response.data?.univ);
-        }
-
-        if (response.data?.photographerId) {
-          setPhotographerId(response.data?.photographerId);
-        }
-
-        router.push('/home');
+        handleLoginSuccess(
+          response,
+          router,
+          setIsLoggedIn,
+          setRole,
+          setUniv,
+          setPhotographerId,
+        );
       } else {
         throw new Error('로그인 요청 실패');
       }

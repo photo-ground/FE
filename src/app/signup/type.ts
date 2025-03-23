@@ -7,7 +7,7 @@ export interface SignUpData {
   name: string;
   phone: string;
   myUniv?: University | '선택안함';
-  gender?: Gender;
+  gender: Gender;
 
   isEmailConfirmed: boolean;
   isPasswordValid: boolean;
