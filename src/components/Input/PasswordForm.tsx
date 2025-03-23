@@ -7,16 +7,16 @@ import PasswordIcon from '@/assets/PasswordIcon';
 import PasswordConfirmIcon from '@/assets/PasswordConfirmIcon';
 import Text from '@/components/atoms/Text';
 import { Input, InputContainer } from '@/styles/input';
-import { SignUpData } from '../type';
-import { InputAreaWrapper } from './EmailInput/styles';
+import { InputAreaWrapper } from '../../app/my/_component/styles';
+import { SignUpData } from '../../app/my/type';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
 
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   width: 100%;
 `;
 
@@ -39,7 +39,7 @@ function checkConfirmPassword(password: string, confirmPassword: string) {
   return password === confirmPassword;
 }
 
-export default function PasswordInput({
+export default function PasswordForm({
   value,
   onChange,
   onCheckPassword,

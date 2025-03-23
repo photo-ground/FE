@@ -29,7 +29,10 @@ const PasswordContainer = styled.div`
   gap: 0.75rem;
   width: 100%;
 `;
-export default function PasswordInput({ value }: { value: string }) {
+export interface PasswordInputProps {
+  value: string;
+}
+export default function PasswordInput({ value }: PasswordInputProps) {
   return (
     <PasswordContainer>
       <InputContainer>
