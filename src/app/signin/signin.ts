@@ -58,6 +58,8 @@ export default async function signin(
       },
     );
 
+    console.log(rawResponse);
+
     const accessToken = rawResponse.headers.get('Authorization')!;
     document.cookie = `accessToken=${accessToken}; Path=/;`;
     const decoded: DecodedToken = jwtDecode(accessToken.split(' ')[1]);

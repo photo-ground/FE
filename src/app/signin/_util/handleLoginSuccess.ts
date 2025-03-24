@@ -24,8 +24,9 @@ export default function handleLoginSuccess(
   if (response.data?.photographerId) {
     setPhotographerId(response.data?.photographerId);
   }
+  console.log(response.data);
 
-  if (response.data?.isFirst) {
+  if (!response.data?.isFirst) {
     router.push('/signin/first');
     return;
   }
