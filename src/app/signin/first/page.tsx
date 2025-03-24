@@ -18,7 +18,6 @@ import { useMutation } from '@tanstack/react-query';
 import CheckIcon from '@/assets/modal/CheckIcon';
 import LoadingPage from '@/components/LoadingPage';
 import updatePhotographerPassword from './updatePhotographerPassword';
-// import signin, { SigninResponse } from '../signin';
 
 const Form = styled.form`
   display: flex;
@@ -54,13 +53,6 @@ export default function SignInPage() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  // useEffect(() => {
-  //   // Show loading state
-  if (isLoading) {
-    return <LoadingPage />;
-  }
-  // }, [isLoading]);
-
   // 비밀번호 변경 요청 함수
   const updateUserMutation = useMutation({
     mutationKey: ['updateUserInfo'],
@@ -79,6 +71,10 @@ export default function SignInPage() {
     },
   });
 
+  // todo fix: 홈페이지로 이동하기 전에 로딩페이지가 작동을 제대로 안함..
+  if (isLoading) {
+    return <LoadingPage />;
+  }
   // 비밀번호 변경 함수 호출
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

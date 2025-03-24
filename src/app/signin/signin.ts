@@ -76,7 +76,7 @@ export default async function signin(
     if (role === Role.Photographer) {
       const { photographerId } = await getPhotographerId(accessToken);
       const responseData = await rawResponse.json();
-      const { isFirst } = responseData; // 비동기로 받아오는 값이므로, 이렇게 처리해야 함
+      const { isFirst } = responseData.data; // 비동기로 받아오는 값이므로, 이렇게 처리해야 함
 
       return { ok: true, data: { accessToken, role, photographerId, isFirst } };
     }
