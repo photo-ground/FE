@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { jwtDecode } from 'jwt-decode';
 import { Role } from '@/types/user';
 import getPhotographerId from '../my/_libs/getPhotographerId';
@@ -5,8 +6,19 @@ import getPhotographerId from '../my/_libs/getPhotographerId';
 interface DecodedToken {
   user_id?: string; // JWT에 저장된 키에 따라 맞게 수정
   username?: string;
-  role?: string;
+  role: Role;
   exp?: number; // 토큰 만료 시간
+}
+
+export interface SigninResponse {
+  ok: boolean;
+  data?: {
+    accessToken: string;
+    role: Role;
+    univ?: any;
+    photographerId?: any;
+    isFirst?: boolean;
+  };
 }
 
 export async function getUserInfo(token: string) {
@@ -29,7 +41,9 @@ export async function getUserInfo(token: string) {
   }
 }
 
-export default async function signin(formData: FormData) {
+export default async function signin(
+  formData: FormData,
+): Promise<SigninResponse> {
   try {
     const rawResponse = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/login`,
@@ -43,6 +57,8 @@ export default async function signin(formData: FormData) {
         credentials: 'include',
       },
     );
+
+    console.log(rawResponse);
 
     const accessToken = rawResponse.headers.get('Authorization')!;
     document.cookie = `accessToken=${accessToken}; Path=/;`;
@@ -59,7 +75,10 @@ export default async function signin(formData: FormData) {
 
     if (role === Role.Photographer) {
       const { photographerId } = await getPhotographerId(accessToken);
-      return { ok: true, data: { accessToken, role, photographerId } };
+      const responseData = await rawResponse.json();
+      const { isFirst } = responseData.data; // 비동기로 받아오는 값이므로, 이렇게 처리해야 함
+
+      return { ok: true, data: { accessToken, role, photographerId, isFirst } };
     }
 
     return { ok: true, data: { accessToken, role } };

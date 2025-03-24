@@ -8,14 +8,12 @@ import TNB from '@/components/TNB';
 import AlertModal from '@/components/modals/AlertModal';
 import CheckIcon from '@/assets/modal/CheckIcon';
 
-import {
-  EmailInput,
-  GenderInput,
-  NameInput,
-  PasswordInput,
-  PhoneInput,
-  UnivInput,
-} from './_components';
+import NameInput from '@/components/Input/NameInput';
+import PhoneInput from '@/components/Input/PhoneInput';
+import UnivInput from '@/components/Input/UnivInput';
+import GenderInput from '@/components/Input/GenderInput';
+import PasswordForm from '@/components/Input/PasswordForm';
+import { Gender } from '@/types/gender';
 import { SignUpData } from './type';
 import {
   AccountSection,
@@ -24,6 +22,7 @@ import {
   UserSection,
 } from './styles';
 import signup from './signup';
+import EmailInput from './_components/EmailInput';
 
 function checkDataValid(data: SignUpData) {
   return (
@@ -48,6 +47,7 @@ export default function SignUpPage() {
     isEmailConfirmed: false,
     isPasswordValid: false,
     isPasswordConfirmed: false,
+    gender: Gender.Male,
   });
   const [isCompleted, setIsCompleted] = useState(false);
   const router = useRouter();
@@ -80,8 +80,8 @@ export default function SignUpPage() {
     setSignUpData({ ...signUpData, phone: newValue });
   };
 
-  const onChangeUniv = (newValue: SignUpData['myUniv']) => {
-    setSignUpData({ ...signUpData, myUniv: newValue });
+  const onChangeUniv = (newValue: string) => {
+    setSignUpData({ ...signUpData, myUniv: newValue as SignUpData['myUniv'] });
   };
 
   const onChangeGender = (newValue: SignUpData['gender']) => {
@@ -107,7 +107,7 @@ export default function SignUpPage() {
             onChange={onChangeEmail}
             onConfirm={onConfirmEmail}
           />
-          <PasswordInput
+          <PasswordForm
             value={signUpData.password}
             onChange={onChangePassword}
             onCheckPassword={onCheckPassword}
@@ -122,7 +122,7 @@ export default function SignUpPage() {
 
           <NameInput value={signUpData.name} onChange={onChangeName} />
           <PhoneInput value={signUpData.phone} onChange={onChangePhone} />
-          <UnivInput value={signUpData.myUniv} onChange={onChangeUniv} />
+          <UnivInput value={signUpData.myUniv || ''} onChange={onChangeUniv} />
           <GenderInput value={signUpData.gender} onChange={onChangeGender} />
         </UserSection>
 

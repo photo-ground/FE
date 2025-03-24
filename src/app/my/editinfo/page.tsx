@@ -12,17 +12,18 @@ import AlertModal from '@/components/modals/AlertModal';
 import ConfirmModal from '@/components/modals/ConfirmModal';
 import WarningIcon from '@/assets/modal/WarningIcon';
 import CheckIcon from '@/assets/modal/CheckIcon';
-import {
-  EmailInput,
-  GenderInput,
-  NameInput,
-  PasswordUpdate,
-  PhoneInput,
-  UnivInput,
-} from '@/app/my/_component';
+
 import RightChevronIcon from '@/assets/RightChevronIcon';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { UpdateUserInfoProps, User } from '@/types/user';
+import EmailInput from '@/components/Input/EmailInput';
+import NameInput from '@/components/Input/NameInput';
+import PhoneInput from '@/components/Input/PhoneInput';
+import UnivInput from '@/components/Input/UnivInput';
+import GenderInput from '@/components/Input/GenderInput';
+import PasswordUpdate from '@/components/Input/PasswordUpdate';
+import { University } from '@/types/university';
+
 import { deleteUser, getUserInfo, updateUserInfo } from '../_libs/getUserInfo';
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -54,7 +55,7 @@ export default function EditProfile() {
   const [userData, setUserData] = useState<UpdateUserInfoProps>({
     name: '',
     phone: '',
-    myUniv: '',
+    myUniv: University.None, // Replace 'DefaultUniversity' with a valid University value
     gender: '',
   });
 

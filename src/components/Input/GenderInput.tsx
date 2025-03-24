@@ -2,10 +2,11 @@
 
 import styled from 'styled-components';
 import Text from '@/components/atoms/Text';
+import { Gender } from '@/types/gender';
 
-const OPTION_LIST: { title: string; value: string }[] = [
-  { title: '남성', value: 'MALE' },
-  { title: '여성', value: 'FEMALE' },
+const OPTION_LIST: { title: string; value: Gender }[] = [
+  { title: '남성', value: Gender.Male },
+  { title: '여성', value: Gender.Female },
 ];
 
 const Container = styled.div`
@@ -42,7 +43,7 @@ export default function GenderInput({
   onChange,
 }: {
   value: string;
-  onChange: (newValue: string) => void;
+  onChange: (newValue: Gender) => void;
 }) {
   return (
     <Container>

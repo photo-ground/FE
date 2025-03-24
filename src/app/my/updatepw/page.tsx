@@ -12,8 +12,9 @@ import TNB from '@/components/TNB';
 import CheckIcon from '@/assets/modal/CheckIcon';
 import AlertModal from '@/components/modals/AlertModal';
 import { useMutation } from '@tanstack/react-query';
-import { PasswordInput, PasswordForm } from '@/app/my/_component';
 
+import PasswordInput from '@/components/Input/PasswordInput';
+import PasswordForm from '@/components/Input/PasswordForm';
 import { updateUserPassword } from '../_libs/getUserInfo';
 /* eslint-disable jsx-a11y/label-has-associated-control */
 const ButtonWrapper = styled.div`

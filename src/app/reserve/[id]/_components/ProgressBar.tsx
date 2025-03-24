@@ -1,4 +1,4 @@
-import CheckIcon from '@/assets/CheckIcon';
+import CheckIcon from '@/assets/ProgressCheckIcon';
 import Text from '@/components/atoms/Text';
 import styled from 'styled-components';
 
